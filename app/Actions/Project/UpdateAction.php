@@ -4,6 +4,7 @@ namespace App\Actions\Project;
 
 use App\Actions\Media\AttachAction as AttachMediaAction;
 use App\Models\Project;
+use App\Models\Topic;
 use Illuminate\Support\Str;
 
 class UpdateAction
@@ -13,7 +14,18 @@ class UpdateAction
 		$media = $data['media'] ?? [];
 		unset($data['media']);
 
-		$data['slug'] = Str::slug($data['title']);
+		$slugParts = [$data['title']];
+		if (!empty($data['location'])) {
+			$slugParts[] = $data['location'];
+		}
+		$data['slug'] = Str::slug(implode(' ', $slugParts));
+
+		if (!empty($data['topic_id'])) {
+			$topic = Topic::where('uuid', $data['topic_id'])->first();
+			$data['topic_id'] = $topic?->id;
+		} else {
+			$data['topic_id'] = null;
+		}
 
 		$project->update($data);
 
@@ -21,6 +33,6 @@ class UpdateAction
 			(new AttachMediaAction)->execute($media, $project);
 		}
 
-		return $project->fresh();
+		return $project;
 	}
 }

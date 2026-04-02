@@ -2,22 +2,18 @@
 
 namespace App\Models;
 
+use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-class Job extends Model
+class AtelierPage extends Model
 {
-	use HasFactory;
-
-	protected $table = 'domain_jobs';
+	use HasFactory, HasUuid;
 
 	protected $fillable = [
-		'title',
-		'lead',
-		'info',
-		'publish',
-		'sort_order',
+		'uuid', 'slug', 'title', 'text',
+		'meta_description', 'publish', 'sort_order',
 	];
 
 	protected $casts = [
@@ -28,10 +24,5 @@ class Job extends Model
 	public function media(): MorphMany
 	{
 		return $this->morphMany(Media::class, 'mediable')->orderBy('sort_order');
-	}
-
-	public function scopePublished($query)
-	{
-		return $query->where('publish', true);
 	}
 }

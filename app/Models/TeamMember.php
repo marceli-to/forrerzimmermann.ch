@@ -2,40 +2,28 @@
 
 namespace App\Models;
 
+use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class TeamMember extends Model
 {
-	use HasFactory;
-
-	protected $table = 'team';
+	use HasFactory, HasUuid;
 
 	protected $fillable = [
-		'firstname',
-		'name',
-		'role',
-		'position',
-		'phone',
-		'email',
-		'cv',
-		'publish',
-		'sort_order',
+		'uuid', 'firstname', 'name', 'title', 'email', 'cv',
+		'publish', 'former', 'sort_order',
 	];
 
 	protected $casts = [
 		'publish' => 'boolean',
+		'former' => 'boolean',
 		'sort_order' => 'integer',
 	];
 
 	public function media(): MorphMany
 	{
 		return $this->morphMany(Media::class, 'mediable')->orderBy('sort_order');
-	}
-
-	public function scopePublished($query)
-	{
-		return $query->where('publish', true);
 	}
 }

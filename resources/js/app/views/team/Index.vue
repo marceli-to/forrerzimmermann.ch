@@ -16,9 +16,8 @@ const { confirm } = useConfirm()
 
 const columns = [
 	{ key: 'name', label: 'Name', primary: true },
-	{ key: 'firstname', label: 'Vorname' },
-	{ key: 'role', label: 'Rolle', class: 'w-160' },
-	{ key: 'email', label: 'E-Mail', class: 'w-200' },
+	{ key: 'title', label: 'Titel' },
+	{ key: 'former', label: '', class: 'w-100' },
 	{ key: 'actions', label: '', class: 'w-100', align: 'right' },
 ]
 
@@ -29,12 +28,12 @@ onMounted(() => {
 async function handleDelete(member) {
 	const ok = await confirm({
 		title: 'Mitglied löschen',
-		message: `"${member.firstname} ${member.name}" wirklich löschen? Dies kann nicht rückgängig gemacht werden.`,
+		message: `"${member.firstname} ${member.name}" wirklich löschen?`,
 		confirmLabel: 'Löschen',
 		destructive: true,
 	})
 	if (!ok) return
-	await store.deleteMember(member.id)
+	await store.deleteMember(member.uuid)
 	toast.success('Mitglied gelöscht')
 }
 </script>
@@ -52,23 +51,31 @@ async function handleDelete(member) {
 		</div>
 
 		<div v-else-if="store.members.length === 0" class="text-sm text-neutral-400">
-			Noch keine Teammitglieder vorhanden.
+			Noch keine Mitglieder vorhanden.
 		</div>
 
 		<DataTable v-else :columns="columns" :rows="store.members">
+			<template #cell-name="{ row }">
+				{{ row.firstname }} {{ row.name }}
+			</template>
+			<template #cell-former="{ row }">
+				<span v-if="row.former" class="text-xs text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-8 py-2 rounded">
+					Ehemalig
+				</span>
+			</template>
 			<template #cell-actions="{ row }">
 				<div class="flex items-center justify-end gap-12">
 					<button
 						class="transition-colors cursor-pointer"
-						:class="row.publish ? 'text-neutral-400 hover:text-neutral-900 dark:hover:text-white' : 'text-neutral-300 hover:text-neutral-600 dark:text-neutral-600 dark:hover:text-neutral-400'"
-						@click="store.toggle(row.id)"
+						:class="row.publish ? 'text-neutral-400 hover:text-neutral-900 dark:hover:text-white' : 'text-neutral-300 dark:text-neutral-600 hover:text-neutral-600 dark:hover:text-neutral-400'"
+						@click="store.toggle(row.uuid)"
 					>
 						<PhEye v-if="row.publish" :size="16" weight="light" />
 						<PhEyeSlash v-else :size="16" weight="light" />
 					</button>
 					<button
 						class="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer"
-						@click="router.push({ name: 'team.edit', params: { id: row.id } })"
+						@click="router.push({ name: 'team.edit', params: { id: row.uuid } })"
 					>
 						<PhPencil :size="16" weight="light" />
 					</button>

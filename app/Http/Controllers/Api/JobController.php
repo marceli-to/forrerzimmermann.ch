@@ -2,64 +2,58 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Actions\Job\DeleteAction as DeleteJobAction;
-use App\Actions\Job\StoreAction as StoreJobAction;
-use App\Actions\Job\UpdateAction as UpdateJobAction;
+use App\Actions\Job\DeleteAction;
+use App\Actions\Job\ReorderAction;
+use App\Actions\Job\StoreAction;
+use App\Actions\Job\UpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Job\StoreJobRequest;
 use App\Http\Requests\Job\UpdateJobRequest;
-use App\Http\Resources\JobResource;
-use App\Models\Job;
+use App\Http\Resources\JobListingResource;
+use App\Models\JobListing;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
 {
 	public function index()
 	{
-		$jobs = Job::with('media')->orderBy('sort_order')->get();
-
-		return JobResource::collection($jobs);
+		return JobListingResource::collection(
+			JobListing::orderBy('sort_order')->get()
+		);
 	}
 
 	public function store(StoreJobRequest $request)
 	{
-		$job = (new StoreJobAction)->execute($request->validated());
-
-		return new JobResource($job->load('media'));
+		$job = (new StoreAction)->execute($request->validated());
+		return new JobListingResource($job);
 	}
 
-	public function show(Job $job)
+	public function show(JobListing $job)
 	{
-		return new JobResource($job->load('media'));
+		return new JobListingResource($job);
 	}
 
-	public function update(UpdateJobRequest $request, Job $job)
+	public function update(UpdateJobRequest $request, JobListing $job)
 	{
-		$job = (new UpdateJobAction)->execute($job, $request->validated());
-
-		return new JobResource($job->load('media'));
+		$job = (new UpdateAction)->execute($job, $request->validated());
+		return new JobListingResource($job);
 	}
 
-	public function toggle(Job $job)
+	public function toggle(JobListing $job)
 	{
 		$job->update(['publish' => !$job->publish]);
-
-		return new JobResource($job);
+		return new JobListingResource($job);
 	}
 
-	public function destroy(Job $job)
+	public function destroy(JobListing $job)
 	{
-		(new DeleteJobAction)->execute($job);
-
+		(new DeleteAction)->execute($job);
 		return response()->json(null, 204);
 	}
 
 	public function reorder(Request $request)
 	{
-		foreach ($request->items as $item) {
-			Job::find($item['id'])->update(['sort_order' => $item['sort_order']]);
-		}
-
-		return response()->json(['message' => 'Reordered']);
+		(new ReorderAction)->execute($request->items);
+		return response()->json(['message' => 'ok']);
 	}
 }

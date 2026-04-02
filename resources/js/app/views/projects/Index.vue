@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router'
 import { useProjectStore } from '@/stores/projects'
 import { useToast } from '@/composables/useToast'
 import { useConfirm } from '@/composables/useConfirm'
-import { PhPencil, PhTrash, PhEye, PhEyeSlash } from '@phosphor-icons/vue'
+import { PhPencil, PhTrash, PhEye, PhEyeSlash, PhStar } from '@phosphor-icons/vue'
 import FormButton from '@/components/ui/form/FormButton.vue'
 import PageHeader from '@/components/layout/PageHeader.vue'
 import DataTable from '@/components/ui/table/DataTable.vue'
@@ -16,11 +16,9 @@ const { confirm } = useConfirm()
 
 const columns = [
 	{ key: 'title', label: 'Titel', primary: true },
-	{ key: 'name', label: 'Name' },
 	{ key: 'location', label: 'Ort' },
 	{ key: 'year', label: 'Jahr', class: 'w-80' },
-	{ key: 'status', label: 'Status', class: 'w-120' },
-	{ key: 'actions', label: '', class: 'w-100', align: 'right' },
+	{ key: 'actions', label: '', class: 'w-140', align: 'right' },
 ]
 
 onMounted(() => {
@@ -35,7 +33,7 @@ async function handleDelete(project) {
 		destructive: true,
 	})
 	if (!ok) return
-	await store.deleteProject(project.id)
+	await store.deleteProject(project.uuid)
 	toast.success('Projekt gelöscht')
 }
 </script>
@@ -61,16 +59,24 @@ async function handleDelete(project) {
 				<div class="flex items-center justify-end gap-12">
 					<button
 						class="transition-colors cursor-pointer"
+						:class="row.feature ? 'text-amber-500 hover:text-amber-600' : 'text-neutral-300 dark:text-neutral-600 hover:text-amber-500'"
+						:title="row.feature ? 'In Auswahl – klicken zum Entfernen' : 'Nicht in Auswahl – klicken zum Hinzufügen'"
+						@click="store.toggleFeature(row.uuid)"
+					>
+						<PhStar :size="16" :weight="row.feature ? 'fill' : 'light'" />
+					</button>
+					<button
+						class="transition-colors cursor-pointer"
 						:class="row.publish ? 'text-neutral-400 hover:text-neutral-900 dark:hover:text-white' : 'text-neutral-300 dark:text-neutral-600 hover:text-neutral-600 dark:hover:text-neutral-400'"
 						:title="row.publish ? 'Veröffentlicht – klicken zum Verstecken' : 'Versteckt – klicken zum Veröffentlichen'"
-						@click="store.toggle(row.id)"
+						@click="store.toggle(row.uuid)"
 					>
 						<PhEye v-if="row.publish" :size="16" weight="light" />
 						<PhEyeSlash v-else :size="16" weight="light" />
 					</button>
 					<button
 						class="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer"
-						@click="router.push({ name: 'projects.edit', params: { id: row.id } })"
+						@click="router.push({ name: 'projects.edit', params: { id: row.uuid } })"
 					>
 						<PhPencil :size="16" weight="light" />
 					</button>

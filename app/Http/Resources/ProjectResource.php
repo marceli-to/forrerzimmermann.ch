@@ -10,21 +10,20 @@ class ProjectResource extends JsonResource
 	public function toArray(Request $request): array
 	{
 		return [
-			'id' => $this->id,
+			'uuid' => $this->uuid,
 			'title' => $this->title,
-			'slug' => $this->slug,
-			'name' => $this->name,
 			'location' => $this->location,
+			'slug' => $this->slug,
+			'subtitle' => $this->subtitle,
 			'year' => $this->year,
 			'description' => $this->description,
 			'info' => $this->info,
-			'status' => $this->status,
-			'competition' => $this->competition,
+			'meta_description' => $this->meta_description,
 			'publish' => $this->publish,
+			'feature' => $this->feature,
 			'sort_order' => $this->sort_order,
+			'topic' => new TopicResource($this->whenLoaded('topic')),
 			'media' => MediaResource::collection($this->whenLoaded('media')),
-			'created_at' => $this->created_at,
-			'updated_at' => $this->updated_at,
 		];
 	}
 }

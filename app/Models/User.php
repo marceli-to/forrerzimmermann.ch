@@ -2,20 +2,18 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-	/** @use HasFactory<\Database\Factories\UserFactory> */
-	use HasFactory, Notifiable;
+	use HasFactory, HasUuid, Notifiable, SoftDeletes;
 
 	protected $fillable = [
-		'name',
-		'email',
-		'password',
+		'uuid', 'firstname', 'name', 'email', 'password', 'role',
 	];
 
 	protected $hidden = [

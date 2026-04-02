@@ -2,22 +2,13 @@
 
 namespace App\Actions\Job;
 
-use App\Actions\Media\AttachAction as AttachMediaAction;
-use App\Models\Job;
+use App\Models\JobListing;
 
 class UpdateAction
 {
-	public function execute(Job $job, array $data): Job
+	public function execute(JobListing $job, array $data): JobListing
 	{
-		$media = $data['media'] ?? [];
-		unset($data['media']);
-
 		$job->update($data);
-
-		if (!empty($media)) {
-			(new AttachMediaAction)->execute($media, $job);
-		}
-
-		return $job->fresh();
+		return $job;
 	}
 }

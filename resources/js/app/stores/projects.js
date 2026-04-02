@@ -52,20 +52,32 @@ export const useProjectStore = defineStore('projects', {
 		},
 
 		async toggle(id) {
-			const project = this.projects.find(p => p.id === id)
+			const project = this.projects.find(p => p.uuid === id)
 			if (project) project.publish = !project.publish
 			try {
 				const { data } = await projectsApi.toggle(id)
-				const idx = this.projects.findIndex(p => p.id === id)
+				const idx = this.projects.findIndex(p => p.uuid === id)
 				if (idx !== -1) this.projects[idx] = data.data
 			} catch {
 				if (project) project.publish = !project.publish
 			}
 		},
 
+		async toggleFeature(id) {
+			const project = this.projects.find(p => p.uuid === id)
+			if (project) project.feature = !project.feature
+			try {
+				const { data } = await projectsApi.feature(id)
+				const idx = this.projects.findIndex(p => p.uuid === id)
+				if (idx !== -1) this.projects[idx] = data.data
+			} catch {
+				if (project) project.feature = !project.feature
+			}
+		},
+
 		async deleteProject(id) {
 			await projectsApi.destroy(id)
-			this.projects = this.projects.filter(p => p.id !== id)
+			this.projects = this.projects.filter(p => p.uuid !== id)
 		},
 	},
 })

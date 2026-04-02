@@ -11,6 +11,7 @@ import MediaEdit from '@/components/media/MediaEdit.vue'
 import PageHeader from '@/components/layout/PageHeader.vue'
 import FormLabel from '@/components/ui/form/FormLabel.vue'
 import FormInput from '@/components/ui/form/FormInput.vue'
+import FormCheckbox from '@/components/ui/form/FormCheckbox.vue'
 import FormButton from '@/components/ui/form/FormButton.vue'
 import FormError from '@/components/ui/form/FormError.vue'
 import FormGroup from '@/components/ui/form/FormGroup.vue'
@@ -27,11 +28,10 @@ const editingMedia = ref(null)
 const form = ref({
 	firstname: '',
 	name: '',
-	role: '',
-	position: '',
-	phone: '',
+	title: '',
 	email: '',
 	cv: '',
+	former: false,
 })
 
 onMounted(async () => {
@@ -44,11 +44,10 @@ onMounted(async () => {
 			form.value = {
 				firstname: m.firstname || '',
 				name: m.name || '',
-				role: m.role || '',
-				position: m.position || '',
-				phone: m.phone || '',
+				title: m.title || '',
 				email: m.email || '',
 				cv: m.cv || '',
+				former: m.former || false,
 			}
 			mediaStore.setItems(m.media || [])
 		}
@@ -123,29 +122,20 @@ function onReorderMedia(items) { mediaStore.reorder(items) }
 
 			<div class="grid grid-cols-2 gap-24">
 				<FormGroup>
-					<FormLabel for="role">Rolle</FormLabel>
-					<FormInput id="role" v-model="form.role" />
-					<FormError :message="store.errors.role" />
+					<FormLabel for="title">Titel</FormLabel>
+					<FormInput id="title" v-model="form.title" />
+					<FormError :message="store.errors.title" />
 				</FormGroup>
 				<FormGroup>
-					<FormLabel for="position">Position</FormLabel>
-					<FormInput id="position" v-model="form.position" />
-					<FormError :message="store.errors.position" />
-				</FormGroup>
-			</div>
-
-			<div class="grid grid-cols-2 gap-24">
-				<FormGroup>
-					<FormLabel for="phone">Telefon</FormLabel>
-					<FormInput id="phone" v-model="form.phone" />
-					<FormError :message="store.errors.phone" />
-				</FormGroup>
-				<FormGroup>
-					<FormLabel for="email">E-Mail *</FormLabel>
+					<FormLabel for="email">E-Mail</FormLabel>
 					<FormInput id="email" v-model="form.email" />
 					<FormError :message="store.errors.email" />
 				</FormGroup>
 			</div>
+
+			<FormGroup>
+				<FormCheckbox v-model="form.former">Ehemalige/r Mitarbeiter/in</FormCheckbox>
+			</FormGroup>
 
 			<FormGroup>
 				<FormLabel>Lebenslauf</FormLabel>
@@ -156,7 +146,7 @@ function onReorderMedia(items) { mediaStore.reorder(items) }
 			</FormGroup>
 
 			<FormGroup>
-				<FormLabel>Bilder</FormLabel>
+				<FormLabel>Portrait</FormLabel>
 				<div class="mt-8">
 					<MediaUploader :compact="mediaStore.items.length > 0" @uploaded="onUploaded" />
 					<MediaGrid

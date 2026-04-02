@@ -10,19 +10,16 @@ class TeamMemberResource extends JsonResource
 	public function toArray(Request $request): array
 	{
 		return [
-			'id' => $this->id,
+			'uuid' => $this->uuid,
 			'firstname' => $this->firstname,
 			'name' => $this->name,
-			'role' => $this->role,
-			'position' => $this->position,
-			'phone' => $this->phone,
+			'title' => $this->title,
 			'email' => $this->email,
 			'cv' => $this->cv,
 			'publish' => $this->publish,
+			'former' => $this->former,
 			'sort_order' => $this->sort_order,
 			'media' => MediaResource::collection($this->whenLoaded('media')),
-			'created_at' => $this->created_at,
-			'updated_at' => $this->updated_at,
 		];
 	}
 }

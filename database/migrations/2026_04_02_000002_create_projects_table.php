@@ -10,17 +10,19 @@ return new class extends Migration
 	{
 		Schema::create('projects', function (Blueprint $table) {
 			$table->id();
+			$table->uuid('uuid')->unique();
 			$table->string('title');
-			$table->string('slug')->unique();
-			$table->string('name')->nullable();
 			$table->string('location')->nullable();
-			$table->unsignedSmallInteger('year')->nullable();
+			$table->string('slug')->unique();
+			$table->string('subtitle')->nullable();
+			$table->integer('year');
 			$table->text('description')->nullable();
 			$table->text('info')->nullable();
-			$table->string('status')->nullable();
-			$table->string('competition')->nullable();
+			$table->string('meta_description')->nullable();
 			$table->boolean('publish')->default(false);
-			$table->unsignedInteger('sort_order')->default(0);
+			$table->boolean('feature')->default(false);
+			$table->integer('sort_order')->default(0);
+			$table->foreignId('topic_id')->nullable()->constrained('topics')->nullOnDelete();
 			$table->timestamps();
 		});
 	}

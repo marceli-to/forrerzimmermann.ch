@@ -52,11 +52,11 @@ export const useTeamStore = defineStore('team', {
 		},
 
 		async toggle(id) {
-			const member = this.members.find(m => m.id === id)
+			const member = this.members.find(m => m.uuid === id)
 			if (member) member.publish = !member.publish
 			try {
 				const { data } = await teamApi.toggle(id)
-				const idx = this.members.findIndex(m => m.id === id)
+				const idx = this.members.findIndex(m => m.uuid === id)
 				if (idx !== -1) this.members[idx] = data.data
 			} catch {
 				if (member) member.publish = !member.publish
@@ -65,7 +65,7 @@ export const useTeamStore = defineStore('team', {
 
 		async deleteMember(id) {
 			await teamApi.destroy(id)
-			this.members = this.members.filter(m => m.id !== id)
+			this.members = this.members.filter(m => m.uuid !== id)
 		},
 	},
 })

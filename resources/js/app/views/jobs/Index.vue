@@ -26,12 +26,12 @@ onMounted(() => {
 async function handleDelete(job) {
 	const ok = await confirm({
 		title: 'Stelle löschen',
-		message: `"${job.title}" wirklich löschen? Dies kann nicht rückgängig gemacht werden.`,
+		message: `"${job.title}" wirklich löschen?`,
 		confirmLabel: 'Löschen',
 		destructive: true,
 	})
 	if (!ok) return
-	await store.deleteJob(job.id)
+	await store.deleteJob(job.uuid)
 	toast.success('Stelle gelöscht')
 }
 </script>
@@ -57,15 +57,15 @@ async function handleDelete(job) {
 				<div class="flex items-center justify-end gap-12">
 					<button
 						class="transition-colors cursor-pointer"
-						:class="row.publish ? 'text-neutral-400 hover:text-neutral-900 dark:hover:text-white' : 'text-neutral-300 hover:text-neutral-600 dark:text-neutral-600 dark:hover:text-neutral-400'"
-						@click="store.toggle(row.id)"
+						:class="row.publish ? 'text-neutral-400 hover:text-neutral-900 dark:hover:text-white' : 'text-neutral-300 dark:text-neutral-600 hover:text-neutral-600 dark:hover:text-neutral-400'"
+						@click="store.toggle(row.uuid)"
 					>
 						<PhEye v-if="row.publish" :size="16" weight="light" />
 						<PhEyeSlash v-else :size="16" weight="light" />
 					</button>
 					<button
 						class="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer"
-						@click="router.push({ name: 'jobs.edit', params: { id: row.id } })"
+						@click="router.push({ name: 'jobs.edit', params: { id: row.uuid } })"
 					>
 						<PhPencil :size="16" weight="light" />
 					</button>

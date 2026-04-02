@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Actions\Team\DeleteAction as DeleteTeamAction;
-use App\Actions\Team\StoreAction as StoreTeamAction;
-use App\Actions\Team\UpdateAction as UpdateTeamAction;
+use App\Actions\Team\DeleteAction;
+use App\Actions\Team\ReorderAction;
+use App\Actions\Team\StoreAction;
+use App\Actions\Team\UpdateAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Team\StoreTeamRequest;
 use App\Http\Requests\Team\UpdateTeamRequest;
@@ -16,50 +17,43 @@ class TeamController extends Controller
 {
 	public function index()
 	{
-		$members = TeamMember::with('media')->orderBy('sort_order')->get();
-
-		return TeamMemberResource::collection($members);
+		return TeamMemberResource::collection(
+			TeamMember::with('media')->orderBy('sort_order')->get()
+		);
 	}
 
 	public function store(StoreTeamRequest $request)
 	{
-		$member = (new StoreTeamAction)->execute($request->validated());
-
+		$member = (new StoreAction)->execute($request->validated());
 		return new TeamMemberResource($member->load('media'));
 	}
 
-	public function show(TeamMember $team)
+	public function show(TeamMember $member)
 	{
-		return new TeamMemberResource($team->load('media'));
-	}
-
-	public function update(UpdateTeamRequest $request, TeamMember $team)
-	{
-		$member = (new UpdateTeamAction)->execute($team, $request->validated());
-
 		return new TeamMemberResource($member->load('media'));
 	}
 
-	public function toggle(TeamMember $team)
+	public function update(UpdateTeamRequest $request, TeamMember $member)
 	{
-		$team->update(['publish' => !$team->publish]);
-
-		return new TeamMemberResource($team);
+		$member = (new UpdateAction)->execute($member, $request->validated());
+		return new TeamMemberResource($member->load('media'));
 	}
 
-	public function destroy(TeamMember $team)
+	public function toggle(TeamMember $member)
 	{
-		(new DeleteTeamAction)->execute($team);
+		$member->update(['publish' => !$member->publish]);
+		return new TeamMemberResource($member);
+	}
 
+	public function destroy(TeamMember $member)
+	{
+		(new DeleteAction)->execute($member);
 		return response()->json(null, 204);
 	}
 
 	public function reorder(Request $request)
 	{
-		foreach ($request->items as $item) {
-			TeamMember::find($item['id'])->update(['sort_order' => $item['sort_order']]);
-		}
-
-		return response()->json(['message' => 'Reordered']);
+		(new ReorderAction)->execute($request->items);
+		return response()->json(['message' => 'ok']);
 	}
 }

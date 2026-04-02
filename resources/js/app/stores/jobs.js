@@ -30,17 +30,13 @@ export const useJobStore = defineStore('jobs', {
 			}
 		},
 
-		async saveJob(form, id = null, media = []) {
+		async saveJob(form, id = null) {
 			this.errors = {}
 			try {
-				const payload = { ...form }
-				if (media.length) {
-					payload.media = media
-				}
 				if (id) {
-					await jobsApi.update(id, payload)
+					await jobsApi.update(id, form)
 				} else {
-					await jobsApi.store(payload)
+					await jobsApi.store(form)
 				}
 				return true
 			} catch (error) {
@@ -52,11 +48,11 @@ export const useJobStore = defineStore('jobs', {
 		},
 
 		async toggle(id) {
-			const job = this.jobs.find(j => j.id === id)
+			const job = this.jobs.find(j => j.uuid === id)
 			if (job) job.publish = !job.publish
 			try {
 				const { data } = await jobsApi.toggle(id)
-				const idx = this.jobs.findIndex(j => j.id === id)
+				const idx = this.jobs.findIndex(j => j.uuid === id)
 				if (idx !== -1) this.jobs[idx] = data.data
 			} catch {
 				if (job) job.publish = !job.publish
@@ -65,7 +61,7 @@ export const useJobStore = defineStore('jobs', {
 
 		async deleteJob(id) {
 			await jobsApi.destroy(id)
-			this.jobs = this.jobs.filter(j => j.id !== id)
+			this.jobs = this.jobs.filter(j => j.uuid !== id)
 		},
 	},
 })

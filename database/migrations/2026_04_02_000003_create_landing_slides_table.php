@@ -8,12 +8,12 @@ return new class extends Migration
 {
 	public function up(): void
 	{
-		Schema::create('domain_jobs', function (Blueprint $table) {
+		Schema::create('landing_slides', function (Blueprint $table) {
 			$table->id();
-			$table->string('title');
-			$table->text('lead')->nullable();
-			$table->text('info')->nullable();
-			$table->boolean('publish')->default(true);
+			$table->uuid('uuid')->unique();
+			$table->enum('type', ['image', 'image_text']);
+			$table->text('text')->nullable();
+			$table->boolean('publish')->default(false);
 			$table->integer('sort_order')->default(0);
 			$table->timestamps();
 		});
@@ -21,6 +21,6 @@ return new class extends Migration
 
 	public function down(): void
 	{
-		Schema::dropIfExists('domain_jobs');
+		Schema::dropIfExists('landing_slides');
 	}
 };

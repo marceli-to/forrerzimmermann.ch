@@ -3,9 +3,14 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\JobController;
+use App\Http\Controllers\Api\LandingController;
 use App\Http\Controllers\Api\MediaController;
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\TeamController;
+use App\Http\Controllers\Api\AtelierController;
+use App\Http\Controllers\Api\KontaktController;
+use App\Http\Controllers\Api\SettingsController;
+use App\Http\Controllers\Api\TopicController;
 
 Route::prefix('dashboard')
 	->middleware(['web', 'auth'])
@@ -18,9 +23,11 @@ Route::prefix('dashboard')
 			->group(function () {
 				Route::get('/', 'index');
 				Route::post('/', 'store');
+				Route::patch('/reorder', 'reorder');
 				Route::get('/{project}', 'show');
 				Route::put('/{project}', 'update');
 				Route::patch('/{project}/publish', 'toggle');
+				Route::patch('/{project}/feature', 'feature');
 				Route::delete('/{project}', 'destroy');
 			});
 
@@ -53,10 +60,57 @@ Route::prefix('dashboard')
 				Route::get('/', 'index');
 				Route::post('/', 'store');
 				Route::patch('/reorder', 'reorder');
-				Route::get('/{team}', 'show');
-				Route::put('/{team}', 'update');
-				Route::patch('/{team}/publish', 'toggle');
-				Route::delete('/{team}', 'destroy');
+				Route::get('/{member}', 'show');
+				Route::put('/{member}', 'update');
+				Route::patch('/{member}/publish', 'toggle');
+				Route::delete('/{member}', 'destroy');
+			});
+
+		Route::controller(TopicController::class)
+			->prefix('topics')
+			->group(function () {
+				Route::get('/', 'index');
+				Route::post('/', 'store');
+				Route::patch('/reorder', 'reorder');
+				Route::get('/{topic}', 'show');
+				Route::put('/{topic}', 'update');
+				Route::patch('/{topic}/publish', 'toggle');
+				Route::delete('/{topic}', 'destroy');
+			});
+
+		Route::controller(LandingController::class)
+			->prefix('landing')
+			->group(function () {
+				Route::get('/', 'index');
+				Route::post('/', 'store');
+				Route::patch('/reorder', 'reorder');
+				Route::get('/{slide}', 'show');
+				Route::put('/{slide}', 'update');
+				Route::patch('/{slide}/publish', 'toggle');
+				Route::delete('/{slide}', 'destroy');
+			});
+
+		Route::controller(AtelierController::class)
+			->prefix('atelier')
+			->group(function () {
+				Route::get('/', 'index');
+				Route::get('/{page}', 'show');
+				Route::put('/{page}', 'update');
+				Route::patch('/{page}/publish', 'toggle');
+			});
+
+		Route::controller(KontaktController::class)
+			->prefix('kontakt')
+			->group(function () {
+				Route::get('/', 'show');
+				Route::put('/', 'update');
+			});
+
+		Route::controller(SettingsController::class)
+			->prefix('settings')
+			->group(function () {
+				Route::get('/', 'show');
+				Route::put('/', 'update');
 			});
 
 	});

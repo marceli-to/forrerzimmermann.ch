@@ -2,18 +2,12 @@
 
 namespace App\Actions\Job;
 
-use App\Models\Job;
-use Illuminate\Support\Facades\Storage;
+use App\Models\JobListing;
 
 class DeleteAction
 {
-	public function execute(Job $job): void
+	public function execute(JobListing $job): void
 	{
-		foreach ($job->media as $media) {
-			Storage::disk('public')->delete('uploads/' . $media->file);
-			$media->delete();
-		}
-
 		$job->delete();
 	}
 }

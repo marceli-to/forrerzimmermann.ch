@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Illuminate\Support\Str;
 
 class Media extends Model
 {
-	use HasFactory;
+	use HasFactory, HasUuid;
 
 	protected $fillable = [
 		'uuid',
@@ -33,22 +33,6 @@ class Media extends Model
 		'width' => 'integer',
 		'height' => 'integer',
 	];
-
-	protected static function boot()
-	{
-		parent::boot();
-
-		static::creating(function ($media) {
-			if (empty($media->uuid)) {
-				$media->uuid = Str::uuid();
-			}
-		});
-	}
-
-	public function getRouteKeyName(): string
-	{
-		return 'uuid';
-	}
 
 	public function mediable(): MorphTo
 	{
