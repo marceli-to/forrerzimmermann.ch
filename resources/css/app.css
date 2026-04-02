@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Geist';
+  src: url('../fonts/Geist-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@import "./partials/spacing.css";
+@import "./vendor/uppy.css";
+@import "./vendor/tiptap.css";
+
+@theme {
+  /* Font family */
+  --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+
+  --text-xxs: 0.625rem;
+
+  /* Colors */
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-snow: #f5f5f5;
+  --color-gray: #828282;
+  --color-navy: #00455c;
+  --color-slate: #5a778e;
+  --color-silver: #c8c8c8;
+  --color-red: #dc0000;
+  --color-lime: #7d9b00;
+  --color-olive: #555700;
+  --color-wine: #75000a;
+  --color-bronze: #8c6900;
+}
+
+/* Debug for grids */
+.debug-grid {
+  @apply bg-yellow-50/50;
+}
+
+.debug-grid > * {
+  @apply outline outline-1 outline-yellow-500/50;
+}
+
+/* Grid layout builder */
+.grid-layout {
+  display: grid;
+  gap: 16px;
+}
+
+.grid-2fr {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-1fr_stacked-1fr,
+.grid-1fr-1fr_stacked,
+.grid-1fr_sm_lg-1fr_lg_sm,
+.grid-1fr_lg_sm-1fr_sm_lg,
+.grid-1fr_sm_lg-1fr_lg,
+.grid-1fr_lg-1fr_sm_lg {
+  grid-template-columns: 1fr 1fr;
+}
+
+.grid-stacked {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+
+/* Grid slots */
+.grid-slot {
+  position: relative;
+  width: 100%;
+  min-height: 200px;
+}
+
+.grid-stacked .grid-slot {
+  min-height: 125px;
+}
+
+
+
+
+
+

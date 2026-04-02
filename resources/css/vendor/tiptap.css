@@ -1,0 +1,35 @@
+.editor {
+	@apply border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 overflow-hidden;
+}
+
+.editor:focus-within {
+	@apply border-neutral-900 dark:border-neutral-500;
+}
+
+.editor .tiptap {
+	@apply px-12 py-12 text-sm leading-normal min-h-[200px] outline-none bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100;
+}
+
+.editor .tiptap p {
+	@apply mb-[1em];
+}
+
+.editor .tiptap ul {
+	@apply list-disc pl-[1.5em] mb-[0.5em];
+}
+
+.editor .tiptap ol {
+	@apply list-decimal pl-[1.5em] mb-[0.5em];
+}
+
+.editor .tiptap li {
+	@apply mb-[0.25em];
+}
+
+.editor .tiptap a {
+	@apply text-neutral-900 dark:text-neutral-100 underline decoration-neutral-300 dark:decoration-neutral-600 underline-offset-4 hover:decoration-neutral-900 dark:hover:decoration-neutral-400;
+}
+
+.editor .tiptap strong {
+	@apply font-semibold;
+}
