@@ -5,7 +5,6 @@ export const useProjectStore = defineStore('projects', {
 	state: () => ({
 		projects: [],
 		current: null,
-		categories: [],
 		loading: false,
 		errors: {},
 	}),
@@ -29,11 +28,6 @@ export const useProjectStore = defineStore('projects', {
 			} finally {
 				this.loading = false
 			}
-		},
-
-		async fetchCategories() {
-			const { data } = await projectsApi.categories()
-			this.categories = data.data
 		},
 
 		async saveProject(form, id = null, media = []) {

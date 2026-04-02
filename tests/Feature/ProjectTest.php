@@ -1,7 +1,5 @@
 <?php
 
-use App\Models\Category;
-use App\Models\CategoryType;
 use App\Models\Project;
 use App\Models\User;
 
@@ -80,22 +78,6 @@ it('deletes a project', function () {
         ->assertNoContent();
 
     expect(Project::count())->toBe(0);
-});
-
-it('assigns a category and type to a project', function () {
-    $category = Category::factory()->create();
-    $type = CategoryType::factory()->create(['category_id' => $category->id]);
-
-    $this->actingAs($this->user)
-        ->postJson('/api/dashboard/projects', [
-            'title' => 'Categorised Project',
-            'category_id' => $category->id,
-            'category_type_id' => $type->id,
-            'publish' => false,
-        ])
-        ->assertCreated()
-        ->assertJsonPath('data.category_id', $category->id)
-        ->assertJsonPath('data.category_type_id', $type->id);
 });
 
 it('requires authentication', function () {

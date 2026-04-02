@@ -15,16 +15,13 @@ class UpdateProjectRequest extends FormRequest
 	{
 		return [
 			'title' => 'required|string|max:255',
-			'category_id' => 'nullable|exists:categories,id',
-			'category_type_id' => 'nullable|exists:category_types,id',
 			'name' => 'nullable|string|max:255',
 			'location' => 'nullable|string|max:255',
 			'year' => 'nullable|integer|min:1900|max:2100',
 			'description' => 'nullable|string',
 			'info' => 'nullable|string',
-			'status' => 'nullable|in:Ausgeführt,In Planung,Studie',
-			'competition' => 'nullable|in:1. Preis,2. Preis,3. Preis,Ankauf,Anerkennung,Andere',
-			'has_detail' => 'boolean',
+			'status' => 'nullable|string|max:255',
+			'competition' => 'nullable|string|max:255',
 			'publish' => 'boolean',
 			'media' => 'nullable|array',
 			'media.*.uuid' => 'required|string',

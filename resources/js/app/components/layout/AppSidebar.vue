@@ -1,15 +1,10 @@
 <script setup>
 import { useRoute } from 'vue-router'
 import {
-	PhBooks,
 	PhBriefcase,
 	PhBuildings,
-	PhFileText,
 	PhGear,
-	PhMicrophone,
-	PhNewspaper,
 	PhSignOut,
-	PhTrophy,
 	PhUsers,
 } from '@phosphor-icons/vue'
 
@@ -18,29 +13,17 @@ const route = useRoute()
 const navigation = [
 	{
 		items: [
-			{ name: 'News', to: '/dashboard/news', icon: PhNewspaper },
 			{ name: 'Projekte', to: '/dashboard/projects', icon: PhBuildings },
 		],
 	},
 	{
-		label: 'Büro',
 		items: [
-			{ name: 'Stellen', to: '/dashboard/jobs', icon: PhBriefcase },
 			{ name: 'Team', to: '/dashboard/team', icon: PhUsers },
-			{ name: 'Auszeichnungen', to: '/dashboard/awards', icon: PhTrophy },
-			{ name: 'Vorträge', to: '/dashboard/lectures', icon: PhMicrophone },
-		],
-	},
-	{
-		label: 'Publikationen',
-		items: [
-			{ name: 'Bücher', to: '/dashboard/books', icon: PhBooks },
-			{ name: 'Presse', to: '/dashboard/press', icon: PhNewspaper },
+			{ name: 'Stellen', to: '/dashboard/jobs', icon: PhBriefcase },
 		],
 	},
 	{
 		items: [
-			{ name: 'Inhalte', to: '/dashboard/content', icon: PhFileText },
 			{ name: 'Einstellungen', to: '/dashboard/settings', icon: PhGear },
 		],
 	},

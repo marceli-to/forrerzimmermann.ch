@@ -23,7 +23,6 @@ class ProjectFactory extends Factory
             'description' => fake()->paragraph(),
             'info' => fake()->paragraph(),
             'status' => fake()->randomElement(['Ausgeführt', 'In Planung', 'Studie']),
-            'has_detail' => true,
             'publish' => false,
             'sort_order' => 0,
         ];

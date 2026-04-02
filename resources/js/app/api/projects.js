@@ -7,5 +7,4 @@ export default {
 	update: (id, data) => api.put(`/projects/${id}`, data),
 	toggle: (id) => api.patch(`/projects/${id}/publish`),
 	destroy: (id) => api.delete(`/projects/${id}`),
-	categories: () => api.get('/projects/categories'),
 }

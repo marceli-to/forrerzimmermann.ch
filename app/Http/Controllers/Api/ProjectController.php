@@ -8,17 +8,14 @@ use App\Actions\Project\UpdateAction as UpdateProjectAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Project\StoreProjectRequest;
 use App\Http\Requests\Project\UpdateProjectRequest;
-use App\Http\Resources\CategoryResource;
 use App\Http\Resources\ProjectResource;
-use App\Models\Category;
 use App\Models\Project;
 
 class ProjectController extends Controller
 {
 	public function index()
 	{
-		$projects = Project::with(['category', 'categoryType'])
-			->orderBy('sort_order')
+		$projects = Project::orderBy('sort_order')
 			->orderBy('created_at', 'desc')
 			->get();
 
@@ -29,12 +26,12 @@ class ProjectController extends Controller
 	{
 		$project = (new StoreProjectAction)->execute($request->validated());
 
-		return new ProjectResource($project->load('category', 'categoryType'));
+		return new ProjectResource($project);
 	}
 
 	public function show(Project $project)
 	{
-		$project->load('category', 'categoryType', 'media', 'grids.items.media');
+		$project->load('media');
 
 		return new ProjectResource($project);
 	}
@@ -43,7 +40,7 @@ class ProjectController extends Controller
 	{
 		$project = (new UpdateProjectAction)->execute($project, $request->validated());
 
-		return new ProjectResource($project->load('category', 'categoryType', 'media'));
+		return new ProjectResource($project->load('media'));
 	}
 
 	public function toggle(Project $project)
@@ -58,12 +55,5 @@ class ProjectController extends Controller
 		(new DeleteProjectAction)->execute($project);
 
 		return response()->json(null, 204);
-	}
-
-	public function categories()
-	{
-		$categories = Category::with('types')->orderBy('sort_order')->get();
-
-		return CategoryResource::collection($categories);
 	}
 }

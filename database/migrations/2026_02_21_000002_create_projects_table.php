@@ -10,8 +10,6 @@ return new class extends Migration
 	{
 		Schema::create('projects', function (Blueprint $table) {
 			$table->id();
-			$table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
-			$table->foreignId('category_type_id')->nullable()->constrained()->nullOnDelete();
 			$table->string('title');
 			$table->string('slug')->unique();
 			$table->string('name')->nullable();
@@ -19,9 +17,8 @@ return new class extends Migration
 			$table->unsignedSmallInteger('year')->nullable();
 			$table->text('description')->nullable();
 			$table->text('info')->nullable();
-			$table->enum('status', ['Ausgeführt', 'In Planung', 'Studie'])->nullable();
+			$table->string('status')->nullable();
 			$table->string('competition')->nullable();
-			$table->boolean('has_detail')->default(true);
 			$table->boolean('publish')->default(false);
 			$table->unsignedInteger('sort_order')->default(0);
 			$table->timestamps();
