@@ -18,7 +18,7 @@ class TopicController extends Controller
 	public function index()
 	{
 		return TopicResource::collection(
-			Topic::orderBy('sort_order')->orderBy('created_at', 'desc')->get()
+			Topic::orderBy('title')->get()
 		);
 	}
 
