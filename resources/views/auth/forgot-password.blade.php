@@ -6,7 +6,7 @@
 			</div>
 		</div>
 		<div class="w-full lg:w-1/2 bg-white flex items-center justify-center px-32 py-48">
-			<div class="w-full max-w-sm">
+			<div class="w-full max-w-xs">
 				<div class="lg:hidden mb-32 text-navy">
 					<x-icons.logo class="w-120" />
 				</div>
@@ -15,7 +15,7 @@
 				@if (session('status'))
 					<div class="mb-16 p-12 text-sm text-emerald-700 bg-emerald-50 rounded-md border border-emerald-200">{{ session('status') }}</div>
 				@endif
-				<form method="POST" action="{{ route('password.email') }}" class="space-y-20">
+				<form method="POST" action="{{ route('password.email') }}" class="space-y-16">
 					@csrf
 					<div>
 						<x-form.label for="email">E-Mail</x-form.label>
