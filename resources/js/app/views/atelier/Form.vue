@@ -9,9 +9,11 @@ import MediaGrid from '@/components/media/MediaGrid.vue'
 import MediaEdit from '@/components/media/MediaEdit.vue'
 import Editor from '@/components/ui/editor/Editor.vue'
 import PageHeader from '@/components/layout/PageHeader.vue'
+import SidebarLayout from '@/components/ui/form/SidebarLayout.vue'
 import FormActions from '@/components/ui/form/FormActions.vue'
 import FormLabel from '@/components/ui/form/FormLabel.vue'
 import FormInput from '@/components/ui/form/FormInput.vue'
+import FormTextarea from '@/components/ui/form/FormTextarea.vue'
 import FormError from '@/components/ui/form/FormError.vue'
 import FormGroup from '@/components/ui/form/FormGroup.vue'
 
@@ -97,49 +99,55 @@ function onSetTeaser(media) { mediaStore.setTeaser(media.uuid) }
 			Laden...
 		</div>
 
-		<form v-else-if="store.current" class="flex flex-col gap-24" @submit.prevent="handleSubmit">
-			<template v-if="store.current.slug === 'profil'">
-				<FormGroup>
-					<FormLabel for="title">Titel</FormLabel>
-					<FormInput id="title" v-model="form.title" />
-					<FormError :message="store.errors.title" />
-				</FormGroup>
+		<form v-else-if="store.current" @submit.prevent="handleSubmit">
+			<SidebarLayout>
+				<div class="flex flex-col gap-24">
+					<template v-if="store.current.slug === 'profil'">
+						<FormGroup>
+							<FormLabel for="title">Titel</FormLabel>
+							<FormInput id="title" v-model="form.title" />
+							<FormError :message="store.errors.title" />
+						</FormGroup>
 
-				<FormGroup>
-					<FormLabel>Text</FormLabel>
-					<div class="mt-8">
-						<Editor v-model="form.text" />
-					</div>
-					<FormError :message="store.errors.text" />
-				</FormGroup>
-			</template>
+						<FormGroup>
+							<FormLabel>Text</FormLabel>
+							<div class="mt-8">
+								<Editor v-model="form.text" />
+							</div>
+							<FormError :message="store.errors.text" />
+						</FormGroup>
+					</template>
 
-			<FormGroup>
-				<FormLabel for="meta_description">Meta Description</FormLabel>
-				<FormInput id="meta_description" v-model="form.meta_description" />
-				<FormError :message="store.errors.meta_description" />
-			</FormGroup>
+					<FormGroup>
+						<FormLabel>Medien</FormLabel>
+						<div class="mt-8 flex flex-col gap-16">
+							<MediaUploader v-if="!mediaStore.items.length" @uploaded="onUploaded" />
+							<MediaGrid
+								v-if="mediaStore.items.length"
+								:items="mediaStore.items"
+								@edit="onEditMedia"
+								@delete="onDeleteMedia"
+								@reorder="onReorderMedia"
+								@teaser="onSetTeaser"
+							/>
+						</div>
+					</FormGroup>
 
-			<FormGroup>
-				<FormLabel>Medien</FormLabel>
-				<div class="mt-8 flex flex-col gap-16">
-					<MediaUploader v-if="!mediaStore.items.length" @uploaded="onUploaded" />
-					<MediaGrid
-						v-if="mediaStore.items.length"
-						:items="mediaStore.items"
-						@edit="onEditMedia"
-						@delete="onDeleteMedia"
-						@reorder="onReorderMedia"
-						@teaser="onSetTeaser"
+					<FormActions
+						submitLabel="Aktualisieren"
+						cancelLabel="Abbrechen"
+						@cancel="router.push({ name: 'atelier.index' })"
 					/>
 				</div>
-			</FormGroup>
 
-			<FormActions
-				submitLabel="Aktualisieren"
-				cancelLabel="Abbrechen"
-				@cancel="router.push({ name: 'atelier.index' })"
-			/>
+				<template #sidebar>
+					<FormGroup>
+						<FormLabel for="meta_description">Meta Description</FormLabel>
+						<FormTextarea id="meta_description" v-model="form.meta_description" />
+						<FormError :message="store.errors.meta_description" />
+					</FormGroup>
+				</template>
+			</SidebarLayout>
 		</form>
 
 		<MediaEdit

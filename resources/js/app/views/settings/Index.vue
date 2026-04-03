@@ -10,6 +10,7 @@ import PageHeader from '@/components/layout/PageHeader.vue'
 import FormActions from '@/components/ui/form/FormActions.vue'
 import FormLabel from '@/components/ui/form/FormLabel.vue'
 import FormInput from '@/components/ui/form/FormInput.vue'
+import FormTextarea from '@/components/ui/form/FormTextarea.vue'
 import FormError from '@/components/ui/form/FormError.vue'
 import FormGroup from '@/components/ui/form/FormGroup.vue'
 
@@ -93,19 +94,19 @@ function onReorderMedia(items) { mediaStore.reorder(items) }
 
 			<FormGroup>
 				<FormLabel for="meta_description">Standard Meta Description</FormLabel>
-				<FormInput id="meta_description" v-model="form.meta_description" />
+				<FormTextarea id="meta_description" v-model="form.meta_description" />
 				<FormError :message="store.errors.meta_description" />
 			</FormGroup>
 
 			<FormGroup>
 				<FormLabel for="landing_meta_description">Meta Description Startseite</FormLabel>
-				<FormInput id="landing_meta_description" v-model="form.landing_meta_description" />
+				<FormTextarea id="landing_meta_description" v-model="form.landing_meta_description" />
 				<FormError :message="store.errors.landing_meta_description" />
 			</FormGroup>
 
 			<FormGroup>
 				<FormLabel for="projects_meta_description">Meta Description Projekte</FormLabel>
-				<FormInput id="projects_meta_description" v-model="form.projects_meta_description" />
+				<FormTextarea id="projects_meta_description" v-model="form.projects_meta_description" />
 				<FormError :message="store.errors.projects_meta_description" />
 			</FormGroup>
 

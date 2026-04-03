@@ -9,6 +9,7 @@ import MediaUploader from '@/components/media/MediaUploader.vue'
 import MediaGrid from '@/components/media/MediaGrid.vue'
 import MediaEdit from '@/components/media/MediaEdit.vue'
 import PageHeader from '@/components/layout/PageHeader.vue'
+import SidebarLayout from '@/components/ui/form/SidebarLayout.vue'
 import FormActions from '@/components/ui/form/FormActions.vue'
 import FormLabel from '@/components/ui/form/FormLabel.vue'
 import FormInput from '@/components/ui/form/FormInput.vue'
@@ -99,64 +100,70 @@ function onReorderMedia(items) { mediaStore.reorder(items) }
 			Laden...
 		</div>
 
-		<form v-else class="flex flex-col gap-24" @submit.prevent="handleSubmit">
-			<div class="grid grid-cols-2 gap-24">
-				<FormGroup>
-					<FormLabel for="firstname">Vorname *</FormLabel>
-					<FormInput id="firstname" v-model="form.firstname" />
-					<FormError :message="store.errors.firstname" />
-				</FormGroup>
-				<FormGroup>
-					<FormLabel for="name">Name *</FormLabel>
-					<FormInput id="name" v-model="form.name" />
-					<FormError :message="store.errors.name" />
-				</FormGroup>
-			</div>
+		<form v-else @submit.prevent="handleSubmit">
+			<SidebarLayout>
+				<div class="flex flex-col gap-24">
+					<div class="grid grid-cols-2 gap-24">
+						<FormGroup>
+							<FormLabel for="firstname">Vorname *</FormLabel>
+							<FormInput id="firstname" v-model="form.firstname" />
+							<FormError :message="store.errors.firstname" />
+						</FormGroup>
+						<FormGroup>
+							<FormLabel for="name">Name *</FormLabel>
+							<FormInput id="name" v-model="form.name" />
+							<FormError :message="store.errors.name" />
+						</FormGroup>
+					</div>
 
-			<div class="grid grid-cols-2 gap-24">
-				<FormGroup>
-					<FormLabel for="title">Titel</FormLabel>
-					<FormInput id="title" v-model="form.title" />
-					<FormError :message="store.errors.title" />
-				</FormGroup>
-				<FormGroup>
-					<FormLabel for="email">E-Mail</FormLabel>
-					<FormInput id="email" v-model="form.email" />
-					<FormError :message="store.errors.email" />
-				</FormGroup>
-			</div>
+					<div class="grid grid-cols-2 gap-24">
+						<FormGroup>
+							<FormLabel for="title">Titel</FormLabel>
+							<FormInput id="title" v-model="form.title" />
+							<FormError :message="store.errors.title" />
+						</FormGroup>
+						<FormGroup>
+							<FormLabel for="email">E-Mail</FormLabel>
+							<FormInput id="email" v-model="form.email" />
+							<FormError :message="store.errors.email" />
+						</FormGroup>
+					</div>
 
-			<FormGroup>
-				<FormCheckbox v-model="form.former">Ehemalige/r Mitarbeiter/in</FormCheckbox>
-			</FormGroup>
+					<FormGroup>
+						<FormLabel>Lebenslauf</FormLabel>
+						<div class="mt-8">
+							<Editor v-model="form.cv" />
+						</div>
+						<FormError :message="store.errors.cv" />
+					</FormGroup>
 
-			<FormGroup>
-				<FormLabel>Lebenslauf</FormLabel>
-				<div class="mt-8">
-					<Editor v-model="form.cv" />
-				</div>
-				<FormError :message="store.errors.cv" />
-			</FormGroup>
+					<FormGroup>
+						<FormLabel>Portrait</FormLabel>
+						<div class="mt-8 flex flex-col gap-16">
+							<MediaUploader v-if="!mediaStore.items.length" @uploaded="onUploaded" />
+							<MediaGrid
+								v-if="mediaStore.items.length"
+								:items="mediaStore.items"
+								@edit="onEditMedia"
+								@delete="onDeleteMedia"
+								@reorder="onReorderMedia"
+							/>
+						</div>
+					</FormGroup>
 
-			<FormGroup>
-				<FormLabel>Portrait</FormLabel>
-				<div class="mt-8 flex flex-col gap-16">
-					<MediaUploader v-if="!mediaStore.items.length" @uploaded="onUploaded" />
-					<MediaGrid
-						v-if="mediaStore.items.length"
-						:items="mediaStore.items"
-						@edit="onEditMedia"
-						@delete="onDeleteMedia"
-						@reorder="onReorderMedia"
+					<FormActions
+						:submitLabel="isEdit ? 'Aktualisieren' : 'Erstellen'"
+						cancelLabel="Abbrechen"
+						@cancel="router.push({ name: 'team.index' })"
 					/>
 				</div>
-			</FormGroup>
 
-			<FormActions
-				:submitLabel="isEdit ? 'Aktualisieren' : 'Erstellen'"
-				cancelLabel="Abbrechen"
-				@cancel="router.push({ name: 'team.index' })"
-			/>
+				<template #sidebar>
+					<FormGroup>
+						<FormCheckbox v-model="form.former">Ehemalige/r Mitarbeiter/in</FormCheckbox>
+					</FormGroup>
+				</template>
+			</SidebarLayout>
 		</form>
 
 		<MediaEdit

@@ -10,9 +10,11 @@ import MediaGrid from '@/components/media/MediaGrid.vue'
 import MediaEdit from '@/components/media/MediaEdit.vue'
 import Editor from '@/components/ui/editor/Editor.vue'
 import PageHeader from '@/components/layout/PageHeader.vue'
+import SidebarLayout from '@/components/ui/form/SidebarLayout.vue'
 import FormActions from '@/components/ui/form/FormActions.vue'
 import FormLabel from '@/components/ui/form/FormLabel.vue'
 import FormInput from '@/components/ui/form/FormInput.vue'
+import FormTextarea from '@/components/ui/form/FormTextarea.vue'
 import FormSelect from '@/components/ui/form/FormSelect.vue'
 import FormCheckbox from '@/components/ui/form/FormCheckbox.vue'
 import FormError from '@/components/ui/form/FormError.vue'
@@ -117,90 +119,95 @@ function onSetTeaser(media) { mediaStore.setTeaser(media.uuid) }
 			Laden...
 		</div>
 
-		<form v-else class="flex flex-col gap-24" @submit.prevent="handleSubmit">
-			<FormGroup>
-				<FormLabel for="title">Titel *</FormLabel>
-				<FormInput id="title" v-model="form.title" />
-				<FormError :message="store.errors.title" />
-			</FormGroup>
+		<form v-else @submit.prevent="handleSubmit">
+			<SidebarLayout>
+				<div class="flex flex-col gap-24">
+					<FormGroup>
+						<FormLabel for="title">Titel *</FormLabel>
+						<FormInput id="title" v-model="form.title" />
+						<FormError :message="store.errors.title" />
+					</FormGroup>
 
-			<div class="grid grid-cols-2 gap-24">
-				<FormGroup>
-					<FormLabel for="location">Ort</FormLabel>
-					<FormInput id="location" v-model="form.location" />
-					<FormError :message="store.errors.location" />
-				</FormGroup>
-				<FormGroup>
-					<FormLabel for="subtitle">Untertitel</FormLabel>
-					<FormInput id="subtitle" v-model="form.subtitle" />
-					<FormError :message="store.errors.subtitle" />
-				</FormGroup>
-			</div>
+					<div class="grid grid-cols-2 gap-24">
+						<FormGroup>
+							<FormLabel for="location">Ort</FormLabel>
+							<FormInput id="location" v-model="form.location" />
+							<FormError :message="store.errors.location" />
+						</FormGroup>
+						<FormGroup>
+							<FormLabel for="subtitle">Untertitel</FormLabel>
+							<FormInput id="subtitle" v-model="form.subtitle" />
+							<FormError :message="store.errors.subtitle" />
+						</FormGroup>
+					</div>
 
-			<div class="grid grid-cols-2 gap-24">
-				<FormGroup>
-					<FormLabel for="year">Jahr *</FormLabel>
-					<FormInput id="year" v-model="form.year" type="number" />
-					<FormError :message="store.errors.year" />
-				</FormGroup>
-				<FormGroup>
-					<FormLabel for="topic_id">Thema</FormLabel>
-					<FormSelect id="topic_id" v-model="form.topic_id" :options="topicOptions" />
-					<FormError :message="store.errors.topic_id" />
-				</FormGroup>
-			</div>
+					<div class="grid grid-cols-2 gap-24">
+						<FormGroup>
+							<FormLabel for="year">Jahr *</FormLabel>
+							<FormInput id="year" v-model="form.year" type="number" />
+							<FormError :message="store.errors.year" />
+						</FormGroup>
+						<FormGroup>
+							<FormLabel for="topic_id">Thema</FormLabel>
+							<FormSelect id="topic_id" v-model="form.topic_id" :options="topicOptions" />
+							<FormError :message="store.errors.topic_id" />
+						</FormGroup>
+					</div>
 
-			<FormGroup>
-				<FormLabel>Beschreibung</FormLabel>
-				<div class="mt-8">
-					<Editor v-model="form.description" />
-				</div>
-				<FormError :message="store.errors.description" />
-			</FormGroup>
+					<FormGroup>
+						<FormLabel>Beschreibung</FormLabel>
+						<div class="mt-8">
+							<Editor v-model="form.description" />
+						</div>
+						<FormError :message="store.errors.description" />
+					</FormGroup>
 
-			<FormGroup>
-				<FormLabel>Info</FormLabel>
-				<div class="mt-8">
-					<Editor v-model="form.info" />
-				</div>
-				<FormError :message="store.errors.info" />
-			</FormGroup>
+					<FormGroup>
+						<FormLabel>Info</FormLabel>
+						<div class="mt-8">
+							<Editor v-model="form.info" />
+						</div>
+						<FormError :message="store.errors.info" />
+					</FormGroup>
 
-			<FormGroup>
-				<FormLabel for="meta_description">Meta Description</FormLabel>
-				<FormInput id="meta_description" v-model="form.meta_description" />
-				<FormError :message="store.errors.meta_description" />
-			</FormGroup>
+					<FormGroup>
+						<FormLabel>Medien</FormLabel>
+						<div class="mt-8 flex flex-col gap-16">
+							<MediaUploader :compact="mediaStore.items.length > 0" @uploaded="onUploaded" />
+							<MediaGrid
+								v-if="mediaStore.items.length"
+								:items="mediaStore.items"
+								@edit="onEditMedia"
+								@delete="onDeleteMedia"
+								@reorder="onReorderMedia"
+								@teaser="onSetTeaser"
+							/>
+						</div>
+					</FormGroup>
 
-			<div class="flex gap-24">
-				<FormGroup>
-					<FormCheckbox v-model="form.publish">Veröffentlichen</FormCheckbox>
-				</FormGroup>
-				<FormGroup>
-					<FormCheckbox v-model="form.feature">In Auswahl anzeigen</FormCheckbox>
-				</FormGroup>
-			</div>
-
-			<FormGroup>
-				<FormLabel>Medien</FormLabel>
-				<div class="mt-8 flex flex-col gap-16">
-					<MediaUploader :compact="mediaStore.items.length > 0" @uploaded="onUploaded" />
-					<MediaGrid
-						v-if="mediaStore.items.length"
-						:items="mediaStore.items"
-						@edit="onEditMedia"
-						@delete="onDeleteMedia"
-						@reorder="onReorderMedia"
-						@teaser="onSetTeaser"
+					<FormActions
+						:submitLabel="isEdit ? 'Aktualisieren' : 'Erstellen'"
+						cancelLabel="Abbrechen"
+						@cancel="router.push({ name: 'projects.index' })"
 					/>
 				</div>
-			</FormGroup>
 
-			<FormActions
-				:submitLabel="isEdit ? 'Aktualisieren' : 'Erstellen'"
-				cancelLabel="Abbrechen"
-				@cancel="router.push({ name: 'projects.index' })"
-			/>
+				<template #sidebar>
+					<div class="flex flex-col gap-24">
+						<FormGroup>
+							<FormLabel for="meta_description">Meta Description</FormLabel>
+							<FormTextarea id="meta_description" v-model="form.meta_description" />
+							<FormError :message="store.errors.meta_description" />
+						</FormGroup>
+						<FormGroup>
+							<FormCheckbox v-model="form.publish">Veröffentlichen</FormCheckbox>
+						</FormGroup>
+						<FormGroup>
+							<FormCheckbox v-model="form.feature">In Auswahl anzeigen</FormCheckbox>
+						</FormGroup>
+					</div>
+				</template>
+			</SidebarLayout>
 		</form>
 
 		<MediaEdit
