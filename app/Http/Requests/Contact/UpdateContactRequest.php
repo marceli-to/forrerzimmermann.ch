@@ -20,7 +20,6 @@ class UpdateContactRequest extends FormRequest
 			'phone' => 'required|string|max:255',
 			'maps_url' => 'nullable|string|url',
 			'imprint' => 'nullable|string',
-			'meta_description' => 'nullable|string|max:255',
 			'publish' => 'boolean',
 		];
 	}

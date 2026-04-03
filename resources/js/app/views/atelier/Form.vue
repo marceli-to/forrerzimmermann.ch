@@ -13,7 +13,7 @@ import SidebarLayout from '@/components/ui/form/SidebarLayout.vue'
 import FormActions from '@/components/ui/form/FormActions.vue'
 import FormLabel from '@/components/ui/form/FormLabel.vue'
 import FormInput from '@/components/ui/form/FormInput.vue'
-import FormTextarea from '@/components/ui/form/FormTextarea.vue'
+import FormCheckbox from '@/components/ui/form/FormCheckbox.vue'
 import FormError from '@/components/ui/form/FormError.vue'
 import FormGroup from '@/components/ui/form/FormGroup.vue'
 
@@ -34,7 +34,6 @@ const pageTitle = computed(() => {
 const form = ref({
 	title: '',
 	text: '',
-	meta_description: '',
 	publish: false,
 })
 
@@ -46,7 +45,6 @@ onMounted(async () => {
 		form.value = {
 			title: p.title || '',
 			text: p.text || '',
-			meta_description: p.meta_description || '',
 			publish: p.publish,
 		}
 		mediaStore.setItems(p.media || [])
@@ -141,9 +139,7 @@ function onSetTeaser(media) { mediaStore.setTeaser(media.uuid) }
 
 				<template #sidebar>
 					<FormGroup>
-						<FormLabel for="meta_description">Meta Description</FormLabel>
-						<FormTextarea id="meta_description" v-model="form.meta_description" />
-						<FormError :message="store.errors.meta_description" />
+						<FormCheckbox v-model="form.publish">Veröffentlichen</FormCheckbox>
 					</FormGroup>
 				</template>
 			</SidebarLayout>
@@ -163,12 +159,6 @@ function onSetTeaser(media) { mediaStore.setTeaser(media.uuid) }
 							@teaser="onSetTeaser"
 						/>
 					</div>
-				</FormGroup>
-
-				<FormGroup>
-					<FormLabel for="meta_description">Meta Description</FormLabel>
-					<FormTextarea id="meta_description" v-model="form.meta_description" />
-					<FormError :message="store.errors.meta_description" />
 				</FormGroup>
 
 				<FormActions

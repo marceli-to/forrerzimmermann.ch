@@ -16,7 +16,6 @@ class UpdateAtelierPageRequest extends FormRequest
 		return [
 			'title' => 'nullable|string|max:255',
 			'text' => 'nullable|string',
-			'meta_description' => 'nullable|string|max:255',
 			'publish' => 'boolean',
 			'media' => 'nullable|array',
 			'media.*.uuid' => 'required|string',
