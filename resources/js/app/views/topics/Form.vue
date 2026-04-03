@@ -4,9 +4,9 @@ import { useRoute, useRouter } from 'vue-router'
 import { useTopicStore } from '@/stores/topics'
 import { useToast } from '@/composables/useToast'
 import PageHeader from '@/components/layout/PageHeader.vue'
+import FormActions from '@/components/ui/form/FormActions.vue'
 import FormLabel from '@/components/ui/form/FormLabel.vue'
 import FormInput from '@/components/ui/form/FormInput.vue'
-import FormButton from '@/components/ui/form/FormButton.vue'
 import FormError from '@/components/ui/form/FormError.vue'
 import FormGroup from '@/components/ui/form/FormGroup.vue'
 
@@ -49,25 +49,24 @@ async function handleSubmit() {
 
 <template>
 	<div>
-		<PageHeader :title="isEdit ? 'Thema bearbeiten' : 'Neues Thema'">
-			<FormButton variant="secondary" @click="router.push({ name: 'topics.index' })">
-				Abbrechen
-			</FormButton>
-			<FormButton @click="handleSubmit">
-				{{ isEdit ? 'Aktualisieren' : 'Erstellen' }}
-			</FormButton>
-		</PageHeader>
+		<PageHeader :title="isEdit ? 'Thema bearbeiten' : 'Neues Thema'" />
 
 		<div v-if="store.loading" class="text-sm text-gray-400">
 			Laden...
 		</div>
 
-		<form v-else class="max-w-4xl" @submit.prevent="handleSubmit">
+		<form v-else class="flex flex-col gap-24" @submit.prevent="handleSubmit">
 			<FormGroup>
 				<FormLabel for="title">Titel *</FormLabel>
 				<FormInput id="title" v-model="form.title" />
 				<FormError :message="store.errors.title" />
 			</FormGroup>
+
+			<FormActions
+				:submitLabel="isEdit ? 'Aktualisieren' : 'Erstellen'"
+				cancelLabel="Abbrechen"
+				@cancel="router.push({ name: 'topics.index' })"
+			/>
 		</form>
 	</div>
 </template>

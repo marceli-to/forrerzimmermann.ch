@@ -9,9 +9,9 @@ import MediaGrid from '@/components/media/MediaGrid.vue'
 import MediaEdit from '@/components/media/MediaEdit.vue'
 import Editor from '@/components/ui/editor/Editor.vue'
 import PageHeader from '@/components/layout/PageHeader.vue'
+import FormActions from '@/components/ui/form/FormActions.vue'
 import FormLabel from '@/components/ui/form/FormLabel.vue'
 import FormInput from '@/components/ui/form/FormInput.vue'
-import FormButton from '@/components/ui/form/FormButton.vue'
 import FormError from '@/components/ui/form/FormError.vue'
 import FormGroup from '@/components/ui/form/FormGroup.vue'
 
@@ -91,20 +91,13 @@ function onSetTeaser(media) { mediaStore.setTeaser(media.uuid) }
 
 <template>
 	<div>
-		<PageHeader :title="pageTitle">
-			<FormButton variant="secondary" @click="router.push({ name: 'atelier.index' })">
-				Abbrechen
-			</FormButton>
-			<FormButton @click="handleSubmit">
-				Aktualisieren
-			</FormButton>
-		</PageHeader>
+		<PageHeader :title="pageTitle" />
 
 		<div v-if="store.loading" class="text-sm text-gray-400">
 			Laden...
 		</div>
 
-		<form v-else-if="store.current" class="max-w-4xl" @submit.prevent="handleSubmit">
+		<form v-else-if="store.current" class="flex flex-col gap-24" @submit.prevent="handleSubmit">
 			<template v-if="store.current.slug === 'profil'">
 				<FormGroup>
 					<FormLabel for="title">Titel</FormLabel>
@@ -129,12 +122,11 @@ function onSetTeaser(media) { mediaStore.setTeaser(media.uuid) }
 
 			<FormGroup>
 				<FormLabel>Medien</FormLabel>
-				<div class="mt-8">
-					<MediaUploader :compact="mediaStore.items.length > 0" @uploaded="onUploaded" />
+				<div class="mt-8 flex flex-col gap-16">
+					<MediaUploader v-if="!mediaStore.items.length" @uploaded="onUploaded" />
 					<MediaGrid
 						v-if="mediaStore.items.length"
 						:items="mediaStore.items"
-						class="mt-16"
 						@edit="onEditMedia"
 						@delete="onDeleteMedia"
 						@reorder="onReorderMedia"
@@ -142,6 +134,12 @@ function onSetTeaser(media) { mediaStore.setTeaser(media.uuid) }
 					/>
 				</div>
 			</FormGroup>
+
+			<FormActions
+				submitLabel="Aktualisieren"
+				cancelLabel="Abbrechen"
+				@cancel="router.push({ name: 'atelier.index' })"
+			/>
 		</form>
 
 		<MediaEdit

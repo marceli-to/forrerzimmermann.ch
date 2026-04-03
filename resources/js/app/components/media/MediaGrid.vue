@@ -19,7 +19,7 @@ const dragItems = computed({
 	<draggable
 		v-model="dragItems"
 		item-key="uuid"
-		class="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-8"
+		class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-20"
 		ghost-class="opacity-30"
 		animation="150"
 	>

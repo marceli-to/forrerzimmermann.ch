@@ -5,9 +5,9 @@ import { useJobStore } from '@/stores/jobs'
 import { useToast } from '@/composables/useToast'
 import Editor from '@/components/ui/editor/Editor.vue'
 import PageHeader from '@/components/layout/PageHeader.vue'
+import FormActions from '@/components/ui/form/FormActions.vue'
 import FormLabel from '@/components/ui/form/FormLabel.vue'
 import FormInput from '@/components/ui/form/FormInput.vue'
-import FormButton from '@/components/ui/form/FormButton.vue'
 import FormError from '@/components/ui/form/FormError.vue'
 import FormGroup from '@/components/ui/form/FormGroup.vue'
 
@@ -52,20 +52,13 @@ async function handleSubmit() {
 
 <template>
 	<div>
-		<PageHeader :title="isEdit ? 'Stelle bearbeiten' : 'Neue Stelle'">
-			<FormButton variant="secondary" @click="router.push({ name: 'jobs.index' })">
-				Abbrechen
-			</FormButton>
-			<FormButton @click="handleSubmit">
-				{{ isEdit ? 'Aktualisieren' : 'Erstellen' }}
-			</FormButton>
-		</PageHeader>
+		<PageHeader :title="isEdit ? 'Stelle bearbeiten' : 'Neue Stelle'" />
 
 		<div v-if="store.loading" class="text-sm text-gray-400">
 			Laden...
 		</div>
 
-		<form v-else class="max-w-4xl" @submit.prevent="handleSubmit">
+		<form v-else class="flex flex-col gap-24" @submit.prevent="handleSubmit">
 			<FormGroup>
 				<FormLabel for="title">Titel *</FormLabel>
 				<FormInput id="title" v-model="form.title" />
@@ -79,6 +72,12 @@ async function handleSubmit() {
 				</div>
 				<FormError :message="store.errors.text" />
 			</FormGroup>
+
+			<FormActions
+				:submitLabel="isEdit ? 'Aktualisieren' : 'Erstellen'"
+				cancelLabel="Abbrechen"
+				@cancel="router.push({ name: 'jobs.index' })"
+			/>
 		</form>
 	</div>
 </template>

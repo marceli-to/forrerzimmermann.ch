@@ -9,9 +9,9 @@ import MediaGrid from '@/components/media/MediaGrid.vue'
 import MediaEdit from '@/components/media/MediaEdit.vue'
 import Editor from '@/components/ui/editor/Editor.vue'
 import PageHeader from '@/components/layout/PageHeader.vue'
+import FormActions from '@/components/ui/form/FormActions.vue'
 import FormLabel from '@/components/ui/form/FormLabel.vue'
 import FormSelect from '@/components/ui/form/FormSelect.vue'
-import FormButton from '@/components/ui/form/FormButton.vue'
 import FormError from '@/components/ui/form/FormError.vue'
 import FormGroup from '@/components/ui/form/FormGroup.vue'
 
@@ -91,20 +91,13 @@ function onReorderMedia(items) { mediaStore.reorder(items) }
 
 <template>
 	<div>
-		<PageHeader :title="isEdit ? 'Slide bearbeiten' : 'Neuer Slide'">
-			<FormButton variant="secondary" @click="router.push({ name: 'landing.index' })">
-				Abbrechen
-			</FormButton>
-			<FormButton @click="handleSubmit">
-				{{ isEdit ? 'Aktualisieren' : 'Erstellen' }}
-			</FormButton>
-		</PageHeader>
+		<PageHeader :title="isEdit ? 'Slide bearbeiten' : 'Neuer Slide'" />
 
 		<div v-if="store.loading" class="text-sm text-gray-400">
 			Laden...
 		</div>
 
-		<form v-else class="max-w-4xl" @submit.prevent="handleSubmit">
+		<form v-else class="flex flex-col gap-24" @submit.prevent="handleSubmit">
 			<FormGroup>
 				<FormLabel for="type">Typ</FormLabel>
 				<FormSelect id="type" v-model="form.type" :options="typeOptions" />
@@ -121,18 +114,23 @@ function onReorderMedia(items) { mediaStore.reorder(items) }
 
 			<FormGroup>
 				<FormLabel>Medien</FormLabel>
-				<div class="mt-8">
-					<MediaUploader :compact="mediaStore.items.length > 0" @uploaded="onUploaded" />
+				<div class="mt-8 flex flex-col gap-16">
+					<MediaUploader v-if="!mediaStore.items.length" @uploaded="onUploaded" />
 					<MediaGrid
 						v-if="mediaStore.items.length"
 						:items="mediaStore.items"
-						class="mt-16"
 						@edit="onEditMedia"
 						@delete="onDeleteMedia"
 						@reorder="onReorderMedia"
 					/>
 				</div>
 			</FormGroup>
+
+			<FormActions
+				:submitLabel="isEdit ? 'Aktualisieren' : 'Erstellen'"
+				cancelLabel="Abbrechen"
+				@cancel="router.push({ name: 'landing.index' })"
+			/>
 		</form>
 
 		<MediaEdit
