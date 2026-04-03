@@ -77,7 +77,7 @@ function handleSave() {
 		</div>
 
 		<!-- Fields -->
-		<div class="px-24 py-20">
+		<div class="px-24 py-20 flex flex-col gap-24">
 			<FormGroup>
 				<FormLabel for="alt">Alt-Text</FormLabel>
 				<FormInput id="alt" v-model="form.alt" placeholder="Bildbeschreibung für Screenreader..." />
@@ -94,14 +94,14 @@ function handleSave() {
 			<div class="flex gap-12">
 				<button
 					type="button"
-					class="flex-1 bg-neutral-900 text-white text-sm font-medium py-10 hover:bg-neutral-800 active:bg-neutral-950 transition-colors"
+					class="text-sm inline-flex items-center justify-center rounded-md px-16 py-8 bg-gray-900 text-white hover:bg-gray-800 transition-colors cursor-pointer"
 					@click="handleSave"
 				>
 					Speichern
 				</button>
 				<button
 					type="button"
-					class="px-16 py-10 border border-neutral-200 text-sm text-gray-500 hover:text-gray-900 hover:border-neutral-400 transition-colors"
+					class="text-sm inline-flex items-center justify-center rounded-md px-16 py-8 bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors cursor-pointer"
 					@click="close"
 				>
 					Abbrechen

@@ -46,24 +46,24 @@ function close() {
 			<Transition name="fade">
 				<div
 					v-if="visible"
-					class="absolute inset-0 bg-black/40"
+					class="absolute inset-0 bg-black/30"
 					@click="close"
 				/>
 			</Transition>
 
 			<!-- Panel -->
 			<div
-				class="absolute top-0 right-0 bottom-0 w-full bg-white shadow-xl transition-transform duration-200 ease-out flex flex-col"
+				class="absolute top-16 right-16 bottom-16 w-full bg-white rounded-2xl shadow-xl transition-transform duration-200 ease-out flex flex-col"
 				:class="[sizes[size], visible ? 'translate-x-0' : 'translate-x-full']"
 			>
 				<!-- Header -->
 				<div class="flex items-center justify-between px-24 py-20 border-b border-neutral-200">
 					<slot name="header">
-						<h3 class="text-sm font-semibold text-gray-900">{{ title }}</h3>
+						<h3 class="text-sm font-medium text-gray-900">{{ title }}</h3>
 					</slot>
 					<button
 						type="button"
-						class="size-28 flex items-center justify-center text-gray-400 hover:text-gray-900 transition-colors"
+						class="text-gray-400 hover:text-gray-900 transition-colors cursor-pointer"
 						@click="close"
 					>
 						<PhX :size="16" weight="light" />
@@ -76,7 +76,7 @@ function close() {
 				</div>
 
 				<!-- Footer -->
-				<div v-if="$slots.footer" class="px-24 py-16 border-t border-neutral-200">
+				<div v-if="$slots.footer" class="px-24 pt-16 pb-24">
 					<slot name="footer" />
 				</div>
 			</div>
