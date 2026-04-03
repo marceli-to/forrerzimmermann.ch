@@ -1,4 +1,3 @@
-.worktrees/
 *.log
 .DS_Store
 .env
