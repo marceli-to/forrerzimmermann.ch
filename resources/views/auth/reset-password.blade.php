@@ -18,7 +18,7 @@
 			<x-form.input type="password" name="password_confirmation" required autocomplete="new-password" />
 			<x-form.error name="password_confirmation" />
 		</div>
-		<div>
+		<div class="flex items-center justify-between mt-24">
 			<x-form.button class="w-full">Passwort zurücksetzen</x-form.button>
 		</div>
 	</form>

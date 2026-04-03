@@ -12,7 +12,7 @@
 			<x-form.input type="password" name="password" required autocomplete="current-password" />
 			<x-form.error name="password" />
 		</div>
-		<div class="flex items-center justify-between">
+		<div class="flex items-center justify-between mt-24">
 			@if (Route::has('password.request'))
 				<x-form.link :href="route('password.request')">Passwort vergessen?</x-form.link>
 			@endif

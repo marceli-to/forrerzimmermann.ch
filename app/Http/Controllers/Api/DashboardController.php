@@ -13,28 +13,18 @@ class DashboardController extends Controller
 		$projects = Project::all();
 		$media = Media::all();
 
-		$recentMedia = Media::orderByDesc('created_at')
-			->limit(8)
-			->get()
-			->map(fn ($m) => [
-				'uuid' => $m->uuid,
-				'original_name' => $m->original_name,
-				'thumbnail_url' => '/img/uploads/' . $m->file . '?w=200&h=200&fit=crop',
-				'created_at' => $m->created_at,
-			]);
-
-		$recentProjects = Project::orderByDesc('created_at')
+		$recentProjects = Project::orderByDesc('updated_at')
 			->limit(5)
 			->get()
 			->map(fn ($p) => [
 				'id' => $p->id,
 				'title' => $p->title,
 				'publish' => $p->publish,
-				'created_at' => $p->created_at,
 				'updated_at' => $p->updated_at,
 			]);
 
 		return response()->json([
+			'user' => auth()->user()->name,
 			'stats' => [
 				'projects_total' => $projects->count(),
 				'projects_published' => $projects->where('publish', true)->count(),
@@ -43,7 +33,6 @@ class DashboardController extends Controller
 				'media_size' => $media->sum('size'),
 			],
 			'recent_projects' => $recentProjects,
-			'recent_media' => $recentMedia,
 		]);
 	}
 }

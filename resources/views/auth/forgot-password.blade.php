@@ -7,7 +7,7 @@
 			<x-form.input type="email" name="email" :value="old('email')" required autofocus />
 			<x-form.error name="email" />
 		</div>
-		<div class="flex items-center justify-between">
+		<div class="flex items-center justify-between mt-24">
 			<x-form.link :href="route('login')">Zurück zum Login</x-form.link>
 			<x-form.button>Link senden</x-form.button>
 		</div>

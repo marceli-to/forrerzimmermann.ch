@@ -15,6 +15,5 @@
 <body class="h-full text-sm font-sans tracking-wide text-gray-900 antialiased bg-gray-100">
 	<div id="app"></div>
 	@vite('resources/js/app/app.js')
-
 </body>
 </html>
