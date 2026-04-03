@@ -9,4 +9,5 @@ export default {
 	destroy: (uuid) => api.delete(`/media/${uuid}`),
 	reorder: (items) => api.patch('/media/reorder', { items }),
 	teaser: (uuid) => api.patch(`/media/${uuid}/teaser`),
+	og: (uuid) => api.patch(`/media/${uuid}/og`),
 }

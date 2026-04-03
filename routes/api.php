@@ -40,6 +40,7 @@ Route::prefix('dashboard')
 				Route::delete('/{media}', 'destroy');
 				Route::patch('/reorder', 'reorder');
 				Route::patch('/{media}/teaser', 'teaser');
+				Route::patch('/{media}/og', 'og');
 			});
 
 		Route::controller(JobController::class)

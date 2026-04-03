@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Actions\Media\DeleteAction as DeleteMediaAction;
 use App\Actions\Media\ReorderAction as ReorderMediaAction;
+use App\Actions\Media\SetOgAction;
 use App\Actions\Media\SetTeaserAction;
 use App\Actions\Media\UpdateAction as UpdateMediaAction;
 use App\Actions\Media\UploadAction as UploadMediaAction;
@@ -54,6 +55,13 @@ class MediaController extends Controller
 	public function teaser(Media $media)
 	{
 		$media = (new SetTeaserAction)->execute($media);
+
+		return new MediaResource($media);
+	}
+
+	public function og(Media $media)
+	{
+		$media = (new SetOgAction)->execute($media);
 
 		return new MediaResource($media);
 	}
