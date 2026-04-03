@@ -1,6 +1,6 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-DorxivNL.css",
+    "file": "assets/app-pT--4GRM.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -9,7 +9,7 @@
     ]
   },
   "resources/css/site.css": {
-    "file": "assets/site-DCOJQjsG.css",
+    "file": "assets/site-CF66RgOM.css",
     "src": "resources/css/site.css",
     "isEntry": true,
     "name": "site",
@@ -22,7 +22,7 @@
     "src": "resources/fonts/Geist-Variable.woff2"
   },
   "resources/js/app/app.js": {
-    "file": "assets/app-ChYPZGw5.js",
+    "file": "assets/app-BXsZzPK5.js",
     "name": "app",
     "src": "resources/js/app/app.js",
     "isEntry": true,
