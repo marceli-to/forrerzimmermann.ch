@@ -52,7 +52,7 @@ const model = defineModel()
 								]"
 							>
 								<slot :name="'cell-' + col.key" :row="row" :value="row[col.key]">
-									{{ row[col.key] ?? '–' }}
+									{{ typeof row[col.key] === 'string' || typeof row[col.key] === 'number' ? row[col.key] : '' }}
 								</slot>
 							</td>
 						</tr>
@@ -77,7 +77,7 @@ const model = defineModel()
 							]"
 						>
 							<slot :name="'cell-' + col.key" :row="row" :value="row[col.key]">
-								{{ row[col.key] ?? '–' }}
+								{{ typeof row[col.key] === 'string' || typeof row[col.key] === 'number' ? row[col.key] : '' }}
 							</slot>
 						</td>
 					</tr>

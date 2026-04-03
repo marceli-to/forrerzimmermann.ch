@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { getActivePinia } from 'pinia'
 
 import LandingIndex from '@/views/landing/Index.vue'
 import LandingForm from '@/views/landing/Form.vue'
@@ -109,7 +110,7 @@ const routes = [
     path: '/dashboard/jobs',
     name: 'jobs.index',
     component: JobIndex,
-    meta: { title: 'Stellen' },
+    meta: { title: 'Jobs' },
   },
   {
     path: '/dashboard/jobs/create',
@@ -146,6 +147,17 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes,
+})
+
+router.beforeEach(() => {
+  const pinia = getActivePinia()
+  if (pinia) {
+    Object.values(pinia.state.value).forEach((storeState) => {
+      if ('errors' in storeState) {
+        storeState.errors = {}
+      }
+    })
+  }
 })
 
 router.afterEach((to) => {

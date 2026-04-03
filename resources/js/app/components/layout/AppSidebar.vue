@@ -30,7 +30,7 @@ const navigation = [
 		items: [
 			{ name: 'Atelier', to: '/dashboard/atelier', icon: PhHouseSimple },
 			{ name: 'Team', to: '/dashboard/team', icon: PhUsers },
-			{ name: 'Stellen', to: '/dashboard/jobs', icon: PhBriefcase },
+			{ name: 'Jobs', to: '/dashboard/jobs', icon: PhBriefcase },
 		],
 	},
 	{

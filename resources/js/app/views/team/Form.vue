@@ -14,7 +14,6 @@ import FormActions from '@/components/ui/form/FormActions.vue'
 import FormLabel from '@/components/ui/form/FormLabel.vue'
 import FormInput from '@/components/ui/form/FormInput.vue'
 import FormCheckbox from '@/components/ui/form/FormCheckbox.vue'
-import FormError from '@/components/ui/form/FormError.vue'
 import FormGroup from '@/components/ui/form/FormGroup.vue'
 
 const route = useRoute()
@@ -105,36 +104,31 @@ function onReorderMedia(items) { mediaStore.reorder(items) }
 				<div class="flex flex-col gap-24">
 					<div class="grid grid-cols-2 gap-24">
 						<FormGroup>
-							<FormLabel for="firstname">Vorname *</FormLabel>
-							<FormInput id="firstname" v-model="form.firstname" />
-							<FormError :message="store.errors.firstname" />
+							<FormLabel for="firstname" :error="store.errors.firstname">Vorname *</FormLabel>
+							<FormInput id="firstname" v-model="form.firstname" :hasError="!!store.errors.firstname" @focus="delete store.errors.firstname" />
 						</FormGroup>
 						<FormGroup>
-							<FormLabel for="name">Name *</FormLabel>
-							<FormInput id="name" v-model="form.name" />
-							<FormError :message="store.errors.name" />
+							<FormLabel for="name" :error="store.errors.name">Name *</FormLabel>
+							<FormInput id="name" v-model="form.name" :hasError="!!store.errors.name" @focus="delete store.errors.name" />
 						</FormGroup>
 					</div>
 
 					<div class="grid grid-cols-2 gap-24">
 						<FormGroup>
-							<FormLabel for="title">Titel</FormLabel>
-							<FormInput id="title" v-model="form.title" />
-							<FormError :message="store.errors.title" />
+							<FormLabel for="title" :error="store.errors.title">Titel</FormLabel>
+							<FormInput id="title" v-model="form.title" :hasError="!!store.errors.title" @focus="delete store.errors.title" />
 						</FormGroup>
 						<FormGroup>
-							<FormLabel for="email">E-Mail</FormLabel>
-							<FormInput id="email" v-model="form.email" />
-							<FormError :message="store.errors.email" />
+							<FormLabel for="email" :error="store.errors.email">E-Mail</FormLabel>
+							<FormInput id="email" v-model="form.email" :hasError="!!store.errors.email" @focus="delete store.errors.email" />
 						</FormGroup>
 					</div>
 
 					<FormGroup>
-						<FormLabel>Lebenslauf</FormLabel>
+						<FormLabel :error="store.errors.cv">Lebenslauf</FormLabel>
 						<div class="mt-8">
-							<Editor v-model="form.cv" />
+							<Editor v-model="form.cv" :hasError="!!store.errors.cv" @focus="delete store.errors.cv" />
 						</div>
-						<FormError :message="store.errors.cv" />
 					</FormGroup>
 
 					<FormGroup>

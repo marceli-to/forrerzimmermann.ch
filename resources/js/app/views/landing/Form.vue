@@ -12,7 +12,6 @@ import PageHeader from '@/components/layout/PageHeader.vue'
 import FormActions from '@/components/ui/form/FormActions.vue'
 import FormLabel from '@/components/ui/form/FormLabel.vue'
 import FormSelect from '@/components/ui/form/FormSelect.vue'
-import FormError from '@/components/ui/form/FormError.vue'
 import FormGroup from '@/components/ui/form/FormGroup.vue'
 
 const route = useRoute()
@@ -99,17 +98,15 @@ function onReorderMedia(items) { mediaStore.reorder(items) }
 
 		<form v-else class="flex flex-col gap-24" @submit.prevent="handleSubmit">
 			<FormGroup>
-				<FormLabel for="type">Typ</FormLabel>
-				<FormSelect id="type" v-model="form.type" :options="typeOptions" />
-				<FormError :message="store.errors.type" />
+				<FormLabel for="type" :error="store.errors.type">Typ</FormLabel>
+				<FormSelect id="type" v-model="form.type" :options="typeOptions" :hasError="!!store.errors.type" @focus="delete store.errors.type" />
 			</FormGroup>
 
 			<FormGroup v-if="form.type === 'image_text'">
-				<FormLabel>Text</FormLabel>
+				<FormLabel :error="store.errors.text">Text</FormLabel>
 				<div class="mt-8">
-					<Editor v-model="form.text" />
+					<Editor v-model="form.text" :hasError="!!store.errors.text" @focus="delete store.errors.text" />
 				</div>
-				<FormError :message="store.errors.text" />
 			</FormGroup>
 
 			<FormGroup>

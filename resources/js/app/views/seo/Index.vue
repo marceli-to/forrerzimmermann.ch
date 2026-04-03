@@ -9,9 +9,7 @@ import MediaEdit from '@/components/media/MediaEdit.vue'
 import PageHeader from '@/components/layout/PageHeader.vue'
 import FormActions from '@/components/ui/form/FormActions.vue'
 import FormLabel from '@/components/ui/form/FormLabel.vue'
-import FormInput from '@/components/ui/form/FormInput.vue'
 import FormTextarea from '@/components/ui/form/FormTextarea.vue'
-import FormError from '@/components/ui/form/FormError.vue'
 import FormGroup from '@/components/ui/form/FormGroup.vue'
 
 const store = useSeoStore()
@@ -20,8 +18,6 @@ const toast = useToast()
 const editingMedia = ref(null)
 
 const form = ref({
-    og_title: '',
-    og_description: '',
     landing_meta_description: '',
     projects_meta_description: '',
     werkliste_meta_description: '',
@@ -37,8 +33,6 @@ onMounted(async () => {
     if (store.seo) {
         const s = store.seo
         form.value = {
-            og_title: s.og_title || '',
-            og_description: s.og_description || '',
             landing_meta_description: s.landing_meta_description || '',
             projects_meta_description: s.projects_meta_description || '',
             werkliste_meta_description: s.werkliste_meta_description || '',
@@ -99,19 +93,7 @@ function onReorderMedia(items) { mediaStore.reorder(items) }
         <form v-else class="flex flex-col gap-24" @submit.prevent="handleSubmit">
 
             <FormGroup>
-                <FormLabel for="og_title">OG Titel</FormLabel>
-                <FormInput id="og_title" v-model="form.og_title" />
-                <FormError :message="store.errors.og_title" />
-            </FormGroup>
-
-            <FormGroup>
-                <FormLabel for="og_description">OG Beschreibung</FormLabel>
-                <FormTextarea id="og_description" v-model="form.og_description" />
-                <FormError :message="store.errors.og_description" />
-            </FormGroup>
-
-            <FormGroup>
-                <FormLabel>OG Image</FormLabel>
+                <FormLabel>Open Graph Bild</FormLabel>
                 <div class="mt-8 flex flex-col gap-16">
                     <MediaUploader v-if="!mediaStore.items.length" @uploaded="onUploaded" />
                     <MediaGrid
@@ -126,46 +108,44 @@ function onReorderMedia(items) { mediaStore.reorder(items) }
                 </div>
             </FormGroup>
 
+            <div class="flex flex-col gap-4">
+                <h2>Meta Descriptions</h2>
+                <p class="text-sm text-gray-400 dark:text-warm-500">Kurze Beschreibung der jeweiligen Seite für Suchmaschinen. Idealerweise 1–2 Sätze, max. 160 Zeichen.</p>
+            </div>
+
             <FormGroup>
-                <FormLabel for="landing_meta_description">Meta Description – Startseite</FormLabel>
-                <FormTextarea id="landing_meta_description" v-model="form.landing_meta_description" />
-                <FormError :message="store.errors.landing_meta_description" />
+                <FormLabel for="landing_meta_description" :error="store.errors.landing_meta_description">Startseite</FormLabel>
+                <FormTextarea id="landing_meta_description" v-model="form.landing_meta_description" :hasError="!!store.errors.landing_meta_description" @focus="delete store.errors.landing_meta_description" />
             </FormGroup>
 
             <FormGroup>
-                <FormLabel for="projects_meta_description">Meta Description – Projekte</FormLabel>
-                <FormTextarea id="projects_meta_description" v-model="form.projects_meta_description" />
-                <FormError :message="store.errors.projects_meta_description" />
+                <FormLabel for="projects_meta_description" :error="store.errors.projects_meta_description">Projekte (Übersicht)</FormLabel>
+                <FormTextarea id="projects_meta_description" v-model="form.projects_meta_description" :hasError="!!store.errors.projects_meta_description" @focus="delete store.errors.projects_meta_description" />
             </FormGroup>
 
             <FormGroup>
-                <FormLabel for="werkliste_meta_description">Meta Description – Werkliste</FormLabel>
-                <FormTextarea id="werkliste_meta_description" v-model="form.werkliste_meta_description" />
-                <FormError :message="store.errors.werkliste_meta_description" />
+                <FormLabel for="werkliste_meta_description" :error="store.errors.werkliste_meta_description">Werkliste</FormLabel>
+                <FormTextarea id="werkliste_meta_description" v-model="form.werkliste_meta_description" :hasError="!!store.errors.werkliste_meta_description" @focus="delete store.errors.werkliste_meta_description" />
             </FormGroup>
 
             <FormGroup>
-                <FormLabel for="profile_meta_description">Meta Description – Profil</FormLabel>
-                <FormTextarea id="profile_meta_description" v-model="form.profile_meta_description" />
-                <FormError :message="store.errors.profile_meta_description" />
+                <FormLabel for="profile_meta_description" :error="store.errors.profile_meta_description">Profil</FormLabel>
+                <FormTextarea id="profile_meta_description" v-model="form.profile_meta_description" :hasError="!!store.errors.profile_meta_description" @focus="delete store.errors.profile_meta_description" />
             </FormGroup>
 
             <FormGroup>
-                <FormLabel for="team_meta_description">Meta Description – Team</FormLabel>
-                <FormTextarea id="team_meta_description" v-model="form.team_meta_description" />
-                <FormError :message="store.errors.team_meta_description" />
+                <FormLabel for="team_meta_description" :error="store.errors.team_meta_description">Team</FormLabel>
+                <FormTextarea id="team_meta_description" v-model="form.team_meta_description" :hasError="!!store.errors.team_meta_description" @focus="delete store.errors.team_meta_description" />
             </FormGroup>
 
             <FormGroup>
-                <FormLabel for="jobs_meta_description">Meta Description – Stellen</FormLabel>
-                <FormTextarea id="jobs_meta_description" v-model="form.jobs_meta_description" />
-                <FormError :message="store.errors.jobs_meta_description" />
+                <FormLabel for="jobs_meta_description" :error="store.errors.jobs_meta_description">Jobs</FormLabel>
+                <FormTextarea id="jobs_meta_description" v-model="form.jobs_meta_description" :hasError="!!store.errors.jobs_meta_description" @focus="delete store.errors.jobs_meta_description" />
             </FormGroup>
 
             <FormGroup>
-                <FormLabel for="contact_meta_description">Meta Description – Kontakt</FormLabel>
-                <FormTextarea id="contact_meta_description" v-model="form.contact_meta_description" />
-                <FormError :message="store.errors.contact_meta_description" />
+                <FormLabel for="contact_meta_description" :error="store.errors.contact_meta_description">Kontakt</FormLabel>
+                <FormTextarea id="contact_meta_description" v-model="form.contact_meta_description" :hasError="!!store.errors.contact_meta_description" @focus="delete store.errors.contact_meta_description" />
             </FormGroup>
 
             <FormActions submitLabel="Speichern" />

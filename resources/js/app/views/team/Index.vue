@@ -16,6 +16,7 @@ const { confirm } = useConfirm()
 
 const columns = [
 	{ key: 'name', label: 'Name', primary: true },
+	{ key: 'email', label: 'E-Mail' },
 	{ key: 'title', label: 'Titel' },
 	{ key: 'former', label: '', class: 'w-100' },
 	{ key: 'actions', label: '', class: 'w-100', align: 'right' },

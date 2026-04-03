@@ -5,6 +5,13 @@
 	}
 }
 
+.editor--error {
+	@apply border-red-400;
+	@variant dark {
+		@apply border-red-500;
+	}
+}
+
 .editor:focus-within {
 	@apply ring-2 ring-gray-200 border-gray-300;
 	@variant dark {

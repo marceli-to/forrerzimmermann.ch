@@ -13,9 +13,11 @@ class UpdateAtelierPageRequest extends FormRequest
 
 	public function rules(): array
 	{
+		$isProfil = $this->route('page')?->slug === 'profil';
+
 		return [
-			'title' => 'nullable|string|max:255',
-			'text' => 'nullable|string',
+			'title' => ($isProfil ? 'required' : 'nullable') . '|string|max:255',
+			'text' => ($isProfil ? 'required' : 'nullable') . '|string',
 			'publish' => 'boolean',
 			'media' => 'nullable|array',
 			'media.*.uuid' => 'required|string',

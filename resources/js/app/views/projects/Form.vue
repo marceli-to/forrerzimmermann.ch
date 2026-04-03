@@ -17,7 +17,6 @@ import FormInput from '@/components/ui/form/FormInput.vue'
 import FormTextarea from '@/components/ui/form/FormTextarea.vue'
 import FormSelect from '@/components/ui/form/FormSelect.vue'
 import FormCheckbox from '@/components/ui/form/FormCheckbox.vue'
-import FormError from '@/components/ui/form/FormError.vue'
 import FormGroup from '@/components/ui/form/FormGroup.vue'
 
 const route = useRoute()
@@ -124,51 +123,44 @@ function onSetOg(media) { mediaStore.setOg(media.uuid) }
 			<SidebarLayout>
 				<div class="flex flex-col gap-24">
 					<FormGroup>
-						<FormLabel for="title">Titel *</FormLabel>
-						<FormInput id="title" v-model="form.title" />
-						<FormError :message="store.errors.title" />
+						<FormLabel for="title" :error="store.errors.title">Titel *</FormLabel>
+						<FormInput id="title" v-model="form.title" :hasError="!!store.errors.title" @focus="delete store.errors.title" />
 					</FormGroup>
 
 					<div class="grid grid-cols-2 gap-24">
 						<FormGroup>
-							<FormLabel for="location">Ort</FormLabel>
-							<FormInput id="location" v-model="form.location" />
-							<FormError :message="store.errors.location" />
+							<FormLabel for="location" :error="store.errors.location">Ort</FormLabel>
+							<FormInput id="location" v-model="form.location" :hasError="!!store.errors.location" @focus="delete store.errors.location" />
 						</FormGroup>
 						<FormGroup>
-							<FormLabel for="subtitle">Untertitel</FormLabel>
-							<FormInput id="subtitle" v-model="form.subtitle" />
-							<FormError :message="store.errors.subtitle" />
+							<FormLabel for="subtitle" :error="store.errors.subtitle">Untertitel</FormLabel>
+							<FormInput id="subtitle" v-model="form.subtitle" :hasError="!!store.errors.subtitle" @focus="delete store.errors.subtitle" />
 						</FormGroup>
 					</div>
 
 					<div class="grid grid-cols-2 gap-24">
 						<FormGroup>
-							<FormLabel for="year">Jahr *</FormLabel>
-							<FormInput id="year" v-model="form.year" type="number" />
-							<FormError :message="store.errors.year" />
+							<FormLabel for="year" :error="store.errors.year">Jahr *</FormLabel>
+							<FormInput id="year" v-model="form.year" type="number" :hasError="!!store.errors.year" @focus="delete store.errors.year" />
 						</FormGroup>
 						<FormGroup>
-							<FormLabel for="topic_id">Thema</FormLabel>
-							<FormSelect id="topic_id" v-model="form.topic_id" :options="topicOptions" />
-							<FormError :message="store.errors.topic_id" />
+							<FormLabel for="topic_id" :error="store.errors.topic_id">Thema</FormLabel>
+							<FormSelect id="topic_id" v-model="form.topic_id" :options="topicOptions" :hasError="!!store.errors.topic_id" @focus="delete store.errors.topic_id" />
 						</FormGroup>
 					</div>
 
 					<FormGroup>
-						<FormLabel>Beschreibung</FormLabel>
+						<FormLabel :error="store.errors.description">Beschreibung</FormLabel>
 						<div class="mt-8">
-							<Editor v-model="form.description" />
+							<Editor v-model="form.description" :hasError="!!store.errors.description" @focus="delete store.errors.description" />
 						</div>
-						<FormError :message="store.errors.description" />
 					</FormGroup>
 
 					<FormGroup>
-						<FormLabel>Info</FormLabel>
+						<FormLabel :error="store.errors.info">Info</FormLabel>
 						<div class="mt-8">
-							<Editor v-model="form.info" />
+							<Editor v-model="form.info" :hasError="!!store.errors.info" @focus="delete store.errors.info" />
 						</div>
-						<FormError :message="store.errors.info" />
 					</FormGroup>
 
 					<FormGroup>
@@ -198,9 +190,8 @@ function onSetOg(media) { mediaStore.setOg(media.uuid) }
 				<template #sidebar>
 					<div class="flex flex-col gap-24">
 						<FormGroup>
-							<FormLabel for="meta_description">Meta Description</FormLabel>
-							<FormTextarea id="meta_description" v-model="form.meta_description" />
-							<FormError :message="store.errors.meta_description" />
+							<FormLabel for="meta_description" :error="store.errors.meta_description">Meta Description</FormLabel>
+							<FormTextarea id="meta_description" v-model="form.meta_description" :hasError="!!store.errors.meta_description" @focus="delete store.errors.meta_description" />
 						</FormGroup>
 						<FormGroup>
 							<FormCheckbox v-model="form.publish">Veröffentlichen</FormCheckbox>

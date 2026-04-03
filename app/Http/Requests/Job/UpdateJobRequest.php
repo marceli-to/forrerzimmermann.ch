@@ -15,7 +15,7 @@ class UpdateJobRequest extends FormRequest
 	{
 		return [
 			'title' => 'required|string|max:255',
-			'text' => 'nullable|string',
+			'text' => 'required|string',
 			'publish' => 'boolean',
 		];
 	}

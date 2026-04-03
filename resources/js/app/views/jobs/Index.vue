@@ -38,7 +38,7 @@ async function handleDelete(job) {
 
 <template>
 	<div>
-		<PageHeader title="Stellen" />
+		<PageHeader title="Jobs" />
 		<FormActions>
 			<button type="button" class="text-sm px-16 py-8 rounded-md bg-gray-900 dark:bg-warm-100 text-white dark:text-warm-900 hover:bg-gray-800 dark:hover:bg-warm-200 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 dark:focus-visible:ring-warm-700" @click="router.push({ name: 'jobs.create' })">Neue Stelle</button>
 		</FormActions>

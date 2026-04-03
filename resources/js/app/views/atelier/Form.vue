@@ -14,7 +14,6 @@ import FormActions from '@/components/ui/form/FormActions.vue'
 import FormLabel from '@/components/ui/form/FormLabel.vue'
 import FormInput from '@/components/ui/form/FormInput.vue'
 import FormCheckbox from '@/components/ui/form/FormCheckbox.vue'
-import FormError from '@/components/ui/form/FormError.vue'
 import FormGroup from '@/components/ui/form/FormGroup.vue'
 
 const route = useRoute()
@@ -102,17 +101,15 @@ function onSetTeaser(media) { mediaStore.setTeaser(media.uuid) }
 			<SidebarLayout v-if="store.current.slug === 'profil'">
 				<div class="flex flex-col gap-24">
 					<FormGroup>
-						<FormLabel for="title">Titel</FormLabel>
-						<FormInput id="title" v-model="form.title" />
-						<FormError :message="store.errors.title" />
+						<FormLabel for="title" :error="store.errors.title">Titel *</FormLabel>
+						<FormInput id="title" v-model="form.title" :hasError="!!store.errors.title" @focus="delete store.errors.title" />
 					</FormGroup>
 
 					<FormGroup>
-						<FormLabel>Text</FormLabel>
+						<FormLabel :error="store.errors.text">Text *</FormLabel>
 						<div class="mt-8">
-							<Editor v-model="form.text" />
+							<Editor v-model="form.text" :hasError="!!store.errors.text" @focus="delete store.errors.text" />
 						</div>
-						<FormError :message="store.errors.text" />
 					</FormGroup>
 
 					<FormGroup>
