@@ -16,7 +16,7 @@ const model = defineModel()
 		<div class="inline-block min-w-full px-4 py-2 align-middle sm:px-6 lg:px-8">
 			<table class="w-full text-sm">
 				<thead>
-					<tr class="text-left border-b border-warm-900/12">
+					<tr class="text-left border-b border-gray-900/10">
 						<th
 							v-for="col in columns"
 							:key="col.key"
@@ -39,7 +39,7 @@ const model = defineModel()
 					animation="150"
 				>
 					<template #item="{ element: row, index }">
-						<tr class="border-b border-warm-900/6 hover:bg-warm-100 cursor-move">
+						<tr class="border-b border-gray-900/6 hover:bg-gray-50 cursor-move">
 							<td
 								v-for="col in columns"
 								:key="col.key"
@@ -48,6 +48,7 @@ const model = defineModel()
 									col.class || '',
 									col.align === 'right' ? 'text-right' : '',
 									col.primary ? 'text-gray-900' : 'text-gray-400 text-sm',
+									row.publish === false && col.key !== 'actions' ? 'opacity-40' : '',
 								]"
 							>
 								<slot :name="'cell-' + col.key" :row="row" :value="row[col.key]">
@@ -61,8 +62,8 @@ const model = defineModel()
 					<tr
 						v-for="(row, index) in rows"
 						:key="row.id ?? index"
-						class="border-b border-warm-900/6"
-						:class="clickableRows ? 'hover:bg-warm-100 cursor-pointer' : ''"
+						class="border-b border-gray-900/6 hover:bg-gray-50"
+						:class="clickableRows ? 'cursor-pointer' : ''"
 					>
 						<td
 							v-for="col in columns"
@@ -72,6 +73,7 @@ const model = defineModel()
 								col.class || '',
 								col.align === 'right' ? 'text-right' : '',
 								col.primary ? 'text-gray-900' : 'text-gray-400 text-sm',
+									row.publish === false && col.key !== 'actions' ? 'opacity-40' : '',
 							]"
 						>
 							<slot :name="'cell-' + col.key" :row="row" :value="row[col.key]">
