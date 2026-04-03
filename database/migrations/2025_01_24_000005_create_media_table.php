@@ -21,6 +21,7 @@ return new class extends Migration
             $table->unsignedInteger('width')->nullable();
             $table->unsignedInteger('height')->nullable();
             $table->boolean('is_teaser')->default(false);
+            $table->boolean('is_og')->default(false);
             $table->integer('sort_order')->default(0);
             $table->timestamps();
         });
