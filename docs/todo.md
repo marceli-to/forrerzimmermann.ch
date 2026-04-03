@@ -18,4 +18,4 @@
 - [ ] Write tests
 
 ## Rewrite Kontakt to Contact
-- [ ] Models, Controllers, Routes, Views, Vue components, etc.
+- [x] Models, Controllers, Routes, Views, Vue components, etc.

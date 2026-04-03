@@ -73,7 +73,17 @@
       "Bash(grep \"^INSERT INTO \\\\`project_files\\\\`\" /Users/marceli.to/Jamon.digital/Webroot/cms.strut.ch/storage/app/private/import/dump.sql -A 50 | grep \"^\\(\" | wc -l)",
       "Bash(grep \"^INSERT INTO \\\\`project_grids\\\\`\" /Users/marceli.to/Jamon.digital/Webroot/cms.strut.ch/storage/app/private/import/dump.sql -A 200 | grep \"^\\(\" | wc -l)",
       "Bash(grep \"^INSERT INTO \\\\`project_grid_elements\\\\`\" /Users/marceli.to/Jamon.digital/Webroot/cms.strut.ch/storage/app/private/import/dump.sql | wc -l)",
-      "Bash(grep \"^INSERT INTO \\\\`project_grid_layouts\\\\`\" /Users/marceli.to/Jamon.digital/Webroot/cms.strut.ch/storage/app/private/import/dump.sql -A 5 | grep \"^\\(\" | wc -l)"
+      "Bash(grep \"^INSERT INTO \\\\`project_grid_layouts\\\\`\" /Users/marceli.to/Jamon.digital/Webroot/cms.strut.ch/storage/app/private/import/dump.sql -A 5 | grep \"^\\(\" | wc -l)",
+      "Bash(git push:*)",
+      "Bash(npx vite:*)",
+      "Bash(perl:*)",
+      "Bash(sed -i '' s/space-y-20/space-y-16/g /Users/marceli.to/Jamon.digital/Webroot/forrerzimmermann.ch/resources/views/auth/login.blade.php /Users/marceli.to/Jamon.digital/Webroot/forrerzimmermann.ch/resources/views/auth/forgot-password.blade.php /Users/marceli.to/Jamon.digital/Webroot/forrerzimmermann.ch/resources/views/auth/reset-password.blade.php)",
+      "Bash(sed -i '' s/max-w-sm/max-w-xs/g /Users/marceli.to/Jamon.digital/Webroot/forrerzimmermann.ch/resources/views/auth/login.blade.php /Users/marceli.to/Jamon.digital/Webroot/forrerzimmermann.ch/resources/views/auth/forgot-password.blade.php /Users/marceli.to/Jamon.digital/Webroot/forrerzimmermann.ch/resources/views/auth/reset-password.blade.php)",
+      "Bash(git worktree:*)",
+      "Bash(ln -s /Users/marceli.to/Jamon.digital/Webroot/forrerzimmermann.ch/vendor /Users/marceli.to/Jamon.digital/Webroot/forrerzimmermann.ch/.worktrees/feature/seo-module/vendor)",
+      "Bash(git revert:*)",
+      "Bash(git:*)",
+      "Bash(echo \"EXIT CODE: $?\")"
     ]
   }
 }
