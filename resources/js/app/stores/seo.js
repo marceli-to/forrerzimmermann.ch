@@ -22,7 +22,8 @@ export const useSeoStore = defineStore('seo', {
         async saveSeo(form) {
             this.errors = {}
             try {
-                await seoApi.update(form)
+                const { data } = await seoApi.update(form)
+                this.seo = data.data
                 return true
             } catch (error) {
                 if (error.response?.status === 422) {

@@ -14,7 +14,7 @@
 @if ($seo?->og_description)
 <meta property="og:description" content="{{ $ogDescription ?? $seo->og_description }}">
 @endif
-@php $ogImage = $ogImage ?? $seo?->media->first()?->file @endphp
+@php $ogImage = $ogImage ?? $seo?->media->firstWhere('is_og', true)?->file ?? $seo?->media->first()?->file @endphp
 @if ($ogImage)
 <meta property="og:image" content="{{ url('uploads/' . $ogImage) }}">
 @endif

@@ -14,14 +14,14 @@ return new class extends Migration
             $table->id();
             $table->uuid('uuid')->unique();
             $table->string('og_title')->nullable();
-            $table->string('og_description')->nullable();
-            $table->string('landing_meta_description')->nullable();
-            $table->string('projects_meta_description')->nullable();
-            $table->string('werkliste_meta_description')->nullable();
-            $table->string('profile_meta_description')->nullable();
-            $table->string('team_meta_description')->nullable();
-            $table->string('jobs_meta_description')->nullable();
-            $table->string('contact_meta_description')->nullable();
+            $table->string('og_description', 500)->nullable();
+            $table->string('landing_meta_description', 500)->nullable();
+            $table->string('projects_meta_description', 500)->nullable();
+            $table->string('werkliste_meta_description', 500)->nullable();
+            $table->string('profile_meta_description', 500)->nullable();
+            $table->string('team_meta_description', 500)->nullable();
+            $table->string('jobs_meta_description', 500)->nullable();
+            $table->string('contact_meta_description', 500)->nullable();
             $table->timestamps();
         });
     }

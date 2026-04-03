@@ -77,6 +77,7 @@ async function handleSubmit() {
     }
 }
 
+function onSetOg(media) { mediaStore.setOg(media.uuid) }
 function onUploaded(media) { mediaStore.addItem(media) }
 function onEditMedia(media) { editingMedia.value = media }
 async function onSaveMedia({ uuid, data }) {
@@ -116,9 +117,11 @@ function onReorderMedia(items) { mediaStore.reorder(items) }
                     <MediaGrid
                         v-if="mediaStore.items.length"
                         :items="mediaStore.items"
+                        :showOg="true"
                         @edit="onEditMedia"
                         @delete="onDeleteMedia"
                         @reorder="onReorderMedia"
+                        @og="onSetOg"
                     />
                 </div>
             </FormGroup>
