@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-import Home from '@/views/Home.vue'
 import LandingIndex from '@/views/landing/Index.vue'
 import LandingForm from '@/views/landing/Form.vue'
 import ProjectIndex from '@/views/projects/Index.vue'
@@ -20,9 +19,7 @@ import SettingsForm from '@/views/settings/Index.vue'
 const routes = [
   {
     path: '/dashboard',
-    name: 'home',
-    component: Home,
-    meta: { title: 'Dashboard' },
+    redirect: { name: 'landing.index' },
   },
   {
     path: '/dashboard/landing',
