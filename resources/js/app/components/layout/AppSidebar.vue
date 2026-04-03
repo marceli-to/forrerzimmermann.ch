@@ -80,7 +80,7 @@ function logout() {
 						<li v-for="item in group.items" :key="item.to">
 							<router-link
 								:to="item.to"
-								class="flex items-center gap-12 px-12 py-10 text-sm rounded-md transition-colors duration-150"
+								class="flex items-center gap-12 px-12 py-10 text-sm rounded-md transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-warm-300 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-warm-950"
 								:class="isActive(item)
 									? 'text-gray-900 dark:text-warm-100'
 									: 'text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100'"
@@ -98,7 +98,7 @@ function logout() {
 		<div class="px-12 pb-24">
 			<button
 				@click="logout"
-				class="flex items-center gap-8 px-12 py-10 w-full text-xs rounded-md text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100 transition-colors duration-150 cursor-pointer"
+				class="flex items-center gap-8 px-12 py-10 w-full text-xs rounded-md text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100 transition-colors duration-150 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-warm-300 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-warm-950"
 			>
 				<PhSignOut :size="18" weight="light" />
 				<span>Abmelden</span>

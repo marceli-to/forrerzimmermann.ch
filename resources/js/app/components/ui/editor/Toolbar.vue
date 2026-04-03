@@ -45,7 +45,7 @@ function closeLinkInput() {
 
 			<button
 				type="button"
-				class="p-8 transition-colors"
+				class="p-8 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-warm-300"
 				:class="editor.isActive('bold') ? 'text-gray-900 dark:text-warm-100 bg-gray-200 dark:bg-warm-700' : 'text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100'"
 				title="Bold"
 				@click="editor.chain().focus().toggleBold().run()">
@@ -54,7 +54,7 @@ function closeLinkInput() {
 
 			<button
 				type="button"
-				class="p-8 transition-colors"
+				class="p-8 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-warm-300"
 				:class="editor.isActive('bulletList') ? 'text-gray-900 dark:text-warm-100 bg-gray-200 dark:bg-warm-700' : 'text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100'"
 				title="Liste"
 				@click="editor.chain().focus().toggleBulletList().run()">
@@ -63,7 +63,7 @@ function closeLinkInput() {
 
 			<button
 				type="button"
-				class="p-8 transition-colors"
+				class="p-8 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-warm-300"
 				:class="editor.isActive('orderedList') ? 'text-gray-900 dark:text-warm-100 bg-gray-200 dark:bg-warm-700' : 'text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100'"
 				title="Nummerierte Liste"
 				@click="editor.chain().focus().toggleOrderedList().run()">
@@ -72,7 +72,7 @@ function closeLinkInput() {
 
 			<button
 				type="button"
-				class="p-8 transition-colors"
+				class="p-8 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-warm-300"
 				:class="editor.isActive('link') ? 'text-gray-900 dark:text-warm-100 bg-gray-200 dark:bg-warm-700' : 'text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100'"
 				title="Link"
 				@click="openLinkInput">
