@@ -1,13 +1,13 @@
 <x-layout.guest>
 	<div class="min-h-dvh flex">
-		<div class="hidden lg:flex lg:w-1/2 bg-navy items-end p-48">
-			<div class="text-white">
-				<x-icons.logo class="w-148" />
+		<div class="hidden lg:flex lg:w-1/2 bg-gray-100 items-end p-48">
+			<div class="text-gray-900">
+				<x-icons.logo class="w-192" />
 			</div>
 		</div>
 		<div class="w-full lg:w-1/2 bg-white flex items-center justify-center px-32 py-48">
-			<div class="w-full max-w-xs">
-				<div class="lg:hidden mb-32 text-navy">
+			<div class="w-full max-w-sm">
+				<div class="lg:hidden mb-32 text-gray-900">
 					<x-icons.logo class="w-120" />
 				</div>
 				<h1 class="text-lg font-medium text-gray-900 mb-4">Neues Passwort</h1>
