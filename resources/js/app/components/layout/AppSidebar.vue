@@ -40,7 +40,7 @@ const navigation = [
 	},
 	{
 		items: [
-			{ name: 'Einstellungen', to: '/dashboard/settings', icon: PhGear },
+			{ name: 'SEO', to: '/dashboard/seo', icon: PhGear },
 		],
 	},
 ]

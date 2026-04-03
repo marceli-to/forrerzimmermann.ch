@@ -14,7 +14,7 @@ import JobIndex from '@/views/jobs/Index.vue'
 import JobForm from '@/views/jobs/Form.vue'
 import KontaktForm from '@/views/kontakt/Form.vue'
 import MediaIndex from '@/views/media/Index.vue'
-import SettingsForm from '@/views/settings/Index.vue'
+import SeoForm from '@/views/seo/Index.vue'
 
 const routes = [
   {
@@ -136,10 +136,10 @@ const routes = [
     meta: { title: 'Media' },
   },
   {
-    path: '/dashboard/settings',
-    name: 'settings.edit',
-    component: SettingsForm,
-    meta: { title: 'Einstellungen' },
+    path: '/dashboard/seo',
+    name: 'seo.edit',
+    component: SeoForm,
+    meta: { title: 'SEO' },
   },
 ]
 
