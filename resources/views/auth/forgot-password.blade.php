@@ -1,4 +1,4 @@
-<x-auth.shell>
+<x-auth.container>
 	<x-auth.header title="Passwort zurücksetzen" description="Geben Sie Ihre E-Mail-Adresse ein und wir senden Ihnen einen Link zum Zurücksetzen." />
 	<form method="POST" action="{{ route('password.email') }}" class="space-y-16">
 		@csrf
@@ -12,4 +12,4 @@
 			<x-form.button>Link senden</x-form.button>
 		</div>
 	</form>
-</x-auth.shell>
+</x-auth.container>

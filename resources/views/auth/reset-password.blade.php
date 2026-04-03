@@ -1,4 +1,4 @@
-<x-auth.shell>
+<x-auth.container>
 	<x-auth.header title="Neues Passwort" description="Legen Sie ein neues Passwort für Ihr Konto fest." />
 	<form method="POST" action="{{ route('password.store') }}" class="space-y-16">
 		@csrf
@@ -22,4 +22,4 @@
 			<x-form.button class="w-full">Passwort zurücksetzen</x-form.button>
 		</div>
 	</form>
-</x-auth.shell>
+</x-auth.container>

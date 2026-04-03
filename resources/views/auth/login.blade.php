@@ -1,4 +1,4 @@
-<x-auth.shell>
+<x-auth.container>
 	<x-auth.header title="Anmelden" description="Melden Sie sich mit Ihrem Konto an." />
 	<form method="POST" action="{{ route('login') }}" class="space-y-16">
 		@csrf
@@ -19,4 +19,4 @@
 			<x-form.button>Anmelden</x-form.button>
 		</div>
 	</form>
-</x-auth.shell>
+</x-auth.container>
