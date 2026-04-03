@@ -1,32 +1,19 @@
 <x-layout.guest>
-	<div class="min-h-full flex">
+	<div class="min-h-dvh flex items-center justify-center p-16">
+		<div class="w-full max-w-sm">
 
-		{{-- Left: Brand panel --}}
-		<div class="hidden lg:flex lg:w-1/2 bg-neutral-900 relative overflow-hidden items-end p-16">
-			<div class="relative z-10">
-				<div class="text-neutral-500 text-xs tracking-[0.2em] uppercase mb-3">Content Management</div>
-				<div class="text-white text-4xl font-light tracking-tight leading-tight">
-					{{ config('app.name', 'CMS') }}
-				</div>
+			{{-- Logo --}}
+			<div class="mb-10 text-white">
+				<x-icons.logo class="w-148" />
 			</div>
-			<div class="absolute inset-0 opacity-[0.03]"
-				style="background-image: linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px); background-size: 60px 60px;">
-			</div>
-		</div>
 
-		{{-- Right: Form --}}
-		<div class="w-full lg:w-1/2 flex items-center justify-center px-6 py-12">
-			<div class="w-full max-w-sm">
+			{{-- Form panel --}}
+			<div class="bg-warm-50 rounded-xl p-32">
 
-				<div class="lg:hidden mb-16">
-					<div class="text-neutral-400 text-xs tracking-[0.2em] uppercase mb-2">Content Management</div>
-					<div class="text-neutral-900 text-2xl font-light tracking-tight">{{ config('app.name', 'CMS') }}</div>
-				</div>
+				<h1 class="text-lg font-medium text-warm-900 mb-1">Neues Passwort</h1>
+				<p class="text-sm text-warm-400 mb-24">Legen Sie ein neues Passwort für Ihr Konto fest.</p>
 
-				<h1 class="text-lg font-medium text-neutral-900 mb-1">Neues Passwort</h1>
-				<p class="text-sm text-neutral-500 mb-10">Legen Sie ein neues Passwort für Ihr Konto fest.</p>
-
-				<form method="POST" action="{{ route('password.store') }}" class="space-y-6">
+				<form method="POST" action="{{ route('password.store') }}" class="space-y-20">
 					@csrf
 					<input type="hidden" name="token" value="{{ $request->route('token') }}">
 
@@ -65,13 +52,12 @@
 						<x-form.error name="password_confirmation" />
 					</div>
 
-					<div class="pt-4">
+					<div>
 						<x-form.button class="w-full">Passwort zurücksetzen</x-form.button>
 					</div>
 				</form>
 
 			</div>
 		</div>
-
 	</div>
 </x-layout.guest>

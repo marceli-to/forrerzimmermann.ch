@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de" class="h-full scroll-smooth dark:bg-neutral-950">
+<html lang="de" class="h-full scroll-smooth">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,9 +10,9 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="shortcut icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-@vite(['resources/css/site.css'])
+@vite(['resources/css/app.css'])
 </head>
-<body class="h-full font-sans text-neutral-900 dark:text-neutral-100 antialiased bg-white dark:bg-neutral-950">
+<body class="h-full font-sans antialiased bg-navy">
 	{{ $slot }}
 </body>
 </html>

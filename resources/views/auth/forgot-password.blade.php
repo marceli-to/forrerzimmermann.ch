@@ -1,31 +1,25 @@
 <x-layout.guest>
-	<div class="min-h-full flex">
+	<div class="min-h-dvh flex items-center justify-center p-16">
+		<div class="w-full max-w-sm">
 
-		{{-- Left: Brand panel --}}
-		<div class="hidden lg:flex lg:w-1/2 bg-neutral-900 relative overflow-hidden items-end p-16">
-			<div class="relative z-10 text-white">
-				<x-icons.logo class="w-48" />
+			{{-- Logo --}}
+			<div class="mb-10 text-white">
+				<x-icons.logo class="w-148" />
 			</div>
-		</div>
 
-		{{-- Right: Form --}}
-		<div class="w-full lg:w-1/2 flex items-center justify-center px-6 py-12">
-			<div class="w-full max-w-sm">
+			{{-- Form panel --}}
+			<div class="bg-warm-50 rounded-xl p-32">
 
-				<div class="lg:hidden mb-16 text-neutral-900">
-					<x-icons.logo class="w-36" />
-				</div>
-
-				<h1 class="text-lg font-medium text-neutral-900 mb-1">Passwort zurücksetzen</h1>
-				<p class="text-sm text-neutral-500 mb-10">Geben Sie Ihre E-Mail-Adresse ein und wir senden Ihnen einen Link zum Zurücksetzen.</p>
+				<h1 class="text-lg font-medium text-warm-900 mb-1">Passwort zurücksetzen</h1>
+				<p class="text-sm text-warm-400 mb-24">Geben Sie Ihre E-Mail-Adresse ein und wir senden Ihnen einen Link zum Zurücksetzen.</p>
 
 				@if (session('status'))
-					<div class="mb-6 p-3 text-sm text-emerald-700 bg-emerald-50 border border-emerald-200">
+					<div class="mb-16 p-12 text-sm text-emerald-700 bg-emerald-50 rounded-md border border-emerald-200">
 						{{ session('status') }}
 					</div>
 				@endif
 
-				<form method="POST" action="{{ route('password.email') }}" class="space-y-6">
+				<form method="POST" action="{{ route('password.email') }}" class="space-y-20">
 					@csrf
 
 					<div>
@@ -40,7 +34,7 @@
 						<x-form.error name="email" />
 					</div>
 
-					<div class="flex items-center justify-between pt-4">
+					<div class="flex items-center justify-between">
 						<x-form.link :href="route('login')">Zurück zum Login</x-form.link>
 						<x-form.button>Link senden</x-form.button>
 					</div>
@@ -48,6 +42,5 @@
 
 			</div>
 		</div>
-
 	</div>
 </x-layout.guest>

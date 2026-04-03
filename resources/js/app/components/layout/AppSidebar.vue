@@ -61,7 +61,7 @@ function logout() {
 </script>
 
 <template>
-	<aside class="fixed top-0 left-0 bottom-0 w-240 bg-neutral-900 dark:bg-neutral-900 flex flex-col z-30">
+	<aside class="fixed top-0 left-0 bottom-0 w-240 bg-navy flex flex-col z-30">
 
 		<!-- Brand -->
 		<div class="px-24 pt-32 pb-24 text-white">
@@ -72,17 +72,14 @@ function logout() {
 		<nav class="flex-1 px-12 mt-16 overflow-y-auto">
 			<div class="space-y-24">
 				<div v-for="(group, index) in navigation" :key="index">
-					<p v-if="group.label" class="px-12 pb-6 text-xxs text-neutral-500 uppercase tracking-wider">
-						{{ group.label }}
-					</p>
-					<ul>
+					<ul role="list">
 						<li v-for="item in group.items" :key="item.to">
 							<router-link
 								:to="item.to"
-								class="flex items-center gap-12 px-12 py-10 text-sm transition-colors duration-150"
+								class="flex items-center gap-12 px-12 py-10 text-sm rounded-md transition-colors duration-150"
 								:class="isActive(item)
-									? 'bg-white/10 text-white'
-									: 'text-neutral-400 hover:text-white hover:bg-white/5'"
+									? 'bg-white/15 text-white'
+									: 'text-white/55 hover:text-white hover:bg-white/8'"
 							>
 								<component :is="item.icon" :size="18" weight="light" />
 								<span>{{ item.name }}</span>
@@ -97,7 +94,7 @@ function logout() {
 		<div class="px-12 pb-24">
 			<button
 				@click="logout"
-				class="flex items-center gap-8 px-12 py-10 w-full text-xs text-neutral-500 hover:text-white hover:bg-white/5 transition-colors duration-150 cursor-pointer"
+				class="flex items-center gap-8 px-12 py-10 w-full text-xs rounded-md text-white/40 hover:text-white hover:bg-white/8 transition-colors duration-150 cursor-pointer"
 			>
 				<PhSignOut :size="18" weight="light" />
 				<span>Abmelden</span>

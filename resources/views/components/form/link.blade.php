@@ -2,7 +2,7 @@
 
 <a
 	href="{{ $href }}"
-	{{ $attributes->merge(['class' => 'text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors duration-200 underline decoration-neutral-300 dark:decoration-neutral-600 underline-offset-4 hover:decoration-neutral-900 dark:hover:decoration-neutral-400']) }}
+	{{ $attributes->merge(['class' => 'text-sm text-warm-400 hover:text-warm-900 transition-colors underline decoration-warm-300 underline-offset-4 hover:decoration-warm-900']) }}
 >
 	{{ $slot }}
 </a>
