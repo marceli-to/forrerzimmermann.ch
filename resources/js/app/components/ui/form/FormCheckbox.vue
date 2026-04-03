@@ -13,7 +13,7 @@ defineProps({
 				:id="id"
 				type="checkbox"
 				v-model="model"
-				class="peer appearance-none size-14 border border-gray-200 dark:border-warm-600 rounded bg-white dark:bg-warm-800 checked:bg-gray-900 dark:checked:bg-warm-100 checked:border-gray-900 dark:checked:border-warm-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 dark:focus-visible:ring-warm-300 focus-visible:ring-offset-2 cursor-pointer transition-colors"
+				class="peer appearance-none size-14 border border-gray-200 dark:border-warm-600 rounded bg-white dark:bg-warm-800 checked:bg-gray-900 dark:checked:bg-warm-100 checked:border-gray-900 dark:checked:border-warm-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 dark:focus-visible:ring-warm-700 focus-visible:ring-offset-0 cursor-pointer transition-colors"
 			/>
 			<svg
 				class="absolute pointer-events-none text-white dark:text-warm-900 opacity-0 peer-checked:opacity-100 transition-opacity"

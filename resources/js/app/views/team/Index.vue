@@ -42,7 +42,7 @@ async function handleDelete(member) {
 	<div>
 		<PageHeader title="Team" />
 		<FormActions>
-			<button type="button" class="text-sm px-16 py-8 rounded-md bg-gray-900 dark:bg-warm-100 text-white dark:text-warm-900 hover:bg-gray-800 dark:hover:bg-warm-200 transition-colors cursor-pointer" @click="router.push({ name: 'team.create' })">Neues Mitglied</button>
+			<button type="button" class="text-sm px-16 py-8 rounded-md bg-gray-900 dark:bg-warm-100 text-white dark:text-warm-900 hover:bg-gray-800 dark:hover:bg-warm-200 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 dark:focus-visible:ring-warm-700" @click="router.push({ name: 'team.create' })">Neues Mitglied</button>
 		</FormActions>
 
 		<div v-if="store.loading" class="text-sm text-gray-400 dark:text-warm-500">
@@ -65,7 +65,7 @@ async function handleDelete(member) {
 			<template #cell-actions="{ row }">
 				<div class="flex items-center justify-end gap-12">
 					<button
-						class="transition-colors cursor-pointer"
+						class="rounded transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 dark:focus-visible:ring-warm-700"
 						:class="row.publish ? 'text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100' : 'text-gray-300 dark:text-warm-700 hover:text-gray-600 dark:hover:text-warm-500'"
 						@click="store.toggle(row.uuid)"
 					>
@@ -73,13 +73,13 @@ async function handleDelete(member) {
 						<PhEyeSlash v-else :size="16" weight="light" />
 					</button>
 					<button
-						class="text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100 transition-colors cursor-pointer"
+						class="rounded text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 dark:focus-visible:ring-warm-700"
 						@click="router.push({ name: 'team.edit', params: { id: row.uuid } })"
 					>
 						<PhPencil :size="16" weight="light" />
 					</button>
 					<button
-						class="text-gray-400 dark:text-warm-500 hover:text-red-600 transition-colors cursor-pointer"
+						class="rounded text-gray-400 dark:text-warm-500 hover:text-red-600 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 dark:focus-visible:ring-warm-700"
 						@click="handleDelete(row)"
 					>
 						<PhTrash :size="16" weight="light" />
