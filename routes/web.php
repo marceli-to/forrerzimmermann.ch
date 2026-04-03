@@ -4,7 +4,12 @@ use App\Http\Controllers\ImageController;
 
 Route::get('/img/{path}', [ImageController::class, 'show'])->where('path', '.*');
 
-Route::view('/', 'pages.landing')->name('page.landing');
+Route::get('/', function () {
+	$seo = \App\Models\SeoSetting::first();
+	return view('pages.landing', [
+		'metaDescription' => $seo?->landing_meta_description,
+	]);
+})->name('page.landing');
 
 // Dashboard (Vue SPA) — requires authentication
 Route::middleware('auth')->group(function () {
