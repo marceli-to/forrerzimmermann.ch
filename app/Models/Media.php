@@ -24,11 +24,13 @@ class Media extends Model
 		'width',
 		'height',
 		'is_teaser',
+		'is_og',
 		'sort_order',
 	];
 
 	protected $casts = [
 		'is_teaser' => 'boolean',
+		'is_og' => 'boolean',
 		'size' => 'integer',
 		'width' => 'integer',
 		'height' => 'integer',

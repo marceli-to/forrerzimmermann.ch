@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\AtelierPage;
 use App\Models\Contact;
-use App\Models\SiteSetting;
+use App\Models\SeoSetting;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -37,9 +37,6 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        SiteSetting::firstOrCreate(
-            ['id' => 1],
-            ['site_title' => 'forrer zimmermann architektur']
-        );
+        SeoSetting::firstOrCreate(['id' => 1]);
     }
 }
