@@ -7,7 +7,7 @@
 }
 
 .editor .tiptap {
-	@apply px-12 py-12 text-sm leading-normal min-h-[200px] outline-none bg-white text-gray-900;
+	@apply px-12 py-10 text-sm leading-normal min-h-[200px] outline-none bg-white text-gray-900;
 }
 
 .editor .tiptap p {
