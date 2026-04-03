@@ -137,12 +137,12 @@ function addFiles(fileList) {
 					<span class="text-gray-900 underline decoration-gray-300 underline-offset-4">Dateien auswählen</span>
 					oder hierhin ziehen
 				</p>
-				<p class="text-xs text-gray-400 mt-6">{{ activeType.hint }}</p>
+				<p class="text-xs text-gray-400 mt-8">{{ activeType.hint }}</p>
 			</div>
 		</div>
 
 		<!-- Progress -->
-		<div v-if="uploading" class="mt-6">
+		<div v-if="uploading" class="mt-8">
 			<div class="h-2 bg-gray-200 overflow-hidden rounded-full">
 				<div class="h-full bg-gray-900 transition-all duration-300" :style="{ width: progress + '%' }" />
 			</div>

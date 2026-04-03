@@ -10,7 +10,7 @@
 				<div class="lg:hidden mb-32 text-navy">
 					<x-icons.logo class="w-120" />
 				</div>
-				<h1 class="text-lg font-medium text-gray-900 mb-1">Passwort zurücksetzen</h1>
+				<h1 class="text-lg font-medium text-gray-900 mb-4">Passwort zurücksetzen</h1>
 				<p class="text-sm text-gray-400 mb-24">Geben Sie Ihre E-Mail-Adresse ein und wir senden Ihnen einen Link zum Zurücksetzen.</p>
 				@if (session('status'))
 					<div class="mb-16 p-12 text-sm text-emerald-700 bg-emerald-50 rounded-md border border-emerald-200">{{ session('status') }}</div>
