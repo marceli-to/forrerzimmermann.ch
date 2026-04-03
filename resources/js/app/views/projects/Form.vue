@@ -113,7 +113,7 @@ function onSetTeaser(media) { mediaStore.setTeaser(media.uuid) }
 	<div>
 		<PageHeader :title="isEdit ? 'Projekt bearbeiten' : 'Neues Projekt'" />
 
-		<div v-if="store.loading" class="text-sm text-gray-400">
+		<div v-if="store.loading" class="text-sm text-gray-400 dark:text-warm-500">
 			Laden...
 		</div>
 

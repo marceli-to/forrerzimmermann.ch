@@ -95,7 +95,7 @@ function onReorderMedia(items) { mediaStore.reorder(items) }
 	<div>
 		<PageHeader :title="isEdit ? 'Mitglied bearbeiten' : 'Neues Mitglied'" />
 
-		<div v-if="store.loading" class="text-sm text-gray-400">
+		<div v-if="store.loading" class="text-sm text-gray-400 dark:text-warm-500">
 			Laden...
 		</div>
 

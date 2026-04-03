@@ -25,11 +25,11 @@ onMounted(() => {
 	<div>
 		<PageHeader title="Atelier" />
 
-		<div v-if="store.loading" class="text-sm text-gray-400">
+		<div v-if="store.loading" class="text-sm text-gray-400 dark:text-warm-500">
 			Laden...
 		</div>
 
-		<div v-else-if="store.pages.length === 0" class="text-sm text-gray-400">
+		<div v-else-if="store.pages.length === 0" class="text-sm text-gray-400 dark:text-warm-500">
 			Keine Seiten vorhanden.
 		</div>
 
@@ -41,7 +41,7 @@ onMounted(() => {
 				<div class="flex items-center justify-end gap-12">
 					<button
 						class="transition-colors cursor-pointer"
-						:class="row.publish ? 'text-gray-400 hover:text-gray-900' : 'text-gray-300 hover:text-gray-600'"
+						:class="row.publish ? 'text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100' : 'text-gray-300 dark:text-warm-700 hover:text-gray-600 dark:hover:text-warm-500'"
 						:title="row.publish ? 'Veröffentlicht – klicken zum Verstecken' : 'Versteckt – klicken zum Veröffentlichen'"
 						@click="store.toggle(row.uuid)"
 					>
@@ -49,7 +49,7 @@ onMounted(() => {
 						<PhEyeSlash v-else :size="16" weight="light" />
 					</button>
 					<button
-						class="text-gray-400 hover:text-gray-900 transition-colors cursor-pointer"
+						class="text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100 transition-colors cursor-pointer"
 						@click="router.push({ name: 'atelier.edit', params: { id: row.uuid } })"
 					>
 						<PhPencil :size="16" weight="light" />

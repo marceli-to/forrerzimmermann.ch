@@ -9,7 +9,6 @@ defineProps({
 	showTeaser: { type: Boolean, default: false },
 	isTeaser: { type: Boolean, default: false },
 	showOverlay: { type: Boolean, default: true },
-	deletable: { type: Boolean, default: true },
 })
 
 const emit = defineEmits(['edit', 'delete', 'teaser', 'click'])
@@ -24,20 +23,12 @@ function formatSize(bytes) {
 
 <template>
 	<div
-		class="group relative bg-white border border-gray-200 rounded-md overflow-hidden hover:border-gray-400 transition-colors"
+		class="group relative bg-white dark:bg-warm-800 border border-gray-200 dark:border-warm-700 rounded-md overflow-hidden hover:border-gray-400 dark:hover:border-warm-500 transition-colors"
 		@click="emit('click', media)"
 	>
 		<!-- Image -->
 		<div class="aspect-square overflow-hidden flex items-center justify-center" :class="realFormat ? 'p-16' : ''">
-			<video
-				v-if="media.type === 'video'"
-				:src="media.original_url"
-				class="block max-w-full max-h-full object-contain"
-				muted
-				preload="metadata"
-			/>
 			<img
-				v-else
 				:src="realFormat ? media.preview_url : media.thumbnail_url"
 				:alt="media.alt || media.original_name"
 				:class="realFormat ? 'max-w-full max-h-full object-contain' : 'w-full h-full object-cover'"
@@ -45,11 +36,9 @@ function formatSize(bytes) {
 		</div>
 
 		<!-- Info -->
-		<div v-if="showInfo" class="px-10 py-8 border-t border-gray-100">
-			<div class="text-xs text-gray-900 truncate">{{ media.original_name }}</div>
-			<div class="text-xs text-gray-400 mt-2">
-				<template v-if="media.type !== 'video'">{{ media.width }}&times;{{ media.height }} · </template>{{ formatSize(media.size) }}
-			</div>
+		<div v-if="showInfo" class="px-10 py-8 border-t border-gray-100 dark:border-warm-700">
+			<div class="text-xs text-gray-900 dark:text-warm-100 truncate">{{ media.original_name }}</div>
+			<div class="text-xs text-gray-400 dark:text-warm-500 mt-2">{{ media.width }}&times;{{ media.height }} · {{ formatSize(media.size) }}</div>
 		</div>
 
 		<!-- Badge -->
@@ -65,30 +54,13 @@ function formatSize(bytes) {
 			v-if="showOverlay"
 			class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex items-center justify-center gap-16"
 		>
-			<button
-				type="button"
-				class="text-white/70 hover:text-white transition-colors cursor-pointer"
-				title="Bearbeiten"
-				@click.stop="emit('edit', media)"
-			>
+			<button type="button" class="text-white/70 hover:text-white transition-colors cursor-pointer" title="Bearbeiten" @click.stop="emit('edit', media)">
 				<PhPencil :size="18" weight="light" />
 			</button>
-			<button
-				v-if="showTeaser"
-				type="button"
-				class="text-white/70 hover:text-white transition-colors cursor-pointer"
-				title="Als Teaser setzen"
-				@click.stop="emit('teaser', media)"
-			>
+			<button v-if="showTeaser" type="button" class="text-white/70 hover:text-white transition-colors cursor-pointer" title="Als Teaser setzen" @click.stop="emit('teaser', media)">
 				<PhStar :size="18" :weight="isTeaser ? 'fill' : 'light'" />
 			</button>
-			<button
-				v-if="deletable"
-				type="button"
-				class="text-white/70 hover:text-white transition-colors cursor-pointer"
-				title="Löschen"
-				@click.stop="emit('delete', media)"
-			>
+			<button type="button" class="text-white/70 hover:text-white transition-colors cursor-pointer" title="Löschen" @click.stop="emit('delete', media)">
 				<PhTrash :size="18" weight="light" />
 			</button>
 		</div>

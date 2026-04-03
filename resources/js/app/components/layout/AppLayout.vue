@@ -8,10 +8,10 @@ const { state: confirmState, onConfirm, onCancel } = useConfirm()
 </script>
 
 <template>
-	<div class="min-h-dvh bg-gray-100 flex">
+	<div class="min-h-dvh bg-gray-100 dark:bg-warm-950 flex">
 		<AppSidebar variant="navy" />
 		<div class="ml-240 flex-1 p-16">
-			<main class="min-h-[calc(100dvh-2rem)] bg-white rounded-2xl p-24 pb-32 relative">
+			<main class="min-h-[calc(100dvh-2rem)] bg-white dark:bg-warm-900 rounded-2xl p-24 pb-32 relative">
 				<ToastContainer />
 				<slot />
 			</main>

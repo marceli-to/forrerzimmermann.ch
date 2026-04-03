@@ -34,7 +34,7 @@ function onClose() {
 <template>
 	<dialog
 		ref="dialogRef"
-		class="p-0 m-auto bg-white rounded-2xl backdrop:bg-black/30 w-full"
+		class="p-0 m-auto bg-white dark:bg-warm-900 rounded-2xl backdrop:bg-black/30 w-full"
 		:class="sizes[size]"
 		@close="onClose"
 		@click.self="onClose"
@@ -43,11 +43,11 @@ function onClose() {
 			<!-- Header -->
 			<div v-if="title || $slots.header" class="flex items-center justify-between mb-20">
 				<slot name="header">
-					<h2 class="text-sm font-medium text-gray-900">{{ title }}</h2>
+					<h2 class="text-sm font-medium text-gray-900 dark:text-warm-100">{{ title }}</h2>
 				</slot>
 				<button
 					type="button"
-					class="text-gray-400 hover:text-gray-900 transition-colors cursor-pointer"
+					class="text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100 transition-colors cursor-pointer"
 					@click="onClose"
 				>
 					<PhX :size="16" weight="light" />

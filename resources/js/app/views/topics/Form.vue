@@ -51,7 +51,7 @@ async function handleSubmit() {
 	<div>
 		<PageHeader :title="isEdit ? 'Thema bearbeiten' : 'Neues Thema'" />
 
-		<div v-if="store.loading" class="text-sm text-gray-400">
+		<div v-if="store.loading" class="text-sm text-gray-400 dark:text-warm-500">
 			Laden...
 		</div>
 

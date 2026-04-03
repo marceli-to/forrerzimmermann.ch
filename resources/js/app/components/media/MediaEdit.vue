@@ -50,7 +50,7 @@ function handleSave() {
 		@close="close"
 	>
 		<!-- Preview -->
-		<div class="bg-neutral-50 border-b border-neutral-200">
+		<div class="bg-neutral-50 dark:bg-warm-800 border-b border-neutral-200 dark:border-warm-700">
 			<video
 				v-if="media?.type === 'video'"
 				:src="media.original_url"
@@ -68,8 +68,8 @@ function handleSave() {
 		</div>
 
 		<!-- File info -->
-		<div v-if="media" class="px-24 py-16 border-b border-neutral-100 text-xs text-gray-400 space-y-2">
-			<div class="text-gray-900 font-medium">{{ media.original_name }}</div>
+		<div v-if="media" class="px-24 py-16 border-b border-neutral-100 dark:border-warm-800 text-xs text-gray-400 dark:text-warm-500 space-y-2">
+			<div class="text-gray-900 dark:text-warm-100 font-medium">{{ media.original_name }}</div>
 			<div>
 				<template v-if="media.width && media.height">{{ media.width }} &times; {{ media.height }} px · </template>
 				{{ media.mime_type }}
@@ -94,14 +94,14 @@ function handleSave() {
 			<div class="flex gap-12">
 				<button
 					type="button"
-					class="text-sm inline-flex items-center justify-center rounded-md px-16 py-8 bg-gray-900 text-white hover:bg-gray-800 transition-colors cursor-pointer"
+					class="text-sm inline-flex items-center justify-center rounded-md px-16 py-8 bg-gray-900 dark:bg-warm-100 text-white dark:text-warm-900 hover:bg-gray-800 dark:hover:bg-warm-200 transition-colors cursor-pointer"
 					@click="handleSave"
 				>
 					Speichern
 				</button>
 				<button
 					type="button"
-					class="text-sm inline-flex items-center justify-center rounded-md px-16 py-8 bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors cursor-pointer"
+					class="text-sm inline-flex items-center justify-center rounded-md px-16 py-8 bg-gray-100 dark:bg-warm-800 text-gray-700 dark:text-warm-300 hover:bg-gray-200 dark:hover:bg-warm-700 transition-colors cursor-pointer"
 					@click="close"
 				>
 					Abbrechen

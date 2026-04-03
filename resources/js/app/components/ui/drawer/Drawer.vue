@@ -53,17 +53,17 @@ function close() {
 
 			<!-- Panel -->
 			<div
-				class="absolute top-16 right-16 bottom-16 w-full bg-white rounded-2xl shadow-xl transition-transform duration-200 ease-out flex flex-col"
+				class="absolute top-16 right-16 bottom-16 w-full bg-white dark:bg-warm-900 rounded-2xl shadow-xl dark:shadow-none transition-transform duration-200 ease-out flex flex-col"
 				:class="[sizes[size], visible ? 'translate-x-0' : 'translate-x-full']"
 			>
 				<!-- Header -->
-				<div class="flex items-center justify-between px-24 py-20 border-b border-neutral-200">
+				<div class="flex items-center justify-between px-24 py-20 border-b border-neutral-200 dark:border-warm-800">
 					<slot name="header">
-						<h3 class="text-sm font-medium text-gray-900">{{ title }}</h3>
+						<h3 class="text-sm font-medium text-gray-900 dark:text-warm-100">{{ title }}</h3>
 					</slot>
 					<button
 						type="button"
-						class="text-gray-400 hover:text-gray-900 transition-colors cursor-pointer"
+						class="text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100 transition-colors cursor-pointer"
 						@click="close"
 					>
 						<PhX :size="16" weight="light" />

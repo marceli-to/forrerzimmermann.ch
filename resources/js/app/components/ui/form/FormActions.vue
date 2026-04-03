@@ -13,7 +13,7 @@ const emit = defineEmits(['cancel'])
 			<button
 				v-if="cancelLabel"
 				type="button"
-				class="text-sm px-16 py-8 rounded-md bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors cursor-pointer"
+				class="text-sm px-16 py-8 rounded-md bg-gray-100 dark:bg-warm-800 text-gray-700 dark:text-warm-300 hover:bg-gray-200 dark:hover:bg-warm-700 transition-colors cursor-pointer"
 				@click="emit('cancel')"
 			>
 				{{ cancelLabel }}
@@ -21,7 +21,7 @@ const emit = defineEmits(['cancel'])
 			<button
 				v-if="submitLabel"
 				type="submit"
-				class="text-sm px-16 py-8 rounded-md bg-gray-900 text-white hover:bg-gray-800 transition-colors cursor-pointer"
+				class="text-sm px-16 py-8 rounded-md bg-gray-900 dark:bg-warm-100 text-white dark:text-warm-900 hover:bg-gray-800 dark:hover:bg-warm-200 transition-colors cursor-pointer"
 			>
 				{{ submitLabel }}
 			</button>

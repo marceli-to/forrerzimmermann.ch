@@ -1,5 +1,5 @@
 <template>
-	<div class="mb-24 last:mb-0">
+	<div>
 		<slot />
 	</div>
 </template>

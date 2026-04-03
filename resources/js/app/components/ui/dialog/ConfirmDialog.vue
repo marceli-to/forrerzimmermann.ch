@@ -16,15 +16,15 @@ const emit = defineEmits(['confirm', 'cancel'])
 
 <template>
 	<AppDialog :open="open" :title="title" @close="emit('cancel')">
-		<p class="text-sm text-gray-600">{{ message }}</p>
+		<p class="text-sm text-gray-600 dark:text-warm-400">{{ message }}</p>
 
 		<template #footer>
-			<div class="flex justify-between">
+			<div class="flex justify-end gap-16">
 				<FormButton variant="secondary" @click="emit('cancel')">
 					{{ cancelLabel }}
 				</FormButton>
 				<FormButton
-					:class="destructive ? '!bg-red-500 !border-red-500 hover:!bg-red-600 hover:!border-red-600 active:!bg-red-700 active:!border-red-700' : ''"
+					:variant="destructive ? 'destructive' : 'primary'"
 					@click="emit('confirm')"
 				>
 					{{ confirmLabel }}

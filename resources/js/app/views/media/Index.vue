@@ -7,7 +7,7 @@ import MediaUploader from '@/components/media/MediaUploader.vue'
 import MediaEdit from '@/components/media/MediaEdit.vue'
 import { PhMagnifyingGlass } from '@phosphor-icons/vue'
 import PageHeader from '@/components/layout/PageHeader.vue'
-import MediaCard from '@/components/media/MediaCard.vue'
+import MediaGrid from '@/components/media/MediaGrid.vue'
 
 const toast = useToast()
 const { confirm } = useConfirm()
@@ -85,11 +85,7 @@ async function handleDelete(media) {
 
 <template>
 	<div>
-		<PageHeader title="Media">
-			<span v-if="!loading" class="text-sm text-gray-400">
-				{{ items.length }} {{ items.length === 1 ? 'Datei' : 'Dateien' }}
-			</span>
-		</PageHeader>
+		<PageHeader title="Media" />
 
 		<!-- Upload -->
 		<div class="mb-24">
@@ -98,12 +94,12 @@ async function handleDelete(media) {
 
 		<!-- Search -->
 		<div class="relative mb-24" v-if="items.length > 0">
-			<PhMagnifyingGlass :size="14" class="absolute left-12 top-1/2 -translate-y-1/2 text-gray-400" />
+			<PhMagnifyingGlass :size="14" class="absolute left-12 top-1/2 -translate-y-1/2 text-gray-400 dark:text-warm-500" />
 			<input
 				v-model="search"
 				type="text"
 				placeholder="Suchen..."
-				class="w-full border border-neutral-200 pl-32 pr-12 py-10 text-sm text-gray-900 focus:outline-none focus:border-neutral-400 bg-white"
+				class="w-full border border-neutral-200 dark:border-warm-700 pl-32 pr-12 py-10 text-sm text-gray-900 dark:text-warm-100 dark:placeholder:text-warm-600 focus:outline-none focus:border-neutral-400 dark:focus:border-warm-600 bg-white dark:bg-warm-800"
 			/>
 		</div>
 
@@ -118,17 +114,13 @@ async function handleDelete(media) {
 		</div>
 
 		<!-- Grid -->
-		<div v-else-if="filteredItems.length > 0" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
-			<MediaCard
-				v-for="media in filteredItems"
-				:key="media.uuid"
-				:media="media"
-				:badge="media.in_use ? 'Verwendet' : null"
-				:deletable="!media.in_use"
-				@edit="openEdit"
-				@delete="handleDelete"
-			/>
-		</div>
+		<MediaGrid
+			v-else-if="filteredItems.length > 0"
+			:items="filteredItems"
+			@edit="openEdit"
+			@delete="handleDelete"
+		/>
+
 
 		<!-- No search results -->
 		<div v-else class="text-sm text-gray-400">

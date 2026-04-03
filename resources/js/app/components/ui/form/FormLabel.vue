@@ -7,7 +7,7 @@ defineProps({
 <template>
 	<label
 		:for="$props.for"
-		class="block text-xs text-gray-500 mb-8"
+		class="block text-xs text-gray-500 dark:text-warm-400 mb-8"
 	>
 		<slot />
 	</label>

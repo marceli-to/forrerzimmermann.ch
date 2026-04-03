@@ -14,6 +14,6 @@ defineProps({
 		:rows="rows"
 		:placeholder="placeholder"
 		v-model="model"
-		class="block w-full px-12 py-10 border border-gray-200 rounded-md bg-white text-sm transition-all focus:outline-none focus:ring-2 focus:ring-gray-200 focus:border-gray-300 resize-none"
+		class="block w-full px-12 py-10 border border-gray-200 dark:border-warm-700 rounded-md bg-white dark:bg-warm-800 text-sm dark:text-warm-100 dark:placeholder:text-warm-600 transition-all focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-warm-700 focus:border-gray-300 dark:focus:border-warm-600 resize-none"
 	/>
 </template>

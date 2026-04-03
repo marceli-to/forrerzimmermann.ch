@@ -5,10 +5,7 @@ defineProps({
 </script>
 
 <template>
-	<div class="flex items-center justify-between mb-40">
-		<h1 class="text-lg font-medium text-gray-900">{{ title }}</h1>
-		<div v-if="$slots.default" class="flex items-center gap-12">
-			<slot />
-		</div>
+	<div class="flex items-center mb-40">
+		<h1 class="text-lg font-medium text-gray-900 dark:text-warm-100">{{ title }}</h1>
 	</div>
 </template>

@@ -46,6 +46,12 @@
   --color-warm-950: #1a1715;
 }
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
 /* Debug for grids */
 .debug-grid {
   @apply bg-yellow-50/50;

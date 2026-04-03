@@ -3,7 +3,7 @@
 		<div class="flex-1 min-w-0">
 			<slot />
 		</div>
-		<aside class="w-280 shrink-0 border border-neutral-200 bg-white p-24 sticky top-24">
+		<aside class="w-280 shrink-0 border border-neutral-200 dark:border-warm-800 bg-white dark:bg-warm-900 p-24 sticky top-24">
 			<slot name="sidebar" />
 		</aside>
 	</div>

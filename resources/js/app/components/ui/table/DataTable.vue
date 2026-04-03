@@ -16,11 +16,11 @@ const model = defineModel()
 		<div class="inline-block min-w-full px-4 py-2 align-middle sm:px-6 lg:px-8">
 			<table class="w-full text-sm">
 				<thead>
-					<tr class="text-left border-b border-gray-900/10">
+					<tr class="text-left border-b border-gray-900/10 dark:border-warm-700/50">
 						<th
 							v-for="col in columns"
 							:key="col.key"
-							class="py-12 text-xs font-medium text-gray-400 whitespace-nowrap"
+							class="py-12 text-xs font-medium text-gray-400 dark:text-warm-500 whitespace-nowrap"
 							:class="[
 								col.class || '',
 								col.align === 'right' ? 'text-right' : '',
@@ -39,7 +39,7 @@ const model = defineModel()
 					animation="150"
 				>
 					<template #item="{ element: row, index }">
-						<tr class="border-b border-gray-900/6 hover:bg-gray-50 cursor-move">
+						<tr class="border-b border-gray-900/6 dark:border-warm-700/40 hover:bg-gray-50 dark:hover:bg-warm-800 cursor-move">
 							<td
 								v-for="col in columns"
 								:key="col.key"
@@ -47,7 +47,7 @@ const model = defineModel()
 								:class="[
 									col.class || '',
 									col.align === 'right' ? 'text-right' : '',
-									col.primary ? 'text-gray-900' : 'text-gray-400 text-sm',
+									col.primary ? 'text-gray-900 dark:text-warm-100' : 'text-gray-400 dark:text-warm-500 text-sm',
 									row.publish === false && col.key !== 'actions' ? 'opacity-40' : '',
 								]"
 							>
@@ -62,7 +62,7 @@ const model = defineModel()
 					<tr
 						v-for="(row, index) in rows"
 						:key="row.id ?? index"
-						class="border-b border-gray-900/6 hover:bg-gray-50"
+						class="border-b border-gray-900/6 dark:border-warm-700/40 hover:bg-gray-50 dark:hover:bg-warm-800"
 						:class="clickableRows ? 'cursor-pointer' : ''"
 					>
 						<td
@@ -72,8 +72,8 @@ const model = defineModel()
 							:class="[
 								col.class || '',
 								col.align === 'right' ? 'text-right' : '',
-								col.primary ? 'text-gray-900' : 'text-gray-400 text-sm',
-									row.publish === false && col.key !== 'actions' ? 'opacity-40' : '',
+								col.primary ? 'text-gray-900 dark:text-warm-100' : 'text-gray-400 dark:text-warm-500 text-sm',
+								row.publish === false && col.key !== 'actions' ? 'opacity-40' : '',
 							]"
 						>
 							<slot :name="'cell-' + col.key" :row="row" :value="row[col.key]">
