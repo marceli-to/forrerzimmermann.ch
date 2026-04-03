@@ -1,5 +1,5 @@
 <script setup>
-import { PhTrash, PhPencil, PhStar } from '@phosphor-icons/vue'
+import { PhTrash, PhPencil, PhStar, PhImage } from '@phosphor-icons/vue'
 
 defineProps({
 	media: { type: Object, required: true },
@@ -8,10 +8,12 @@ defineProps({
 	badge: { type: String, default: null },
 	showTeaser: { type: Boolean, default: false },
 	isTeaser: { type: Boolean, default: false },
+	showOg: { type: Boolean, default: false },
+	isOg: { type: Boolean, default: false },
 	showOverlay: { type: Boolean, default: true },
 })
 
-const emit = defineEmits(['edit', 'delete', 'teaser', 'click'])
+const emit = defineEmits(['edit', 'delete', 'teaser', 'og', 'click'])
 
 function formatSize(bytes) {
 	if (!bytes) return '–'
@@ -49,6 +51,13 @@ function formatSize(bytes) {
 			{{ badge }}
 		</div>
 
+		<div
+			v-if="isOg"
+			class="absolute top-0 right-0 bg-gray-900 text-white text-[9px] font-medium tracking-wide uppercase px-6 py-3 leading-none"
+		>
+			OG
+		</div>
+
 		<!-- Overlay actions -->
 		<div
 			v-if="showOverlay"
@@ -59,6 +68,9 @@ function formatSize(bytes) {
 			</button>
 			<button v-if="showTeaser" type="button" class="text-white/70 hover:text-white transition-colors cursor-pointer" title="Als Teaser setzen" @click.stop="emit('teaser', media)">
 				<PhStar :size="18" :weight="isTeaser ? 'fill' : 'light'" />
+			</button>
+			<button v-if="showOg" type="button" class="text-white/70 hover:text-white transition-colors cursor-pointer" title="Als OG Image setzen" @click.stop="emit('og', media)">
+				<PhImage :size="18" :weight="isOg ? 'fill' : 'light'" />
 			</button>
 			<button type="button" class="text-white/70 hover:text-white transition-colors cursor-pointer" title="Löschen" @click.stop="emit('delete', media)">
 				<PhTrash :size="18" weight="light" />

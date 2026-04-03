@@ -109,6 +109,7 @@ async function onSaveMedia({ uuid, data }) {
 async function onDeleteMedia(media) { await mediaStore.deleteItem(media.uuid) }
 function onReorderMedia(items) { mediaStore.reorder(items) }
 function onSetTeaser(media) { mediaStore.setTeaser(media.uuid) }
+function onSetOg(media) { mediaStore.setOg(media.uuid) }
 </script>
 
 <template>
@@ -177,10 +178,12 @@ function onSetTeaser(media) { mediaStore.setTeaser(media.uuid) }
 							<MediaGrid
 								v-if="mediaStore.items.length"
 								:items="mediaStore.items"
+								:showOg="true"
 								@edit="onEditMedia"
 								@delete="onDeleteMedia"
 								@reorder="onReorderMedia"
 								@teaser="onSetTeaser"
+								@og="onSetOg"
 							/>
 						</div>
 					</FormGroup>

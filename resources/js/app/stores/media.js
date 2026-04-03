@@ -88,5 +88,24 @@ export const useMediaStore = defineStore('media', {
 				is_teaser: wasTeaser ? false : i.uuid === uuid,
 			}))
 		},
+
+		async setOg(uuid) {
+			const item = this.items.find(i => i.uuid === uuid)
+			const wasOg = item?.is_og
+
+			if (item?._temp) {
+				this.items = this.items.map(i => ({
+					...i,
+					is_og: wasOg ? false : i.uuid === uuid,
+				}))
+				return
+			}
+
+			await mediaApi.og(uuid)
+			this.items = this.items.map(i => ({
+				...i,
+				is_og: wasOg ? false : i.uuid === uuid,
+			}))
+		},
 	},
 })
