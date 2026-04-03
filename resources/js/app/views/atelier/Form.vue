@@ -100,23 +100,22 @@ function onSetTeaser(media) { mediaStore.setTeaser(media.uuid) }
 		</div>
 
 		<form v-else-if="store.current" @submit.prevent="handleSubmit">
-			<SidebarLayout>
+			<!-- Profil: sidebar layout (has title + editor + media to fill main column) -->
+			<SidebarLayout v-if="store.current.slug === 'profil'">
 				<div class="flex flex-col gap-24">
-					<template v-if="store.current.slug === 'profil'">
-						<FormGroup>
-							<FormLabel for="title">Titel</FormLabel>
-							<FormInput id="title" v-model="form.title" />
-							<FormError :message="store.errors.title" />
-						</FormGroup>
+					<FormGroup>
+						<FormLabel for="title">Titel</FormLabel>
+						<FormInput id="title" v-model="form.title" />
+						<FormError :message="store.errors.title" />
+					</FormGroup>
 
-						<FormGroup>
-							<FormLabel>Text</FormLabel>
-							<div class="mt-8">
-								<Editor v-model="form.text" />
-							</div>
-							<FormError :message="store.errors.text" />
-						</FormGroup>
-					</template>
+					<FormGroup>
+						<FormLabel>Text</FormLabel>
+						<div class="mt-8">
+							<Editor v-model="form.text" />
+						</div>
+						<FormError :message="store.errors.text" />
+					</FormGroup>
 
 					<FormGroup>
 						<FormLabel>Medien</FormLabel>
@@ -148,6 +147,36 @@ function onSetTeaser(media) { mediaStore.setTeaser(media.uuid) }
 					</FormGroup>
 				</template>
 			</SidebarLayout>
+
+			<!-- Team / Jobs: single column (only media + meta desc, no sidebar needed) -->
+			<div v-else class="flex flex-col gap-24">
+				<FormGroup>
+					<FormLabel>Medien</FormLabel>
+					<div class="mt-8 flex flex-col gap-16">
+						<MediaUploader v-if="!mediaStore.items.length" @uploaded="onUploaded" />
+						<MediaGrid
+							v-if="mediaStore.items.length"
+							:items="mediaStore.items"
+							@edit="onEditMedia"
+							@delete="onDeleteMedia"
+							@reorder="onReorderMedia"
+							@teaser="onSetTeaser"
+						/>
+					</div>
+				</FormGroup>
+
+				<FormGroup>
+					<FormLabel for="meta_description">Meta Description</FormLabel>
+					<FormTextarea id="meta_description" v-model="form.meta_description" />
+					<FormError :message="store.errors.meta_description" />
+				</FormGroup>
+
+				<FormActions
+					submitLabel="Aktualisieren"
+					cancelLabel="Abbrechen"
+					@cancel="router.push({ name: 'atelier.index' })"
+				/>
+			</div>
 		</form>
 
 		<MediaEdit
