@@ -43,11 +43,11 @@ function onClose() {
 			<!-- Header -->
 			<div v-if="title || $slots.header" class="flex items-start justify-between mb-20">
 				<slot name="header">
-					<h2 class="text-sm font-medium text-neutral-900">{{ title }}</h2>
+					<h2 class="text-sm font-medium text-gray-900">{{ title }}</h2>
 				</slot>
 				<button
 					type="button"
-					class="text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer -mt-2 -mr-2"
+					class="text-gray-400 hover:text-gray-900 transition-colors cursor-pointer -mt-2 -mr-2"
 					@click="onClose"
 				>
 					<PhX :size="16" weight="light" />

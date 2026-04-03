@@ -20,7 +20,7 @@ const model = defineModel()
 						<th
 							v-for="col in columns"
 							:key="col.key"
-							class="py-16 text-xxs font-medium text-warm-400 whitespace-nowrap"
+							class="py-12 text-xs font-medium text-gray-400 whitespace-nowrap"
 							:class="[
 								col.class || '',
 								col.align === 'right' ? 'text-right' : '',
@@ -47,7 +47,7 @@ const model = defineModel()
 								:class="[
 									col.class || '',
 									col.align === 'right' ? 'text-right' : '',
-									col.primary ? 'text-warm-900' : 'text-warm-400 text-sm',
+									col.primary ? 'text-gray-900' : 'text-gray-400 text-sm',
 								]"
 							>
 								<slot :name="'cell-' + col.key" :row="row" :value="row[col.key]">
@@ -71,7 +71,7 @@ const model = defineModel()
 							:class="[
 								col.class || '',
 								col.align === 'right' ? 'text-right' : '',
-								col.primary ? 'text-warm-900' : 'text-warm-400 text-sm',
+								col.primary ? 'text-gray-900' : 'text-gray-400 text-sm',
 							]"
 						>
 							<slot :name="'cell-' + col.key" :row="row" :value="row[col.key]">

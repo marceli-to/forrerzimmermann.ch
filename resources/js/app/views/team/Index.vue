@@ -46,11 +46,11 @@ async function handleDelete(member) {
 			</FormButton>
 		</PageHeader>
 
-		<div v-if="store.loading" class="text-sm text-neutral-400">
+		<div v-if="store.loading" class="text-sm text-gray-400">
 			Laden...
 		</div>
 
-		<div v-else-if="store.members.length === 0" class="text-sm text-neutral-400">
+		<div v-else-if="store.members.length === 0" class="text-sm text-gray-400">
 			Noch keine Mitglieder vorhanden.
 		</div>
 
@@ -59,7 +59,7 @@ async function handleDelete(member) {
 				{{ row.firstname }} {{ row.name }}
 			</template>
 			<template #cell-former="{ row }">
-				<span v-if="row.former" class="text-xs text-neutral-400 bg-neutral-100 px-8 py-2 rounded">
+				<span v-if="row.former" class="text-xs text-gray-400 bg-neutral-100 px-8 py-2 rounded">
 					Ehemalig
 				</span>
 			</template>
@@ -67,20 +67,20 @@ async function handleDelete(member) {
 				<div class="flex items-center justify-end gap-12">
 					<button
 						class="transition-colors cursor-pointer"
-						:class="row.publish ? 'text-neutral-400 hover:text-neutral-900' : 'text-neutral-300 hover:text-neutral-600'"
+						:class="row.publish ? 'text-gray-400 hover:text-gray-900' : 'text-gray-300 hover:text-gray-600'"
 						@click="store.toggle(row.uuid)"
 					>
 						<PhEye v-if="row.publish" :size="16" weight="light" />
 						<PhEyeSlash v-else :size="16" weight="light" />
 					</button>
 					<button
-						class="text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
+						class="text-gray-400 hover:text-gray-900 transition-colors cursor-pointer"
 						@click="router.push({ name: 'team.edit', params: { id: row.uuid } })"
 					>
 						<PhPencil :size="16" weight="light" />
 					</button>
 					<button
-						class="text-neutral-400 hover:text-red-600 transition-colors cursor-pointer"
+						class="text-gray-400 hover:text-red-600 transition-colors cursor-pointer"
 						@click="handleDelete(row)"
 					>
 						<PhTrash :size="16" weight="light" />

@@ -44,11 +44,11 @@ async function handleDelete(topic) {
 			</FormButton>
 		</PageHeader>
 
-		<div v-if="store.loading" class="text-sm text-neutral-400">
+		<div v-if="store.loading" class="text-sm text-gray-400">
 			Laden...
 		</div>
 
-		<div v-else-if="store.topics.length === 0" class="text-sm text-neutral-400">
+		<div v-else-if="store.topics.length === 0" class="text-sm text-gray-400">
 			Noch keine Themen vorhanden.
 		</div>
 
@@ -57,20 +57,20 @@ async function handleDelete(topic) {
 				<div class="flex items-center justify-end gap-12">
 					<button
 						class="transition-colors cursor-pointer"
-						:class="row.publish ? 'text-neutral-400 hover:text-neutral-900' : 'text-neutral-300 hover:text-neutral-600'"
+						:class="row.publish ? 'text-gray-400 hover:text-gray-900' : 'text-gray-300 hover:text-gray-600'"
 						@click="store.toggle(row.uuid)"
 					>
 						<PhEye v-if="row.publish" :size="16" weight="light" />
 						<PhEyeSlash v-else :size="16" weight="light" />
 					</button>
 					<button
-						class="text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
+						class="text-gray-400 hover:text-gray-900 transition-colors cursor-pointer"
 						@click="router.push({ name: 'topics.edit', params: { id: row.uuid } })"
 					>
 						<PhPencil :size="16" weight="light" />
 					</button>
 					<button
-						class="text-neutral-400 hover:text-red-600 transition-colors cursor-pointer"
+						class="text-gray-400 hover:text-red-600 transition-colors cursor-pointer"
 						@click="handleDelete(row)"
 					>
 						<PhTrash :size="16" weight="light" />

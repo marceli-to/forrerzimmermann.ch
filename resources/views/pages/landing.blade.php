@@ -10,11 +10,11 @@
 			</div>
 
 			<div class="relative z-10 text-center max-w-xl">
-				<div class="text-neutral-400 text-xs tracking-[0.3em] uppercase mb-6">Content Management</div>
-				<h1 class="text-5xl sm:text-6xl font-light tracking-tight text-neutral-900 mb-6">
+				<div class="text-gray-400 text-xs tracking-[0.3em] uppercase mb-6">Content Management</div>
+				<h1 class="text-5xl sm:text-6xl font-light tracking-tight text-gray-900 mb-6">
 					{{ config('app.name', 'CMS') }}
 				</h1>
-				<p class="text-base text-neutral-500 leading-relaxed mb-12">
+				<p class="text-base text-gray-500 leading-relaxed mb-12">
 					Inhalte verwalten, Medien organisieren, Projekte pflegen — alles an einem Ort.
 				</p>
 				<a href="{{ route('login') }}"
@@ -27,7 +27,7 @@
 
 		{{-- Footer --}}
 		<footer class="px-6 py-6 text-center">
-			<p class="text-xs text-neutral-400 tracking-wide">&copy; {{ date('Y') }} {{ config('app.name', 'CMS') }}</p>
+			<p class="text-xs text-gray-400 tracking-wide">&copy; {{ date('Y') }} {{ config('app.name', 'CMS') }}</p>
 		</footer>
 
 	</div>

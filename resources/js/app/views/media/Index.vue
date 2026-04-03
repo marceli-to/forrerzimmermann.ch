@@ -86,7 +86,7 @@ async function handleDelete(media) {
 <template>
 	<div>
 		<PageHeader title="Media">
-			<span v-if="!loading" class="text-sm text-neutral-400">
+			<span v-if="!loading" class="text-sm text-gray-400">
 				{{ items.length }} {{ items.length === 1 ? 'Datei' : 'Dateien' }}
 			</span>
 		</PageHeader>
@@ -98,22 +98,22 @@ async function handleDelete(media) {
 
 		<!-- Search -->
 		<div class="relative mb-24" v-if="items.length > 0">
-			<PhMagnifyingGlass :size="14" class="absolute left-12 top-1/2 -translate-y-1/2 text-neutral-400" />
+			<PhMagnifyingGlass :size="14" class="absolute left-12 top-1/2 -translate-y-1/2 text-gray-400" />
 			<input
 				v-model="search"
 				type="text"
 				placeholder="Suchen..."
-				class="w-full border border-neutral-200 pl-32 pr-12 py-10 text-sm text-neutral-900 focus:outline-none focus:border-neutral-400 bg-white"
+				class="w-full border border-neutral-200 pl-32 pr-12 py-10 text-sm text-gray-900 focus:outline-none focus:border-neutral-400 bg-white"
 			/>
 		</div>
 
 		<!-- Loading -->
-		<div v-if="loading" class="text-sm text-neutral-400">
+		<div v-if="loading" class="text-sm text-gray-400">
 			Laden...
 		</div>
 
 		<!-- Empty -->
-		<div v-else-if="items.length === 0" class="text-sm text-neutral-400">
+		<div v-else-if="items.length === 0" class="text-sm text-gray-400">
 			Noch keine Medien vorhanden.
 		</div>
 
@@ -131,7 +131,7 @@ async function handleDelete(media) {
 		</div>
 
 		<!-- No search results -->
-		<div v-else class="text-sm text-neutral-400">
+		<div v-else class="text-sm text-gray-400">
 			Keine Ergebnisse für "{{ search }}".
 		</div>
 

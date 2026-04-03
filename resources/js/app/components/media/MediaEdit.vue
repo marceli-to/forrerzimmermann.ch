@@ -68,8 +68,8 @@ function handleSave() {
 		</div>
 
 		<!-- File info -->
-		<div v-if="media" class="px-24 py-16 border-b border-neutral-100 text-xs text-neutral-400 space-y-2">
-			<div class="text-neutral-900 font-medium">{{ media.original_name }}</div>
+		<div v-if="media" class="px-24 py-16 border-b border-neutral-100 text-xs text-gray-400 space-y-2">
+			<div class="text-gray-900 font-medium">{{ media.original_name }}</div>
 			<div>
 				<template v-if="media.width && media.height">{{ media.width }} &times; {{ media.height }} px · </template>
 				{{ media.mime_type }}
@@ -101,7 +101,7 @@ function handleSave() {
 				</button>
 				<button
 					type="button"
-					class="px-16 py-10 border border-neutral-200 text-sm text-neutral-500 hover:text-neutral-900 hover:border-neutral-400 transition-colors"
+					class="px-16 py-10 border border-neutral-200 text-sm text-gray-500 hover:text-gray-900 hover:border-neutral-400 transition-colors"
 					@click="close"
 				>
 					Abbrechen

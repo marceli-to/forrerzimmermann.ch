@@ -11,7 +11,7 @@ const { state: confirmState, onConfirm, onCancel } = useConfirm()
 	<div class="min-h-dvh bg-gray-100 flex">
 		<AppSidebar variant="navy" />
 		<div class="ml-240 flex-1 p-16">
-			<main class="min-h-[calc(100dvh-2rem)] bg-white rounded-2xl pt-24 px-32 pb-32 relative">
+			<main class="min-h-[calc(100dvh-2rem)] bg-white rounded-2xl p-24 pb-32 relative">
 				<ToastContainer />
 				<slot />
 			</main>

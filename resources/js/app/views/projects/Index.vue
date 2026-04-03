@@ -46,11 +46,11 @@ async function handleDelete(project) {
 			</FormButton>
 		</PageHeader>
 
-		<div v-if="store.loading" class="text-sm text-neutral-400">
+		<div v-if="store.loading" class="text-sm text-gray-400">
 			Laden...
 		</div>
 
-		<div v-else-if="store.projects.length === 0" class="text-sm text-neutral-400">
+		<div v-else-if="store.projects.length === 0" class="text-sm text-gray-400">
 			Noch keine Projekte vorhanden.
 		</div>
 
@@ -59,7 +59,7 @@ async function handleDelete(project) {
 				<div class="flex items-center justify-end gap-12">
 					<button
 						class="transition-colors cursor-pointer"
-						:class="row.feature ? 'text-amber-500 hover:text-amber-600' : 'text-neutral-300 hover:text-amber-500'"
+						:class="row.feature ? 'text-amber-500 hover:text-amber-600' : 'text-gray-300 hover:text-amber-500'"
 						:title="row.feature ? 'In Auswahl – klicken zum Entfernen' : 'Nicht in Auswahl – klicken zum Hinzufügen'"
 						@click="store.toggleFeature(row.uuid)"
 					>
@@ -67,7 +67,7 @@ async function handleDelete(project) {
 					</button>
 					<button
 						class="transition-colors cursor-pointer"
-						:class="row.publish ? 'text-neutral-400 hover:text-neutral-900' : 'text-neutral-300 hover:text-neutral-600'"
+						:class="row.publish ? 'text-gray-400 hover:text-gray-900' : 'text-gray-300 hover:text-gray-600'"
 						:title="row.publish ? 'Veröffentlicht – klicken zum Verstecken' : 'Versteckt – klicken zum Veröffentlichen'"
 						@click="store.toggle(row.uuid)"
 					>
@@ -75,13 +75,13 @@ async function handleDelete(project) {
 						<PhEyeSlash v-else :size="16" weight="light" />
 					</button>
 					<button
-						class="text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
+						class="text-gray-400 hover:text-gray-900 transition-colors cursor-pointer"
 						@click="router.push({ name: 'projects.edit', params: { id: row.uuid } })"
 					>
 						<PhPencil :size="16" weight="light" />
 					</button>
 					<button
-						class="text-neutral-400 hover:text-red-600 transition-colors cursor-pointer"
+						class="text-gray-400 hover:text-red-600 transition-colors cursor-pointer"
 						@click="handleDelete(row)"
 					>
 						<PhTrash :size="16" weight="light" />

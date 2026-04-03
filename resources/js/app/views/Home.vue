@@ -47,7 +47,7 @@ function timeAgo(dateStr) {
 	<div>
 		<PageHeader title="Dashboard" />
 
-		<div v-if="loading" class="text-sm text-neutral-400">Laden...</div>
+		<div v-if="loading" class="text-sm text-gray-400">Laden...</div>
 
 		<template v-else-if="data">
 
@@ -59,38 +59,38 @@ function timeAgo(dateStr) {
 					<div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-32">
 						<div class="bg-white border border-neutral-200 p-20 hover:border-neutral-400 transition-colors">
 							<div class="mb-12">
-								<span class="text-xxs font-medium text-neutral-400 uppercase tracking-[0.15em] truncate">Projekte</span>
+								<span class="text-xxs font-medium text-gray-400 uppercase tracking-[0.15em] truncate">Projekte</span>
 							</div>
-							<div class="text-2xl font-light text-neutral-900 tracking-tight tabular-nums">{{ data.stats.projects_total }}</div>
-							<div class="text-xxs text-neutral-400 mt-4">
+							<div class="text-2xl font-light text-gray-900 tracking-tight tabular-nums">{{ data.stats.projects_total }}</div>
+							<div class="text-xxs text-gray-400 mt-4">
 								{{ data.stats.projects_published }} publiziert · {{ data.stats.projects_draft }} Entwürfe
 							</div>
 						</div>
 
 						<div class="bg-white border border-neutral-200 p-20 hover:border-neutral-400 transition-colors">
 							<div class="mb-12">
-								<span class="text-xxs font-medium text-neutral-400 uppercase tracking-[0.15em] truncate">Publiziert</span>
+								<span class="text-xxs font-medium text-gray-400 uppercase tracking-[0.15em] truncate">Publiziert</span>
 							</div>
 							<div class="text-2xl font-light text-emerald-600 tracking-tight tabular-nums">{{ data.stats.projects_published }}</div>
-							<div class="text-xxs text-neutral-400 mt-4">
+							<div class="text-xxs text-gray-400 mt-4">
 								{{ data.stats.projects_total > 0 ? Math.round(data.stats.projects_published / data.stats.projects_total * 100) : 0 }}% aller Projekte
 							</div>
 						</div>
 
 						<div class="bg-white border border-neutral-200 p-20 hover:border-neutral-400 transition-colors">
 							<div class="mb-12">
-								<span class="text-xxs font-medium text-neutral-400 uppercase tracking-[0.15em] truncate">Medien</span>
+								<span class="text-xxs font-medium text-gray-400 uppercase tracking-[0.15em] truncate">Medien</span>
 							</div>
-							<div class="text-2xl font-light text-neutral-900 tracking-tight tabular-nums">{{ data.stats.media_total }}</div>
-							<div class="text-xxs text-neutral-400 mt-4">Bilder in der Bibliothek</div>
+							<div class="text-2xl font-light text-gray-900 tracking-tight tabular-nums">{{ data.stats.media_total }}</div>
+							<div class="text-xxs text-gray-400 mt-4">Bilder in der Bibliothek</div>
 						</div>
 
 						<div class="bg-white border border-neutral-200 p-20 hover:border-neutral-400 transition-colors">
 							<div class="mb-12">
-								<span class="text-xxs font-medium text-neutral-400 uppercase tracking-[0.15em] truncate">Speicher</span>
+								<span class="text-xxs font-medium text-gray-400 uppercase tracking-[0.15em] truncate">Speicher</span>
 							</div>
-							<div class="text-2xl font-light text-neutral-900 tracking-tight tabular-nums">{{ formatSize(data.stats.media_size) }}</div>
-							<div class="text-xxs text-neutral-400 mt-4">Gesamtgrösse aller Medien</div>
+							<div class="text-2xl font-light text-gray-900 tracking-tight tabular-nums">{{ formatSize(data.stats.media_size) }}</div>
+							<div class="text-xxs text-gray-400 mt-4">Gesamtgrösse aller Medien</div>
 						</div>
 					</div>
 				</div>
@@ -100,38 +100,38 @@ function timeAgo(dateStr) {
 					<div class="grid grid-cols-2 lg:grid-cols-4 mb-32">
 						<div class="p-20 pr-20">
 							<div class="mb-12">
-								<span class="text-xxs font-medium text-warm-400 uppercase tracking-[0.15em] truncate">Projekte</span>
+								<span class="text-xxs font-medium text-gray-400 uppercase tracking-[0.15em] truncate">Projekte</span>
 							</div>
-							<div class="text-2xl font-light text-warm-900 tracking-tight tabular-nums">{{ data.stats.projects_total }}</div>
-							<div class="text-xxs text-warm-400 mt-4">
+							<div class="text-2xl font-light text-gray-900 tracking-tight tabular-nums">{{ data.stats.projects_total }}</div>
+							<div class="text-xxs text-gray-400 mt-4">
 								{{ data.stats.projects_published }} publiziert · {{ data.stats.projects_draft }} Entwürfe
 							</div>
 						</div>
 
 						<div class="p-20 border-l border-warm-900/8 [&:nth-child(2n)]:max-lg:border-l-0 max-lg:[&:nth-child(n+3)]:border-t max-lg:[&:nth-child(n+3)]:border-warm-900/8 lg:border-l lg:border-warm-900/8">
 							<div class="mb-12">
-								<span class="text-xxs font-medium text-warm-400 uppercase tracking-[0.15em] truncate">Publiziert</span>
+								<span class="text-xxs font-medium text-gray-400 uppercase tracking-[0.15em] truncate">Publiziert</span>
 							</div>
 							<div class="text-2xl font-light text-navy tracking-tight tabular-nums">{{ data.stats.projects_published }}</div>
-							<div class="text-xxs text-warm-400 mt-4">
+							<div class="text-xxs text-gray-400 mt-4">
 								{{ data.stats.projects_total > 0 ? Math.round(data.stats.projects_published / data.stats.projects_total * 100) : 0 }}% aller Projekte
 							</div>
 						</div>
 
 						<div class="p-20 max-lg:border-t max-lg:border-warm-900/8 lg:border-l lg:border-warm-900/8">
 							<div class="mb-12">
-								<span class="text-xxs font-medium text-warm-400 uppercase tracking-[0.15em] truncate">Medien</span>
+								<span class="text-xxs font-medium text-gray-400 uppercase tracking-[0.15em] truncate">Medien</span>
 							</div>
-							<div class="text-2xl font-light text-warm-900 tracking-tight tabular-nums">{{ data.stats.media_total }}</div>
-							<div class="text-xxs text-warm-400 mt-4">Bilder in der Bibliothek</div>
+							<div class="text-2xl font-light text-gray-900 tracking-tight tabular-nums">{{ data.stats.media_total }}</div>
+							<div class="text-xxs text-gray-400 mt-4">Bilder in der Bibliothek</div>
 						</div>
 
 						<div class="p-20 max-lg:border-t max-lg:border-warm-900/8 lg:border-l lg:border-warm-900/8">
 							<div class="mb-12">
-								<span class="text-xxs font-medium text-warm-400 uppercase tracking-[0.15em] truncate">Speicher</span>
+								<span class="text-xxs font-medium text-gray-400 uppercase tracking-[0.15em] truncate">Speicher</span>
 							</div>
-							<div class="text-2xl font-light text-warm-900 tracking-tight tabular-nums">{{ formatSize(data.stats.media_size) }}</div>
-							<div class="text-xxs text-warm-400 mt-4">Gesamtgrösse aller Medien</div>
+							<div class="text-2xl font-light text-gray-900 tracking-tight tabular-nums">{{ formatSize(data.stats.media_size) }}</div>
+							<div class="text-xxs text-gray-400 mt-4">Gesamtgrösse aller Medien</div>
 						</div>
 					</div>
 				</div>
@@ -141,38 +141,38 @@ function timeAgo(dateStr) {
 					<div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-32">
 						<div class="bg-warm-100 p-20">
 							<div class="mb-12">
-								<span class="text-xxs font-medium text-warm-500 uppercase tracking-[0.15em] truncate">Projekte</span>
+								<span class="text-xxs font-medium text-gray-500 uppercase tracking-[0.15em] truncate">Projekte</span>
 							</div>
-							<div class="text-2xl font-light text-warm-900 tracking-tight tabular-nums">{{ data.stats.projects_total }}</div>
-							<div class="text-xxs text-warm-400 mt-4">
+							<div class="text-2xl font-light text-gray-900 tracking-tight tabular-nums">{{ data.stats.projects_total }}</div>
+							<div class="text-xxs text-gray-400 mt-4">
 								{{ data.stats.projects_published }} publiziert · {{ data.stats.projects_draft }} Entwürfe
 							</div>
 						</div>
 
 						<div class="bg-warm-100 p-20">
 							<div class="mb-12">
-								<span class="text-xxs font-medium text-warm-500 uppercase tracking-[0.15em] truncate">Publiziert</span>
+								<span class="text-xxs font-medium text-gray-500 uppercase tracking-[0.15em] truncate">Publiziert</span>
 							</div>
 							<div class="text-2xl font-light text-navy tracking-tight tabular-nums">{{ data.stats.projects_published }}</div>
-							<div class="text-xxs text-warm-400 mt-4">
+							<div class="text-xxs text-gray-400 mt-4">
 								{{ data.stats.projects_total > 0 ? Math.round(data.stats.projects_published / data.stats.projects_total * 100) : 0 }}% aller Projekte
 							</div>
 						</div>
 
 						<div class="bg-warm-100 p-20">
 							<div class="mb-12">
-								<span class="text-xxs font-medium text-warm-500 uppercase tracking-[0.15em] truncate">Medien</span>
+								<span class="text-xxs font-medium text-gray-500 uppercase tracking-[0.15em] truncate">Medien</span>
 							</div>
-							<div class="text-2xl font-light text-warm-900 tracking-tight tabular-nums">{{ data.stats.media_total }}</div>
-							<div class="text-xxs text-warm-400 mt-4">Bilder in der Bibliothek</div>
+							<div class="text-2xl font-light text-gray-900 tracking-tight tabular-nums">{{ data.stats.media_total }}</div>
+							<div class="text-xxs text-gray-400 mt-4">Bilder in der Bibliothek</div>
 						</div>
 
 						<div class="bg-warm-100 p-20">
 							<div class="mb-12">
-								<span class="text-xxs font-medium text-warm-500 uppercase tracking-[0.15em] truncate">Speicher</span>
+								<span class="text-xxs font-medium text-gray-500 uppercase tracking-[0.15em] truncate">Speicher</span>
 							</div>
-							<div class="text-2xl font-light text-warm-900 tracking-tight tabular-nums">{{ formatSize(data.stats.media_size) }}</div>
-							<div class="text-xxs text-warm-400 mt-4">Gesamtgrösse aller Medien</div>
+							<div class="text-2xl font-light text-gray-900 tracking-tight tabular-nums">{{ formatSize(data.stats.media_size) }}</div>
+							<div class="text-xxs text-gray-400 mt-4">Gesamtgrösse aller Medien</div>
 						</div>
 					</div>
 				</div>
@@ -187,16 +187,16 @@ function timeAgo(dateStr) {
 					<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 						<div class="bg-white border border-neutral-200">
 							<div class="flex items-center justify-between px-20 py-16 border-b border-neutral-100">
-								<h2 class="text-xs font-medium text-neutral-900 uppercase">Letzte Projekte</h2>
+								<h2 class="text-xs font-medium text-gray-900 uppercase">Letzte Projekte</h2>
 								<button
-									class="text-xxs text-neutral-400 hover:text-neutral-900 flex items-center gap-4 transition-colors cursor-pointer"
+									class="text-xxs text-gray-400 hover:text-gray-900 flex items-center gap-4 transition-colors cursor-pointer"
 									@click="router.push({ name: 'projects.index' })"
 								>
 									Alle anzeigen
 									<PhArrowRight :size="10" />
 								</button>
 							</div>
-							<div v-if="data.recent_projects.length === 0" class="px-20 py-24 text-sm text-neutral-400">
+							<div v-if="data.recent_projects.length === 0" class="px-20 py-24 text-sm text-gray-400">
 								Noch keine Projekte.
 							</div>
 							<div v-else>
@@ -210,28 +210,28 @@ function timeAgo(dateStr) {
 									<PhCircle
 										:size="8"
 										weight="fill"
-										:class="project.publish ? 'text-emerald-500' : 'text-neutral-300'"
+										:class="project.publish ? 'text-emerald-500' : 'text-gray-300'"
 									/>
 									<div class="flex-1 min-w-0">
-										<div class="text-sm text-neutral-900 truncate">{{ project.title }}</div>
+										<div class="text-sm text-gray-900 truncate">{{ project.title }}</div>
 									</div>
-									<div class="text-xxs text-neutral-400 whitespace-nowrap tabular-nums">{{ timeAgo(project.updated_at) }}</div>
+									<div class="text-xxs text-gray-400 whitespace-nowrap tabular-nums">{{ timeAgo(project.updated_at) }}</div>
 								</div>
 							</div>
 						</div>
 
 						<div class="bg-white border border-neutral-200">
 							<div class="flex items-center justify-between px-20 py-16 border-b border-neutral-100">
-								<h2 class="text-xs font-medium text-neutral-900 uppercase">Letzte Uploads</h2>
+								<h2 class="text-xs font-medium text-gray-900 uppercase">Letzte Uploads</h2>
 								<button
-									class="text-xxs text-neutral-400 hover:text-neutral-900 flex items-center gap-4 transition-colors cursor-pointer"
+									class="text-xxs text-gray-400 hover:text-gray-900 flex items-center gap-4 transition-colors cursor-pointer"
 									@click="router.push({ name: 'media.index' })"
 								>
 									Alle anzeigen
 									<PhArrowRight :size="10" />
 								</button>
 							</div>
-							<div v-if="data.recent_media.length === 0" class="px-20 py-24 text-sm text-neutral-400">
+							<div v-if="data.recent_media.length === 0" class="px-20 py-24 text-sm text-gray-400">
 								Noch keine Medien.
 							</div>
 							<div v-else class="p-12">
@@ -256,16 +256,16 @@ function timeAgo(dateStr) {
 					<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 						<div>
 							<div class="flex items-center justify-between pb-16 border-b border-warm-900/8">
-								<h2 class="text-xs font-medium text-warm-900 uppercase tracking-[0.08em]">Letzte Projekte</h2>
+								<h2 class="text-xs font-medium text-gray-900 uppercase tracking-[0.08em]">Letzte Projekte</h2>
 								<button
-									class="text-xxs text-warm-400 hover:text-warm-900 flex items-center gap-4 transition-colors cursor-pointer"
+									class="text-xxs text-gray-400 hover:text-gray-900 flex items-center gap-4 transition-colors cursor-pointer"
 									@click="router.push({ name: 'projects.index' })"
 								>
 									Alle anzeigen
 									<PhArrowRight :size="10" />
 								</button>
 							</div>
-							<div v-if="data.recent_projects.length === 0" class="py-24 text-sm text-warm-400">
+							<div v-if="data.recent_projects.length === 0" class="py-24 text-sm text-gray-400">
 								Noch keine Projekte.
 							</div>
 							<div v-else>
@@ -279,28 +279,28 @@ function timeAgo(dateStr) {
 									<PhCircle
 										:size="8"
 										weight="fill"
-										:class="project.publish ? 'text-navy' : 'text-warm-300'"
+										:class="project.publish ? 'text-navy' : 'text-gray-300'"
 									/>
 									<div class="flex-1 min-w-0">
-										<div class="text-sm text-warm-900 truncate">{{ project.title }}</div>
+										<div class="text-sm text-gray-900 truncate">{{ project.title }}</div>
 									</div>
-									<div class="text-xxs text-warm-400 whitespace-nowrap tabular-nums">{{ timeAgo(project.updated_at) }}</div>
+									<div class="text-xxs text-gray-400 whitespace-nowrap tabular-nums">{{ timeAgo(project.updated_at) }}</div>
 								</div>
 							</div>
 						</div>
 
 						<div>
 							<div class="flex items-center justify-between pb-16 border-b border-warm-900/8">
-								<h2 class="text-xs font-medium text-warm-900 uppercase tracking-[0.08em]">Letzte Uploads</h2>
+								<h2 class="text-xs font-medium text-gray-900 uppercase tracking-[0.08em]">Letzte Uploads</h2>
 								<button
-									class="text-xxs text-warm-400 hover:text-warm-900 flex items-center gap-4 transition-colors cursor-pointer"
+									class="text-xxs text-gray-400 hover:text-gray-900 flex items-center gap-4 transition-colors cursor-pointer"
 									@click="router.push({ name: 'media.index' })"
 								>
 									Alle anzeigen
 									<PhArrowRight :size="10" />
 								</button>
 							</div>
-							<div v-if="data.recent_media.length === 0" class="py-24 text-sm text-warm-400">
+							<div v-if="data.recent_media.length === 0" class="py-24 text-sm text-gray-400">
 								Noch keine Medien.
 							</div>
 							<div v-else class="pt-12">
@@ -325,16 +325,16 @@ function timeAgo(dateStr) {
 					<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 						<div class="bg-warm-100 p-20">
 							<div class="flex items-center justify-between pb-16 border-b border-warm-900/8">
-								<h2 class="text-xs font-medium text-warm-800 uppercase tracking-[0.08em]">Letzte Projekte</h2>
+								<h2 class="text-xs font-medium text-gray-800 uppercase tracking-[0.08em]">Letzte Projekte</h2>
 								<button
-									class="text-xxs text-warm-400 hover:text-warm-800 flex items-center gap-4 transition-colors cursor-pointer"
+									class="text-xxs text-gray-400 hover:text-gray-800 flex items-center gap-4 transition-colors cursor-pointer"
 									@click="router.push({ name: 'projects.index' })"
 								>
 									Alle anzeigen
 									<PhArrowRight :size="10" />
 								</button>
 							</div>
-							<div v-if="data.recent_projects.length === 0" class="py-24 text-sm text-warm-400">
+							<div v-if="data.recent_projects.length === 0" class="py-24 text-sm text-gray-400">
 								Noch keine Projekte.
 							</div>
 							<div v-else>
@@ -348,28 +348,28 @@ function timeAgo(dateStr) {
 									<PhCircle
 										:size="8"
 										weight="fill"
-										:class="project.publish ? 'text-navy' : 'text-warm-300'"
+										:class="project.publish ? 'text-navy' : 'text-gray-300'"
 									/>
 									<div class="flex-1 min-w-0">
-										<div class="text-sm text-warm-800 truncate">{{ project.title }}</div>
+										<div class="text-sm text-gray-800 truncate">{{ project.title }}</div>
 									</div>
-									<div class="text-xxs text-warm-400 whitespace-nowrap tabular-nums">{{ timeAgo(project.updated_at) }}</div>
+									<div class="text-xxs text-gray-400 whitespace-nowrap tabular-nums">{{ timeAgo(project.updated_at) }}</div>
 								</div>
 							</div>
 						</div>
 
 						<div class="bg-warm-100 p-20">
 							<div class="flex items-center justify-between pb-16 border-b border-warm-900/8">
-								<h2 class="text-xs font-medium text-warm-800 uppercase tracking-[0.08em]">Letzte Uploads</h2>
+								<h2 class="text-xs font-medium text-gray-800 uppercase tracking-[0.08em]">Letzte Uploads</h2>
 								<button
-									class="text-xxs text-warm-400 hover:text-warm-800 flex items-center gap-4 transition-colors cursor-pointer"
+									class="text-xxs text-gray-400 hover:text-gray-800 flex items-center gap-4 transition-colors cursor-pointer"
 									@click="router.push({ name: 'media.index' })"
 								>
 									Alle anzeigen
 									<PhArrowRight :size="10" />
 								</button>
 							</div>
-							<div v-if="data.recent_media.length === 0" class="py-24 text-sm text-warm-400">
+							<div v-if="data.recent_media.length === 0" class="py-24 text-sm text-gray-400">
 								Noch keine Medien.
 							</div>
 							<div v-else class="pt-12">

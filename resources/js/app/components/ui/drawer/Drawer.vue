@@ -59,11 +59,11 @@ function close() {
 				<!-- Header -->
 				<div class="flex items-center justify-between px-24 py-20 border-b border-neutral-200">
 					<slot name="header">
-						<h3 class="text-sm font-semibold text-neutral-900">{{ title }}</h3>
+						<h3 class="text-sm font-semibold text-gray-900">{{ title }}</h3>
 					</slot>
 					<button
 						type="button"
-						class="size-28 flex items-center justify-center text-neutral-400 hover:text-neutral-900 transition-colors"
+						class="size-28 flex items-center justify-center text-gray-400 hover:text-gray-900 transition-colors"
 						@click="close"
 					>
 						<PhX :size="16" weight="light" />

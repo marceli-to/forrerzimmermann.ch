@@ -120,7 +120,7 @@ function onSetTeaser(media) { mediaStore.setTeaser(media.uuid) }
 			</FormButton>
 		</PageHeader>
 
-		<div v-if="store.loading" class="text-sm text-neutral-400">
+		<div v-if="store.loading" class="text-sm text-gray-400">
 			Laden...
 		</div>
 
