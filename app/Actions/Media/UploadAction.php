@@ -14,7 +14,8 @@ class UploadAction
 
 		$file->storeAs($directory, $filename, 'public');
 
-		$dimensions = $this->getDimensions($file);
+		$size = @getimagesize($file->getRealPath());
+		$dimensions = [$size[0] ?? null, $size[1] ?? null];
 
 		return [
 			'uuid' => Str::uuid()->toString(),
@@ -22,46 +23,18 @@ class UploadAction
 			'original_name' => $file->getClientOriginalName(),
 			'mime_type' => $file->getMimeType(),
 			'size' => $file->getSize(),
-			'width' => $dimensions[0] ?? null,
-			'height' => $dimensions[1] ?? null,
+			'width' => $dimensions[0],
+			'height' => $dimensions[1],
 			'alt' => null,
 			'caption' => null,
 			'is_teaser' => false,
 			'sort_order' => 0,
-			'orientation' => $this->orientation($dimensions[0] ?? null, $dimensions[1] ?? null),
-			'type' => str_starts_with($file->getMimeType(), 'video/') ? 'video' : 'image',
+			'orientation' => $this->orientation($dimensions[0], $dimensions[1]),
 			'original_url' => '/temp/' . $filename,
-			'thumbnail_url' => '/img/temp/' . $filename . '?w=200&h=200&fit=crop',
+			'thumbnail_url' => '/img/temp/' . $filename . '?w=400&h=400&fit=crop',
 			'preview_url' => '/img/temp/' . $filename . '?w=800&fit=max',
 			'_temp' => true,
 		];
-	}
-
-	private function getDimensions(UploadedFile $file): array
-	{
-		if (str_starts_with($file->getMimeType(), 'video/')) {
-			return $this->getVideoDimensions($file->getRealPath());
-		}
-
-		$size = @getimagesize($file->getRealPath());
-
-		return [$size[0] ?? null, $size[1] ?? null];
-	}
-
-	private function getVideoDimensions(string $path): array
-	{
-		$command = sprintf(
-			'ffprobe -v error -select_streams v:0 -show_entries stream=width,height -of csv=s=x:p=0 %s',
-			escapeshellarg($path)
-		);
-
-		$output = @shell_exec($command);
-
-		if ($output && preg_match('/(\d+)x(\d+)/', trim($output), $matches)) {
-			return [(int) $matches[1], (int) $matches[2]];
-		}
-
-		return [null, null];
 	}
 
 	private function uniqueFilename(string $originalName): string

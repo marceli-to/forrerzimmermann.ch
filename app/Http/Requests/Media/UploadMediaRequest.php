@@ -14,7 +14,7 @@ class UploadMediaRequest extends FormRequest
 	public function rules(): array
 	{
 		return [
-			'file' => 'required|file|mimes:jpg,jpeg,png,webp,gif,mp4,mov,webm|max:51200',
+			'file' => 'required|file|mimes:jpg,jpeg,png,webp,gif|max:51200',
 		];
 	}
 }

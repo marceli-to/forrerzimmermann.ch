@@ -39,12 +39,6 @@ class MediaController extends Controller
 
 	public function destroy(Media $media)
 	{
-		if ($media->mediable_id !== null) {
-			return response()->json([
-				'message' => 'Dieses Bild wird verwendet und kann nicht gelöscht werden.',
-			], 422);
-		}
-
 		(new DeleteMediaAction)->execute($media);
 
 		return response()->json(null, 204);

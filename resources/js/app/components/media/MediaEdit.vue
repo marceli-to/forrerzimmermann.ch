@@ -46,21 +46,13 @@ function handleSave() {
 <template>
 	<Drawer
 		:open="isOpen"
-		:title="media?.type === 'video' ? 'Video bearbeiten' : 'Bild bearbeiten'"
+		title="Bild bearbeiten"
 		@close="close"
 	>
 		<!-- Preview -->
 		<div class="bg-neutral-50 dark:bg-warm-800 border-b border-neutral-200 dark:border-warm-700">
-			<video
-				v-if="media?.type === 'video'"
-				:src="media.original_url"
-				class="w-full max-h-[320px] object-contain"
-				controls
-				muted
-				preload="metadata"
-			/>
 			<img
-				v-else-if="media"
+				v-if="media"
 				:src="media.preview_url"
 				:alt="media.alt || ''"
 				class="w-full max-h-[320px] object-contain"

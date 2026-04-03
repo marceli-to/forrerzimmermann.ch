@@ -9,10 +9,6 @@ class DeleteAction
 {
 	public function execute(Media $media): void
 	{
-		if ($media->mediable_id !== null) {
-			throw new \RuntimeException('Media is in use and cannot be deleted.');
-		}
-
 		Storage::disk('public')->delete('uploads/' . $media->file);
 
 		$media->delete();

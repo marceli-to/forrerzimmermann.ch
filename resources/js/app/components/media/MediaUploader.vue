@@ -7,24 +7,11 @@ import German from '@uppy/locales/lib/de_DE'
 
 const props = defineProps({
 	compact: { type: Boolean, default: false },
-	accept: { type: String, default: 'image/*' },
 	maxFiles: { type: Number, default: null },
 })
 
-const fileTypes = {
-	'image/*': {
-		extensions: ['.jpg', '.jpeg', '.png', '.webp', '.gif'],
-		label: 'Bilder hinzufügen',
-		hint: 'JPG, PNG, WebP, GIF — max. 50 MB',
-	},
-	'video/*': {
-		extensions: ['.mp4', '.mov', '.webm'],
-		label: 'Videos hinzufügen',
-		hint: 'MP4, MOV, WebM — max. 50 MB',
-	},
-}
-
-const activeType = fileTypes[props.accept] || fileTypes['image/*']
+const extensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif']
+const hint = 'JPG, PNG, WebP, GIF — max. 50 MB'
 
 const emit = defineEmits(['uploaded'])
 
@@ -41,7 +28,7 @@ onMounted(() => {
 		locale: German,
 		autoProceed: true,
 		restrictions: {
-			allowedFileTypes: activeType.extensions,
+			allowedFileTypes: extensions,
 			maxFileSize: 51200 * 1024,
 			maxNumberOfFiles: props.maxFiles,
 		},
@@ -116,8 +103,8 @@ function addFiles(fileList) {
 		>
 			<div class="flex items-center justify-center gap-8 py-24">
 				<PhPlus :size="14" weight="light" class="text-gray-400 dark:text-warm-500" />
-				<span class="text-xs text-gray-500 dark:text-warm-400">{{ activeType.label }}</span>
-				<span class="text-xs text-gray-400 dark:text-warm-500 ml-4">{{ activeType.hint }}</span>
+				<span class="text-xs text-gray-500 dark:text-warm-400">Bilder hinzufügen</span>
+				<span class="text-xs text-gray-400 dark:text-warm-500 ml-4">{{ hint }}</span>
 			</div>
 		</div>
 
@@ -137,7 +124,7 @@ function addFiles(fileList) {
 					<span class="text-gray-900 dark:text-warm-100 underline decoration-gray-300 dark:decoration-warm-600 underline-offset-4">Dateien auswählen</span>
 					oder hierhin ziehen
 				</p>
-				<p class="text-xs text-gray-400 dark:text-warm-500 mt-8">{{ activeType.hint }}</p>
+				<p class="text-xs text-gray-400 dark:text-warm-500 mt-8">{{ hint }}</p>
 			</div>
 		</div>
 
@@ -152,7 +139,7 @@ function addFiles(fileList) {
 			ref="fileInput"
 			type="file"
 			:multiple="!maxFiles || maxFiles > 1"
-			:accept="activeType.extensions.join(',')"
+			:accept="extensions.join(',')"
 			class="hidden"
 			@change="onFileSelect"
 		/>
