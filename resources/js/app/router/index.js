@@ -12,7 +12,7 @@ import TeamIndex from '@/views/team/Index.vue'
 import TeamForm from '@/views/team/Form.vue'
 import JobIndex from '@/views/jobs/Index.vue'
 import JobForm from '@/views/jobs/Form.vue'
-import KontaktForm from '@/views/kontakt/Form.vue'
+import KontaktForm from '@/views/contact/Form.vue'
 import MediaIndex from '@/views/media/Index.vue'
 import SeoForm from '@/views/seo/Index.vue'
 
