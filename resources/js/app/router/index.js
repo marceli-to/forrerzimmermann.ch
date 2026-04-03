@@ -124,8 +124,8 @@ const routes = [
     meta: { title: 'Stelle bearbeiten' },
   },
   {
-    path: '/dashboard/kontakt',
-    name: 'kontakt.edit',
+    path: '/dashboard/contact',
+    name: 'contact.edit',
     component: KontaktForm,
     meta: { title: 'Kontakt' },
   },

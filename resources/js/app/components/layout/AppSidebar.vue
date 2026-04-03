@@ -35,7 +35,7 @@ const navigation = [
 	},
 	{
 		items: [
-			{ name: 'Kontakt', to: '/dashboard/kontakt', icon: PhEnvelope },
+			{ name: 'Kontakt', to: '/dashboard/contact', icon: PhEnvelope },
 		],
 	},
 	{

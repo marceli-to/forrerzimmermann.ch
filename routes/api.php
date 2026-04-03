@@ -101,7 +101,7 @@ Route::prefix('dashboard')
 			});
 
 		Route::controller(KontaktController::class)
-			->prefix('kontakt')
+			->prefix('contact')
 			->group(function () {
 				Route::get('/', 'show');
 				Route::put('/', 'update');

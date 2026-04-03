@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import kontaktApi from '@/api/kontakt'
+import kontaktApi from '@/api/contact'
 
 export const useKontaktStore = defineStore('kontakt', {
 	state: () => ({
