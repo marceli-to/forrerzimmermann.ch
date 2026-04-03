@@ -25,8 +25,8 @@ provide('activeTab', activeTab)
 				type="button"
 				class="pb-4 text-xs font-medium uppercase tracking-[0.08em] transition-colors cursor-pointer"
 				:class="activeTab === tab.key
-					? 'text-neutral-900 dark:text-white border-b border-neutral-900 dark:border-white'
-					: 'text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300'"
+					? 'text-neutral-900 border-b border-neutral-900'
+					: 'text-neutral-400 hover:text-neutral-600'"
 				@click="activeTab = tab.key"
 			>
 				{{ tab.label }}

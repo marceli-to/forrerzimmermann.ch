@@ -16,7 +16,7 @@ const emit = defineEmits(['confirm', 'cancel'])
 
 <template>
 	<AppDialog :open="open" :title="title" @close="emit('cancel')">
-		<p class="text-sm text-neutral-600 dark:text-neutral-300">{{ message }}</p>
+		<p class="text-sm text-neutral-600">{{ message }}</p>
 
 		<template #footer>
 			<div class="flex justify-between">

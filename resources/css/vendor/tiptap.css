@@ -1,13 +1,13 @@
 .editor {
-	@apply border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 overflow-hidden;
+	@apply border border-gray-200 rounded-md bg-white overflow-hidden;
 }
 
 .editor:focus-within {
-	@apply border-neutral-900 dark:border-neutral-500;
+	@apply ring-2 ring-gray-200 border-gray-300;
 }
 
 .editor .tiptap {
-	@apply px-12 py-12 text-sm leading-normal min-h-[200px] outline-none bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100;
+	@apply px-12 py-12 text-sm leading-normal min-h-[200px] outline-none bg-white text-gray-900;
 }
 
 .editor .tiptap p {
@@ -27,7 +27,7 @@
 }
 
 .editor .tiptap a {
-	@apply text-neutral-900 dark:text-neutral-100 underline decoration-neutral-300 dark:decoration-neutral-600 underline-offset-4 hover:decoration-neutral-900 dark:hover:decoration-neutral-400;
+	@apply text-gray-900 underline decoration-gray-300 underline-offset-4 hover:decoration-gray-900;
 }
 
 .editor .tiptap strong {

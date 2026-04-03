@@ -1,10 +1,10 @@
 @props(['type' => 'submit', 'variant' => 'primary'])
 
 @php
-$base = 'inline-flex items-center justify-center rounded-md font-medium text-sm transition-colors cursor-pointer focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy';
+$base = 'text-sm inline-flex items-center justify-center gap-2 rounded-md cursor-pointer transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 disabled:opacity-50 disabled:cursor-not-allowed px-16 py-8';
 $variants = [
-	'primary' => 'px-16 py-8 bg-navy text-white hover:bg-navy/90 active:bg-navy/80',
-	'secondary' => 'px-16 py-8 bg-transparent text-warm-900 border border-warm-400 hover:border-warm-900 active:bg-warm-100',
+	'primary' => 'bg-gray-900 text-white hover:bg-gray-800',
+	'secondary' => 'bg-gray-100 text-gray-700 hover:bg-gray-200',
 ];
 @endphp
 

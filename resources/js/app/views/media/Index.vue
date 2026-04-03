@@ -103,7 +103,7 @@ async function handleDelete(media) {
 				v-model="search"
 				type="text"
 				placeholder="Suchen..."
-				class="w-full border border-neutral-200 dark:border-neutral-800 pl-32 pr-12 py-10 text-sm text-neutral-900 dark:text-neutral-100 focus:outline-none focus:border-neutral-400 dark:focus:border-neutral-600 bg-white dark:bg-neutral-900"
+				class="w-full border border-neutral-200 pl-32 pr-12 py-10 text-sm text-neutral-900 focus:outline-none focus:border-neutral-400 bg-white"
 			/>
 		</div>
 

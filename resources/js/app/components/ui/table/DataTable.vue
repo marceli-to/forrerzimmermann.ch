@@ -20,7 +20,7 @@ const model = defineModel()
 						<th
 							v-for="col in columns"
 							:key="col.key"
-							class="py-12 text-xxs font-medium text-warm-400 whitespace-nowrap"
+							class="py-16 text-xxs font-medium text-warm-400 whitespace-nowrap"
 							:class="[
 								col.class || '',
 								col.align === 'right' ? 'text-right' : '',
@@ -43,7 +43,7 @@ const model = defineModel()
 							<td
 								v-for="col in columns"
 								:key="col.key"
-								class="py-12 first:pl-4 last:pr-4"
+								class="py-16 first:pl-4 last:pr-4"
 								:class="[
 									col.class || '',
 									col.align === 'right' ? 'text-right' : '',
@@ -67,7 +67,7 @@ const model = defineModel()
 						<td
 							v-for="col in columns"
 							:key="col.key"
-							class="py-12 first:pl-4 last:pr-4"
+							class="py-16 first:pl-4 last:pr-4"
 							:class="[
 								col.class || '',
 								col.align === 'right' ? 'text-right' : '',

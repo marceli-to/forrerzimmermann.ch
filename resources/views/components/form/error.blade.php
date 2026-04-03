@@ -1,5 +1,5 @@
 @props(['name'])
 
 @foreach ($errors->get($name) as $message)
-	<p {{ $attributes->merge(['class' => 'mt-2 text-xs text-red-600 dark:text-red-400']) }}>{{ $message }}</p>
+	<p {{ $attributes->merge(['class' => 'mt-2 text-xs text-red-600']) }}>{{ $message }}</p>
 @endforeach

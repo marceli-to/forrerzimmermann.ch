@@ -5,7 +5,7 @@ defineProps({
 </script>
 
 <template>
-	<p v-if="message" class="mt-8 text-[11px] text-red-600 dark:text-red-400">
+	<p v-if="message" class="mt-8 text-[11px] text-red-600">
 		{{ Array.isArray(message) ? message[0] : message }}
 	</p>
 </template>

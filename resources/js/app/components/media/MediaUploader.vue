@@ -107,44 +107,44 @@ function addFiles(fileList) {
 		<!-- Compact: slim add bar -->
 		<div
 			v-if="compact"
-			class="border border-neutral-200 dark:border-neutral-800 transition-colors duration-150 cursor-pointer hover:border-neutral-400 dark:hover:border-neutral-600 bg-white dark:bg-neutral-900"
-			:class="isDragging ? '!border-neutral-900 dark:!border-neutral-400 !bg-neutral-50 dark:!bg-neutral-800' : ''"
+			class="border border-gray-200 rounded-md transition-colors cursor-pointer hover:ring-2 hover:ring-gray-200 hover:border-gray-300 bg-white"
+			:class="isDragging ? '!border-gray-900 !bg-gray-50' : ''"
 			@click="fileInput?.click()"
 			@dragover.prevent="isDragging = true"
 			@dragleave.prevent="isDragging = false"
 			@drop.prevent="onDrop"
 		>
 			<div class="flex items-center justify-center gap-8 py-24">
-				<PhPlus :size="14" weight="light" class="text-neutral-400" />
-				<span class="text-xs text-neutral-500">{{ activeType.label }}</span>
-				<span class="text-xxs text-neutral-400 ml-4">{{ activeType.hint }}</span>
+				<PhPlus :size="14" weight="light" class="text-gray-400" />
+				<span class="text-xs text-gray-500">{{ activeType.label }}</span>
+				<span class="text-xs text-gray-400 ml-4">{{ activeType.hint }}</span>
 			</div>
 		</div>
 
 		<!-- Full: drop zone -->
 		<div
 			v-else
-			class="border border-neutral-200 dark:border-neutral-800 transition-colors duration-150 cursor-pointer hover:border-neutral-400 dark:hover:border-neutral-600 bg-white dark:bg-neutral-900"
-			:class="isDragging ? '!border-neutral-900 dark:!border-neutral-400 !bg-neutral-50 dark:!bg-neutral-800' : ''"
+			class="border border-gray-200 rounded-md transition-colors cursor-pointer hover:ring-2 hover:ring-gray-200 hover:border-gray-300 bg-white"
+			:class="isDragging ? '!border-gray-900 !bg-gray-50' : ''"
 			@click="fileInput?.click()"
 			@dragover.prevent="isDragging = true"
 			@dragleave.prevent="isDragging = false"
 			@drop.prevent="onDrop"
 		>
 			<div class="flex flex-col items-center justify-center py-[8rem] px-24">
-				<PhUploadSimple :size="24" weight="light" class="text-neutral-400 mb-12" />
-				<p class="text-xs text-neutral-500">
-					<span class="text-neutral-900 dark:text-neutral-100 underline decoration-neutral-300 dark:decoration-neutral-600 underline-offset-4">Dateien auswählen</span>
+				<PhUploadSimple :size="24" weight="light" class="text-gray-400 mb-12" />
+				<p class="text-xs text-gray-500">
+					<span class="text-gray-900 underline decoration-gray-300 underline-offset-4">Dateien auswählen</span>
 					oder hierhin ziehen
 				</p>
-				<p class="text-xxs text-neutral-400 mt-6">{{ activeType.hint }}</p>
+				<p class="text-xs text-gray-400 mt-6">{{ activeType.hint }}</p>
 			</div>
 		</div>
 
 		<!-- Progress -->
 		<div v-if="uploading" class="mt-6">
-			<div class="h-2 bg-neutral-200 dark:bg-neutral-800 overflow-hidden">
-				<div class="h-full bg-neutral-900 dark:bg-neutral-100 transition-all duration-300" :style="{ width: progress + '%' }" />
+			<div class="h-2 bg-gray-200 overflow-hidden rounded-full">
+				<div class="h-full bg-gray-900 transition-all duration-300" :style="{ width: progress + '%' }" />
 			</div>
 		</div>
 

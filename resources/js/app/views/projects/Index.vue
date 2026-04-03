@@ -59,7 +59,7 @@ async function handleDelete(project) {
 				<div class="flex items-center justify-end gap-12">
 					<button
 						class="transition-colors cursor-pointer"
-						:class="row.feature ? 'text-amber-500 hover:text-amber-600' : 'text-neutral-300 dark:text-neutral-600 hover:text-amber-500'"
+						:class="row.feature ? 'text-amber-500 hover:text-amber-600' : 'text-neutral-300 hover:text-amber-500'"
 						:title="row.feature ? 'In Auswahl – klicken zum Entfernen' : 'Nicht in Auswahl – klicken zum Hinzufügen'"
 						@click="store.toggleFeature(row.uuid)"
 					>
@@ -67,7 +67,7 @@ async function handleDelete(project) {
 					</button>
 					<button
 						class="transition-colors cursor-pointer"
-						:class="row.publish ? 'text-neutral-400 hover:text-neutral-900 dark:hover:text-white' : 'text-neutral-300 dark:text-neutral-600 hover:text-neutral-600 dark:hover:text-neutral-400'"
+						:class="row.publish ? 'text-neutral-400 hover:text-neutral-900' : 'text-neutral-300 hover:text-neutral-600'"
 						:title="row.publish ? 'Veröffentlicht – klicken zum Verstecken' : 'Versteckt – klicken zum Veröffentlichen'"
 						@click="store.toggle(row.uuid)"
 					>
@@ -75,13 +75,13 @@ async function handleDelete(project) {
 						<PhEyeSlash v-else :size="16" weight="light" />
 					</button>
 					<button
-						class="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer"
+						class="text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
 						@click="router.push({ name: 'projects.edit', params: { id: row.uuid } })"
 					>
 						<PhPencil :size="16" weight="light" />
 					</button>
 					<button
-						class="text-neutral-400 hover:text-red-600 dark:hover:text-red-400 transition-colors cursor-pointer"
+						class="text-neutral-400 hover:text-red-600 transition-colors cursor-pointer"
 						@click="handleDelete(row)"
 					>
 						<PhTrash :size="16" weight="light" />

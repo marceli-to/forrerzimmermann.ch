@@ -24,7 +24,7 @@ function formatSize(bytes) {
 
 <template>
 	<div
-		class="group relative bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 overflow-hidden hover:border-neutral-900 dark:hover:border-neutral-500 transition-colors"
+		class="group relative bg-white border border-gray-200 rounded-md overflow-hidden hover:border-gray-400 transition-colors"
 		@click="emit('click', media)"
 	>
 		<!-- Image -->
@@ -45,9 +45,9 @@ function formatSize(bytes) {
 		</div>
 
 		<!-- Info -->
-		<div v-if="showInfo" class="px-10 py-8 border-t border-neutral-100 dark:border-neutral-800">
-			<div class="text-xs text-neutral-900 dark:text-neutral-100 truncate">{{ media.original_name }}</div>
-			<div class="text-xxs text-neutral-400 dark:text-neutral-500 mt-2">
+		<div v-if="showInfo" class="px-10 py-8 border-t border-gray-100">
+			<div class="text-xs text-gray-900 truncate">{{ media.original_name }}</div>
+			<div class="text-xs text-gray-400 mt-2">
 				<template v-if="media.type !== 'video'">{{ media.width }}&times;{{ media.height }} · </template>{{ formatSize(media.size) }}
 			</div>
 		</div>
@@ -55,7 +55,7 @@ function formatSize(bytes) {
 		<!-- Badge -->
 		<div
 			v-if="badge"
-			class="absolute top-0 left-0 bg-neutral-900 dark:bg-neutral-100 text-white dark:text-neutral-900 text-[9px] font-medium tracking-wide uppercase px-6 py-3 leading-none"
+			class="absolute top-0 left-0 bg-gray-900 text-white text-[9px] font-medium tracking-wide uppercase px-6 py-3 leading-none"
 		>
 			{{ badge }}
 		</div>

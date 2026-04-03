@@ -14,5 +14,6 @@
 </head>
 <body class="h-full font-sans antialiased bg-navy">
 	{{ $slot }}
+
 </body>
 </html>

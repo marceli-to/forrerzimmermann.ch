@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 @vite(['resources/css/app.css'])
 </head>
-<body class="h-full font-sans text-neutral-900 antialiased bg-navy">
+<body class="h-full text-sm font-sans tracking-wide text-neutral-900 antialiased bg-gray-100">
 	<div id="app"></div>
 	@vite('resources/js/app/app.js')
 

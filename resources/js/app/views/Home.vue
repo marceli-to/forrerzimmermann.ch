@@ -57,40 +57,40 @@ function timeAgo(dateStr) {
 				<!-- Option 1: Current bordered cards -->
 				<div data-uidotsh-option="Bordered cards (current)" class="contents">
 					<div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-32">
-						<div class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-20 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors">
+						<div class="bg-white border border-neutral-200 p-20 hover:border-neutral-400 transition-colors">
 							<div class="mb-12">
-								<span class="text-xxs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-[0.15em] truncate">Projekte</span>
+								<span class="text-xxs font-medium text-neutral-400 uppercase tracking-[0.15em] truncate">Projekte</span>
 							</div>
-							<div class="text-2xl font-light text-neutral-900 dark:text-white tracking-tight tabular-nums">{{ data.stats.projects_total }}</div>
-							<div class="text-xxs text-neutral-400 dark:text-neutral-500 mt-4">
+							<div class="text-2xl font-light text-neutral-900 tracking-tight tabular-nums">{{ data.stats.projects_total }}</div>
+							<div class="text-xxs text-neutral-400 mt-4">
 								{{ data.stats.projects_published }} publiziert · {{ data.stats.projects_draft }} Entwürfe
 							</div>
 						</div>
 
-						<div class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-20 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors">
+						<div class="bg-white border border-neutral-200 p-20 hover:border-neutral-400 transition-colors">
 							<div class="mb-12">
-								<span class="text-xxs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-[0.15em] truncate">Publiziert</span>
+								<span class="text-xxs font-medium text-neutral-400 uppercase tracking-[0.15em] truncate">Publiziert</span>
 							</div>
 							<div class="text-2xl font-light text-emerald-600 tracking-tight tabular-nums">{{ data.stats.projects_published }}</div>
-							<div class="text-xxs text-neutral-400 dark:text-neutral-500 mt-4">
+							<div class="text-xxs text-neutral-400 mt-4">
 								{{ data.stats.projects_total > 0 ? Math.round(data.stats.projects_published / data.stats.projects_total * 100) : 0 }}% aller Projekte
 							</div>
 						</div>
 
-						<div class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-20 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors">
+						<div class="bg-white border border-neutral-200 p-20 hover:border-neutral-400 transition-colors">
 							<div class="mb-12">
-								<span class="text-xxs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-[0.15em] truncate">Medien</span>
+								<span class="text-xxs font-medium text-neutral-400 uppercase tracking-[0.15em] truncate">Medien</span>
 							</div>
-							<div class="text-2xl font-light text-neutral-900 dark:text-white tracking-tight tabular-nums">{{ data.stats.media_total }}</div>
-							<div class="text-xxs text-neutral-400 dark:text-neutral-500 mt-4">Bilder in der Bibliothek</div>
+							<div class="text-2xl font-light text-neutral-900 tracking-tight tabular-nums">{{ data.stats.media_total }}</div>
+							<div class="text-xxs text-neutral-400 mt-4">Bilder in der Bibliothek</div>
 						</div>
 
-						<div class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 p-20 hover:border-neutral-400 dark:hover:border-neutral-600 transition-colors">
+						<div class="bg-white border border-neutral-200 p-20 hover:border-neutral-400 transition-colors">
 							<div class="mb-12">
-								<span class="text-xxs font-medium text-neutral-400 dark:text-neutral-500 uppercase tracking-[0.15em] truncate">Speicher</span>
+								<span class="text-xxs font-medium text-neutral-400 uppercase tracking-[0.15em] truncate">Speicher</span>
 							</div>
-							<div class="text-2xl font-light text-neutral-900 dark:text-white tracking-tight tabular-nums">{{ formatSize(data.stats.media_size) }}</div>
-							<div class="text-xxs text-neutral-400 dark:text-neutral-500 mt-4">Gesamtgrösse aller Medien</div>
+							<div class="text-2xl font-light text-neutral-900 tracking-tight tabular-nums">{{ formatSize(data.stats.media_size) }}</div>
+							<div class="text-xxs text-neutral-400 mt-4">Gesamtgrösse aller Medien</div>
 						</div>
 					</div>
 				</div>
@@ -185,11 +185,11 @@ function timeAgo(dateStr) {
 				<!-- Option 1: Current bordered sections -->
 				<div data-uidotsh-option="Bordered sections (current)" class="contents">
 					<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-						<div class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
-							<div class="flex items-center justify-between px-20 py-16 border-b border-neutral-100 dark:border-neutral-800">
-								<h2 class="text-xs font-medium text-neutral-900 dark:text-white uppercase">Letzte Projekte</h2>
+						<div class="bg-white border border-neutral-200">
+							<div class="flex items-center justify-between px-20 py-16 border-b border-neutral-100">
+								<h2 class="text-xs font-medium text-neutral-900 uppercase">Letzte Projekte</h2>
 								<button
-									class="text-xxs text-neutral-400 hover:text-neutral-900 dark:hover:text-white flex items-center gap-4 transition-colors cursor-pointer"
+									class="text-xxs text-neutral-400 hover:text-neutral-900 flex items-center gap-4 transition-colors cursor-pointer"
 									@click="router.push({ name: 'projects.index' })"
 								>
 									Alle anzeigen
@@ -203,28 +203,28 @@ function timeAgo(dateStr) {
 								<div
 									v-for="(project, index) in data.recent_projects"
 									:key="project.id"
-									class="flex items-center gap-12 px-20 py-12 hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors cursor-pointer"
-									:class="{ 'border-t border-neutral-100 dark:border-neutral-800': index > 0 }"
+									class="flex items-center gap-12 px-20 py-12 hover:bg-neutral-50 transition-colors cursor-pointer"
+									:class="{ 'border-t border-neutral-100': index > 0 }"
 									@click="router.push({ name: 'projects.edit', params: { id: project.id } })"
 								>
 									<PhCircle
 										:size="8"
 										weight="fill"
-										:class="project.publish ? 'text-emerald-500' : 'text-neutral-300 dark:text-neutral-600'"
+										:class="project.publish ? 'text-emerald-500' : 'text-neutral-300'"
 									/>
 									<div class="flex-1 min-w-0">
-										<div class="text-sm text-neutral-900 dark:text-neutral-100 truncate">{{ project.title }}</div>
+										<div class="text-sm text-neutral-900 truncate">{{ project.title }}</div>
 									</div>
 									<div class="text-xxs text-neutral-400 whitespace-nowrap tabular-nums">{{ timeAgo(project.updated_at) }}</div>
 								</div>
 							</div>
 						</div>
 
-						<div class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">
-							<div class="flex items-center justify-between px-20 py-16 border-b border-neutral-100 dark:border-neutral-800">
-								<h2 class="text-xs font-medium text-neutral-900 dark:text-white uppercase">Letzte Uploads</h2>
+						<div class="bg-white border border-neutral-200">
+							<div class="flex items-center justify-between px-20 py-16 border-b border-neutral-100">
+								<h2 class="text-xs font-medium text-neutral-900 uppercase">Letzte Uploads</h2>
 								<button
-									class="text-xxs text-neutral-400 hover:text-neutral-900 dark:hover:text-white flex items-center gap-4 transition-colors cursor-pointer"
+									class="text-xxs text-neutral-400 hover:text-neutral-900 flex items-center gap-4 transition-colors cursor-pointer"
 									@click="router.push({ name: 'media.index' })"
 								>
 									Alle anzeigen

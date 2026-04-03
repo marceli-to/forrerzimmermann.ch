@@ -53,17 +53,17 @@ function close() {
 
 			<!-- Panel -->
 			<div
-				class="absolute top-0 right-0 bottom-0 w-full bg-white dark:bg-neutral-900 shadow-xl dark:shadow-none transition-transform duration-200 ease-out flex flex-col"
+				class="absolute top-0 right-0 bottom-0 w-full bg-white shadow-xl transition-transform duration-200 ease-out flex flex-col"
 				:class="[sizes[size], visible ? 'translate-x-0' : 'translate-x-full']"
 			>
 				<!-- Header -->
-				<div class="flex items-center justify-between px-24 py-20 border-b border-neutral-200 dark:border-neutral-800">
+				<div class="flex items-center justify-between px-24 py-20 border-b border-neutral-200">
 					<slot name="header">
-						<h3 class="text-sm font-semibold text-neutral-900 dark:text-white">{{ title }}</h3>
+						<h3 class="text-sm font-semibold text-neutral-900">{{ title }}</h3>
 					</slot>
 					<button
 						type="button"
-						class="size-28 flex items-center justify-center text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
+						class="size-28 flex items-center justify-center text-neutral-400 hover:text-neutral-900 transition-colors"
 						@click="close"
 					>
 						<PhX :size="16" weight="light" />
@@ -76,7 +76,7 @@ function close() {
 				</div>
 
 				<!-- Footer -->
-				<div v-if="$slots.footer" class="px-24 py-16 border-t border-neutral-200 dark:border-neutral-800">
+				<div v-if="$slots.footer" class="px-24 py-16 border-t border-neutral-200">
 					<slot name="footer" />
 				</div>
 			</div>

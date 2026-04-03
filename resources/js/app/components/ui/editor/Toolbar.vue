@@ -39,14 +39,14 @@ function closeLinkInput() {
 </script>
 
 <template>
-	<div class="relative border-b border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800">
+	<div class="relative border-b border-gray-200 bg-gray-50">
 
 		<div class="flex items-center gap-2">
 
 			<button
 				type="button"
 				class="p-8 transition-colors"
-				:class="editor.isActive('bold') ? 'text-neutral-900 dark:text-white bg-neutral-200 dark:bg-neutral-700' : 'text-neutral-400 hover:text-neutral-900 dark:hover:text-white'"
+				:class="editor.isActive('bold') ? 'text-gray-900 bg-gray-200' : 'text-gray-400 hover:text-gray-900'"
 				title="Bold"
 				@click="editor.chain().focus().toggleBold().run()">
 				<PhTextB :size="16" weight="light" />
@@ -55,7 +55,7 @@ function closeLinkInput() {
 			<button
 				type="button"
 				class="p-8 transition-colors"
-				:class="editor.isActive('bulletList') ? 'text-neutral-900 dark:text-white bg-neutral-200 dark:bg-neutral-700' : 'text-neutral-400 hover:text-neutral-900 dark:hover:text-white'"
+				:class="editor.isActive('bulletList') ? 'text-gray-900 bg-gray-200' : 'text-gray-400 hover:text-gray-900'"
 				title="Liste"
 				@click="editor.chain().focus().toggleBulletList().run()">
 				<PhListBullets :size="16" weight="light" />
@@ -64,7 +64,7 @@ function closeLinkInput() {
 			<button
 				type="button"
 				class="p-8 transition-colors"
-				:class="editor.isActive('orderedList') ? 'text-neutral-900 dark:text-white bg-neutral-200 dark:bg-neutral-700' : 'text-neutral-400 hover:text-neutral-900 dark:hover:text-white'"
+				:class="editor.isActive('orderedList') ? 'text-gray-900 bg-gray-200' : 'text-gray-400 hover:text-gray-900'"
 				title="Nummerierte Liste"
 				@click="editor.chain().focus().toggleOrderedList().run()">
 				<PhListNumbers :size="16" weight="light" />
@@ -73,7 +73,7 @@ function closeLinkInput() {
 			<button
 				type="button"
 				class="p-8 transition-colors"
-				:class="editor.isActive('link') ? 'text-neutral-900 dark:text-white bg-neutral-200 dark:bg-neutral-700' : 'text-neutral-400 hover:text-neutral-900 dark:hover:text-white'"
+				:class="editor.isActive('link') ? 'text-gray-900 bg-gray-200' : 'text-gray-400 hover:text-gray-900'"
 				title="Link"
 				@click="openLinkInput">
 				<PhLink :size="16" weight="light" />
@@ -83,20 +83,20 @@ function closeLinkInput() {
 		<!-- Link input overlay -->
 		<div
 			v-if="showLinkInput"
-			class="absolute left-0 right-0 top-full z-10 flex items-center gap-8 border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-900 p-8">
+			class="absolute left-0 right-0 top-full z-10 flex items-center gap-8 border border-gray-200 bg-white p-8">
 
 			<input
 				ref="linkInput"
 				v-model="linkUrl"
 				type="url"
 				placeholder="https://..."
-				class="flex-1 px-0 py-6 text-xs bg-transparent text-neutral-900 dark:text-neutral-100 border-0 border-b border-neutral-300 dark:border-neutral-600 focus:border-neutral-900 dark:focus:border-neutral-400 focus:ring-0 outline-none"
+				class="flex-1 px-0 py-6 text-xs bg-transparent text-gray-900 border-0 border-b border-gray-200 focus:border-gray-900 focus:ring-0 outline-none"
 				@keydown.enter.prevent="applyLink"
 				@keydown.escape.prevent="closeLinkInput" />
 
 			<button
 				type="button"
-				class="bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-[11px] font-medium tracking-wide px-12 py-6"
+				class="bg-gray-900 text-white text-[11px] font-medium px-12 py-6 rounded-md"
 				@click="applyLink">
 				Übernehmen
 			</button>
@@ -104,14 +104,14 @@ function closeLinkInput() {
 			<button
 				v-if="editor.isActive('link')"
 				type="button"
-				class="border border-neutral-300 dark:border-neutral-600 text-neutral-900 dark:text-neutral-100 text-[11px] font-medium tracking-wide px-12 py-6 hover:border-neutral-900 dark:hover:border-neutral-400"
+				class="border border-gray-200 text-gray-700 text-[11px] font-medium px-12 py-6 rounded-md hover:border-gray-900"
 				@click="removeLink">
 				Entfernen
 			</button>
 
 			<button
 				type="button"
-				class="text-neutral-400 hover:text-neutral-900 dark:hover:text-white p-4 transition-colors"
+				class="text-gray-400 hover:text-gray-900 p-4 transition-colors"
 				title="Abbrechen"
 				@click="closeLinkInput">
 				<PhX :size="14" weight="light" />
