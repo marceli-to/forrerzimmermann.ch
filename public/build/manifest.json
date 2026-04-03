@@ -1,0 +1,33 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-DorxivNL.css",
+    "src": "resources/css/app.css",
+    "isEntry": true,
+    "name": "app",
+    "names": [
+      "app.css"
+    ]
+  },
+  "resources/css/site.css": {
+    "file": "assets/site-DCOJQjsG.css",
+    "src": "resources/css/site.css",
+    "isEntry": true,
+    "name": "site",
+    "names": [
+      "site.css"
+    ]
+  },
+  "resources/fonts/Geist-Variable.woff2": {
+    "file": "assets/Geist-Variable-CrgPqtmy.woff2",
+    "src": "resources/fonts/Geist-Variable.woff2"
+  },
+  "resources/js/app/app.js": {
+    "file": "assets/app-ChYPZGw5.js",
+    "name": "app",
+    "src": "resources/js/app/app.js",
+    "isEntry": true,
+    "css": [
+      "assets/app-RIUyHCwp.css"
+    ]
+  }
+}
