@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Http\Requests\Seo;
+
+use Illuminate\Foundation\Http\FormRequest;
+
+class UpdateSeoSettingRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    public function rules(): array
+    {
+        return [
+            'og_title' => 'nullable|string|max:255',
+            'og_description' => 'nullable|string|max:500',
+            'landing_meta_description' => 'nullable|string|max:500',
+            'projects_meta_description' => 'nullable|string|max:500',
+            'werkliste_meta_description' => 'nullable|string|max:500',
+            'profile_meta_description' => 'nullable|string|max:500',
+            'team_meta_description' => 'nullable|string|max:500',
+            'jobs_meta_description' => 'nullable|string|max:500',
+            'contact_meta_description' => 'nullable|string|max:500',
+            'media' => 'nullable|array',
+            'media.*.uuid' => 'required|string',
+            'media.*.file' => 'required|string',
+            'media.*.original_name' => 'required|string',
+            'media.*.mime_type' => 'required|string',
+            'media.*.size' => 'required|integer',
+            'media.*.width' => 'nullable|integer',
+            'media.*.height' => 'nullable|integer',
+            'media.*.alt' => 'nullable|string|max:255',
+            'media.*.caption' => 'nullable|string|max:255',
+        ];
+    }
+}

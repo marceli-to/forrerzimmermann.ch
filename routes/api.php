@@ -9,7 +9,7 @@ use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\TeamController;
 use App\Http\Controllers\Api\AtelierController;
 use App\Http\Controllers\Api\KontaktController;
-use App\Http\Controllers\Api\SettingsController;
+use App\Http\Controllers\Api\SeoController;
 use App\Http\Controllers\Api\TopicController;
 
 Route::prefix('dashboard')
@@ -106,8 +106,8 @@ Route::prefix('dashboard')
 				Route::put('/', 'update');
 			});
 
-		Route::controller(SettingsController::class)
-			->prefix('settings')
+		Route::controller(SeoController::class)
+			->prefix('seo')
 			->group(function () {
 				Route::get('/', 'show');
 				Route::put('/', 'update');
