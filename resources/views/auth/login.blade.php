@@ -28,13 +28,10 @@
 						<x-form.error name="password" />
 					</div>
 					<div class="flex items-center justify-between">
-						<x-form.checkbox name="remember">Angemeldet bleiben</x-form.checkbox>
 						@if (Route::has('password.request'))
 							<x-form.link :href="route('password.request')">Passwort vergessen?</x-form.link>
 						@endif
-					</div>
-					<div>
-						<x-form.button class="w-full">Anmelden</x-form.button>
+						<x-form.button>Anmelden</x-form.button>
 					</div>
 				</form>
 			</div>
