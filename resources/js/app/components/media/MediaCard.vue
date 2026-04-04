@@ -26,7 +26,7 @@ function formatSize(bytes) {
 
 <template>
 	<div
-		class="group relative bg-white dark:bg-warm-800 border border-gray-200 dark:border-warm-700 rounded-md overflow-hidden hover:border-gray-400 dark:hover:border-warm-500 transition-colors"
+		class="group relative bg-white dark:bg-warm-800 border border-gray-200 dark:border-warm-700 rounded-md overflow-hidden"
 		@click="emit('click', media)"
 	>
 		<!-- Image -->
@@ -59,29 +59,31 @@ function formatSize(bytes) {
 			OG
 		</div>
 
-		<!-- Overlay actions -->
+		<!-- Overlay actions: bottom bar slides up on hover -->
 		<div
 			v-if="showOverlay"
-			class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex items-center justify-center gap-16"
+			class="absolute inset-x-0 top-0 -translate-y-full group-hover:translate-y-0 transition-transform duration-150"
 		>
-			<a :href="media.preview_url" target="_blank" class="text-white/70 hover:text-white transition-colors" title="In neuem Tab öffnen" @click.stop>
-				<PhArrowSquareOut :size="18" weight="light" />
-			</a>
-			<button type="button" class="text-white/70 hover:text-white transition-colors cursor-pointer" title="Bearbeiten" @click.stop="emit('edit', media)">
-				<PhPencil :size="18" weight="light" />
-			</button>
-			<button v-if="hasCrop" type="button" class="text-white/70 hover:text-white transition-colors cursor-pointer" title="Zuschneiden" @click.stop="emit('crop', media)">
-				<PhCrop :size="18" weight="light" />
-			</button>
-			<button v-if="hasTeaser" type="button" class="text-white/70 hover:text-white transition-colors cursor-pointer" title="Als Teaser setzen" @click.stop="emit('teaser', media)">
-				<PhStar :size="18" :weight="isTeaser ? 'fill' : 'light'" />
-			</button>
-			<button v-if="hasOg" type="button" class="text-white/70 hover:text-white transition-colors cursor-pointer" title="Als OG Image setzen" @click.stop="emit('og', media)">
-				<PhImage :size="18" :weight="isOg ? 'fill' : 'light'" />
-			</button>
-			<button type="button" class="text-white/70 hover:text-white transition-colors cursor-pointer" title="Löschen" @click.stop="emit('delete', media)">
-				<PhTrash :size="18" weight="light" />
-			</button>
+			<div class="bg-black/80 px-10 py-8 flex items-center justify-around">
+				<a :href="media.preview_url" target="_blank" class="text-white/70 hover:text-white" title="In neuem Tab öffnen" @click.stop>
+					<PhArrowSquareOut :size="15" weight="light" />
+				</a>
+				<button type="button" class="text-white/70 hover:text-white cursor-pointer" title="Bearbeiten" @click.stop="emit('edit', media)">
+					<PhPencil :size="15" weight="light" />
+				</button>
+				<button v-if="hasCrop" type="button" class="text-white/70 hover:text-white cursor-pointer" title="Zuschneiden" @click.stop="emit('crop', media)">
+					<PhCrop :size="15" weight="light" />
+				</button>
+				<button v-if="hasTeaser" type="button" class="text-white/70 hover:text-white cursor-pointer" title="Als Teaser setzen" @click.stop="emit('teaser', media)">
+					<PhStar :size="15" :weight="isTeaser ? 'fill' : 'light'" />
+				</button>
+				<button v-if="hasOg" type="button" class="text-white/70 hover:text-white cursor-pointer" title="Als OG Image setzen" @click.stop="emit('og', media)">
+					<PhImage :size="15" :weight="isOg ? 'fill' : 'light'" />
+				</button>
+				<button type="button" class="text-white/70 hover:text-white cursor-pointer" title="Löschen" @click.stop="emit('delete', media)">
+					<PhTrash :size="15" weight="light" />
+				</button>
+			</div>
 		</div>
 	</div>
 </template>
