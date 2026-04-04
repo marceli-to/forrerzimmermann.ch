@@ -1,4 +1,5 @@
 <script setup>
+import { ref, computed } from 'vue'
 import draggable from 'vuedraggable'
 
 const props = defineProps({
@@ -9,6 +10,29 @@ const props = defineProps({
 })
 
 const model = defineModel()
+
+const sortKey = ref(null)
+const sortDir = ref('asc')
+
+function toggleSort(col) {
+	if (!col.sortable || props.draggableRows) return
+	if (sortKey.value === col.key) {
+		sortDir.value = sortDir.value === 'asc' ? 'desc' : 'asc'
+	} else {
+		sortKey.value = col.key
+		sortDir.value = 'asc'
+	}
+}
+
+const sortedRows = computed(() => {
+	if (!sortKey.value || props.draggableRows) return props.rows
+	return [...props.rows].sort((a, b) => {
+		const aVal = a[sortKey.value] ?? ''
+		const bVal = b[sortKey.value] ?? ''
+		const cmp = String(aVal).localeCompare(String(bVal), undefined, { numeric: true, sensitivity: 'base' })
+		return sortDir.value === 'asc' ? cmp : -cmp
+	})
+})
 </script>
 
 <template>
@@ -24,9 +48,16 @@ const model = defineModel()
 							:class="[
 								col.class || '',
 								col.align === 'right' ? 'text-right' : '',
+								col.sortable && !draggableRows ? 'cursor-pointer select-none hover:text-gray-700 dark:hover:text-warm-300' : '',
 							]"
+							@click="toggleSort(col)"
 						>
-							{{ col.label }}
+							<span class="inline-flex items-center gap-4">
+								{{ col.label }}
+								<span v-if="col.sortable && !draggableRows && sortKey === col.key" class="text-gray-400 dark:text-warm-500">
+									{{ sortDir === 'asc' ? '↑' : '↓' }}
+								</span>
+							</span>
 						</th>
 					</tr>
 				</thead>
@@ -60,7 +91,7 @@ const model = defineModel()
 				</draggable>
 				<tbody v-else>
 					<tr
-						v-for="(row, index) in rows"
+						v-for="(row, index) in sortedRows"
 						:key="row.id ?? index"
 						class="border-b border-gray-900/6 dark:border-warm-700/40 hover:bg-gray-50 dark:hover:bg-warm-800"
 						:class="clickableRows ? 'cursor-pointer' : ''"
