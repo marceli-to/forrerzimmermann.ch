@@ -1,5 +1,5 @@
 <script setup>
-import { PhTrash, PhPencil, PhStar, PhImage } from '@phosphor-icons/vue'
+import { PhTrash, PhPencil, PhStar, PhImage, PhCrop } from '@phosphor-icons/vue'
 
 defineProps({
 	media: { type: Object, required: true },
@@ -11,9 +11,10 @@ defineProps({
 	hasOg: { type: Boolean, default: false },
 	isOg: { type: Boolean, default: false },
 	showOverlay: { type: Boolean, default: true },
+	hasCrop: { type: Boolean, default: false },
 })
 
-const emit = defineEmits(['edit', 'delete', 'teaser', 'og', 'click'])
+const emit = defineEmits(['edit', 'delete', 'teaser', 'og', 'crop', 'click'])
 
 function formatSize(bytes) {
 	if (!bytes) return '–'
@@ -65,6 +66,9 @@ function formatSize(bytes) {
 		>
 			<button type="button" class="text-white/70 hover:text-white transition-colors cursor-pointer" title="Bearbeiten" @click.stop="emit('edit', media)">
 				<PhPencil :size="18" weight="light" />
+			</button>
+			<button v-if="hasCrop" type="button" class="text-white/70 hover:text-white transition-colors cursor-pointer" title="Zuschneiden" @click.stop="emit('crop', media)">
+				<PhCrop :size="18" weight="light" />
 			</button>
 			<button v-if="hasTeaser" type="button" class="text-white/70 hover:text-white transition-colors cursor-pointer" title="Als Teaser setzen" @click.stop="emit('teaser', media)">
 				<PhStar :size="18" :weight="isTeaser ? 'fill' : 'light'" />

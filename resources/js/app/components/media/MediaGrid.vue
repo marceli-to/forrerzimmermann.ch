@@ -1,7 +1,9 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import draggable from 'vuedraggable'
 import MediaCard from '@/components/media/MediaCard.vue'
+import MediaCrop from '@/components/media/MediaCrop.vue'
+import { useMediaStore } from '@/stores/media'
 
 const props = defineProps({
 	items: { type: Array, default: () => [] },
@@ -10,6 +12,14 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['edit', 'delete', 'reorder', 'teaser', 'og'])
+
+const store = useMediaStore()
+const cropMedia = ref(null)
+
+async function handleCropSave({ uuid, crop }) {
+  await store.setCrop(uuid, crop)
+  cropMedia.value = null
+}
 
 const dragItems = computed({
 	get: () => props.items,
@@ -35,12 +45,20 @@ const dragItems = computed({
 					:isTeaser="element.is_teaser"
 					:hasOg="hasOg"
 					:isOg="element.is_og"
+					:has-crop="element.mime_type?.startsWith('image/')"
 					@edit="emit('edit', $event)"
 					@teaser="emit('teaser', $event)"
 					@og="emit('og', $event)"
 					@delete="emit('delete', $event)"
+					@crop="cropMedia = $event"
 				/>
 			</div>
 		</template>
 	</draggable>
+
+	<MediaCrop
+		:media="cropMedia"
+		@close="cropMedia = null"
+		@save="handleCropSave"
+	/>
 </template>
