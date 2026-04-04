@@ -25,7 +25,7 @@
 - [x] Draggable reordering in Vue component
 
 ## DataTable
-- [ ] Make it sortable (sortable columns can be configured)
+- [x] Make it sortable (sortable columns can be configured)
 
 ## Add tests
 - [x] Write tests

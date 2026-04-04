@@ -15,9 +15,9 @@ const toast = useToast()
 const { confirm } = useConfirm()
 
 const columns = [
-	{ key: 'title', label: 'Titel', primary: true },
-	{ key: 'location', label: 'Ort' },
-	{ key: 'year', label: 'Jahr', class: 'w-80' },
+	{ key: 'title', label: 'Titel', primary: true, sortable: true },
+	{ key: 'location', label: 'Ort', sortable: true },
+	{ key: 'year', label: 'Jahr', class: 'w-80', sortable: true },
 	{ key: 'actions', label: '', class: 'w-140', align: 'right' },
 ]
 

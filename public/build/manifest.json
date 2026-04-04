@@ -1,6 +1,6 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-CBJEHeLs.css",
+    "file": "assets/app-JEF60XKx.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -22,7 +22,7 @@
     "src": "resources/fonts/Geist-Variable.woff2"
   },
   "resources/js/app/app.js": {
-    "file": "assets/app-BOh_zIOn.js",
+    "file": "assets/app-CY22y2nG.js",
     "name": "app",
     "src": "resources/js/app/app.js",
     "isEntry": true,
