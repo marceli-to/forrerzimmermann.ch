@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useJobStore } from '@/stores/jobs'
 import { useToast } from '@/composables/useToast'
@@ -14,14 +14,29 @@ const store = useJobStore()
 const toast = useToast()
 const { confirm } = useConfirm()
 
+const draggableJobs = ref([])
+
 const columns = [
 	{ key: 'title', label: 'Titel', primary: true },
 	{ key: 'actions', label: '', class: 'w-100', align: 'right' },
 ]
 
-onMounted(() => {
-	store.fetchJobs()
+onMounted(async () => {
+	await store.fetchJobs()
+	draggableJobs.value = [...store.jobs]
 })
+
+watch(() => store.jobs, (val) => {
+	draggableJobs.value = [...val]
+})
+
+async function handleReorder() {
+	const items = draggableJobs.value.map((job, index) => ({
+		uuid: job.uuid,
+		sort_order: index,
+	}))
+	await store.reorderJobs(items)
+}
 
 async function handleDelete(job) {
 	const ok = await confirm({
@@ -51,7 +66,14 @@ async function handleDelete(job) {
 			Noch keine Stellen vorhanden.
 		</div>
 
-		<DataTable v-else :columns="columns" :rows="store.jobs">
+		<DataTable
+			v-else
+			v-model="draggableJobs"
+			:columns="columns"
+			:rows="draggableJobs"
+			:draggable-rows="true"
+			@update:model-value="handleReorder"
+		>
 			<template #cell-actions="{ row }">
 				<div class="flex items-center justify-end gap-12">
 					<button
