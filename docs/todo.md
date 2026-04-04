@@ -1,25 +1,30 @@
 # TODO
 
 ## Check code quality
-- [ ] Action classes
-- [ ] Requests
-- [ ] Resources
-- [ ] Controllers
-- [ ] Models
+- [ ] Action classes
+- [ ] Requests
+- [ ] Resources
+- [ ] Controllers
+- [ ] Models
 
 ## Check vue components/composables
-- [ ] Components
-- [ ] Composables
+- [ ] Components
+- [ ] Composables
 
 ## Topics
-- [ ] Add sort_order
+- [x] Add sort_order
+- [x] Draggable reordering in Vue component
+
+## Team
+- [ ] Add sort_order
 - [ ] Draggable reordering in Vue component
+- [ ] Group by former / non former (2 sortable DataTables)
 
 ## DataTable
-- [ ] Make it sortable (sortable columns can be configured)
+- [ ] Make it sortable (sortable columns can be configured)
 
 ## Add tests
-- [x] Write tests
+- [x] Write tests
 
 ## Rewrite Kontakt to Contact
-- [x] Models, Controllers, Routes, Views, Vue components, etc.
+- [x] Models, Controllers, Routes, Views, Vue components, etc.
