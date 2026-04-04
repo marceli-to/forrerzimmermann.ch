@@ -253,6 +253,16 @@ it('rejects invalid crop values', function () {
         ->assertUnprocessable();
 });
 
+it('rejects partial crop values', function () {
+    $media = Media::factory()->create();
+
+    $this->actingAs($this->user)
+        ->patchJson("/api/dashboard/media/{$media->uuid}/crop", [
+            'x' => 100, 'y' => null, 'w' => null, 'h' => null,
+        ])
+        ->assertUnprocessable();
+});
+
 it('requires authentication for media', function () {
     $this->getJson('/api/dashboard/media')->assertUnauthorized();
 });
