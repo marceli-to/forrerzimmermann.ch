@@ -31,6 +31,7 @@ function close() {
 }
 
 function handleSave() {
+  if (!cropperRef.value) return
   const { coordinates } = cropperRef.value.getResult()
   emit('save', {
     uuid: props.media.uuid,
