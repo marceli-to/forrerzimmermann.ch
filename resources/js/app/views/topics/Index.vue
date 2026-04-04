@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useTopicStore } from '@/stores/topics'
 import { useToast } from '@/composables/useToast'
@@ -14,14 +14,29 @@ const store = useTopicStore()
 const toast = useToast()
 const { confirm } = useConfirm()
 
+const draggableTopics = ref([])
+
 const columns = [
 	{ key: 'title', label: 'Titel', primary: true },
 	{ key: 'actions', label: '', class: 'w-100', align: 'right' },
 ]
 
-onMounted(() => {
-	store.fetchTopics()
+onMounted(async () => {
+	await store.fetchTopics()
+	draggableTopics.value = [...store.topics]
 })
+
+watch(() => store.topics, (val) => {
+	draggableTopics.value = [...val]
+})
+
+async function handleReorder() {
+	const items = draggableTopics.value.map((topic, index) => ({
+		uuid: topic.uuid,
+		sort_order: index,
+	}))
+	await store.reorderTopics(items)
+}
 
 async function handleDelete(topic) {
 	const ok = await confirm({
@@ -51,7 +66,14 @@ async function handleDelete(topic) {
 			Noch keine Themen vorhanden.
 		</div>
 
-		<DataTable v-else :columns="columns" :rows="store.topics">
+		<DataTable
+			v-else
+			v-model="draggableTopics"
+			:columns="columns"
+			:rows="draggableTopics"
+			:draggable-rows="true"
+			@update:model-value="handleReorder"
+		>
 			<template #cell-actions="{ row }">
 				<div class="flex items-center justify-end gap-12">
 					<button
