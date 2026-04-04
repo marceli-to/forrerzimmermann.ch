@@ -13,23 +13,31 @@ class ProjectFactory extends Factory
     public function definition(): array
     {
         $title = fake()->sentence(3, false);
+        $location = fake()->city();
 
         return [
             'title' => $title,
-            'slug' => Str::slug($title),
-            'name' => fake()->company(),
-            'location' => fake()->city(),
+            'location' => $location,
+            'slug' => Str::slug($title . ' ' . $location),
+            'subtitle' => fake()->sentence(4),
             'year' => fake()->numberBetween(1990, 2025),
             'description' => fake()->paragraph(),
             'info' => fake()->paragraph(),
-            'status' => fake()->randomElement(['Ausgeführt', 'In Planung', 'Studie']),
+            'meta_description' => fake()->sentence(),
             'publish' => false,
+            'feature' => false,
             'sort_order' => 0,
+            'topic_id' => null,
         ];
     }
 
     public function published(): static
     {
         return $this->state(fn () => ['publish' => true]);
+    }
+
+    public function featured(): static
+    {
+        return $this->state(fn () => ['feature' => true]);
     }
 }
