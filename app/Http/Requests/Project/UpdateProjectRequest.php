@@ -23,7 +23,7 @@ class UpdateProjectRequest extends FormRequest
 			'meta_description' => 'nullable|string|max:255',
 			'publish' => 'boolean',
 			'feature' => 'boolean',
-			'topic_id' => 'nullable|string',
+			'topic_id' => 'nullable|string|exists:topics,uuid',
 			'media' => 'nullable|array',
 			'media.*.uuid' => 'required|string',
 			'media.*.file' => 'required|string',

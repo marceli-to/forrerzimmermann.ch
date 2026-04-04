@@ -67,6 +67,8 @@ it('updates a project', function () {
         ])
         ->assertOk()
         ->assertJsonPath('data.title', 'Updated Title');
+
+    expect($project->fresh()->title)->toBe('Updated Title');
 });
 
 it('attaches a topic on create', function () {
@@ -81,6 +83,17 @@ it('attaches a topic on create', function () {
         ->assertCreated();
 
     expect($response->json('data.topic.uuid'))->toBe($topic->uuid);
+});
+
+it('rejects an invalid topic_id', function () {
+    $this->actingAs($this->user)
+        ->postJson('/api/dashboard/projects', [
+            'title' => 'Project',
+            'year' => 2022,
+            'topic_id' => 'non-existent-uuid',
+        ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrors(['topic_id']);
 });
 
 it('toggles publish state', function () {
