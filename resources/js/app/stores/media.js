@@ -110,17 +110,26 @@ export const useMediaStore = defineStore('media', {
 
 		async setCrop(uuid, cropData) {
 			const index = this.items.findIndex(i => i.uuid === uuid)
-			if (index === -1) return
+			if (index === -1) return false
 
 			const item = this.items[index]
 
 			if (item._temp) {
 				this.items[index] = { ...item, crop: cropData }
-				return
+				return true
 			}
 
-			const { data: response } = await mediaApi.crop(uuid, cropData)
-			this.items[index] = response.data
+			this.errors = {}
+			try {
+				const { data: response } = await mediaApi.crop(uuid, cropData)
+				this.items[index] = response.data
+				return true
+			} catch (error) {
+				if (error.response?.status === 422) {
+					this.errors = error.response.data.errors
+				}
+				return false
+			}
 		},
 	},
 })
