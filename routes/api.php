@@ -38,6 +38,7 @@ Route::prefix('dashboard')
 				Route::patch('/reorder', 'reorder');
 				Route::patch('/{media}/teaser', 'teaser');
 				Route::patch('/{media}/og', 'og');
+				Route::patch('/{media}/crop', 'crop');
 			});
 
 		Route::controller(JobController::class)

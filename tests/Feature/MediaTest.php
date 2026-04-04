@@ -212,6 +212,47 @@ it('does not append crop param when crop is null', function () {
         ->assertJsonPath('data.0.thumbnail_url', '/img/uploads/test-image.jpg?w=400&h=400&fit=crop');
 });
 
+it('sets crop on media', function () {
+    $media = Media::factory()->create(['crop' => null]);
+
+    $this->actingAs($this->user)
+        ->patchJson("/api/dashboard/media/{$media->uuid}/crop", [
+            'x' => 100, 'y' => 50, 'w' => 800, 'h' => 600,
+        ])
+        ->assertOk()
+        ->assertJsonPath('data.crop.x', 100)
+        ->assertJsonPath('data.crop.y', 50)
+        ->assertJsonPath('data.crop.w', 800)
+        ->assertJsonPath('data.crop.h', 600);
+
+    expect($media->fresh()->crop)->toBe(['x' => 100, 'y' => 50, 'w' => 800, 'h' => 600]);
+});
+
+it('clears crop on media when null values sent', function () {
+    $media = Media::factory()->create([
+        'crop' => ['x' => 100, 'y' => 50, 'w' => 800, 'h' => 600],
+    ]);
+
+    $this->actingAs($this->user)
+        ->patchJson("/api/dashboard/media/{$media->uuid}/crop", [
+            'x' => null, 'y' => null, 'w' => null, 'h' => null,
+        ])
+        ->assertOk()
+        ->assertJsonPath('data.crop', null);
+
+    expect($media->fresh()->crop)->toBeNull();
+});
+
+it('rejects invalid crop values', function () {
+    $media = Media::factory()->create();
+
+    $this->actingAs($this->user)
+        ->patchJson("/api/dashboard/media/{$media->uuid}/crop", [
+            'x' => 'bad', 'y' => 50, 'w' => 800, 'h' => 600,
+        ])
+        ->assertUnprocessable();
+});
+
 it('requires authentication for media', function () {
     $this->getJson('/api/dashboard/media')->assertUnauthorized();
 });

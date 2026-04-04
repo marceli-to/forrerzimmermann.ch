@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Actions\Media\CropAction;
 use App\Actions\Media\DeleteAction as DeleteMediaAction;
 use App\Actions\Media\ReorderAction as ReorderMediaAction;
 use App\Actions\Media\SetOgAction;
@@ -9,6 +10,7 @@ use App\Actions\Media\SetTeaserAction;
 use App\Actions\Media\UpdateAction as UpdateMediaAction;
 use App\Actions\Media\UploadAction as UploadMediaAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Media\CropMediaRequest;
 use App\Http\Requests\Media\ReorderMediaRequest;
 use App\Http\Requests\Media\UpdateMediaRequest;
 use App\Http\Requests\Media\UploadMediaRequest;
@@ -62,6 +64,13 @@ class MediaController extends Controller
 	public function og(Media $media)
 	{
 		$media = (new SetOgAction)->execute($media);
+
+		return new MediaResource($media);
+	}
+
+	public function crop(CropMediaRequest $request, Media $media)
+	{
+		$media = (new CropAction)->execute($media, $request->validated());
 
 		return new MediaResource($media);
 	}
