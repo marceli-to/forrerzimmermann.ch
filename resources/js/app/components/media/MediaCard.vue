@@ -59,7 +59,7 @@ function formatSize(bytes) {
 		<!-- Overlay actions: bar slides down from top on hover -->
 		<div
 			v-if="showOverlay"
-			class="absolute inset-x-0 top-0 -translate-y-full group-hover:translate-y-0 transition-transform duration-150"
+			class="absolute inset-x-8 top-8 -translate-y-[calc(100%+8px)] group-hover:translate-y-0 transition-transform duration-150 rounded-md overflow-hidden"
 		>
 			<div class="bg-black/80 px-10 py-8 flex items-center justify-around">
 				<a :href="media.preview_url" target="_blank" class="text-white/70 hover:text-white" title="In neuem Tab öffnen" @click.stop>
