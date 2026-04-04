@@ -17,6 +17,7 @@ class Image extends Component
     public array $formats;
     public string $class;
     public string $loading;
+    public ?array $crop;
     public array $breakpoints;
     public array $sources = [];
     public string $fallbackUrl;
@@ -31,7 +32,8 @@ class Image extends Component
         array $formats = ['avif', 'webp', 'jpg'],
         array $breakpoints = [],
         string $class = '',
-        string $loading = 'lazy'
+        string $loading = 'lazy',
+        ?array $crop = null,
     ) {
         $this->src = $src;
         $this->alt = $alt;
@@ -43,6 +45,7 @@ class Image extends Component
         $this->breakpoints = $breakpoints;
         $this->class = $class;
         $this->loading = $loading;
+        $this->crop = $crop;
 
         if (!empty($this->breakpoints)) {
             $this->buildResponsiveSources();
@@ -102,6 +105,10 @@ class Image extends Component
 
         if ($this->fit) {
             $params[] = 'fit=' . $this->fit;
+        }
+
+        if ($this->crop && $this->fit === 'crop') {
+            $params[] = 'crop=' . $this->crop['w'] . ',' . $this->crop['h'] . ',' . $this->crop['x'] . ',' . $this->crop['y'];
         }
 
         if ($format) {
