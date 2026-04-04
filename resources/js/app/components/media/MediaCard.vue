@@ -44,22 +44,19 @@ function formatSize(bytes) {
 			<div class="text-xs text-gray-400 dark:text-warm-500 mt-2">{{ media.width }}&times;{{ media.height }} · {{ formatSize(media.size) }}</div>
 		</div>
 
-		<!-- Badge -->
-		<div
-			v-if="badge"
-			class="absolute top-0 left-0 bg-gray-900 text-white text-[9px] font-medium tracking-wide uppercase px-6 py-3 leading-none"
-		>
-			{{ badge }}
+		<!-- Badges: top-left -->
+		<div class="absolute top-6 left-6 flex flex-col items-start gap-4 pointer-events-none">
+			<span
+				v-if="badge"
+				class="bg-gray-900 text-white text-[9px] font-medium tracking-wide uppercase px-6 py-3 leading-none rounded-full"
+			>{{ badge }}</span>
+			<span
+				v-if="isOg"
+				class="bg-gray-900 text-white text-[9px] font-medium tracking-wide uppercase px-6 py-3 leading-none rounded-full"
+			>OG</span>
 		</div>
 
-		<div
-			v-if="isOg"
-			class="absolute top-0 right-0 bg-gray-900 text-white text-[9px] font-medium tracking-wide uppercase px-6 py-3 leading-none"
-		>
-			OG
-		</div>
-
-		<!-- Overlay actions: bottom bar slides up on hover -->
+		<!-- Overlay actions: bar slides down from top on hover -->
 		<div
 			v-if="showOverlay"
 			class="absolute inset-x-0 top-0 -translate-y-full group-hover:translate-y-0 transition-transform duration-150"
