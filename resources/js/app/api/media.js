@@ -10,4 +10,5 @@ export default {
 	reorder: (items) => api.patch('/media/reorder', { items }),
 	teaser: (uuid) => api.patch(`/media/${uuid}/teaser`),
 	og: (uuid) => api.patch(`/media/${uuid}/og`),
+	crop: (uuid, data) => api.patch(`/media/${uuid}/crop`, data),
 }
