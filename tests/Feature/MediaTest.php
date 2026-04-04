@@ -26,11 +26,11 @@ it('uploads an image to temp storage', function () {
     $response = $this->actingAs($this->user)
         ->postJson('/api/dashboard/media/upload', ['file' => $file])
         ->assertOk()
-        ->assertJsonStructure(['data' => ['uuid', 'file', 'original_name', 'width', 'height']])
-        ->assertJsonPath('data._temp', true);
+        ->assertJsonStructure(['data' => ['uuid', 'file', 'original_name', 'width', 'height', '_temp']]);
 
-    $filename = $response->json('data.file');
-    Storage::disk('public')->assertExists('temp/' . $filename);
+    expect($response->json('data._temp'))->toBeTrue();
+
+    Storage::disk('public')->assertExists('temp/' . $response->json('data.file'));
 });
 
 it('rejects non-image uploads', function () {
@@ -54,20 +54,9 @@ it('updates media alt and caption', function () {
         ->assertJsonPath('data.caption', 'Taken in Zurich');
 });
 
-it('prevents deletion of attached media', function () {
-    $media = Media::factory()->create();
-
-    $this->actingAs($this->user)
-        ->deleteJson("/api/dashboard/media/{$media->uuid}")
-        ->assertUnprocessable()
-        ->assertJsonPath('message', 'Dieses Bild wird verwendet und kann nicht gelöscht werden.');
-
-    expect(Media::count())->toBe(1);
-});
-
-it('deletes unattached media', function () {
-    Storage::disk('public')->put('uploads/test.jpg', 'fake');
-    $media = Media::factory()->unattached()->create(['file' => 'test.jpg']);
+it('deletes media and removes file from storage', function () {
+    Storage::disk('public')->put('uploads/test.jpg', 'fake-content');
+    $media = Media::factory()->create(['file' => 'test.jpg']);
 
     $this->actingAs($this->user)
         ->deleteJson("/api/dashboard/media/{$media->uuid}")
@@ -75,6 +64,31 @@ it('deletes unattached media', function () {
 
     expect(Media::count())->toBe(0);
     Storage::disk('public')->assertMissing('uploads/test.jpg');
+});
+
+it('reorders media', function () {
+    $a = Media::factory()->create(['sort_order' => 0]);
+    $b = Media::factory()->create(['sort_order' => 1]);
+
+    $this->actingAs($this->user)
+        ->patchJson('/api/dashboard/media/reorder', [
+            'items' => [
+                ['uuid' => $a->uuid, 'sort_order' => 1],
+                ['uuid' => $b->uuid, 'sort_order' => 0],
+            ],
+        ])
+        ->assertOk();
+
+    expect($a->fresh()->sort_order)->toBe(1)
+        ->and($b->fresh()->sort_order)->toBe(0);
+});
+
+it('rejects reorder with unknown uuid', function () {
+    $this->actingAs($this->user)
+        ->patchJson('/api/dashboard/media/reorder', [
+            'items' => [['uuid' => 'bad-uuid', 'sort_order' => 0]],
+        ])
+        ->assertUnprocessable();
 });
 
 it('toggles teaser on', function () {
@@ -91,7 +105,7 @@ it('toggles teaser on', function () {
         ->assertJsonPath('data.is_teaser', true);
 });
 
-it('toggles teaser off', function () {
+it('toggles teaser off when already set', function () {
     $project = Project::factory()->create();
     $media = Media::factory()->create([
         'mediable_type' => Project::class,
@@ -105,7 +119,61 @@ it('toggles teaser off', function () {
         ->assertJsonPath('data.is_teaser', false);
 });
 
+it('only allows one teaser per entity', function () {
+    $project = Project::factory()->create();
+    $first = Media::factory()->create([
+        'mediable_type' => Project::class,
+        'mediable_id' => $project->id,
+        'is_teaser' => true,
+    ]);
+    $second = Media::factory()->create([
+        'mediable_type' => Project::class,
+        'mediable_id' => $project->id,
+        'is_teaser' => false,
+    ]);
+
+    $this->actingAs($this->user)
+        ->patchJson("/api/dashboard/media/{$second->uuid}/teaser")
+        ->assertOk()
+        ->assertJsonPath('data.is_teaser', true);
+
+    expect($first->fresh()->is_teaser)->toBeFalse();
+});
+
+it('toggles og image on', function () {
+    $project = Project::factory()->create();
+    $media = Media::factory()->create([
+        'mediable_type' => Project::class,
+        'mediable_id' => $project->id,
+        'is_og' => false,
+    ]);
+
+    $this->actingAs($this->user)
+        ->patchJson("/api/dashboard/media/{$media->uuid}/og")
+        ->assertOk()
+        ->assertJsonPath('data.is_og', true);
+});
+
+it('only allows one og image per entity', function () {
+    $project = Project::factory()->create();
+    $first = Media::factory()->create([
+        'mediable_type' => Project::class,
+        'mediable_id' => $project->id,
+        'is_og' => true,
+    ]);
+    $second = Media::factory()->create([
+        'mediable_type' => Project::class,
+        'mediable_id' => $project->id,
+        'is_og' => false,
+    ]);
+
+    $this->actingAs($this->user)
+        ->patchJson("/api/dashboard/media/{$second->uuid}/og")
+        ->assertOk();
+
+    expect($first->fresh()->is_og)->toBeFalse();
+});
+
 it('requires authentication for media', function () {
-    $this->getJson('/api/dashboard/media')
-        ->assertUnauthorized();
+    $this->getJson('/api/dashboard/media')->assertUnauthorized();
 });
