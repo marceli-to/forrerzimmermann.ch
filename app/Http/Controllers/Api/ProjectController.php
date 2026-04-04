@@ -28,7 +28,7 @@ class ProjectController extends Controller
 	public function store(StoreProjectRequest $request)
 	{
 		$project = (new StoreAction)->execute($request->validated());
-		return new ProjectResource($project->load('topic'));
+		return (new ProjectResource($project->load('topic')))->response()->setStatusCode(201);
 	}
 
 	public function show(Project $project)

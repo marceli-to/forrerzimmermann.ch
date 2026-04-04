@@ -16,6 +16,7 @@ class Topic extends Model
 	];
 
 	protected $casts = [
+		'uuid' => 'string',
 		'publish' => 'boolean',
 		'sort_order' => 'integer',
 	];
