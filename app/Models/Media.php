@@ -23,6 +23,7 @@ class Media extends Model
 		'caption',
 		'width',
 		'height',
+		'crop',
 		'is_teaser',
 		'is_og',
 		'sort_order',
@@ -34,6 +35,7 @@ class Media extends Model
 		'size' => 'integer',
 		'width' => 'integer',
 		'height' => 'integer',
+		'crop' => 'array',
 	];
 
 	public function mediable(): MorphTo
