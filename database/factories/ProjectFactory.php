@@ -12,7 +12,7 @@ class ProjectFactory extends Factory
 
     public function definition(): array
     {
-        $title = fake()->sentence(3, false);
+        $title = fake()->unique()->sentence(3, false);
         $location = fake()->city();
 
         return [
