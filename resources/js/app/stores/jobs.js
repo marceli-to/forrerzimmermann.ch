@@ -63,5 +63,9 @@ export const useJobStore = defineStore('jobs', {
 			await jobsApi.destroy(id)
 			this.jobs = this.jobs.filter(j => j.uuid !== id)
 		},
+
+		async reorderJobs(items) {
+			await jobsApi.reorder(items)
+		},
 	},
 })
