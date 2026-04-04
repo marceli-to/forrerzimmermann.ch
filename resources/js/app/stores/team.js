@@ -67,5 +67,9 @@ export const useTeamStore = defineStore('team', {
 			await teamApi.destroy(id)
 			this.members = this.members.filter(m => m.uuid !== id)
 		},
+
+		async reorderMembers(items) {
+			await teamApi.reorder(items)
+		},
 	},
 })
