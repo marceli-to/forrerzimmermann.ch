@@ -121,7 +121,8 @@ const defaultSize = computed(() => {
             :stencil-props="{ aspectRatio }"
             :default-position="defaultPosition"
             :default-size="defaultSize"
-            class="max-h-[50vh]"
+            class="h-[60vh]"
+            image-restriction="fit-area"
           />
         </div>
 
