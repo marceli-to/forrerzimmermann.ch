@@ -63,5 +63,9 @@ export const useTopicStore = defineStore('topics', {
 			await topicsApi.destroy(id)
 			this.topics = this.topics.filter(t => t.uuid !== id)
 		},
+
+		async reorderTopics(items) {
+			await topicsApi.reorder(items)
+		},
 	},
 })
