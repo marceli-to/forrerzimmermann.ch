@@ -9,6 +9,10 @@ class MediaResource extends JsonResource
 {
 	public function toArray(Request $request): array
 	{
+		$cropParam = $this->crop
+			? '&crop=' . $this->crop['w'] . ',' . $this->crop['h'] . ',' . $this->crop['x'] . ',' . $this->crop['y']
+			: '';
+
 		return [
 			'id' => $this->id,
 			'uuid' => $this->uuid,
@@ -20,12 +24,13 @@ class MediaResource extends JsonResource
 			'caption' => $this->caption,
 			'width' => $this->width,
 			'height' => $this->height,
+			'crop' => $this->crop,
 			'orientation' => $this->orientation,
 			'is_teaser' => $this->is_teaser,
 			'is_og' => $this->is_og,
 			'sort_order' => $this->sort_order,
 			'original_url' => '/uploads/' . $this->file,
-			'thumbnail_url' => '/img/uploads/' . $this->file . '?w=400&h=400&fit=crop',
+			'thumbnail_url' => '/img/uploads/' . $this->file . '?w=400&h=400&fit=crop' . $cropParam,
 			'preview_url' => '/img/uploads/' . $this->file . '?w=800&fit=max',
 		];
 	}

@@ -174,6 +174,44 @@ it('only allows one og image per entity', function () {
     expect($first->fresh()->is_og)->toBeFalse();
 });
 
+it('includes crop in media resource', function () {
+    $media = Media::factory()->create([
+        'crop' => ['x' => 100, 'y' => 50, 'w' => 800, 'h' => 600],
+    ]);
+
+    $this->actingAs($this->user)
+        ->getJson('/api/dashboard/media')
+        ->assertOk()
+        ->assertJsonPath('data.0.crop.x', 100)
+        ->assertJsonPath('data.0.crop.y', 50)
+        ->assertJsonPath('data.0.crop.w', 800)
+        ->assertJsonPath('data.0.crop.h', 600);
+});
+
+it('appends crop param to thumbnail_url when crop is set', function () {
+    $media = Media::factory()->create([
+        'file' => 'test-image.jpg',
+        'crop' => ['x' => 100, 'y' => 50, 'w' => 800, 'h' => 600],
+    ]);
+
+    $this->actingAs($this->user)
+        ->getJson('/api/dashboard/media')
+        ->assertOk()
+        ->assertJsonPath('data.0.thumbnail_url', '/img/uploads/test-image.jpg?w=400&h=400&fit=crop&crop=800,600,100,50');
+});
+
+it('does not append crop param when crop is null', function () {
+    $media = Media::factory()->create([
+        'file' => 'test-image.jpg',
+        'crop' => null,
+    ]);
+
+    $this->actingAs($this->user)
+        ->getJson('/api/dashboard/media')
+        ->assertOk()
+        ->assertJsonPath('data.0.thumbnail_url', '/img/uploads/test-image.jpg?w=400&h=400&fit=crop');
+});
+
 it('requires authentication for media', function () {
     $this->getJson('/api/dashboard/media')->assertUnauthorized();
 });
