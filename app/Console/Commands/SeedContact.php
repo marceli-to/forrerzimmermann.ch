@@ -16,7 +16,7 @@ class SeedContact extends Command
             ['id' => 1],
             [
                 'name' => 'Forrer Zimmermann Architekten GmbH',
-                'address' => 'Badenerstrasse 370, CH-8004 Zürich',
+                'address' => "Badenerstrasse 370\n\nCH-8004 Zürich",
                 'email' => 'mail@forrerzimmermann.ch',
                 'phone' => '+41 44 548 90 01',
                 'maps_url' => null,

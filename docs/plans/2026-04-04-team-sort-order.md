@@ -1,3 +1,64 @@
+# Team Sort Order & Grouping Implementation Plan
+
+> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
+
+**Goal:** Enable drag-and-drop reordering of Team members in two independent groups (current and former), persisted via the existing reorder API endpoint.
+
+**Architecture:** The backend is fully complete (sort_order field, ReorderAction, ReorderTeamRequest, reorder route, teamApi.reorder()). Two frontend changes are needed: add a `reorderMembers()` store action, then rewrite `Index.vue` to split members into two computed groups, each with its own draggable DataTable and independent sort_order sequence starting from 0.
+
+**Tech Stack:** Laravel (PHP), Vue 3 (Composition API), Pinia, vuedraggable v4
+
+---
+
+### Task 1: Add reorderMembers action to Pinia store
+
+**Files:**
+- Modify: `resources/js/app/stores/team.js`
+
+**Step 1: Add the action**
+
+Inside the `actions` object, after `deleteMember`, add:
+
+```js
+async reorderMembers(items) {
+    await teamApi.reorder(items)
+},
+```
+
+`teamApi` is already imported. `teamApi.reorder(items)` already exists in `resources/js/app/api/team.js`.
+
+**Step 2: Verify with Read**
+
+Read the file and confirm `reorderMembers` appears after `deleteMember`.
+
+**Step 3: Commit**
+
+```bash
+git add resources/js/app/stores/team.js
+git commit -m "feat: add reorderMembers action to team store"
+```
+
+---
+
+### Task 2: Rewrite Team Index.vue with two grouped draggable DataTables
+
+**Files:**
+- Modify: `resources/js/app/views/team/Index.vue`
+
+**Overview of changes:**
+- Add `ref`, `computed`, `watch` to Vue imports
+- Add two draggable refs: `draggableCurrentMembers`, `draggableFormerMembers`
+- Add two computed properties filtering `store.members` by `former` flag
+- Add watches to sync draggable refs when store updates
+- Add two `handleReorder` functions (one per group)
+- Replace single DataTable with two DataTables (one per group), each with a heading and empty state
+- Remove the `former` column from columns (no longer needed — groups are visually separated)
+
+**Step 1: Replace the full `<script setup>` block**
+
+Replace the entire `<script setup>` section with:
+
+```vue
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
 import { useRouter } from 'vue-router'
@@ -69,7 +130,13 @@ async function handleDelete(member) {
 	toast.success('Mitglied gelöscht')
 }
 </script>
+```
 
+**Step 2: Replace the full `<template>` block**
+
+Replace the entire `<template>` section with:
+
+```vue
 <template>
 	<div>
 		<PageHeader title="Team" />
@@ -126,7 +193,7 @@ async function handleDelete(member) {
 			</div>
 
 			<div>
-				<h2 class="text-sm font-medium text-gray-500 dark:text-warm-400 mb-12">Ehemalige</h2>
+				<h2 class="text-sm font-medium text-gray-500 dark:text-warm-400 mb-12">Ehemalig</h2>
 				<div v-if="draggableFormerMembers.length === 0" class="text-sm text-gray-400 dark:text-warm-500">
 					Keine ehemaligen Mitglieder vorhanden.
 				</div>
@@ -170,3 +237,19 @@ async function handleDelete(member) {
 		</template>
 	</div>
 </template>
+```
+
+**Step 3: Verify with Read**
+
+Read the final file and confirm:
+- Two DataTables present
+- Both have `draggable-rows="true"`
+- `handleReorderCurrent` and `handleReorderFormer` are wired correctly
+- `former` column is removed from `columns`
+
+**Step 4: Commit**
+
+```bash
+git add resources/js/app/views/team/Index.vue
+git commit -m "feat: group team members by active/former with independent drag-and-drop ordering"
+```
