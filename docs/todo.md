@@ -16,9 +16,13 @@
 - [x] Draggable reordering in Vue component
 
 ## Team
+- [x] Add sort_order
+- [x] Draggable reordering in Vue component
+- [x] Group by former / non former (2 sortable DataTables)
+
+## Jobs
 - [ ] Add sort_order
 - [ ] Draggable reordering in Vue component
-- [ ] Group by former / non former (2 sortable DataTables)
 
 ## DataTable
 - [ ] Make it sortable (sortable columns can be configured)
