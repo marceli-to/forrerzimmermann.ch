@@ -17,8 +17,11 @@ const store = useMediaStore()
 const cropMedia = ref(null)
 
 async function handleCropSave({ uuid, crop }) {
-  await store.setCrop(uuid, crop)
-  cropMedia.value = null
+  try {
+    await store.setCrop(uuid, crop)
+  } finally {
+    cropMedia.value = null
+  }
 }
 
 const dragItems = computed({
@@ -45,7 +48,7 @@ const dragItems = computed({
 					:isTeaser="element.is_teaser"
 					:hasOg="hasOg"
 					:isOg="element.is_og"
-					:has-crop="element.mime_type?.startsWith('image/')"
+					:hasCrop="element.mime_type?.startsWith('image/')"
 					@edit="emit('edit', $event)"
 					@teaser="emit('teaser', $event)"
 					@og="emit('og', $event)"
