@@ -7,11 +7,11 @@ use App\Actions\Project\ReorderAction;
 use App\Actions\Project\StoreAction;
 use App\Actions\Project\UpdateAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Project\ReorderProjectRequest;
 use App\Http\Requests\Project\StoreProjectRequest;
 use App\Http\Requests\Project\UpdateProjectRequest;
 use App\Http\Resources\ProjectResource;
 use App\Models\Project;
-use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
@@ -60,9 +60,9 @@ class ProjectController extends Controller
 		return response()->json(null, 204);
 	}
 
-	public function reorder(Request $request)
+	public function reorder(ReorderProjectRequest $request)
 	{
-		(new ReorderAction)->execute($request->items);
+		(new ReorderAction)->execute($request->validated('items'));
 		return response()->json(['message' => 'ok']);
 	}
 }

@@ -14,9 +14,7 @@ return new class extends Migration
 			$table->string('slug')->unique();
 			$table->string('title')->nullable();
 			$table->text('text')->nullable();
-			$table->string('meta_description')->nullable();
 			$table->boolean('publish')->default(false);
-			$table->integer('sort_order')->default(0);
 			$table->timestamps();
 		});
 	}

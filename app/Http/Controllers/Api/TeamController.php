@@ -7,11 +7,11 @@ use App\Actions\Team\ReorderAction;
 use App\Actions\Team\StoreAction;
 use App\Actions\Team\UpdateAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Team\ReorderTeamRequest;
 use App\Http\Requests\Team\StoreTeamRequest;
 use App\Http\Requests\Team\UpdateTeamRequest;
 use App\Http\Resources\TeamMemberResource;
 use App\Models\TeamMember;
-use Illuminate\Http\Request;
 
 class TeamController extends Controller
 {
@@ -51,9 +51,9 @@ class TeamController extends Controller
 		return response()->json(null, 204);
 	}
 
-	public function reorder(Request $request)
+	public function reorder(ReorderTeamRequest $request)
 	{
-		(new ReorderAction)->execute($request->items);
+		(new ReorderAction)->execute($request->validated('items'));
 		return response()->json(['message' => 'ok']);
 	}
 }

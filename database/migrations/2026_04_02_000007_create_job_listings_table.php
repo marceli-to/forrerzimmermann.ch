@@ -12,7 +12,7 @@ return new class extends Migration
 			$table->id();
 			$table->uuid('uuid')->unique();
 			$table->string('title');
-			$table->text('text')->nullable();
+			$table->text('text');
 			$table->boolean('publish')->default(false);
 			$table->integer('sort_order')->default(0);
 			$table->timestamps();

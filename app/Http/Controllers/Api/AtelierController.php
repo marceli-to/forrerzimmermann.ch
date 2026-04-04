@@ -13,7 +13,7 @@ class AtelierController extends Controller
 	public function index()
 	{
 		return AtelierPageResource::collection(
-			AtelierPage::with('media')->orderBy('sort_order')->get()
+			AtelierPage::with('media')->orderBy('id')->get()
 		);
 	}
 

@@ -18,6 +18,6 @@ class UpdateAction
 			(new AttachMediaAction)->execute($media, $page);
 		}
 
-		return $page;
+		return $page->fresh();
 	}
 }

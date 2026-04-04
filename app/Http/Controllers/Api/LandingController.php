@@ -7,11 +7,11 @@ use App\Actions\Landing\ReorderAction as ReorderLandingSlidesAction;
 use App\Actions\Landing\StoreAction as StoreLandingSlideAction;
 use App\Actions\Landing\UpdateAction as UpdateLandingSlideAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Landing\ReorderLandingSlideRequest;
 use App\Http\Requests\Landing\StoreLandingSlideRequest;
 use App\Http\Requests\Landing\UpdateLandingSlideRequest;
 use App\Http\Resources\LandingSlideResource;
 use App\Models\LandingSlide;
-use Illuminate\Http\Request;
 
 class LandingController extends Controller
 {
@@ -58,9 +58,9 @@ class LandingController extends Controller
 		return response()->json(null, 204);
 	}
 
-	public function reorder(Request $request)
+	public function reorder(ReorderLandingSlideRequest $request)
 	{
-		(new ReorderLandingSlidesAction)->execute($request->items);
+		(new ReorderLandingSlidesAction)->execute($request->validated('items'));
 
 		return response()->json(['message' => 'Reordered']);
 	}

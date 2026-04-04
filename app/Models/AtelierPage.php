@@ -12,13 +12,11 @@ class AtelierPage extends Model
 	use HasFactory, HasUuid;
 
 	protected $fillable = [
-		'uuid', 'slug', 'title', 'text',
-		'meta_description', 'publish', 'sort_order',
+		'uuid', 'slug', 'title', 'text', 'publish',
 	];
 
 	protected $casts = [
 		'publish' => 'boolean',
-		'sort_order' => 'integer',
 	];
 
 	public function media(): MorphMany

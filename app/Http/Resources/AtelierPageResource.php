@@ -14,9 +14,7 @@ class AtelierPageResource extends JsonResource
 			'slug' => $this->slug,
 			'title' => $this->title,
 			'text' => $this->text,
-			'meta_description' => $this->meta_description,
 			'publish' => $this->publish,
-			'sort_order' => $this->sort_order,
 			'media' => MediaResource::collection($this->whenLoaded('media')),
 		];
 	}

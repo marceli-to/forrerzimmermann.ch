@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\JobController;
 use App\Http\Controllers\Api\LandingController;
 use App\Http\Controllers\Api\MediaController;
@@ -15,8 +14,6 @@ use App\Http\Controllers\Api\TopicController;
 Route::prefix('dashboard')
 	->middleware(['web', 'auth'])
 	->group(function () {
-
-		Route::get('/', [DashboardController::class, 'index']);
 
 		Route::controller(ProjectController::class)
 			->prefix('projects')

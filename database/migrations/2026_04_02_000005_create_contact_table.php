@@ -17,7 +17,6 @@ return new class extends Migration
 			$table->string('phone');
 			$table->string('maps_url')->nullable();
 			$table->text('imprint')->nullable();
-			$table->string('meta_description')->nullable();
 			$table->boolean('publish')->default(false);
 			$table->timestamps();
 		});

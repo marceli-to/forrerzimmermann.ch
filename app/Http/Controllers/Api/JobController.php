@@ -7,11 +7,11 @@ use App\Actions\Job\ReorderAction;
 use App\Actions\Job\StoreAction;
 use App\Actions\Job\UpdateAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Job\ReorderJobRequest;
 use App\Http\Requests\Job\StoreJobRequest;
 use App\Http\Requests\Job\UpdateJobRequest;
 use App\Http\Resources\JobListingResource;
 use App\Models\JobListing;
-use Illuminate\Http\Request;
 
 class JobController extends Controller
 {
@@ -51,9 +51,9 @@ class JobController extends Controller
 		return response()->json(null, 204);
 	}
 
-	public function reorder(Request $request)
+	public function reorder(ReorderJobRequest $request)
 	{
-		(new ReorderAction)->execute($request->items);
+		(new ReorderAction)->execute($request->validated('items'));
 		return response()->json(['message' => 'ok']);
 	}
 }

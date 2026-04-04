@@ -33,6 +33,6 @@ class UpdateAction
 			(new AttachMediaAction)->execute($media, $project);
 		}
 
-		return $project;
+		return $project->fresh();
 	}
 }

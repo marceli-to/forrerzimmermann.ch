@@ -17,7 +17,6 @@ class ContactResource extends JsonResource
 			'phone' => $this->phone,
 			'maps_url' => $this->maps_url,
 			'imprint' => $this->imprint,
-			'meta_description' => $this->meta_description,
 			'publish' => $this->publish,
 		];
 	}

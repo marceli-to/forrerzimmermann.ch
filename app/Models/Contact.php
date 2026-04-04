@@ -20,7 +20,6 @@ class Contact extends Model
 		'phone',
 		'maps_url',
 		'imprint',
-		'meta_description',
 		'publish',
 	];
 

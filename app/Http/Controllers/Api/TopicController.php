@@ -7,11 +7,11 @@ use App\Actions\Topic\ReorderAction;
 use App\Actions\Topic\StoreAction;
 use App\Actions\Topic\UpdateAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Topic\ReorderTopicRequest;
 use App\Http\Requests\Topic\StoreTopicRequest;
 use App\Http\Requests\Topic\UpdateTopicRequest;
 use App\Http\Resources\TopicResource;
 use App\Models\Topic;
-use Illuminate\Http\Request;
 
 class TopicController extends Controller
 {
@@ -51,9 +51,9 @@ class TopicController extends Controller
 		return response()->json(null, 204);
 	}
 
-	public function reorder(Request $request)
+	public function reorder(ReorderTopicRequest $request)
 	{
-		(new ReorderAction)->execute($request->items);
+		(new ReorderAction)->execute($request->validated('items'));
 		return response()->json(['message' => 'ok']);
 	}
 }
