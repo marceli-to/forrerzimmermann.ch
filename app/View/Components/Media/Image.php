@@ -89,7 +89,7 @@ class Image extends Component
         $this->fallbackUrl = $this->buildUrl('jpg');
     }
 
-    public function buildUrl(string $format = null, ?int $width = null, ?int $height = null): string
+    public function buildUrl(?string $format = null, ?int $width = null, ?int $height = null): string
     {
         $params = [];
         $useWidth = $width ?? $this->width;
@@ -107,7 +107,7 @@ class Image extends Component
             $params[] = 'fit=' . $this->fit;
         }
 
-        if ($this->crop && $this->fit === 'crop') {
+        if ($this->crop && $this->fit === 'crop' && isset($this->crop['w'], $this->crop['h'], $this->crop['x'], $this->crop['y'])) {
             $params[] = 'crop=' . $this->crop['w'] . ',' . $this->crop['h'] . ',' . $this->crop['x'] . ',' . $this->crop['y'];
         }
 
