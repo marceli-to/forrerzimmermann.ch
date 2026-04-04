@@ -25,7 +25,7 @@ class JobController extends Controller
 	public function store(StoreJobRequest $request)
 	{
 		$job = (new StoreAction)->execute($request->validated());
-		return new JobListingResource($job);
+		return (new JobListingResource($job))->response()->setStatusCode(201);
 	}
 
 	public function show(JobListing $job)
