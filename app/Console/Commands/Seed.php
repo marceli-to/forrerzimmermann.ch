@@ -18,6 +18,7 @@ class Seed extends Command
         $this->call('app:seed-topics');
         $this->call('app:seed-projects');
         $this->call('app:seed-team');
+        $this->call('app:seed-jobs');
 
         $this->info('Database seeded.');
     }

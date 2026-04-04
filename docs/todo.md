@@ -1,8 +1,5 @@
 # TODO
 
-## No UUID
-- [ ] remove uuid everywhere
-
 ## Check code quality
 - [ ] Action classes
 - [ ] Requests
@@ -14,8 +11,15 @@
 - [ ] Components
 - [ ] Composables
 
+## Topics
+- [ ] Add sort_order
+- [ ] Draggable reordering in Vue component
+
+## DataTable
+- [ ] Make it sortable (sortable columns can be configured)
+
 ## Add tests
-- [ ] Write tests
+- [x] Write tests
 
 ## Rewrite Kontakt to Contact
 - [x] Models, Controllers, Routes, Views, Vue components, etc.
