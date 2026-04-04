@@ -170,6 +170,7 @@ function onSetOg(media) { mediaStore.setOg(media.uuid) }
 							<MediaGrid
 								v-if="mediaStore.items.length"
 								:items="mediaStore.items"
+								sidebar
 								:hasOg="true"
 								:hasTeaser="true"
 								@edit="onEditMedia"

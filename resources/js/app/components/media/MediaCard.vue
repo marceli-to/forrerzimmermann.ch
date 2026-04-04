@@ -1,5 +1,5 @@
 <script setup>
-import { PhTrash, PhPencil, PhStar, PhImage, PhCrop } from '@phosphor-icons/vue'
+import { PhTrash, PhPencil, PhStar, PhImage, PhCrop, PhArrowSquareOut } from '@phosphor-icons/vue'
 
 defineProps({
 	media: { type: Object, required: true },
@@ -64,6 +64,9 @@ function formatSize(bytes) {
 			v-if="showOverlay"
 			class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-150 flex items-center justify-center gap-16"
 		>
+			<a :href="media.preview_url" target="_blank" class="text-white/70 hover:text-white transition-colors" title="In neuem Tab öffnen" @click.stop>
+				<PhArrowSquareOut :size="18" weight="light" />
+			</a>
 			<button type="button" class="text-white/70 hover:text-white transition-colors cursor-pointer" title="Bearbeiten" @click.stop="emit('edit', media)">
 				<PhPencil :size="18" weight="light" />
 			</button>

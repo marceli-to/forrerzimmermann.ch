@@ -9,6 +9,7 @@ const props = defineProps({
 	items: { type: Array, default: () => [] },
 	hasOg: { type: Boolean, default: false },
 	hasTeaser: { type: Boolean, default: false },
+	sidebar: { type: Boolean, default: false },
 })
 
 const emit = defineEmits(['edit', 'delete', 'reorder', 'teaser', 'og'])
@@ -34,7 +35,7 @@ const dragItems = computed({
 	<draggable
 		v-model="dragItems"
 		item-key="uuid"
-		class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-20"
+		:class="sidebar ? 'grid grid-cols-2 sm:grid-cols-3 gap-20' : 'grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-20'"
 		ghost-class="opacity-30"
 		animation="150"
 	>
