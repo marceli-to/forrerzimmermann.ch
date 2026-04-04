@@ -6,9 +6,9 @@ defineProps({
 	realFormat: { type: Boolean, default: false },
 	showInfo: { type: Boolean, default: true },
 	badge: { type: String, default: null },
-	showTeaser: { type: Boolean, default: false },
+	hasTeaser: { type: Boolean, default: false },
 	isTeaser: { type: Boolean, default: false },
-	showOg: { type: Boolean, default: false },
+	hasOg: { type: Boolean, default: false },
 	isOg: { type: Boolean, default: false },
 	showOverlay: { type: Boolean, default: true },
 })
@@ -66,10 +66,10 @@ function formatSize(bytes) {
 			<button type="button" class="text-white/70 hover:text-white transition-colors cursor-pointer" title="Bearbeiten" @click.stop="emit('edit', media)">
 				<PhPencil :size="18" weight="light" />
 			</button>
-			<button v-if="showTeaser" type="button" class="text-white/70 hover:text-white transition-colors cursor-pointer" title="Als Teaser setzen" @click.stop="emit('teaser', media)">
+			<button v-if="hasTeaser" type="button" class="text-white/70 hover:text-white transition-colors cursor-pointer" title="Als Teaser setzen" @click.stop="emit('teaser', media)">
 				<PhStar :size="18" :weight="isTeaser ? 'fill' : 'light'" />
 			</button>
-			<button v-if="showOg" type="button" class="text-white/70 hover:text-white transition-colors cursor-pointer" title="Als OG Image setzen" @click.stop="emit('og', media)">
+			<button v-if="hasOg" type="button" class="text-white/70 hover:text-white transition-colors cursor-pointer" title="Als OG Image setzen" @click.stop="emit('og', media)">
 				<PhImage :size="18" :weight="isOg ? 'fill' : 'light'" />
 			</button>
 			<button type="button" class="text-white/70 hover:text-white transition-colors cursor-pointer" title="Löschen" @click.stop="emit('delete', media)">

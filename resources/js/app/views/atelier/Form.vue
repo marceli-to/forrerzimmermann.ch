@@ -85,7 +85,6 @@ async function onSaveMedia({ uuid, data }) {
 }
 async function onDeleteMedia(media) { await mediaStore.deleteItem(media.uuid) }
 function onReorderMedia(items) { mediaStore.reorder(items) }
-function onSetTeaser(media) { mediaStore.setTeaser(media.uuid) }
 </script>
 
 <template>
@@ -122,7 +121,6 @@ function onSetTeaser(media) { mediaStore.setTeaser(media.uuid) }
 								@edit="onEditMedia"
 								@delete="onDeleteMedia"
 								@reorder="onReorderMedia"
-								@teaser="onSetTeaser"
 							/>
 						</div>
 					</FormGroup>
@@ -153,7 +151,6 @@ function onSetTeaser(media) { mediaStore.setTeaser(media.uuid) }
 							@edit="onEditMedia"
 							@delete="onDeleteMedia"
 							@reorder="onReorderMedia"
-							@teaser="onSetTeaser"
 						/>
 					</div>
 				</FormGroup>

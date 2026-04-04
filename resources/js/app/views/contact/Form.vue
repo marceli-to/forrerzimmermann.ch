@@ -7,6 +7,7 @@ import PageHeader from '@/components/layout/PageHeader.vue'
 import FormActions from '@/components/ui/form/FormActions.vue'
 import FormLabel from '@/components/ui/form/FormLabel.vue'
 import FormInput from '@/components/ui/form/FormInput.vue'
+import FormTextarea from '@/components/ui/form/FormTextarea.vue'
 import FormGroup from '@/components/ui/form/FormGroup.vue'
 
 const store = useKontaktStore()
@@ -63,7 +64,7 @@ async function handleSubmit() {
 
 				<FormGroup>
 					<FormLabel for="address" :error="store.errors.address">Adresse *</FormLabel>
-					<FormInput id="address" v-model="form.address" :hasError="!!store.errors.address" @focus="delete store.errors.address" />
+					<FormTextarea id="address" v-model="form.address" :hasError="!!store.errors.address" @focus="delete store.errors.address" />
 				</FormGroup>
 
 				<div class="grid grid-cols-2 gap-24">

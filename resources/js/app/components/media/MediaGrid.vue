@@ -5,7 +5,8 @@ import MediaCard from '@/components/media/MediaCard.vue'
 
 const props = defineProps({
 	items: { type: Array, default: () => [] },
-	showOg: { type: Boolean, default: false },
+	hasOg: { type: Boolean, default: false },
+	hasTeaser: { type: Boolean, default: false },
 })
 
 const emit = defineEmits(['edit', 'delete', 'reorder', 'teaser', 'og'])
@@ -30,9 +31,9 @@ const dragItems = computed({
 					:media="element"
 					:showInfo="true"
 					:badge="element.is_teaser ? 'Teaser' : null"
-					:showTeaser="true"
+					:hasTeaser="hasTeaser"
 					:isTeaser="element.is_teaser"
-					:showOg="showOg"
+					:hasOg="hasOg"
 					:isOg="element.is_og"
 					@edit="emit('edit', $event)"
 					@teaser="emit('teaser', $event)"
