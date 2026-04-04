@@ -107,5 +107,20 @@ export const useMediaStore = defineStore('media', {
 				is_og: wasOg ? false : i.uuid === uuid,
 			}))
 		},
+
+		async setCrop(uuid, cropData) {
+			const index = this.items.findIndex(i => i.uuid === uuid)
+			if (index === -1) return
+
+			const item = this.items[index]
+
+			if (item._temp) {
+				this.items[index] = { ...item, crop: cropData }
+				return
+			}
+
+			const { data: response } = await mediaApi.crop(uuid, cropData)
+			this.items[index] = response.data
+		},
 	},
 })
