@@ -25,7 +25,7 @@ class TeamController extends Controller
 	public function store(StoreTeamRequest $request)
 	{
 		$member = (new StoreAction)->execute($request->validated());
-		return new TeamMemberResource($member->load('media'));
+		return (new TeamMemberResource($member->load('media')))->response()->setStatusCode(201);
 	}
 
 	public function show(TeamMember $member)
