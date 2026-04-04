@@ -12,7 +12,7 @@ class SeoSetting extends Model
     use HasFactory, HasUuid;
 
     protected $fillable = [
-        'uuid', 'og_title', 'og_description',
+        'uuid',
         'landing_meta_description', 'projects_meta_description',
         'werkliste_meta_description', 'profile_meta_description',
         'team_meta_description', 'jobs_meta_description',

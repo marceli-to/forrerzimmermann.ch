@@ -8,13 +8,9 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::dropIfExists('site_settings');
-
         Schema::create('seo_settings', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->unique();
-            $table->string('og_title')->nullable();
-            $table->string('og_description', 500)->nullable();
             $table->string('landing_meta_description', 500)->nullable();
             $table->string('projects_meta_description', 500)->nullable();
             $table->string('werkliste_meta_description', 500)->nullable();

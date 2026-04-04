@@ -14,8 +14,6 @@ class UpdateSeoSettingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'og_title' => 'nullable|string|max:255',
-            'og_description' => 'nullable|string|max:500',
             'landing_meta_description' => 'nullable|string|max:500',
             'projects_meta_description' => 'nullable|string|max:500',
             'werkliste_meta_description' => 'nullable|string|max:500',

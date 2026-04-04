@@ -11,8 +11,6 @@ class SeoSettingResource extends JsonResource
     {
         return [
             'uuid' => $this->uuid,
-            'og_title' => $this->og_title,
-            'og_description' => $this->og_description,
             'landing_meta_description' => $this->landing_meta_description,
             'projects_meta_description' => $this->projects_meta_description,
             'werkliste_meta_description' => $this->werkliste_meta_description,
