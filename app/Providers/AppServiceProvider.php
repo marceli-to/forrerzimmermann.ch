@@ -21,6 +21,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer('components.layout.guest', SeoComposer::class);
+        View::composer('*', SeoComposer::class);
     }
 }

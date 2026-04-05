@@ -1,15 +1,29 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\LandingController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\AtelierController;
+use App\Http\Controllers\ContactController;
 
 Route::get('/img/{path}', [ImageController::class, 'show'])->where('path', '.*');
 
-Route::get('/', function () {
-	$seo = \App\Models\SeoSetting::first();
-	return view('pages.landing', [
-		'metaDescription' => $seo?->landing_meta_description,
-	]);
-})->name('page.landing');
+Route::get('/', LandingController::class)->name('page.landing');
+
+Route::prefix('projekte')->group(function () {
+	Route::get('/', [ProjectController::class, 'index'])->name('page.projects');
+	Route::get('/werkliste', [ProjectController::class, 'worklist'])->name('page.projects.worklist');
+	Route::get('/{slug}', [ProjectController::class, 'show'])->name('page.projects.show');
+});
+
+Route::prefix('atelier')->group(function () {
+	Route::get('/profil', [AtelierController::class, 'profile'])->name('page.atelier.profile');
+	Route::get('/team', [AtelierController::class, 'team'])->name('page.atelier.team');
+	Route::get('/jobs', [AtelierController::class, 'jobs'])->name('page.atelier.jobs');
+});
+
+Route::get('/kontakt', ContactController::class)->name('page.contact');
 
 // Dashboard (Vue SPA) — requires authentication
 Route::middleware('auth')->group(function () {

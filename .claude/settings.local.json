@@ -83,7 +83,8 @@
       "Bash(ln -s /Users/marceli.to/Jamon.digital/Webroot/forrerzimmermann.ch/vendor /Users/marceli.to/Jamon.digital/Webroot/forrerzimmermann.ch/.worktrees/feature/seo-module/vendor)",
       "Bash(git revert:*)",
       "Bash(git:*)",
-      "Bash(echo \"EXIT CODE: $?\")"
+      "Bash(echo \"EXIT CODE: $?\")",
+      "Bash(identify /Users/marceli.to/Jamon.digital/Webroot/forrerzimmermann.ch/storage/app/seed/fza-projekte.png)"
     ]
   }
 }

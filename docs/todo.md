@@ -32,3 +32,21 @@
 
 ## Rewrite Kontakt to Contact
 - [x] Models, Controllers, Routes, Views, Vue components, etc.
+
+## Frontend
+
+### Layout
+- [x] Setup site.blade.php in views/components/layout
+- [x] Use layout components in views/components/layout/partials
+
+### Controllers
+- [x] Landing
+- [x] Projects
+- [x] Worklist
+- [x] Profile
+- [x] Team
+- [x] Jobs
+- [x] Contact
+
+### Routes
+- [x] Set up routes
