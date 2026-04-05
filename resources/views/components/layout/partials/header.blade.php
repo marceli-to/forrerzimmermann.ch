@@ -1,5 +1,5 @@
 <header class="p-4">
-	<nav>
+	<nav class="flex gap-x-4">
 		<a href="{{ route('page.landing') }}">Start</a>
 		<a href="{{ route('page.projects') }}">Projekte</a>
 		<a href="{{ route('page.worklist') }}">Werkliste</a>
