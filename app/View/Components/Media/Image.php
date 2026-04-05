@@ -2,6 +2,7 @@
 
 namespace App\View\Components\Media;
 
+use App\Models\Media;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
@@ -10,119 +11,106 @@ class Image extends Component
 {
     public string $src;
     public string $alt;
-    public ?int $width;
-    public ?int $height;
+    public int $width;
+    public int $height;
+    public ?array $crop;
+    public float $aspectRatio;
     public string $fit;
     public int $quality;
     public array $formats;
     public string $class;
     public string $loading;
-    public ?array $crop;
-    public array $breakpoints;
+    public string $sizes;
     public array $sources = [];
     public string $fallbackUrl;
 
+    protected const WIDTHS = [480, 640, 768, 1024, 1280, 1440, 1600, 1920];
+
     public function __construct(
-        string $src,
-        string $alt = '',
-        ?int $width = null,
-        ?int $height = null,
+        Media $media,
+        string $sizes = '100vw',
+        int $maxWidth = 1600,
+        ?string $alt = null,
         string $fit = 'crop',
         int $quality = 90,
         array $formats = ['avif', 'webp', 'jpg'],
-        array $breakpoints = [],
         string $class = '',
         string $loading = 'lazy',
-        ?array $crop = null,
     ) {
-        $this->src = $src;
-        $this->alt = $alt;
-        $this->width = $width;
-        $this->height = $height;
+        $this->src = 'uploads/' . $media->file;
+        $this->alt = $alt ?? $media->alt ?? '';
+        $this->crop = $media->crop;
         $this->fit = $fit;
         $this->quality = $quality;
         $this->formats = $formats;
-        $this->breakpoints = $breakpoints;
         $this->class = $class;
         $this->loading = $loading;
-        $this->crop = $crop;
+        $this->sizes = $sizes;
 
-        if (!empty($this->breakpoints)) {
-            $this->buildResponsiveSources();
+        // Use crop dimensions for aspect ratio if crop exists, otherwise original
+        if ($this->crop && isset($this->crop['w'], $this->crop['h'])) {
+            $this->aspectRatio = $this->crop['h'] / $this->crop['w'];
         } else {
-            $this->buildSimpleSources();
-        }
-    }
-
-    protected function buildResponsiveSources(): void
-    {
-        foreach ($this->breakpoints as $breakpoint) {
-            $bpWidth = $breakpoint['width'] ?? $this->width;
-            $bpHeight = $breakpoint['height'] ?? $this->height;
-            $media = $breakpoint['media'] ?? null;
-
-            foreach ($this->formats as $format) {
-                $this->sources[] = [
-                    'srcset' => $this->buildUrl($format, $bpWidth, $bpHeight),
-                    'type' => $this->getMimeType($format),
-                    'media' => $media,
-                ];
-            }
+            $baseWidth = $media->width ?? 1;
+            $baseHeight = $media->height ?? 1;
+            $this->aspectRatio = $baseHeight / $baseWidth;
         }
 
-        $lastBreakpoint = end($this->breakpoints);
-        $this->fallbackUrl = $this->buildUrl('jpg', $lastBreakpoint['width'] ?? $this->width, $lastBreakpoint['height'] ?? $this->height);
+        // Largest width for img width/height attributes
+        $widths = array_values(array_filter(self::WIDTHS, fn ($w) => $w <= $maxWidth));
+        $this->width = end($widths) ?: $maxWidth;
+        $this->height = (int) round($this->width * $this->aspectRatio);
+
+        $this->buildSources($widths);
     }
 
-    protected function buildSimpleSources(): void
+    protected function buildSources(array $widths): void
     {
         foreach ($this->formats as $format) {
-            if ($format !== 'jpg' && $format !== 'jpeg') {
-                $this->sources[] = [
-                    'srcset' => $this->buildUrl($format),
-                    'type' => $this->getMimeType($format),
-                    'media' => null,
-                ];
+            if ($format === 'jpg' || $format === 'jpeg') {
+                continue;
             }
+
+            $this->sources[] = [
+                'srcset' => $this->buildSrcset($format, $widths),
+                'type' => $this->getMimeType($format),
+                'sizes' => $this->sizes,
+            ];
         }
 
-        $this->fallbackUrl = $this->buildUrl('jpg');
+        $this->fallbackUrl = $this->buildUrl('jpg', $this->width, $this->height);
     }
 
-    public function buildUrl(?string $format = null, ?int $width = null, ?int $height = null): string
+    protected function buildSrcset(string $format, array $widths): string
     {
-        $params = [];
-        $useWidth = $width ?? $this->width;
-        $useHeight = $height ?? $this->height;
-
-        if ($useWidth) {
-            $params[] = 'w=' . $useWidth;
+        $parts = [];
+        foreach ($widths as $w) {
+            $h = (int) round($w * $this->aspectRatio);
+            $parts[] = $this->buildUrl($format, $w, $h) . ' ' . $w . 'w';
         }
 
-        if ($useHeight) {
-            $params[] = 'h=' . $useHeight;
-        }
+        return implode(', ', $parts);
+    }
 
-        if ($this->fit) {
-            $params[] = 'fit=' . $this->fit;
-        }
+    protected function buildUrl(string $format, int $width, int $height): string
+    {
+        $params = [
+            'w=' . $width,
+            'h=' . $height,
+            'fit=' . $this->fit,
+        ];
 
         if ($this->crop && $this->fit === 'crop' && isset($this->crop['w'], $this->crop['h'], $this->crop['x'], $this->crop['y'])) {
             $params[] = 'crop=' . $this->crop['w'] . ',' . $this->crop['h'] . ',' . $this->crop['x'] . ',' . $this->crop['y'];
         }
 
-        if ($format) {
-            $params[] = 'fm=' . $format;
-        }
-
+        $params[] = 'fm=' . $format;
         $params[] = 'q=' . $this->quality;
 
-        $queryString = implode('&', $params);
-
-        return '/img/' . $this->src . ($queryString ? '?' . $queryString : '');
+        return '/img/' . $this->src . '?' . implode('&', $params);
     }
 
-    public function getMimeType(string $format): string
+    protected function getMimeType(string $format): string
     {
         return match ($format) {
             'avif' => 'image/avif',

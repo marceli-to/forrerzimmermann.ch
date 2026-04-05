@@ -3,15 +3,15 @@
 		<source
 			srcset="{{ $source['srcset'] }}"
 			type="{{ $source['type'] }}"
-			@if($source['media']) media="{{ $source['media'] }}" @endif
+			sizes="{{ $source['sizes'] }}"
 		>
 	@endforeach
 
 	<img
 		src="{{ $fallbackUrl }}"
 		alt="{{ $alt }}"
-		@if($width) width="{{ $width }}" @endif
-		@if($height) height="{{ $height }}" @endif
+		width="{{ $width }}"
+		height="{{ $height }}"
 		@if($class) class="{{ $class }}" @endif
 		loading="{{ $loading }}"
 		{{ $attributes }}

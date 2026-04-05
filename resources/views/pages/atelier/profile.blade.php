@@ -2,13 +2,7 @@
   <div class="grid grid-cols-2 gap-x-6">
     @if($profile->media)
       <div>
-        <x-media.image
-          :src="'uploads/' . $profile->media->file"
-          :alt="$profile->media->alt ?? ''"
-          :width="$profile->media->width"
-          :height="$profile->media->height"
-          :crop="$profile->media->crop"
-        />
+        <x-media.image :media="$profile->media" sizes="(min-width: 768px) 50vw, 100vw" />
       </div>
     @endif
     @if($profile)

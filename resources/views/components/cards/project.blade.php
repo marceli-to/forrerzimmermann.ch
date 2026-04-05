@@ -4,11 +4,9 @@
   @if($image && $project->teaser->first())
     <div class="aspect-[16/10] overflow-hidden">
       <x-media.image
-        :src="'uploads/' . $project->teaser->first()->file"
-        :alt="$project->teaser->first()->alt ?? $project->title"
-        :width="$project->teaser->first()->width"
-        :height="$project->teaser->first()->height"
-        :crop="$project->teaser->first()->crop"
+        :media="$project->teaser->first()"
+        :alt="$project->title"
+        sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
         class="w-full h-full object-cover"
       />
     </div>

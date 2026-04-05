@@ -2,13 +2,7 @@
   <div class="grid grid-cols-2 gap-x-6">
     @if($page?->media)
       <div>
-        <x-media.image
-          :src="'uploads/' . $page->media->file"
-          :alt="$page->media->alt ?? ''"
-          :width="$page->media->width"
-          :height="$page->media->height"
-          :crop="$page->media->crop"
-        />
+        <x-media.image :media="$page->media" sizes="(min-width: 768px) 50vw, 100vw" />
       </div>
     @endif
     <div>
