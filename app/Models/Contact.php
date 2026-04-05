@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\HasPublish;
 use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Contact extends Model
 {
-	use HasFactory, HasUuid;
+	use HasFactory, HasPublish, HasUuid;
 
 	protected $table = 'contact';
 

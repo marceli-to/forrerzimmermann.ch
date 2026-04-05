@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
+
 class ContactController extends Controller
 {
 	public function __invoke()
 	{
-		return view('pages.contact');
+		$contact = Contact::first();
+		return view('pages.contact', compact('contact'));
 	}
 }

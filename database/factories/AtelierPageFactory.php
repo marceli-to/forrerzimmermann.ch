@@ -19,8 +19,8 @@ class AtelierPageFactory extends Factory
         ];
     }
 
-    public function profil(): static
+    public function profile(): static
     {
-        return $this->state(fn () => ['slug' => 'profil']);
+        return $this->state(fn () => ['slug' => 'profile']);
     }
 }

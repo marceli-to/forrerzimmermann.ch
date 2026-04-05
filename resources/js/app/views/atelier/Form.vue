@@ -24,7 +24,7 @@ const toast = useToast()
 
 const editingMedia = ref(null)
 
-const pageTitles = { profil: 'Profil', team: 'Team', jobs: 'Jobs' }
+const pageTitles = { profile: 'Profil', team: 'Team', jobs: 'Jobs' }
 const pageTitle = computed(() => {
 	const slug = store.current?.slug
 	return slug ? `${pageTitles[slug]} bearbeiten` : 'Bearbeiten'
@@ -46,7 +46,7 @@ onMounted(async () => {
 			text: p.text || '',
 			publish: p.publish,
 		}
-		mediaStore.setItems(p.media || [])
+		mediaStore.setItems(p.media ? [p.media] : [])
 	}
 })
 
@@ -97,7 +97,7 @@ function onReorderMedia(items) { mediaStore.reorder(items) }
 
 		<form v-else-if="store.current" @submit.prevent="handleSubmit">
 			<!-- Profil: sidebar layout (has title + editor + media to fill main column) -->
-			<SidebarLayout v-if="store.current.slug === 'profil'">
+			<SidebarLayout v-if="store.current.slug === 'profile'">
 				<div class="flex flex-col gap-24">
 					<FormGroup>
 						<FormLabel for="title" :error="store.errors.title">Titel *</FormLabel>

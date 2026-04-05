@@ -25,7 +25,7 @@ class SeedAtelier extends Command
         $profilText = "Wir sind ein junges, engagiertes und dynamisches Architekturbüro mit Sitz in der Stadt Zürich. Nach langjähriger Mitarbeit bei renommierten Architekten gründeten wir, Katrin Zimmermann und Stefan Forrer, unser eigenes Büro in Zürich. Seit 2018 erarbeiten wir architektonische Lösungsvorschläge als Beiträge bei Wettbewerben, Studien und Planerwahlverfahren.\n\nDa wir auf umfassende Erfahrungen in der Projektierung und Ausführung von ganz kleinen bis zu sehr grossen Bauvorhaben zurückgreifen können, sind wir in der Lage, gezielt und effizient auf unterschiedliche Aufgabenstellungen und Ortsgegebenheiten einzugehen.";
 
         $pages = [
-            ['slug' => 'profil', 'title' => 'Atelier', 'text' => $profilText],
+            ['slug' => 'profile', 'title' => 'Atelier', 'text' => $profilText],
             ['slug' => 'team', 'title' => null, 'text' => null],
             ['slug' => 'jobs', 'title' => null, 'text' => null],
         ];

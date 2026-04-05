@@ -1,4 +1,4 @@
-<header>
+<header class="p-4">
 	<nav>
 		<a href="{{ route('page.landing') }}">Start</a>
 		<a href="{{ route('page.projects') }}">Projekte</a>

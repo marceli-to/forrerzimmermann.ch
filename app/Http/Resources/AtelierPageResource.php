@@ -15,7 +15,7 @@ class AtelierPageResource extends JsonResource
 			'title' => $this->title,
 			'text' => $this->text,
 			'publish' => $this->publish,
-			'media' => MediaResource::collection($this->whenLoaded('media')),
+			'media' => $this->whenLoaded('media', fn () => new MediaResource($this->media)),
 		];
 	}
 }

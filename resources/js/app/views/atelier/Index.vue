@@ -9,7 +9,7 @@ import DataTable from '@/components/ui/table/DataTable.vue'
 const router = useRouter()
 const store = useAtelierStore()
 
-const pageTitles = { profil: 'Profil', team: 'Team', jobs: 'Jobs' }
+const pageTitles = { profile: 'Profil', team: 'Team', jobs: 'Jobs' }
 
 const columns = [
 	{ key: 'name', label: 'Seite', primary: true },
