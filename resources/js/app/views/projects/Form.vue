@@ -127,25 +127,19 @@ function onSetOg(media) { mediaStore.setOg(media.uuid) }
 						<FormInput id="title" v-model="form.title" :hasError="!!store.errors.title" @focus="delete store.errors.title" />
 					</FormGroup>
 
+					<FormGroup>
+						<FormLabel for="subtitle" :error="store.errors.subtitle">Untertitel</FormLabel>
+						<FormInput id="subtitle" v-model="form.subtitle" :hasError="!!store.errors.subtitle" @focus="delete store.errors.subtitle" />
+					</FormGroup>
+
 					<div class="grid grid-cols-2 gap-24">
 						<FormGroup>
 							<FormLabel for="location" :error="store.errors.location">Ort</FormLabel>
 							<FormInput id="location" v-model="form.location" :hasError="!!store.errors.location" @focus="delete store.errors.location" />
 						</FormGroup>
 						<FormGroup>
-							<FormLabel for="subtitle" :error="store.errors.subtitle">Untertitel</FormLabel>
-							<FormInput id="subtitle" v-model="form.subtitle" :hasError="!!store.errors.subtitle" @focus="delete store.errors.subtitle" />
-						</FormGroup>
-					</div>
-
-					<div class="grid grid-cols-2 gap-24">
-						<FormGroup>
 							<FormLabel for="year" :error="store.errors.year">Jahr *</FormLabel>
 							<FormInput id="year" v-model="form.year" type="number" :hasError="!!store.errors.year" @focus="delete store.errors.year" />
-						</FormGroup>
-						<FormGroup>
-							<FormLabel for="topic_id" :error="store.errors.topic_id">Thema</FormLabel>
-							<FormSelect id="topic_id" v-model="form.topic_id" :options="topicOptions" :hasError="!!store.errors.topic_id" @focus="delete store.errors.topic_id" />
 						</FormGroup>
 					</div>
 
@@ -192,17 +186,23 @@ function onSetOg(media) { mediaStore.setOg(media.uuid) }
 				<template #sidebar>
 					<div class="flex flex-col gap-24">
 						<FormGroup>
+							<FormLabel for="topic_id" :error="store.errors.topic_id">Thema</FormLabel>
+							<FormSelect id="topic_id" v-model="form.topic_id" :options="topicOptions" :hasError="!!store.errors.topic_id" @focus="delete store.errors.topic_id" />
+						</FormGroup>
+						<div class="flex flex-col gap-12">
+							<FormGroup>
+								<FormCheckbox v-model="form.publish">Veröffentlichen</FormCheckbox>
+							</FormGroup>
+							<FormGroup>
+								<FormCheckbox v-model="form.feature">In Auswahl anzeigen</FormCheckbox>
+							</FormGroup>
+						</div>
+						<FormGroup>
 							<FormLabel for="meta_description" :error="store.errors.meta_description">Meta Description</FormLabel>
 							<FormTextarea id="meta_description" v-model="form.meta_description" :hasError="!!store.errors.meta_description" @focus="delete store.errors.meta_description" />
               <span class="block text-xs text-gray-500 dark:text-warm-400 mt-6">
                 Nur für Projekte mit Detailseite, max. 160 Zeichen
               </span>
-						</FormGroup>
-						<FormGroup>
-							<FormCheckbox v-model="form.publish">Veröffentlichen</FormCheckbox>
-						</FormGroup>
-						<FormGroup>
-							<FormCheckbox v-model="form.feature">In Auswahl anzeigen</FormCheckbox>
 						</FormGroup>
 					</div>
 				</template>
