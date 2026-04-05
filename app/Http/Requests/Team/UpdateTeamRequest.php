@@ -21,16 +21,6 @@ class UpdateTeamRequest extends FormRequest
 			'cv' => 'nullable|string',
 			'publish' => 'boolean',
 			'former' => 'boolean',
-			'media' => 'nullable|array',
-			'media.*.uuid' => 'required|string',
-			'media.*.file' => 'required|string',
-			'media.*.original_name' => 'required|string',
-			'media.*.mime_type' => 'required|string',
-			'media.*.size' => 'required|integer',
-			'media.*.width' => 'nullable|integer',
-			'media.*.height' => 'nullable|integer',
-			'media.*.alt' => 'nullable|string|max:255',
-			'media.*.caption' => 'nullable|string|max:255',
 		];
 	}
 }

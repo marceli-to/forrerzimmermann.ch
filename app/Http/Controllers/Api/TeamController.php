@@ -18,25 +18,25 @@ class TeamController extends Controller
 	public function index()
 	{
 		return TeamMemberResource::collection(
-			TeamMember::with('media')->orderBy('sort_order')->get()
+			TeamMember::orderBy('sort_order')->get()
 		);
 	}
 
 	public function store(StoreTeamRequest $request)
 	{
 		$member = (new StoreAction)->execute($request->validated());
-		return (new TeamMemberResource($member->load('media')))->response()->setStatusCode(201);
+		return (new TeamMemberResource($member))->response()->setStatusCode(201);
 	}
 
 	public function show(TeamMember $member)
 	{
-		return new TeamMemberResource($member->load('media'));
+		return new TeamMemberResource($member);
 	}
 
 	public function update(UpdateTeamRequest $request, TeamMember $member)
 	{
 		$member = (new UpdateAction)->execute($member, $request->validated());
-		return new TeamMemberResource($member->load('media'));
+		return new TeamMemberResource($member);
 	}
 
 	public function toggle(TeamMember $member)

@@ -30,13 +30,10 @@ export const useTeamStore = defineStore('team', {
 			}
 		},
 
-		async saveMember(form, id = null, media = []) {
+		async saveMember(form, id = null) {
 			this.errors = {}
 			try {
 				const payload = { ...form }
-				if (media.length) {
-					payload.media = media
-				}
 				if (id) {
 					await teamApi.update(id, payload)
 				} else {

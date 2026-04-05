@@ -19,7 +19,6 @@ class TeamMemberResource extends JsonResource
 			'publish' => $this->publish,
 			'former' => $this->former,
 			'sort_order' => $this->sort_order,
-			'media' => MediaResource::collection($this->whenLoaded('media')),
 		];
 	}
 }

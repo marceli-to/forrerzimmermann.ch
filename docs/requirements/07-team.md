@@ -25,10 +25,6 @@ Team members are displayed on the Atelier > Team sub-page. Each member shows nam
 | `created_at` | timestamp   |                                                 |
 | `updated_at` | timestamp   |                                                 |
 
-### Relations
-
-- **Media:** Polymorphic `MorphMany` — one portrait image per member
-
 ---
 
 ## Sidebar
@@ -72,7 +68,6 @@ Team members are displayed on the Atelier > Team sub-page. Each member shows nam
 - Uses traits: `HasUuid`, `HasFactory`
 - Casts: `publish` (boolean), `former` (boolean)
 - Fillable: `uuid`, `firstname`, `name`, `title`, `email`, `cv`, `publish`, `former`, `sort_order`
-- Relation: `media()` → `MorphMany(Media::class, 'mediable')->orderBy('sort_order')`
 
 ### Controllers
 
@@ -83,9 +78,9 @@ Team members are displayed on the Atelier > Team sub-page. Each member shows nam
 
 | Action                    | Purpose                                      |
 |---------------------------|----------------------------------------------|
-| `StoreTeamMemberAction`   | Create member, attach media                  |
-| `UpdateTeamMemberAction`  | Update member, sync media                    |
-| `DeleteTeamMemberAction`  | Delete member + clean up media               |
+| `StoreTeamMemberAction`   | Create member                                |
+| `UpdateTeamMemberAction`  | Update member                                |
+| `DeleteTeamMemberAction`  | Delete member                                |
 | `ReorderTeamMembersAction`| Batch update `sort_order`                    |
 
 ### Form Request
@@ -101,13 +96,12 @@ Team members are displayed on the Atelier > Team sub-page. Each member shows nam
 | `cv`        | nullable, string             |
 | `publish`   | boolean                      |
 | `former`    | boolean                      |
-| `media`     | nullable, array              |
 
 ### API Resource
 
 `App\Http\Resources\Dashboard\TeamMemberResource`
 
-Returns: `uuid`, `firstname`, `name`, `title`, `email`, `cv`, `publish`, `former`, `sort_order`, `media` (nested `MediaResource`).
+Returns: `uuid`, `firstname`, `name`, `title`, `email`, `cv`, `publish`, `former`, `sort_order`.
 
 ---
 
@@ -148,7 +142,7 @@ Actions: `fetchMembers`, `fetchMember`, `saveMember`, `toggle`, `deleteMember`
 ### Index View (`views/team/Index.vue`)
 
 - `PageHeader` with title "Team" and "Neues Mitglied" button
-- `DataTable` with columns: portrait thumbnail, name (firstname + name), title, former badge, publish status, actions (edit, delete, publish toggle)
+- `DataTable` with columns: name (firstname + name), title, former badge, publish status, actions (edit, delete, publish toggle)
 - Drag-and-drop reorder support
 - Empty state: "Noch keine Mitglieder vorhanden."
 
@@ -158,8 +152,6 @@ Actions: `fetchMembers`, `fetchMember`, `saveMember`, `toggle`, `deleteMember`
 - `FormInput` for firstname, name, title, email
 - `FormCheckbox` for former
 - `Editor` (Tiptap) for cv
-- `MediaUploader` + `MediaGrid` for portrait image
-- `MediaEdit` drawer for alt editing
 
 ### Router Registration
 
