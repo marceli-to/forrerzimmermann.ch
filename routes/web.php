@@ -13,9 +13,10 @@ Route::get('/', LandingController::class)->name('page.landing');
 
 Route::prefix('projekte')->group(function () {
 	Route::get('/', [ProjectController::class, 'index'])->name('page.projects');
-	Route::get('/werkliste', [ProjectController::class, 'worklist'])->name('page.projects.worklist');
 	Route::get('/{slug}', [ProjectController::class, 'show'])->name('page.projects.show');
 });
+
+Route::get('/werkliste', [ProjectController::class, 'worklist'])->name('page.worklist');
 
 Route::prefix('atelier')->group(function () {
 	Route::get('/profil', [AtelierController::class, 'profile'])->name('page.atelier.profile');
