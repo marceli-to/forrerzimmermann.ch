@@ -5,7 +5,7 @@
 		<a href="{{ route('page.worklist') }}">Werkliste</a>
 		<a href="{{ route('page.atelier.profile') }}">Profil</a>
 		<a href="{{ route('page.atelier.team') }}">Team</a>
-		<a href="{{ route('page.atelier.jobs') }}">Stellen</a>
+		<a href="{{ route('page.atelier.jobs') }}">Jobs</a>
 		<a href="{{ route('page.contact') }}">Kontakt</a>
 	</nav>
 </header>

@@ -63,7 +63,7 @@ async function handleDelete(job) {
 		</div>
 
 		<div v-else-if="store.jobs.length === 0" class="text-sm text-gray-400 dark:text-warm-500">
-			Noch keine Stellen vorhanden.
+			Noch keine Jobs vorhanden.
 		</div>
 
 		<DataTable
