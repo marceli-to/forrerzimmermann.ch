@@ -12,7 +12,11 @@ class JobListing extends Model
 	use HasFactory, HasPublish, HasUuid;
 
 	protected $fillable = [
-		'uuid', 'title', 'text', 'publish', 'sort_order',
+		'uuid', 
+    'title', 
+    'text', 
+    'publish', 
+    'sort_order',
 	];
 
 	protected $casts = [

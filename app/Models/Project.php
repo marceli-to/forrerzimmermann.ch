@@ -14,9 +14,19 @@ class Project extends Model
 	use HasFactory, HasPublish, HasUuid;
 
 	protected $fillable = [
-		'uuid', 'title', 'location', 'slug', 'subtitle', 'year',
-		'description', 'info', 'meta_description',
-		'publish', 'feature', 'sort_order', 'topic_id',
+		'uuid',
+    'title',
+    'location', 
+    'slug', 
+    'subtitle', 
+    'year',
+		'description', 
+    'info', 
+    'meta_description',
+		'publish', 
+    'feature', 
+    'sort_order', 
+    'topic_id',
 	];
 
 	protected $casts = [

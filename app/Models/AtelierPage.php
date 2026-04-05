@@ -13,7 +13,11 @@ class AtelierPage extends Model
 	use HasFactory, HasPublish, HasUuid;
 
 	protected $fillable = [
-		'uuid', 'slug', 'title', 'text', 'publish',
+		'uuid', 
+    'slug', 
+    'title', 
+    'text', 
+    'publish',
 	];
 
 	protected $casts = [

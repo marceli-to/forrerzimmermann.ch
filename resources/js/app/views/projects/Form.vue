@@ -194,12 +194,15 @@ function onSetOg(media) { mediaStore.setOg(media.uuid) }
 						<FormGroup>
 							<FormLabel for="meta_description" :error="store.errors.meta_description">Meta Description</FormLabel>
 							<FormTextarea id="meta_description" v-model="form.meta_description" :hasError="!!store.errors.meta_description" @focus="delete store.errors.meta_description" />
+              <span class="block text-xs text-gray-500 dark:text-warm-400 mt-6">
+                Nur für Projekte mit Detailseite, max. 160 Zeichen
+              </span>
 						</FormGroup>
 						<FormGroup>
 							<FormCheckbox v-model="form.publish">Veröffentlichen</FormCheckbox>
 						</FormGroup>
 						<FormGroup>
-							<FormCheckbox v-model="form.feature">Als Projekt anzeigen</FormCheckbox>
+							<FormCheckbox v-model="form.feature">In Auswahl anzeigen</FormCheckbox>
 						</FormGroup>
 					</div>
 				</template>

@@ -13,7 +13,11 @@ class Topic extends Model
 	use HasFactory, HasPublish, HasUuid;
 
 	protected $fillable = [
-		'uuid', 'title', 'slug', 'publish', 'sort_order',
+		'uuid',  
+    'title', 
+    'slug', 
+    'publish', 
+    'sort_order',
 	];
 
 	protected $casts = [

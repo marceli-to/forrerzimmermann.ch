@@ -84,7 +84,8 @@
       "Bash(git revert:*)",
       "Bash(git:*)",
       "Bash(echo \"EXIT CODE: $?\")",
-      "Bash(identify /Users/marceli.to/Jamon.digital/Webroot/forrerzimmermann.ch/storage/app/seed/fza-projekte.png)"
+      "Bash(identify /Users/marceli.to/Jamon.digital/Webroot/forrerzimmermann.ch/storage/app/seed/fza-projekte.png)",
+      "Bash(grep:*)"
     ]
   }
 }
