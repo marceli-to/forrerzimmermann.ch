@@ -27,6 +27,7 @@ watch(() => props.open, (val) => {
 })
 
 function onClose() {
+	document.activeElement?.blur()
 	emit('close')
 }
 </script>

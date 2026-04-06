@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, computed } from 'vue'
+import { ref, watch, computed, onMounted, onUnmounted } from 'vue'
 import { PhX } from '@phosphor-icons/vue'
 import { Cropper } from 'vue-advanced-cropper'
 import 'vue-advanced-cropper/dist/style.css'
@@ -30,6 +30,16 @@ function close() {
   isOpen.value = false
   emit('close')
 }
+
+function onKeydown(e) {
+  if (e.key === 'Escape' && isOpen.value) {
+    document.activeElement?.blur()
+    close()
+  }
+}
+
+onMounted(() => document.addEventListener('keydown', onKeydown))
+onUnmounted(() => document.removeEventListener('keydown', onKeydown))
 
 function handleSave() {
   if (!cropperRef.value) return

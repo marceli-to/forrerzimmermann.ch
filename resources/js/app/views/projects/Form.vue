@@ -246,7 +246,10 @@ function onSetOg(media) { mediaStore.setOg(media.uuid) }
 			@save="onSaveMedia"
 		/>
 
-		<AppDialog :open="showTopicDialog" title="Neues Thema" size="sm" @close="showTopicDialog = false; newTopicTitle = ''; newTopicError = ''">
+		<AppDialog 
+      :open="showTopicDialog" 
+      title="Neues Thema" 
+      size="sm" @close="showTopicDialog = false; newTopicTitle = ''; newTopicError = ''">
 			<form @submit.prevent="handleCreateTopic">
 				<FormGroup>
 					<FormLabel for="new_topic_title" :error="newTopicError">Titel *</FormLabel>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted, onUnmounted } from 'vue'
 import { PhX } from '@phosphor-icons/vue'
 
 const props = defineProps({
@@ -12,6 +12,7 @@ const emit = defineEmits(['close'])
 
 const visible = ref(false)
 const mounted = ref(false)
+const closing = ref(false)
 
 const sizes = {
 	sm: 'max-w-[420px]',
@@ -21,11 +22,12 @@ const sizes = {
 
 watch(() => props.open, (val) => {
 	if (val) {
+		closing.value = false
 		mounted.value = true
 		requestAnimationFrame(() => {
 			visible.value = true
 		})
-	} else {
+	} else if (!closing.value) {
 		visible.value = false
 		setTimeout(() => {
 			mounted.value = false
@@ -34,9 +36,24 @@ watch(() => props.open, (val) => {
 }, { immediate: true })
 
 function close() {
+	if (closing.value) return
+	closing.value = true
 	visible.value = false
-	setTimeout(() => emit('close'), 200)
+	setTimeout(() => {
+		mounted.value = false
+		emit('close')
+	}, 200)
 }
+
+function onKeydown(e) {
+	if (e.key === 'Escape' && props.open) {
+		document.activeElement?.blur()
+		close()
+	}
+}
+
+onMounted(() => document.addEventListener('keydown', onKeydown))
+onUnmounted(() => document.removeEventListener('keydown', onKeydown))
 </script>
 
 <template>
