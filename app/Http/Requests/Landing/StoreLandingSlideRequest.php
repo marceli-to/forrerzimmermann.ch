@@ -29,4 +29,13 @@ class StoreLandingSlideRequest extends FormRequest
 			'media.*.caption' => 'nullable|string|max:255',
 		];
 	}
+
+	public function messages(): array
+	{
+		return [
+			'type.required' => 'Typ ist erforderlich',
+			'type.in' => 'Ungültiger Typ',
+			'text.required_if' => 'Text ist erforderlich für diesen Typ',
+		];
+	}
 }

@@ -33,4 +33,17 @@ class UpdateSeoSettingRequest extends FormRequest
             'media.*.caption' => 'nullable|string|max:255',
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'landing_meta_description.max' => 'Meta Description darf maximal 500 Zeichen lang sein',
+            'projects_meta_description.max' => 'Meta Description darf maximal 500 Zeichen lang sein',
+            'werkliste_meta_description.max' => 'Meta Description darf maximal 500 Zeichen lang sein',
+            'profile_meta_description.max' => 'Meta Description darf maximal 500 Zeichen lang sein',
+            'team_meta_description.max' => 'Meta Description darf maximal 500 Zeichen lang sein',
+            'jobs_meta_description.max' => 'Meta Description darf maximal 500 Zeichen lang sein',
+            'contact_meta_description.max' => 'Meta Description darf maximal 500 Zeichen lang sein',
+        ];
+    }
 }

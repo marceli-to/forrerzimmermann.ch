@@ -19,6 +19,8 @@ import FormTextarea from '@/components/ui/form/FormTextarea.vue'
 import FormSelect from '@/components/ui/form/FormSelect.vue'
 import FormCheckbox from '@/components/ui/form/FormCheckbox.vue'
 import FormGroup from '@/components/ui/form/FormGroup.vue'
+import FormButton from '@/components/ui/form/FormButton.vue'
+import AppDialog from '@/components/ui/dialog/AppDialog.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -29,6 +31,9 @@ const toast = useToast()
 const isEdit = computed(() => !!route.params.id)
 const editingMedia = ref(null)
 const topicOptions = ref([])
+const showTopicDialog = ref(false)
+const newTopicTitle = ref('')
+const newTopicError = ref('')
 
 const form = ref({
 	title: '',
@@ -102,6 +107,25 @@ async function handleSubmit() {
 		router.push({ name: 'projects.index' })
 	} else if (Object.keys(store.errors).length) {
 		toast.error('Bitte überprüfen Sie das Formular')
+	}
+}
+
+async function handleCreateTopic() {
+	newTopicError.value = ''
+	try {
+		const { data } = await topicsApi.store({ title: newTopicTitle.value.trim(), publish: true })
+		const created = data.data
+		topicOptions.value.push({ value: created.uuid, label: created.title })
+		form.value.topic_id = created.uuid
+		showTopicDialog.value = false
+		newTopicTitle.value = ''
+		toast.success('Thema erstellt')
+	} catch (error) {
+		if (error.response?.status === 422) {
+			newTopicError.value = Object.values(error.response.data.errors).flat()[0]
+		} else {
+			toast.error('Fehler beim Erstellen')
+		}
 	}
 }
 
@@ -194,6 +218,7 @@ function onSetOg(media) { mediaStore.setOg(media.uuid) }
 						<FormGroup>
 							<FormLabel for="topic_id" :error="store.errors.topic_id">Thema</FormLabel>
 							<FormSelect id="topic_id" v-model="form.topic_id" :options="topicOptions" :hasError="!!store.errors.topic_id" @focus="delete store.errors.topic_id" />
+							<button type="button" class="block ml-auto text-xs text-gray-500 dark:text-warm-400 hover:text-gray-900 dark:hover:text-warm-100 transition-colors cursor-pointer mt-6" @click="showTopicDialog = true">+ Hinzufügen</button>
 						</FormGroup>
 						<div class="flex flex-col gap-12">
 							<FormGroup>
@@ -220,5 +245,20 @@ function onSetOg(media) { mediaStore.setOg(media.uuid) }
 			@close="editingMedia = null"
 			@save="onSaveMedia"
 		/>
+
+		<AppDialog :open="showTopicDialog" title="Neues Thema" size="sm" @close="showTopicDialog = false; newTopicTitle = ''; newTopicError = ''">
+			<form @submit.prevent="handleCreateTopic">
+				<FormGroup>
+					<FormLabel for="new_topic_title" :error="newTopicError">Titel *</FormLabel>
+					<FormInput id="new_topic_title" v-model="newTopicTitle" :hasError="!!newTopicError" @focus="newTopicError = ''" />
+				</FormGroup>
+			</form>
+			<template #footer>
+				<div class="flex justify-end gap-8">
+					<FormButton variant="secondary" @click="showTopicDialog = false; newTopicTitle = ''; newTopicError = ''">Abbrechen</FormButton>
+					<FormButton @click="handleCreateTopic">Erstellen</FormButton>
+				</div>
+			</template>
+		</AppDialog>
 	</div>
 </template>

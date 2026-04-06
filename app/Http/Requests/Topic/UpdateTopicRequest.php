@@ -18,4 +18,12 @@ class UpdateTopicRequest extends FormRequest
 			'publish' => 'boolean',
 		];
 	}
+
+	public function messages(): array
+	{
+		return [
+			'title.required' => 'Titel ist erforderlich',
+			'title.max' => 'Titel darf maximal 255 Zeichen lang sein',
+		];
+	}
 }

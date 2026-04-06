@@ -36,4 +36,18 @@ class UpdateProjectRequest extends FormRequest
 			'media.*.caption' => 'nullable|string|max:255',
 		];
 	}
+
+	public function messages(): array
+	{
+		return [
+			'title.required' => 'Titel ist erforderlich',
+			'title.max' => 'Titel darf maximal 255 Zeichen lang sein',
+			'year.required' => 'Jahr ist erforderlich',
+			'year.integer' => 'Jahr muss eine Zahl sein',
+			'location.max' => 'Ort darf maximal 255 Zeichen lang sein',
+			'subtitle.max' => 'Untertitel darf maximal 255 Zeichen lang sein',
+			'meta_description.max' => 'Meta Description darf maximal 255 Zeichen lang sein',
+			'topic_id.exists' => 'Das gewählte Thema ist ungültig',
+		];
+	}
 }

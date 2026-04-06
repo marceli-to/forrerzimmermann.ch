@@ -31,4 +31,13 @@ class UpdateAtelierPageRequest extends FormRequest
 			'media.*.caption' => 'nullable|string|max:255',
 		];
 	}
+
+	public function messages(): array
+	{
+		return [
+			'title.required' => 'Titel ist erforderlich',
+			'title.max' => 'Titel darf maximal 255 Zeichen lang sein',
+			'text.required' => 'Text ist erforderlich',
+		];
+	}
 }

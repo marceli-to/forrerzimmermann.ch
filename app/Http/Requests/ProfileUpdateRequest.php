@@ -27,4 +27,15 @@ class ProfileUpdateRequest extends FormRequest
             ],
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Name ist erforderlich',
+            'name.max' => 'Name darf maximal 255 Zeichen lang sein',
+            'email.required' => 'E-Mail ist erforderlich',
+            'email.email' => 'Bitte eine gültige E-Mail-Adresse eingeben',
+            'email.unique' => 'Diese E-Mail-Adresse wird bereits verwendet',
+        ];
+    }
 }

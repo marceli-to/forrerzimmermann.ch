@@ -23,4 +23,16 @@ class StoreTeamRequest extends FormRequest
 			'former' => 'boolean',
 		];
 	}
+
+	public function messages(): array
+	{
+		return [
+			'firstname.required' => 'Vorname ist erforderlich',
+			'firstname.max' => 'Vorname darf maximal 255 Zeichen lang sein',
+			'name.required' => 'Name ist erforderlich',
+			'name.max' => 'Name darf maximal 255 Zeichen lang sein',
+			'title.max' => 'Titel darf maximal 255 Zeichen lang sein',
+			'email.email' => 'Bitte eine gültige E-Mail-Adresse eingeben',
+		];
+	}
 }
