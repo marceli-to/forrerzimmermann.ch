@@ -25,6 +25,10 @@ const editor = useEditor({
 		}),
 		Link.configure({
 			openOnClick: false,
+			HTMLAttributes: {
+				target: null,
+				title: null,
+			},
 		}),
 	],
 	onUpdate({ editor }) {
