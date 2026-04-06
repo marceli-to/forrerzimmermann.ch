@@ -31,9 +31,9 @@ const pageTitle = computed(() => {
 	return slug ? `${pageTitles[slug]} bearbeiten` : 'Bearbeiten'
 })
 
+const isProfile = computed(() => store.current?.slug === 'profile')
+
 const form = ref({
-	title: '',
-	text: '',
 	publish: false,
 })
 
@@ -45,9 +45,8 @@ onMounted(async () => {
 	if (store.current) {
 		const p = store.current
 		form.value = {
-			title: p.title || '',
-			text: p.text || '',
 			publish: p.publish,
+			...(p.slug === 'profile' ? { title: p.title || '', text: p.text || '' } : {}),
 		}
 		mediaStore.setItems(p.media ? [p.media] : [])
 	}
