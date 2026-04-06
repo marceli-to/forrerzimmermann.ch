@@ -30,6 +30,7 @@ class AttachAction
 				'height' => $item['height'] ?? null,
 				'alt' => $item['alt'] ?? null,
 				'caption' => $item['caption'] ?? null,
+				'crop' => $item['crop'] ?? null,
 				'sort_order' => $maxSort,
 			]);
 		}

@@ -29,6 +29,7 @@ class UpdateAtelierPageRequest extends FormRequest
 			'media.*.height' => 'nullable|integer',
 			'media.*.alt' => 'nullable|string|max:255',
 			'media.*.caption' => 'nullable|string|max:255',
+			'media.*.crop' => 'nullable|array',
 		];
 	}
 
