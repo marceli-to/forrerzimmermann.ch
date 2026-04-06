@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, nextTick } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { PhTextB, PhListBullets, PhListNumbers, PhLink } from '@phosphor-icons/vue'
 import AppDialog from '../dialog/AppDialog.vue'
 import FormGroup from '../form/FormGroup.vue'
@@ -8,6 +8,7 @@ import FormInput from '../form/FormInput.vue'
 import FormSelect from '../form/FormSelect.vue'
 import FormCheckbox from '../form/FormCheckbox.vue'
 import FormButton from '../form/FormButton.vue'
+import projectsApi from '@/api/projects'
 
 const props = defineProps({
 	editor: { type: Object, required: true },
@@ -19,11 +20,17 @@ const linkProtocol = ref('https://')
 const linkUrl = ref('')
 const linkTitle = ref('')
 const linkTarget = ref(false)
+const linkPage = ref(null)
+const linkProject = ref(null)
+
+const projects = ref([])
 
 const typeOptions = [
 	{ value: 'url', label: 'URL' },
 	{ value: 'email', label: 'E-Mail' },
 	{ value: 'tel', label: 'Telefon' },
+	{ value: 'page', label: 'Seite' },
+	{ value: 'project', label: 'Projekt' },
 ]
 
 const protocolOptions = [
@@ -31,12 +38,31 @@ const protocolOptions = [
 	{ value: 'http://', label: 'http://' },
 ]
 
+const pageOptions = [
+	{ value: '/', label: 'Home' },
+	{ value: '/projekte', label: 'Projekte' },
+	{ value: '/werkliste', label: 'Werkliste' },
+	{ value: '/atelier/profil', label: 'Profil' },
+	{ value: '/atelier/team', label: 'Team' },
+	{ value: '/atelier/jobs', label: 'Jobs' },
+	{ value: '/kontakt', label: 'Kontakt' },
+]
+
+const projectOptions = computed(() =>
+	projects.value.map(p => ({ value: `/projekte/${p.slug}`, label: p.title }))
+)
+
 const isEditing = computed(() => props.editor.isActive('link'))
 
 const placeholder = computed(() => {
 	if (linkType.value === 'email') return 'info@example.com'
 	if (linkType.value === 'tel') return '+41 00 000 00 00'
 	return 'www.example.com'
+})
+
+onMounted(async () => {
+	const { data } = await projectsApi.index()
+	projects.value = data.data
 })
 
 function openDialog() {
@@ -54,30 +80,49 @@ function openDialog() {
 			linkUrl.value = href.replace('tel:', '')
 			linkProtocol.value = 'https://'
 		} else {
-			linkType.value = 'url'
-			if (href.startsWith('http://')) {
-				linkProtocol.value = 'http://'
-				linkUrl.value = href.replace('http://', '')
+			// Check if it's an internal page
+			const matchedPage = pageOptions.find(p => p.value === href)
+			if (matchedPage) {
+				linkType.value = 'page'
+				linkPage.value = href
+			} else if (href.startsWith('/projekte/')) {
+				linkType.value = 'project'
+				linkProject.value = href
 			} else {
-				linkProtocol.value = 'https://'
-				linkUrl.value = href.replace('https://', '')
+				linkType.value = 'url'
+				if (href.startsWith('http://')) {
+					linkProtocol.value = 'http://'
+					linkUrl.value = href.replace('http://', '')
+				} else {
+					linkProtocol.value = 'https://'
+					linkUrl.value = href.replace('https://', '')
+				}
 			}
 		}
 
 		linkTitle.value = attrs.title || ''
 		linkTarget.value = attrs.target === '_blank'
 	} else {
-		linkType.value = 'url'
-		linkProtocol.value = 'https://'
-		linkUrl.value = ''
-		linkTitle.value = ''
-		linkTarget.value = false
+		resetFields()
 	}
 
 	showDialog.value = true
 }
 
+function resetFields() {
+	linkType.value = 'url'
+	linkProtocol.value = 'https://'
+	linkUrl.value = ''
+	linkTitle.value = ''
+	linkTarget.value = false
+	linkPage.value = null
+	linkProject.value = null
+}
+
 function buildHref() {
+	if (linkType.value === 'page') return linkPage.value
+	if (linkType.value === 'project') return linkProject.value
+
 	const value = linkUrl.value.trim()
 	if (!value) return ''
 
@@ -170,15 +215,39 @@ function closeDialog() {
 					<FormSelect v-model="linkType" :options="typeOptions" placeholder="Typ wählen" />
 				</FormGroup>
 
-				<FormGroup>
-					<FormLabel>{{ linkType === 'email' ? 'E-Mail-Adresse' : linkType === 'tel' ? 'Telefonnummer' : 'URL' }}</FormLabel>
-					<div v-if="linkType === 'url'" class="flex gap-8">
+				<!-- URL -->
+				<FormGroup v-if="linkType === 'url'">
+					<FormLabel>URL</FormLabel>
+					<div class="flex gap-8">
 						<div class="w-110 shrink-0">
 							<FormSelect v-model="linkProtocol" :options="protocolOptions" placeholder="" />
 						</div>
 						<FormInput v-model="linkUrl" :placeholder="placeholder" />
 					</div>
-					<FormInput v-else v-model="linkUrl" :placeholder="placeholder" />
+				</FormGroup>
+
+				<!-- Email -->
+				<FormGroup v-if="linkType === 'email'">
+					<FormLabel>E-Mail-Adresse</FormLabel>
+					<FormInput v-model="linkUrl" :placeholder="placeholder" />
+				</FormGroup>
+
+				<!-- Tel -->
+				<FormGroup v-if="linkType === 'tel'">
+					<FormLabel>Telefonnummer</FormLabel>
+					<FormInput v-model="linkUrl" :placeholder="placeholder" />
+				</FormGroup>
+
+				<!-- Page -->
+				<FormGroup v-if="linkType === 'page'">
+					<FormLabel>Seite</FormLabel>
+					<FormSelect v-model="linkPage" :options="pageOptions" placeholder="Seite wählen" />
+				</FormGroup>
+
+				<!-- Project -->
+				<FormGroup v-if="linkType === 'project'">
+					<FormLabel>Projekt</FormLabel>
+					<FormSelect v-model="linkProject" :options="projectOptions" placeholder="Projekt wählen" />
 				</FormGroup>
 
 				<FormGroup>
