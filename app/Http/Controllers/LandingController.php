@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LandingSlide;
+
 class LandingController extends Controller
 {
 	public function __invoke()
 	{
-		return view('pages.landing');
+		$slides = LandingSlide::published()
+			->with('media')
+			->orderBy('sort_order')
+			->get();
+
+		return view('pages.landing', compact('slides'));
 	}
 }
