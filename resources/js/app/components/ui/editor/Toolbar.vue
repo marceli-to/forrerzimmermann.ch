@@ -49,7 +49,12 @@ const pageOptions = [
 ]
 
 const projectOptions = computed(() =>
-	projects.value.map(p => ({ value: `/projekte/${p.slug}`, label: p.title }))
+	[...projects.value]
+		.sort((a, b) => a.title.localeCompare(b.title, 'de'))
+		.map(p => ({
+			value: `/projekte/${p.slug}`,
+			label: p.location ? `${p.title}, ${p.location}` : p.title,
+		}))
 )
 
 const isEditing = computed(() => props.editor.isActive('link'))
