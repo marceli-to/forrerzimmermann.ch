@@ -67,6 +67,7 @@ async function handleSubmit() {
 		height: item.height,
 		alt: item.alt || null,
 		caption: item.caption || null,
+		crop: item.crop || null,
 	}))
 
 	const success = await store.saveSlide(
