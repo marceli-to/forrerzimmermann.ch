@@ -80,40 +80,15 @@ const defaultSize = computed(() => {
     >
       <div class="bg-white dark:bg-warm-900 rounded-2xl shadow-xl w-full max-w-3xl mx-16 flex flex-col max-h-[90vh]">
         <!-- Header -->
-        <div class="flex items-center justify-between px-24 py-16">
+        <div class="flex items-center justify-between px-24 pt-16">
           <h2 class="text-sm font-medium text-gray-900 dark:text-warm-100">Bild zuschneiden</h2>
           <button type="button" class="text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100 transition-colors cursor-pointer" @click="close">
             <PhX :size="16" weight="light" />
           </button>
         </div>
 
-        <!-- Aspect ratio controls -->
-        <div class="flex items-center justify-between px-24 py-12 border-b border-gray-100 dark:border-warm-800">
-          <div class="flex gap-8">
-            <button
-              v-for="opt in aspectOptions"
-              :key="opt.label"
-              type="button"
-              class="text-xs px-10 py-4 rounded border transition-colors cursor-pointer"
-              :class="aspectRatio === opt.value
-                ? 'bg-gray-900 text-white border-gray-900 dark:bg-warm-100 dark:text-warm-900 dark:border-warm-100'
-                : 'border-gray-300 text-gray-600 hover:border-gray-500 dark:border-warm-600 dark:text-warm-400'"
-              @click="aspectRatio = opt.value"
-            >
-              {{ opt.label }}
-            </button>
-          </div>
-          <button
-            type="button"
-            class="text-xs px-10 py-4 rounded border transition-colors cursor-pointer border-gray-300 text-gray-600 hover:border-gray-500 dark:border-warm-600 dark:text-warm-400"
-            @click="handleClear"
-          >
-            Zuschnitt entfernen
-          </button>
-        </div>
-
         <!-- Cropper -->
-        <div class="flex-1 overflow-hidden bg-white dark:bg-warm-900 p-16 min-h-0">
+        <div class="flex-1 overflow-hidden bg-white dark:bg-warm-900 p-16 min-h-0 [&_.vue-advanced-cropper]:!bg-gray-100 dark:[&_.vue-advanced-cropper]:!bg-warm-800">
           <Cropper
             v-if="media"
             ref="cropperRef"
@@ -127,7 +102,28 @@ const defaultSize = computed(() => {
         </div>
 
         <!-- Footer -->
-        <div class="flex items-center justify-end px-24 py-16">
+        <div class="flex items-center justify-between px-24 pb-16">
+          <div class="flex items-center gap-8">
+            <button
+              v-for="opt in aspectOptions"
+              :key="opt.label"
+              type="button"
+              class="text-xs px-10 py-4 rounded border transition-colors cursor-pointer"
+              :class="aspectRatio === opt.value
+                ? 'bg-gray-900 text-white border-gray-900 dark:bg-warm-100 dark:text-warm-900 dark:border-warm-100'
+                : 'border-gray-300 text-gray-600 hover:border-gray-500 dark:border-warm-600 dark:text-warm-400'"
+              @click="aspectRatio = opt.value"
+            >
+              {{ opt.label }}
+            </button>
+            <button
+              type="button"
+              class="text-xs px-10 py-4 text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100 transition-colors cursor-pointer"
+              @click="handleClear"
+            >
+              Zurücksetzen
+            </button>
+          </div>
           <div class="flex gap-12">
             <button
               type="button"
