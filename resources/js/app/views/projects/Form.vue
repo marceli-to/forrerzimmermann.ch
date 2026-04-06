@@ -4,6 +4,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { useProjectStore } from '@/stores/projects'
 import { useMediaStore } from '@/stores/media'
 import { useToast } from '@/composables/useToast'
+import { useUnsavedChanges } from '@/composables/useUnsavedChanges'
 import topicsApi from '@/api/topics'
 import MediaUploader from '@/components/media/MediaUploader.vue'
 import MediaGrid from '@/components/media/MediaGrid.vue'
@@ -42,6 +43,8 @@ const form = ref({
 	topic_id: null,
 })
 
+const { setOriginal, bypass } = useUnsavedChanges(form)
+
 onMounted(async () => {
 	mediaStore.setItems([])
 
@@ -70,6 +73,8 @@ onMounted(async () => {
 			mediaStore.setItems(p.media || [])
 		}
 	}
+
+	setOriginal()
 })
 
 async function handleSubmit() {
@@ -93,6 +98,7 @@ async function handleSubmit() {
 
 	if (success) {
 		toast.success(isEdit.value ? 'Projekt aktualisiert' : 'Projekt erstellt')
+		bypass()
 		router.push({ name: 'projects.index' })
 	} else if (Object.keys(store.errors).length) {
 		toast.error('Bitte überprüfen Sie das Formular')

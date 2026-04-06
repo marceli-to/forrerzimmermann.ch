@@ -3,6 +3,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTopicStore } from '@/stores/topics'
 import { useToast } from '@/composables/useToast'
+import { useUnsavedChanges } from '@/composables/useUnsavedChanges'
 import PageHeader from '@/components/layout/PageHeader.vue'
 import FormActions from '@/components/ui/form/FormActions.vue'
 import FormLabel from '@/components/ui/form/FormLabel.vue'
@@ -20,6 +21,8 @@ const form = ref({
 	title: '',
 })
 
+const { setOriginal, bypass } = useUnsavedChanges(form)
+
 onMounted(async () => {
 	if (isEdit.value) {
 		await store.fetchTopic(route.params.id)
@@ -29,6 +32,8 @@ onMounted(async () => {
 			}
 		}
 	}
+
+	setOriginal()
 })
 
 async function handleSubmit() {
@@ -39,6 +44,7 @@ async function handleSubmit() {
 
 	if (success) {
 		toast.success(isEdit.value ? 'Thema aktualisiert' : 'Thema erstellt')
+		bypass()
 		router.push({ name: 'topics.index' })
 	} else if (Object.keys(store.errors).length) {
 		toast.error('Bitte überprüfen Sie das Formular')

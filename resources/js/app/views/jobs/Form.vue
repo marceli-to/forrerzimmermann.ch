@@ -3,6 +3,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useJobStore } from '@/stores/jobs'
 import { useToast } from '@/composables/useToast'
+import { useUnsavedChanges } from '@/composables/useUnsavedChanges'
 import Editor from '@/components/ui/editor/Editor.vue'
 import PageHeader from '@/components/layout/PageHeader.vue'
 import FormActions from '@/components/ui/form/FormActions.vue'
@@ -22,6 +23,8 @@ const form = ref({
 	text: '',
 })
 
+const { setOriginal, bypass } = useUnsavedChanges(form)
+
 onMounted(async () => {
 	if (isEdit.value) {
 		await store.fetchJob(route.params.id)
@@ -32,6 +35,8 @@ onMounted(async () => {
 			}
 		}
 	}
+
+	setOriginal()
 })
 
 async function handleSubmit() {
@@ -42,6 +47,7 @@ async function handleSubmit() {
 
 	if (success) {
 		toast.success(isEdit.value ? 'Stelle aktualisiert' : 'Stelle erstellt')
+		bypass()
 		router.push({ name: 'jobs.index' })
 	} else if (Object.keys(store.errors).length) {
 		toast.error('Bitte überprüfen Sie das Formular')

@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import { useSeoStore } from '@/stores/seo'
 import { useMediaStore } from '@/stores/media'
 import { useToast } from '@/composables/useToast'
+import { useUnsavedChanges } from '@/composables/useUnsavedChanges'
 import MediaUploader from '@/components/media/MediaUploader.vue'
 import MediaGrid from '@/components/media/MediaGrid.vue'
 import MediaEdit from '@/components/media/MediaEdit.vue'
@@ -27,6 +28,8 @@ const form = ref({
     contact_meta_description: '',
 })
 
+const { setOriginal } = useUnsavedChanges(form)
+
 onMounted(async () => {
     mediaStore.setItems([])
     await store.fetchSeo()
@@ -43,6 +46,8 @@ onMounted(async () => {
         }
         mediaStore.setItems(s.media || [])
     }
+
+    setOriginal()
 })
 
 async function handleSubmit() {
@@ -65,6 +70,7 @@ async function handleSubmit() {
 
     const success = await store.saveSeo(payload)
     if (success) {
+        setOriginal()
         toast.success('SEO-Einstellungen aktualisiert')
     } else if (Object.keys(store.errors).length) {
         toast.error('Bitte überprüfen Sie das Formular')

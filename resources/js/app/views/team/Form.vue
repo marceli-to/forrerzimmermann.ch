@@ -3,6 +3,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTeamStore } from '@/stores/team'
 import { useToast } from '@/composables/useToast'
+import { useUnsavedChanges } from '@/composables/useUnsavedChanges'
 import Editor from '@/components/ui/editor/Editor.vue'
 import PageHeader from '@/components/layout/PageHeader.vue'
 import SidebarLayout from '@/components/ui/form/SidebarLayout.vue'
@@ -28,6 +29,8 @@ const form = ref({
 	former: false,
 })
 
+const { setOriginal, bypass } = useUnsavedChanges(form)
+
 onMounted(async () => {
 	if (isEdit.value) {
 		await store.fetchMember(route.params.id)
@@ -43,6 +46,8 @@ onMounted(async () => {
 			}
 		}
 	}
+
+	setOriginal()
 })
 
 async function handleSubmit() {
@@ -53,6 +58,7 @@ async function handleSubmit() {
 
 	if (success) {
 		toast.success(isEdit.value ? 'Mitglied aktualisiert' : 'Mitglied erstellt')
+		bypass()
 		router.push({ name: 'team.index' })
 	} else if (Object.keys(store.errors).length) {
 		toast.error('Bitte überprüfen Sie das Formular')

@@ -4,6 +4,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { useAtelierStore } from '@/stores/atelier'
 import { useMediaStore } from '@/stores/media'
 import { useToast } from '@/composables/useToast'
+import { useUnsavedChanges } from '@/composables/useUnsavedChanges'
 import MediaUploader from '@/components/media/MediaUploader.vue'
 import MediaGrid from '@/components/media/MediaGrid.vue'
 import MediaEdit from '@/components/media/MediaEdit.vue'
@@ -36,6 +37,8 @@ const form = ref({
 	publish: false,
 })
 
+const { setOriginal, bypass } = useUnsavedChanges(form)
+
 onMounted(async () => {
 	mediaStore.setItems([])
 	await store.fetchPage(route.params.id)
@@ -48,6 +51,8 @@ onMounted(async () => {
 		}
 		mediaStore.setItems(p.media ? [p.media] : [])
 	}
+
+	setOriginal()
 })
 
 async function handleSubmit() {
@@ -71,6 +76,7 @@ async function handleSubmit() {
 
 	if (success) {
 		toast.success('Seite aktualisiert')
+		bypass()
 		router.push({ name: 'atelier.index' })
 	} else if (Object.keys(store.errors).length) {
 		toast.error('Bitte überprüfen Sie das Formular')

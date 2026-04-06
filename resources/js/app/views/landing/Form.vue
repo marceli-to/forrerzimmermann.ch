@@ -4,6 +4,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { useLandingStore } from '@/stores/landing'
 import { useMediaStore } from '@/stores/media'
 import { useToast } from '@/composables/useToast'
+import { useUnsavedChanges } from '@/composables/useUnsavedChanges'
 import MediaUploader from '@/components/media/MediaUploader.vue'
 import MediaGrid from '@/components/media/MediaGrid.vue'
 import MediaEdit from '@/components/media/MediaEdit.vue'
@@ -34,6 +35,8 @@ const form = ref({
 	publish: false,
 })
 
+const { setOriginal, bypass } = useUnsavedChanges(form)
+
 onMounted(async () => {
 	mediaStore.setItems([])
 
@@ -49,6 +52,8 @@ onMounted(async () => {
 			mediaStore.setItems(s.media || [])
 		}
 	}
+
+	setOriginal()
 })
 
 async function handleSubmit() {
@@ -72,6 +77,7 @@ async function handleSubmit() {
 
 	if (success) {
 		toast.success(isEdit.value ? 'Slide aktualisiert' : 'Slide erstellt')
+		bypass()
 		router.push({ name: 'landing.index' })
 	} else if (Object.keys(store.errors).length) {
 		toast.error('Bitte überprüfen Sie das Formular')

@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useKontaktStore } from '@/stores/kontakt'
 import { useToast } from '@/composables/useToast'
+import { useUnsavedChanges } from '@/composables/useUnsavedChanges'
 import Editor from '@/components/ui/editor/Editor.vue'
 import PageHeader from '@/components/layout/PageHeader.vue'
 import FormActions from '@/components/ui/form/FormActions.vue'
@@ -22,6 +23,8 @@ const form = ref({
 	imprint: '',
 })
 
+const { setOriginal } = useUnsavedChanges(form)
+
 onMounted(async () => {
 	await store.fetchContact()
 	if (store.contact) {
@@ -35,11 +38,14 @@ onMounted(async () => {
 			imprint: c.imprint || '',
 		}
 	}
+
+	setOriginal()
 })
 
 async function handleSubmit() {
 	const success = await store.saveContact(form.value)
 	if (success) {
+		setOriginal()
 		toast.success('Kontakt aktualisiert')
 	} else if (Object.keys(store.errors).length) {
 		toast.error('Bitte überprüfen Sie das Formular')
