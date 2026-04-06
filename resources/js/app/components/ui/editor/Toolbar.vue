@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { PhTextB, PhListBullets, PhListNumbers, PhLink } from '@phosphor-icons/vue'
+import { PhTextB, PhTextHTwo, PhTextHThree, PhListBullets, PhListNumbers, PhLink, PhEraser } from '@phosphor-icons/vue'
 import AppDialog from '../dialog/AppDialog.vue'
 import FormGroup from '../form/FormGroup.vue'
 import FormLabel from '../form/FormLabel.vue'
@@ -12,6 +12,7 @@ import projectsApi from '@/api/projects'
 
 const props = defineProps({
 	editor: { type: Object, required: true },
+	headings: { type: Boolean, default: false },
 })
 
 const showDialog = ref(false)
@@ -174,9 +175,29 @@ function closeDialog() {
 
 		<div class="flex items-center gap-2">
 
+			<template v-if="headings">
+				<button
+					type="button"
+					class="p-8 rounded transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 dark:focus-visible:ring-warm-700"
+					:class="editor.isActive('heading', { level: 2 }) ? 'text-gray-900 dark:text-warm-100 bg-gray-200 dark:bg-warm-700' : 'text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100'"
+					title="Überschrift 2"
+					@click="editor.chain().focus().toggleHeading({ level: 2 }).run()">
+					<PhTextHTwo :size="16" weight="light" />
+				</button>
+
+				<button
+					type="button"
+					class="p-8 rounded transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 dark:focus-visible:ring-warm-700"
+					:class="editor.isActive('heading', { level: 3 }) ? 'text-gray-900 dark:text-warm-100 bg-gray-200 dark:bg-warm-700' : 'text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100'"
+					title="Überschrift 3"
+					@click="editor.chain().focus().toggleHeading({ level: 3 }).run()">
+					<PhTextHThree :size="16" weight="light" />
+				</button>
+			</template>
+
 			<button
 				type="button"
-				class="p-8 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 dark:focus-visible:ring-warm-700"
+				class="p-8 rounded transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 dark:focus-visible:ring-warm-700"
 				:class="editor.isActive('bold') ? 'text-gray-900 dark:text-warm-100 bg-gray-200 dark:bg-warm-700' : 'text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100'"
 				title="Bold"
 				@click="editor.chain().focus().toggleBold().run()">
@@ -185,7 +206,7 @@ function closeDialog() {
 
 			<button
 				type="button"
-				class="p-8 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 dark:focus-visible:ring-warm-700"
+				class="p-8 rounded transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 dark:focus-visible:ring-warm-700"
 				:class="editor.isActive('bulletList') ? 'text-gray-900 dark:text-warm-100 bg-gray-200 dark:bg-warm-700' : 'text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100'"
 				title="Liste"
 				@click="editor.chain().focus().toggleBulletList().run()">
@@ -194,7 +215,7 @@ function closeDialog() {
 
 			<button
 				type="button"
-				class="p-8 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 dark:focus-visible:ring-warm-700"
+				class="p-8 rounded transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 dark:focus-visible:ring-warm-700"
 				:class="editor.isActive('orderedList') ? 'text-gray-900 dark:text-warm-100 bg-gray-200 dark:bg-warm-700' : 'text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100'"
 				title="Nummerierte Liste"
 				@click="editor.chain().focus().toggleOrderedList().run()">
@@ -203,11 +224,19 @@ function closeDialog() {
 
 			<button
 				type="button"
-				class="p-8 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 dark:focus-visible:ring-warm-700"
+				class="p-8 rounded transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 dark:focus-visible:ring-warm-700"
 				:class="editor.isActive('link') ? 'text-gray-900 dark:text-warm-100 bg-gray-200 dark:bg-warm-700' : 'text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100'"
 				title="Link"
 				@click="openDialog">
 				<PhLink :size="16" weight="light" />
+			</button>
+
+			<button
+				type="button"
+				class="p-8 rounded transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 dark:focus-visible:ring-warm-700 text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100"
+				title="Formatierung entfernen"
+				@click="editor.chain().focus().unsetAllMarks().clearNodes().run()">
+				<PhEraser :size="16" weight="light" />
 			</button>
 		</div>
 

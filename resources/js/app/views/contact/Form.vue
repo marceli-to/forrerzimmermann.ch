@@ -92,7 +92,7 @@ async function handleSubmit() {
 				<FormGroup>
 					<FormLabel :error="store.errors.imprint">Impressum</FormLabel>
 					<div class="mt-8">
-						<Editor v-model="form.imprint" :hasError="!!store.errors.imprint" @focus="delete store.errors.imprint" />
+						<Editor v-model="form.imprint" :hasError="!!store.errors.imprint" :headings="true" @focus="delete store.errors.imprint" />
 					</div>
 				</FormGroup>
 
