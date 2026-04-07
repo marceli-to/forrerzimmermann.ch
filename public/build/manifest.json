@@ -9,7 +9,7 @@
     ]
   },
   "resources/css/site.css": {
-    "file": "assets/site-CPqO_4eO.css",
+    "file": "assets/site-rvYsuQmy.css",
     "src": "resources/css/site.css",
     "isEntry": true,
     "name": "site",
@@ -22,7 +22,7 @@
     "src": "resources/fonts/Geist-Variable.woff2"
   },
   "resources/js/app/app.js": {
-    "file": "assets/app-Yofb5PBk.js",
+    "file": "assets/app-BqH5dM0U.js",
     "name": "app",
     "src": "resources/js/app/app.js",
     "isEntry": true,
