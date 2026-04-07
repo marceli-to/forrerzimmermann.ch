@@ -1,7 +1,9 @@
 <x-layout.guest>
 	<div class="min-h-dvh flex">
-		<div class="hidden lg:flex lg:w-1/2 bg-gray-100 dark:bg-warm-950 items-end p-48">
-			<div class="text-gray-900 dark:text-warm-100">
+		<div class="hidden lg:block lg:w-1/2 relative">
+			<img src="{{ asset('img/visual-login.jpg') }}" alt="" class="absolute inset-0 w-full h-full object-cover" />
+			<div class="absolute inset-0 bg-black/20"></div>
+			<div class="relative z-10 flex items-end p-48 h-full text-white">
 				<x-icons.logo class="w-192" />
 			</div>
 		</div>
