@@ -216,19 +216,19 @@ function onSetOg(media) { mediaStore.setOg(media.uuid) }
 
 				<template #sidebar>
 					<div class="flex flex-col gap-24">
-						<FormGroup>
-							<FormLabel for="topic_id" :error="store.errors.topic_id">Thema</FormLabel>
-							<FormSelect id="topic_id" v-model="form.topic_id" :options="topicOptions" :hasError="!!store.errors.topic_id" @focus="delete store.errors.topic_id" />
-							<button type="button" class="block ml-auto text-xs text-gray-500 dark:text-warm-400 hover:text-gray-900 dark:hover:text-warm-100 transition-colors cursor-pointer mt-6" @click="showTopicDialog = true">+ Hinzufügen</button>
-						</FormGroup>
 						<div class="flex flex-col gap-12">
 							<FormGroup>
 								<FormCheckbox v-model="form.publish">Veröffentlichen</FormCheckbox>
 							</FormGroup>
 							<FormGroup>
-								<FormCheckbox v-model="form.feature">In Auswahl anzeigen</FormCheckbox>
+								<FormCheckbox v-model="form.feature">In Projekte anzeigen</FormCheckbox>
 							</FormGroup>
 						</div>
+						<FormGroup>
+							<FormLabel for="topic_id" :error="store.errors.topic_id">Thema</FormLabel>
+							<FormSelect id="topic_id" v-model="form.topic_id" :options="topicOptions" :hasError="!!store.errors.topic_id" @focus="delete store.errors.topic_id" />
+							<button type="button" class="block ml-auto text-xs text-gray-500 dark:text-warm-400 hover:text-gray-900 dark:hover:text-warm-100 transition-colors cursor-pointer mt-6" @click="showTopicDialog = true">+ Hinzufügen</button>
+						</FormGroup>
 						<FormGroup>
 							<FormLabel for="meta_description" :error="store.errors.meta_description">Meta Description</FormLabel>
 							<FormTextarea id="meta_description" v-model="form.meta_description" :hasError="!!store.errors.meta_description" @focus="delete store.errors.meta_description" />
