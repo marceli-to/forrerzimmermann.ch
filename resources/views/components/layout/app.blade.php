@@ -10,6 +10,8 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="shortcut icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="apple-mobile-web-app-title" content="forrer zimmermann architektur" />
+<link rel="manifest" href="/site.webmanifest" />
 @vite(['resources/css/app.css'])
 </head>
 <body class="h-full text-sm font-sans tracking-wide text-gray-900 antialiased bg-gray-100">
