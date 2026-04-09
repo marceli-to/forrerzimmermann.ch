@@ -29,7 +29,7 @@ class MediaResource extends JsonResource
 			'is_teaser' => $this->is_teaser,
 			'is_og' => $this->is_og,
 			'sort_order' => $this->sort_order,
-			'original_url' => '/uploads/' . $this->file,
+			'original_url' => '/storage/uploads/' . $this->file,
 			'thumbnail_url' => '/img/uploads/' . $this->file . '?w=400&h=400&fit=crop' . $cropParam,
 			'preview_url' => '/img/uploads/' . $this->file . '?w=800&fit=max' . $cropParam,
 		];
