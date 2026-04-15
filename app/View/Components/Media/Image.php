@@ -43,6 +43,15 @@ class Image extends Component
         if ($media instanceof Collection) {
             $desktopMedia = $media->where('variant', 'desktop')->first();
             $mobileMedia = $media->where('variant', 'mobile')->first();
+
+            // Fall back: if only one variant exists, use it as the primary
+            if (!$desktopMedia && $mobileMedia) {
+                $desktopMedia = $mobileMedia;
+                $mobileMedia = null;
+            } elseif (!$desktopMedia) {
+                $desktopMedia = $media->first();
+                $mobileMedia = null;
+            }
         } else {
             $desktopMedia = $media;
             $mobileMedia = null;
