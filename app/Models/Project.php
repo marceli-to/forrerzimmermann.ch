@@ -46,6 +46,16 @@ class Project extends Model
 		return $this->morphMany(Media::class, 'mediable')->where('is_teaser', true);
 	}
 
+	public function desktopTeaser(): MorphMany
+	{
+		return $this->morphMany(Media::class, 'mediable')->where('is_teaser', true)->where('variant', 'desktop');
+	}
+
+	public function mobileTeaser(): MorphMany
+	{
+		return $this->morphMany(Media::class, 'mediable')->where('is_teaser', true)->where('variant', 'mobile');
+	}
+
 	public function topic(): BelongsTo
 	{
 		return $this->belongsTo(Topic::class);

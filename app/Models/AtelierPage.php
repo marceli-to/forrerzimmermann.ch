@@ -28,4 +28,14 @@ class AtelierPage extends Model
 	{
 		return $this->morphMany(Media::class, 'mediable')->orderBy('sort_order');
 	}
+
+	public function desktopMedia(): MorphMany
+	{
+		return $this->morphMany(Media::class, 'mediable')->where('variant', 'desktop');
+	}
+
+	public function mobileMedia(): MorphMany
+	{
+		return $this->morphMany(Media::class, 'mediable')->where('variant', 'mobile');
+	}
 }

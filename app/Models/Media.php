@@ -44,16 +44,6 @@ class Media extends Model
 		return $this->morphTo();
 	}
 
-	public function scopeDesktop($query)
-	{
-		return $query->where('variant', 'desktop');
-	}
-
-	public function scopeMobile($query)
-	{
-		return $query->where('variant', 'mobile');
-	}
-
 	public function isImage(): bool
 	{
 		return str_starts_with($this->mime_type, 'image/');

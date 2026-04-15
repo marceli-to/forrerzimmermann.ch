@@ -1,12 +1,12 @@
 <x-layout.site :description="$seo?->jobs_meta_description">
-  @php
-    $desktopMedia = $page?->media->where('variant', 'desktop')->first();
-    $mobileMedia = $page?->media->where('variant', 'mobile')->first();
-  @endphp
   <div class="grid grid-cols-2 gap-x-6">
-    @if($desktopMedia)
+    @if($page?->desktopMedia->first())
       <div>
-        <x-media.image :media="$desktopMedia" :mobileMedia="$mobileMedia" sizes="(min-width: 768px) 50vw, 100vw" />
+        <x-media.image
+          :media="$page->desktopMedia->first()"
+          :mobileMedia="$page->mobileMedia->first()"
+          sizes="(min-width: 768px) 50vw, 100vw"
+        />
       </div>
     @endif
     <div>

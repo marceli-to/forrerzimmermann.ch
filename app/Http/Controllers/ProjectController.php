@@ -10,7 +10,7 @@ class ProjectController extends Controller
 	{
 		$projects = Project::published()
 			->where('feature', true)
-			->with('teaser')
+			->with(['teaser', 'desktopTeaser', 'mobileTeaser'])
 			->orderBy('sort_order')
 			->get();
 
