@@ -100,7 +100,7 @@ function onReorderMedia(items) { mediaStore.reorder(items) }
             <FormGroup>
                 <FormLabel>Open Graph Bild</FormLabel>
                 <div class="mt-8 flex flex-col gap-16">
-                    <MediaUploader v-if="!mediaStore.items.length" @uploaded="onUploaded" />
+                    <MediaUploader :compact="mediaStore.items.length > 0" @uploaded="onUploaded" />
                     <MediaGrid
                         v-if="mediaStore.items.length"
                         :items="mediaStore.items"
