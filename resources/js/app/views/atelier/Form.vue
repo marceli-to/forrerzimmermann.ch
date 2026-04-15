@@ -48,7 +48,7 @@ onMounted(async () => {
 			publish: p.publish,
 			...(p.slug === 'profile' ? { title: p.title || '', text: p.text || '' } : {}),
 		}
-		mediaStore.setItems(p.media ? [p.media] : [])
+		mediaStore.setItems(p.media || [])
 	}
 
 	setOriginal()
@@ -120,7 +120,7 @@ function onReorderMedia(items) { mediaStore.reorder(items) }
 					<FormGroup>
 						<FormLabel>Medien</FormLabel>
 						<div class="mt-8 flex flex-col gap-16">
-							<MediaUploader v-if="!mediaStore.items.length" @uploaded="onUploaded" />
+							<MediaUploader :compact="mediaStore.items.length > 0" @uploaded="onUploaded" />
 							<MediaGrid
 								v-if="mediaStore.items.length"
 								:items="mediaStore.items"

@@ -6,7 +6,7 @@ use App\Traits\HasPublish;
 use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class AtelierPage extends Model
 {
@@ -24,8 +24,8 @@ class AtelierPage extends Model
 		'publish' => 'boolean',
 	];
 
-	public function media(): MorphOne
+	public function media(): MorphMany
 	{
-		return $this->morphOne(Media::class, 'mediable');
+		return $this->morphMany(Media::class, 'mediable')->orderBy('sort_order');
 	}
 }

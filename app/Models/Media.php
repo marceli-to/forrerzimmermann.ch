@@ -24,6 +24,7 @@ class Media extends Model
 		'width',
 		'height',
 		'crop',
+		'variant',
 		'is_teaser',
 		'is_og',
 		'sort_order',
@@ -41,6 +42,16 @@ class Media extends Model
 	public function mediable(): MorphTo
 	{
 		return $this->morphTo();
+	}
+
+	public function scopeDesktop($query)
+	{
+		return $query->where('variant', 'desktop');
+	}
+
+	public function scopeMobile($query)
+	{
+		return $query->where('variant', 'mobile');
 	}
 
 	public function isImage(): bool

@@ -14,6 +14,7 @@ class UpdateMediaRequest extends FormRequest
 	public function rules(): array
 	{
 		return [
+			'variant' => 'sometimes|in:desktop,mobile',
 			'alt' => 'nullable|string|max:255',
 			'caption' => 'nullable|string|max:255',
 		];

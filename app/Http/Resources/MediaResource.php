@@ -25,6 +25,7 @@ class MediaResource extends JsonResource
 			'width' => $this->width,
 			'height' => $this->height,
 			'crop' => $this->crop,
+			'variant' => $this->variant,
 			'orientation' => $this->orientation,
 			'is_teaser' => $this->is_teaser,
 			'is_og' => $this->is_og,

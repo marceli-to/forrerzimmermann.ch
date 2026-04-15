@@ -3,6 +3,7 @@ import { ref, watch } from 'vue'
 import Drawer from '@/components/ui/drawer/Drawer.vue'
 import FormLabel from '@/components/ui/form/FormLabel.vue'
 import FormInput from '@/components/ui/form/FormInput.vue'
+import FormSelect from '@/components/ui/form/FormSelect.vue'
 import FormGroup from '@/components/ui/form/FormGroup.vue'
 import FormTextarea from '@/components/ui/form/FormTextarea.vue'
 
@@ -15,12 +16,19 @@ const emit = defineEmits(['close', 'save'])
 const isOpen = ref(false)
 
 const form = ref({
+	variant: 'desktop',
 	alt: '',
 	caption: '',
 })
 
+const variantOptions = [
+	{ value: 'desktop', label: 'Desktop' },
+	{ value: 'mobile', label: 'Mobile' },
+]
+
 watch(() => props.media, (val) => {
 	if (val) {
+		form.value.variant = val.variant || 'desktop'
 		form.value.alt = val.alt || ''
 		form.value.caption = val.caption || ''
 		isOpen.value = true
@@ -70,6 +78,11 @@ function handleSave() {
 
 		<!-- Fields -->
 		<div class="px-24 py-20 flex flex-col gap-24">
+			<FormGroup>
+				<FormLabel for="variant">Variante</FormLabel>
+				<FormSelect id="variant" v-model="form.variant" :options="variantOptions" placeholder="" />
+			</FormGroup>
+
 			<FormGroup>
 				<FormLabel for="alt">Alt-Text</FormLabel>
 				<FormInput id="alt" v-model="form.alt" placeholder="Bildbeschreibung für Screenreader..." />

@@ -22,12 +22,15 @@ class Image extends Component
     public string $loading;
     public string $sizes;
     public array $sources = [];
+    public array $mobileSources = [];
     public string $fallbackUrl;
+    public bool $hasMobileVariant;
 
     protected const WIDTHS = [480, 640, 768, 1024, 1280, 1440, 1600, 1920];
 
     public function __construct(
         Media $media,
+        ?Media $mobileMedia = null,
         string $sizes = '100vw',
         int $maxWidth = 1600,
         ?string $alt = null,
@@ -46,8 +49,9 @@ class Image extends Component
         $this->class = $class;
         $this->loading = $loading;
         $this->sizes = $sizes;
+        $this->hasMobileVariant = $mobileMedia !== null;
 
-        // Use crop dimensions for aspect ratio if crop exists, otherwise original
+        // Desktop aspect ratio
         if ($this->crop && isset($this->crop['w'], $this->crop['h'])) {
             $this->aspectRatio = $this->crop['h'] / $this->crop['w'];
         } else {
@@ -61,21 +65,52 @@ class Image extends Component
         $this->width = end($widths) ?: $maxWidth;
         $this->height = (int) round($this->width * $this->aspectRatio);
 
-        $this->buildSources($widths);
+        $this->buildSources($widths, $mobileMedia);
     }
 
-    protected function buildSources(array $widths): void
+    protected function buildSources(array $widths, ?Media $mobileMedia): void
     {
+        if ($mobileMedia) {
+            $mobileSrc = 'uploads/' . $mobileMedia->file;
+            $mobileCrop = $mobileMedia->crop;
+
+            if ($mobileCrop && isset($mobileCrop['w'], $mobileCrop['h'])) {
+                $mobileAspectRatio = $mobileCrop['h'] / $mobileCrop['w'];
+            } else {
+                $mobileAspectRatio = ($mobileMedia->height ?? 1) / ($mobileMedia->width ?? 1);
+            }
+
+            $mobileWidths = array_values(array_filter($widths, fn ($w) => $w <= 768));
+
+            foreach ($this->formats as $format) {
+                if ($format === 'jpg' || $format === 'jpeg') {
+                    continue;
+                }
+                $this->mobileSources[] = [
+                    'srcset' => $this->buildSrcsetFor($format, $mobileWidths, $mobileSrc, $mobileCrop, $mobileAspectRatio),
+                    'type' => $this->getMimeType($format),
+                    'sizes' => $this->sizes,
+                    'media' => '(max-width: 767px)',
+                ];
+            }
+        }
+
         foreach ($this->formats as $format) {
             if ($format === 'jpg' || $format === 'jpeg') {
                 continue;
             }
 
-            $this->sources[] = [
+            $source = [
                 'srcset' => $this->buildSrcset($format, $widths),
                 'type' => $this->getMimeType($format),
                 'sizes' => $this->sizes,
             ];
+
+            if ($this->hasMobileVariant) {
+                $source['media'] = '(min-width: 768px)';
+            }
+
+            $this->sources[] = $source;
         }
 
         $this->fallbackUrl = $this->buildUrl('jpg', $this->width, $this->height);
@@ -92,7 +127,23 @@ class Image extends Component
         return implode(', ', $parts);
     }
 
+    protected function buildSrcsetFor(string $format, array $widths, string $src, ?array $crop, float $aspectRatio): string
+    {
+        $parts = [];
+        foreach ($widths as $w) {
+            $h = (int) round($w * $aspectRatio);
+            $parts[] = $this->buildUrlFor($format, $w, $h, $src, $crop) . ' ' . $w . 'w';
+        }
+
+        return implode(', ', $parts);
+    }
+
     protected function buildUrl(string $format, int $width, int $height): string
+    {
+        return $this->buildUrlFor($format, $width, $height, $this->src, $this->crop);
+    }
+
+    protected function buildUrlFor(string $format, int $width, int $height, string $src, ?array $crop): string
     {
         $params = [
             'w=' . $width,
@@ -100,14 +151,14 @@ class Image extends Component
             'fit=' . $this->fit,
         ];
 
-        if ($this->crop && $this->fit === 'crop' && isset($this->crop['w'], $this->crop['h'], $this->crop['x'], $this->crop['y'])) {
-            $params[] = 'crop=' . $this->crop['w'] . ',' . $this->crop['h'] . ',' . $this->crop['x'] . ',' . $this->crop['y'];
+        if ($crop && $this->fit === 'crop' && isset($crop['w'], $crop['h'], $crop['x'], $crop['y'])) {
+            $params[] = 'crop=' . $crop['w'] . ',' . $crop['h'] . ',' . $crop['x'] . ',' . $crop['y'];
         }
 
         $params[] = 'fm=' . $format;
         $params[] = 'q=' . $this->quality;
 
-        return '/img/' . $this->src . '?' . implode('&', $params);
+        return '/img/' . $src . '?' . implode('&', $params);
     }
 
     protected function getMimeType(string $format): string

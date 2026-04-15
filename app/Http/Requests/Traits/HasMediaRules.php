@@ -18,6 +18,7 @@ trait HasMediaRules
 			'media.*.alt' => 'nullable|string|max:255',
 			'media.*.caption' => 'nullable|string|max:255',
 			'media.*.crop' => 'nullable|array',
+			'media.*.variant' => 'sometimes|in:desktop,mobile',
 		];
 	}
 }

@@ -31,6 +31,7 @@ class AttachAction
 				'alt' => $item['alt'] ?? null,
 				'caption' => $item['caption'] ?? null,
 				'crop' => $item['crop'] ?? null,
+				'variant' => $item['variant'] ?? 'desktop',
 				'sort_order' => $maxSort,
 			]);
 		}

@@ -51,6 +51,10 @@ function formatSize(bytes) {
 				class="bg-gray-900 text-white text-[9px] font-medium tracking-wide uppercase px-6 py-3 leading-none rounded-full"
 			>{{ badge }}</span>
 			<span
+				v-if="media.variant === 'mobile'"
+				class="bg-gray-900 text-white text-[9px] font-medium tracking-wide uppercase px-6 py-3 leading-none rounded-full"
+			>Mobile</span>
+			<span
 				v-if="isOg"
 				class="bg-gray-900 text-white text-[9px] font-medium tracking-wide uppercase px-6 py-3 leading-none rounded-full"
 			>OG</span>
