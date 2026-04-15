@@ -41,19 +41,19 @@ function formatSize(bytes) {
 		<!-- Info -->
 		<div v-if="showInfo" class="px-10 py-8 border-t border-gray-100 dark:border-warm-700">
 			<div class="text-xs text-gray-900 dark:text-warm-100 truncate">{{ media.original_name }}</div>
-			<div class="flex items-center gap-4 mt-2">
-				<span class="text-xs text-gray-400 dark:text-warm-500">{{ media.width }}&times;{{ media.height }} · {{ formatSize(media.size) }}</span>
+			<div class="text-xs text-gray-400 dark:text-warm-500 mt-2">{{ media.width }}&times;{{ media.height }} · {{ formatSize(media.size) }}</div>
+			<div v-if="badge || media.variant || isOg" class="flex items-center gap-4 mt-6">
 				<span
 					v-if="badge"
-					class="text-[9px] font-medium uppercase tracking-wide text-gray-500 dark:text-warm-400 border border-gray-200 dark:border-warm-600 rounded px-4 py-1 leading-none"
+					class="text-[0.625rem] font-semibold uppercase tracking-wide bg-gray-900 dark:bg-warm-100 text-white dark:text-warm-900 rounded px-6 py-2 leading-none"
 				>{{ badge }}</span>
 				<span
 					v-if="media.variant"
-					class="text-[9px] font-medium uppercase tracking-wide text-gray-500 dark:text-warm-400 border border-gray-200 dark:border-warm-600 rounded px-4 py-1 leading-none"
+					class="text-[0.625rem] font-semibold uppercase tracking-wide bg-gray-900 dark:bg-warm-100 text-white dark:text-warm-900 rounded px-6 py-2 leading-none"
 				>{{ media.variant === 'mobile' ? 'Mobile' : 'Desktop' }}</span>
 				<span
 					v-if="isOg"
-					class="text-[9px] font-medium uppercase tracking-wide text-gray-500 dark:text-warm-400 border border-gray-200 dark:border-warm-600 rounded px-4 py-1 leading-none"
+					class="text-[0.625rem] font-semibold uppercase tracking-wide bg-gray-900 dark:bg-warm-100 text-white dark:text-warm-900 rounded px-6 py-2 leading-none"
 				>OG</span>
 			</div>
 		</div>
