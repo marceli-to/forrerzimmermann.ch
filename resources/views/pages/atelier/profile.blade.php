@@ -1,12 +1,8 @@
 <x-layout.site :description="$seo?->profile_meta_description">
   <div class="grid grid-cols-2 gap-x-6">
-    @if($profile->desktopMedia->first())
+    @if($profile->media->count())
       <div>
-        <x-media.image
-          :media="$profile->desktopMedia->first()"
-          :mobileMedia="$profile->mobileMedia->first()"
-          sizes="(min-width: 768px) 50vw, 100vw"
-        />
+        <x-media.image :media="$profile->media" sizes="(min-width: 768px) 50vw, 100vw" />
       </div>
     @endif
     @if($profile)

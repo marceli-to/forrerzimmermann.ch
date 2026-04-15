@@ -5,6 +5,7 @@ namespace App\View\Components\Media;
 use App\Models\Media;
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\View\Component;
 
 class Image extends Component
@@ -29,8 +30,7 @@ class Image extends Component
     protected const WIDTHS = [480, 640, 768, 1024, 1280, 1440, 1600, 1920];
 
     public function __construct(
-        Media $media,
-        ?Media $mobileMedia = null,
+        Media|Collection $media,
         string $sizes = '100vw',
         int $maxWidth = 1600,
         ?string $alt = null,
@@ -40,9 +40,17 @@ class Image extends Component
         string $class = '',
         string $loading = 'lazy',
     ) {
-        $this->src = 'uploads/' . $media->file;
-        $this->alt = $alt ?? $media->alt ?? '';
-        $this->crop = $media->crop;
+        if ($media instanceof Collection) {
+            $desktopMedia = $media->where('variant', 'desktop')->first();
+            $mobileMedia = $media->where('variant', 'mobile')->first();
+        } else {
+            $desktopMedia = $media;
+            $mobileMedia = null;
+        }
+
+        $this->src = 'uploads/' . $desktopMedia->file;
+        $this->alt = $alt ?? $desktopMedia->alt ?? '';
+        $this->crop = $desktopMedia->crop;
         $this->fit = $fit;
         $this->quality = $quality;
         $this->formats = $formats;
@@ -51,16 +59,14 @@ class Image extends Component
         $this->sizes = $sizes;
         $this->hasMobileVariant = $mobileMedia !== null;
 
-        // Desktop aspect ratio
         if ($this->crop && isset($this->crop['w'], $this->crop['h'])) {
             $this->aspectRatio = $this->crop['h'] / $this->crop['w'];
         } else {
-            $baseWidth = $media->width ?? 1;
-            $baseHeight = $media->height ?? 1;
+            $baseWidth = $desktopMedia->width ?? 1;
+            $baseHeight = $desktopMedia->height ?? 1;
             $this->aspectRatio = $baseHeight / $baseWidth;
         }
 
-        // Largest width for img width/height attributes
         $widths = array_values(array_filter(self::WIDTHS, fn ($w) => $w <= $maxWidth));
         $this->width = end($widths) ?: $maxWidth;
         $this->height = (int) round($this->width * $this->aspectRatio);

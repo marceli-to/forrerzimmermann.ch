@@ -9,7 +9,7 @@ class LandingController extends Controller
 	public function __invoke()
 	{
 		$slides = LandingSlide::published()
-			->with(['media', 'desktopMedia', 'mobileMedia'])
+			->with('media')
 			->orderBy('sort_order')
 			->get();
 

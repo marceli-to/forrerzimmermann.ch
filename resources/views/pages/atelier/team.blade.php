@@ -1,12 +1,8 @@
 <x-layout.site :description="$seo?->team_meta_description">
   <div class="grid grid-cols-2 gap-x-6">
-    @if($page?->desktopMedia->first())
+    @if($page?->media->count())
       <div>
-        <x-media.image
-          :media="$page->desktopMedia->first()"
-          :mobileMedia="$page->mobileMedia->first()"
-          sizes="(min-width: 768px) 50vw, 100vw"
-        />
+        <x-media.image :media="$page->media" sizes="(min-width: 768px) 50vw, 100vw" />
       </div>
     @endif
     <div>
