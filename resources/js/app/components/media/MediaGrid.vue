@@ -17,9 +17,9 @@ const emit = defineEmits(['edit', 'delete', 'reorder', 'teaser', 'og'])
 const store = useMediaStore()
 const cropMedia = ref(null)
 
-async function handleCropSave({ uuid, crop }) {
+async function handleCropSave({ uuid, breakpoint, crop }) {
   try {
-    await store.setCrop(uuid, crop)
+    await store.setCrop(uuid, breakpoint, crop)
   } finally {
     cropMedia.value = null
   }

@@ -13,8 +13,10 @@ class Image extends Component
     public string $alt;
     public int $width;
     public int $height;
-    public ?array $crop;
+    public ?array $desktopCrop;
+    public ?array $mobileCrop;
     public float $aspectRatio;
+    public float $mobileAspectRatio;
     public string $fit;
     public int $quality;
     public array $formats;
@@ -22,7 +24,9 @@ class Image extends Component
     public string $loading;
     public string $sizes;
     public array $sources = [];
+    public array $mobileSources = [];
     public string $fallbackUrl;
+    public bool $hasResponsiveCrop;
 
     protected const WIDTHS = [480, 640, 768, 1024, 1280, 1440, 1600, 1920];
 
@@ -39,7 +43,6 @@ class Image extends Component
     ) {
         $this->src = 'uploads/' . $media->file;
         $this->alt = $alt ?? $media->alt ?? '';
-        $this->crop = $media->crop;
         $this->fit = $fit;
         $this->quality = $quality;
         $this->formats = $formats;
@@ -47,13 +50,25 @@ class Image extends Component
         $this->loading = $loading;
         $this->sizes = $sizes;
 
-        // Use crop dimensions for aspect ratio if crop exists, otherwise original
-        if ($this->crop && isset($this->crop['w'], $this->crop['h'])) {
-            $this->aspectRatio = $this->crop['h'] / $this->crop['w'];
+        // Extract desktop/mobile crops from nested structure
+        $this->desktopCrop = $media->crop['desktop'] ?? null;
+        $this->mobileCrop = $media->crop['mobile'] ?? null;
+        $this->hasResponsiveCrop = $this->mobileCrop !== null;
+
+        // Desktop aspect ratio
+        if ($this->desktopCrop && isset($this->desktopCrop['w'], $this->desktopCrop['h'])) {
+            $this->aspectRatio = $this->desktopCrop['h'] / $this->desktopCrop['w'];
         } else {
             $baseWidth = $media->width ?? 1;
             $baseHeight = $media->height ?? 1;
             $this->aspectRatio = $baseHeight / $baseWidth;
+        }
+
+        // Mobile aspect ratio
+        if ($this->mobileCrop && isset($this->mobileCrop['w'], $this->mobileCrop['h'])) {
+            $this->mobileAspectRatio = $this->mobileCrop['h'] / $this->mobileCrop['w'];
+        } else {
+            $this->mobileAspectRatio = $this->aspectRatio;
         }
 
         // Largest width for img width/height attributes
@@ -66,33 +81,56 @@ class Image extends Component
 
     protected function buildSources(array $widths): void
     {
+        if ($this->hasResponsiveCrop) {
+            // Mobile sources (small widths only)
+            $mobileWidths = array_values(array_filter($widths, fn ($w) => $w <= 768));
+            foreach ($this->formats as $format) {
+                if ($format === 'jpg' || $format === 'jpeg') {
+                    continue;
+                }
+                $this->mobileSources[] = [
+                    'srcset' => $this->buildSrcset($format, $mobileWidths, $this->mobileCrop, $this->mobileAspectRatio),
+                    'type' => $this->getMimeType($format),
+                    'sizes' => $this->sizes,
+                    'media' => '(max-width: 767px)',
+                ];
+            }
+        }
+
+        // Desktop sources (with media query only when mobile crop exists)
         foreach ($this->formats as $format) {
             if ($format === 'jpg' || $format === 'jpeg') {
                 continue;
             }
 
-            $this->sources[] = [
-                'srcset' => $this->buildSrcset($format, $widths),
+            $source = [
+                'srcset' => $this->buildSrcset($format, $widths, $this->desktopCrop, $this->aspectRatio),
                 'type' => $this->getMimeType($format),
                 'sizes' => $this->sizes,
             ];
+
+            if ($this->hasResponsiveCrop) {
+                $source['media'] = '(min-width: 768px)';
+            }
+
+            $this->sources[] = $source;
         }
 
-        $this->fallbackUrl = $this->buildUrl('jpg', $this->width, $this->height);
+        $this->fallbackUrl = $this->buildUrl('jpg', $this->width, $this->height, $this->desktopCrop);
     }
 
-    protected function buildSrcset(string $format, array $widths): string
+    protected function buildSrcset(string $format, array $widths, ?array $crop, float $aspectRatio): string
     {
         $parts = [];
         foreach ($widths as $w) {
-            $h = (int) round($w * $this->aspectRatio);
-            $parts[] = $this->buildUrl($format, $w, $h) . ' ' . $w . 'w';
+            $h = (int) round($w * $aspectRatio);
+            $parts[] = $this->buildUrl($format, $w, $h, $crop) . ' ' . $w . 'w';
         }
 
         return implode(', ', $parts);
     }
 
-    protected function buildUrl(string $format, int $width, int $height): string
+    protected function buildUrl(string $format, int $width, int $height, ?array $crop = null): string
     {
         $params = [
             'w=' . $width,
@@ -100,8 +138,8 @@ class Image extends Component
             'fit=' . $this->fit,
         ];
 
-        if ($this->crop && $this->fit === 'crop' && isset($this->crop['w'], $this->crop['h'], $this->crop['x'], $this->crop['y'])) {
-            $params[] = 'crop=' . $this->crop['w'] . ',' . $this->crop['h'] . ',' . $this->crop['x'] . ',' . $this->crop['y'];
+        if ($crop && $this->fit === 'crop' && isset($crop['w'], $crop['h'], $crop['x'], $crop['y'])) {
+            $params[] = 'crop=' . $crop['w'] . ',' . $crop['h'] . ',' . $crop['x'] . ',' . $crop['y'];
         }
 
         $params[] = 'fm=' . $format;
