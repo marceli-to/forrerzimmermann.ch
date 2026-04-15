@@ -43,18 +43,9 @@ function formatSize(bytes) {
 			<div class="text-xs text-gray-900 dark:text-warm-100 truncate">{{ media.original_name }}</div>
 			<div class="text-xs text-gray-400 dark:text-warm-500 mt-2">{{ media.width }}&times;{{ media.height }} · {{ formatSize(media.size) }}</div>
 			<div v-if="badge || media.variant || isOg" class="flex items-center gap-4 mt-6">
-				<span
-					v-if="badge"
-					class="text-[0.625rem] font-semibold uppercase tracking-wide bg-gray-900 dark:bg-warm-100 text-white dark:text-warm-900 rounded px-6 py-2 leading-none"
-				>{{ badge }}</span>
-				<span
-					v-if="media.variant"
-					class="text-[0.625rem] font-semibold uppercase tracking-wide bg-gray-900 dark:bg-warm-100 text-white dark:text-warm-900 rounded px-6 py-2 leading-none"
-				>{{ media.variant === 'mobile' ? 'Mobile' : 'Desktop' }}</span>
-				<span
-					v-if="isOg"
-					class="text-[0.625rem] font-semibold uppercase tracking-wide bg-gray-900 dark:bg-warm-100 text-white dark:text-warm-900 rounded px-6 py-2 leading-none"
-				>OG</span>
+				<span v-if="badge" class="text-[0.6875rem] font-medium text-amber-600 dark:text-amber-400 border border-amber-300 dark:border-amber-700 rounded-full px-8 py-3 leading-none">{{ badge }}</span>
+				<span v-if="media.variant" class="text-[0.6875rem] font-medium rounded-full px-8 py-3 leading-none" :class="media.variant === 'mobile' ? 'text-violet-600 dark:text-violet-400 border border-violet-300 dark:border-violet-700' : 'text-sky-600 dark:text-sky-400 border border-sky-300 dark:border-sky-700'">{{ media.variant === 'mobile' ? 'Mobile' : 'Desktop' }}</span>
+				<span v-if="isOg" class="text-[0.6875rem] font-medium text-emerald-600 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-700 rounded-full px-8 py-3 leading-none">OG</span>
 			</div>
 		</div>
 
