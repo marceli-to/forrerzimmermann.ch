@@ -108,33 +108,20 @@ export const useMediaStore = defineStore('media', {
 			}))
 		},
 
-		async setCrop(uuid, breakpoint, cropData) {
+		async setCrop(uuid, cropData) {
 			const index = this.items.findIndex(i => i.uuid === uuid)
 			if (index === -1) return false
 
 			const item = this.items[index]
-			const allNull = cropData.x === null && cropData.y === null
-				&& cropData.w === null && cropData.h === null
-
-			// Build the merged crop object
-			const existingCrop = item.crop || {}
-			let newCrop
-			if (allNull) {
-				newCrop = { ...existingCrop }
-				delete newCrop[breakpoint]
-				if (Object.keys(newCrop).length === 0) newCrop = null
-			} else {
-				newCrop = { ...existingCrop, [breakpoint]: cropData }
-			}
 
 			if (item._temp) {
-				this.items[index] = { ...item, crop: newCrop }
+				this.items[index] = { ...item, crop: cropData }
 				return true
 			}
 
 			this.errors = {}
 			try {
-				const { data: response } = await mediaApi.crop(uuid, { breakpoint, ...cropData })
+				const { data: response } = await mediaApi.crop(uuid, cropData)
 				this.items[index] = response.data
 				return true
 			} catch (error) {

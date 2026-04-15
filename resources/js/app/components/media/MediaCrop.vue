@@ -1,6 +1,6 @@
 <script setup>
 import { ref, watch, computed, onMounted, onUnmounted } from 'vue'
-import { PhX, PhDesktop, PhDeviceMobile } from '@phosphor-icons/vue'
+import { PhX } from '@phosphor-icons/vue'
 import { Cropper } from 'vue-advanced-cropper'
 import 'vue-advanced-cropper/dist/style.css'
 
@@ -13,49 +13,18 @@ const emit = defineEmits(['close', 'save'])
 const isOpen = ref(false)
 const cropperRef = ref(null)
 const aspectRatio = ref(null)
-const breakpoint = ref('desktop')
-
-// Store crops per breakpoint while the dialog is open
-const crops = ref({ desktop: null, mobile: null })
 
 const aspectOptions = [
   { label: 'Frei', value: null },
-  { label: '3:2', value: 3 / 2 },
+  { label: '16:9', value: 16 / 9 },
   { label: '4:3', value: 4 / 3 },
   { label: '1:1', value: 1 },
 ]
 
 watch(() => props.media, (val) => {
   isOpen.value = !!val
-  breakpoint.value = 'desktop'
   aspectRatio.value = null
-  if (val) {
-    crops.value = {
-      desktop: val.crop?.desktop || null,
-      mobile: val.crop?.mobile || null,
-    }
-  } else {
-    crops.value = { desktop: null, mobile: null }
-  }
 }, { immediate: true })
-
-function switchBreakpoint(bp) {
-  // Save current cropper state before switching
-  saveCropperState()
-  breakpoint.value = bp
-  aspectRatio.value = null
-}
-
-function saveCropperState() {
-  if (!cropperRef.value) return
-  const { coordinates } = cropperRef.value.getResult()
-  crops.value[breakpoint.value] = {
-    x: Math.round(coordinates.left),
-    y: Math.round(coordinates.top),
-    w: Math.round(coordinates.width),
-    h: Math.round(coordinates.height),
-  }
-}
 
 function close() {
   isOpen.value = false
@@ -73,13 +42,16 @@ onMounted(() => document.addEventListener('keydown', onKeydown))
 onUnmounted(() => document.removeEventListener('keydown', onKeydown))
 
 function handleSave() {
-  // Save current breakpoint state first
-  saveCropperState()
-
+  if (!cropperRef.value) return
+  const { coordinates } = cropperRef.value.getResult()
   emit('save', {
     uuid: props.media.uuid,
-    breakpoint: breakpoint.value,
-    crop: crops.value[breakpoint.value],
+    crop: {
+      x: Math.round(coordinates.left),
+      y: Math.round(coordinates.top),
+      w: Math.round(coordinates.width),
+      h: Math.round(coordinates.height),
+    },
   })
   isOpen.value = false
 }
@@ -87,26 +59,26 @@ function handleSave() {
 function handleClear() {
   emit('save', {
     uuid: props.media.uuid,
-    breakpoint: breakpoint.value,
     crop: { x: null, y: null, w: null, h: null },
   })
   isOpen.value = false
 }
 
 const defaultPosition = computed(() => {
-  const crop = crops.value[breakpoint.value]
-  if (!crop) return undefined
-  return { left: crop.x, top: crop.y }
+  if (!props.media?.crop) return undefined
+  return {
+    left: props.media.crop.x,
+    top: props.media.crop.y,
+  }
 })
 
 const defaultSize = computed(() => {
-  const crop = crops.value[breakpoint.value]
-  if (!crop) return undefined
-  return { width: crop.w, height: crop.h }
+  if (!props.media?.crop) return undefined
+  return {
+    width: props.media.crop.w,
+    height: props.media.crop.h,
+  }
 })
-
-// Force re-mount cropper when breakpoint changes
-const cropperKey = computed(() => `${props.media?.uuid}-${breakpoint.value}`)
 </script>
 
 <template>
@@ -120,36 +92,9 @@ const cropperKey = computed(() => `${props.media?.uuid}-${breakpoint.value}`)
         <!-- Header -->
         <div class="flex items-center justify-between px-24 pt-16">
           <h2 class="text-sm font-medium text-gray-900 dark:text-warm-100">Bild zuschneiden</h2>
-          <div class="flex items-center gap-4">
-            <!-- Desktop/Mobile toggle -->
-            <div class="flex items-center border border-gray-200 dark:border-warm-700 rounded-md overflow-hidden mr-8">
-              <button
-                type="button"
-                class="flex items-center gap-4 text-xs px-10 py-4 transition-colors cursor-pointer"
-                :class="breakpoint === 'desktop'
-                  ? 'bg-gray-900 text-white dark:bg-warm-100 dark:text-warm-900'
-                  : 'text-gray-600 hover:text-gray-900 dark:text-warm-400 dark:hover:text-warm-100'"
-                @click="switchBreakpoint('desktop')"
-              >
-                <PhDesktop :size="14" weight="light" />
-                Desktop
-              </button>
-              <button
-                type="button"
-                class="flex items-center gap-4 text-xs px-10 py-4 transition-colors cursor-pointer"
-                :class="breakpoint === 'mobile'
-                  ? 'bg-gray-900 text-white dark:bg-warm-100 dark:text-warm-900'
-                  : 'text-gray-600 hover:text-gray-900 dark:text-warm-400 dark:hover:text-warm-100'"
-                @click="switchBreakpoint('mobile')"
-              >
-                <PhDeviceMobile :size="14" weight="light" />
-                Mobile
-              </button>
-            </div>
-            <button type="button" class="text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100 transition-colors cursor-pointer" @click="close">
-              <PhX :size="16" weight="light" />
-            </button>
-          </div>
+          <button type="button" class="text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100 transition-colors cursor-pointer" @click="close">
+            <PhX :size="16" weight="light" />
+          </button>
         </div>
 
         <!-- Cropper -->
@@ -157,7 +102,6 @@ const cropperKey = computed(() => `${props.media?.uuid}-${breakpoint.value}`)
           <Cropper
             v-if="media"
             ref="cropperRef"
-            :key="cropperKey"
             :src="media.original_url"
             :stencil-props="{ aspectRatio }"
             :default-position="defaultPosition"

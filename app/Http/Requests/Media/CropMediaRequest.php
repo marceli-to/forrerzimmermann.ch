@@ -14,7 +14,6 @@ class CropMediaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'breakpoint' => 'required|in:desktop,mobile',
             'x' => 'nullable|integer|min:0|required_with:y,w,h',
             'y' => 'nullable|integer|min:0|required_with:x,w,h',
             'w' => 'nullable|integer|min:1|required_with:x,y,h',

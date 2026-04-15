@@ -9,9 +9,8 @@ class MediaResource extends JsonResource
 {
 	public function toArray(Request $request): array
 	{
-		$desktopCrop = $this->crop['desktop'] ?? null;
-		$cropParam = $desktopCrop && isset($desktopCrop['w'], $desktopCrop['h'], $desktopCrop['x'], $desktopCrop['y'])
-			? '&crop=' . $desktopCrop['w'] . ',' . $desktopCrop['h'] . ',' . $desktopCrop['x'] . ',' . $desktopCrop['y']
+		$cropParam = $this->crop && isset($this->crop['w'], $this->crop['h'], $this->crop['x'], $this->crop['y'])
+			? '&crop=' . $this->crop['w'] . ',' . $this->crop['h'] . ',' . $this->crop['x'] . ',' . $this->crop['y']
 			: '';
 
 		return [
