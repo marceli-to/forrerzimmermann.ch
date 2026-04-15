@@ -1,5 +1,5 @@
 <script setup>
-import { PhTrash, PhPencil, PhStar, PhImage, PhCrop, PhArrowSquareOut } from '@phosphor-icons/vue'
+import { PhTrash, PhPencil, PhStar, PhImage, PhCrop, PhArrowSquareOut, PhDesktop, PhDeviceMobile } from '@phosphor-icons/vue'
 
 defineProps({
 	media: { type: Object, required: true },
@@ -14,7 +14,7 @@ defineProps({
 	hasCrop: { type: Boolean, default: false },
 })
 
-const emit = defineEmits(['edit', 'delete', 'teaser', 'og', 'crop', 'click'])
+const emit = defineEmits(['edit', 'delete', 'teaser', 'og', 'crop', 'click', 'variant'])
 
 function formatSize(bytes) {
 	if (!bytes) return '–'
@@ -63,6 +63,10 @@ function formatSize(bytes) {
 				</button>
 				<button v-if="hasCrop" type="button" class="text-white/70 hover:text-white cursor-pointer" title="Zuschneiden" @click.stop="emit('crop', media)">
 					<PhCrop :size="15" weight="light" />
+				</button>
+				<button type="button" class="text-white/70 hover:text-white cursor-pointer" :title="media.variant === 'mobile' ? 'Auf Desktop setzen' : 'Auf Mobile setzen'" @click.stop="emit('variant', media)">
+					<PhDeviceMobile v-if="media.variant === 'desktop'" :size="15" weight="light" />
+					<PhDesktop v-else :size="15" weight="light" />
 				</button>
 				<button v-if="hasTeaser" type="button" class="text-white/70 hover:text-white cursor-pointer" title="Als Teaser setzen" @click.stop="emit('teaser', media)">
 					<PhStar :size="15" :weight="isTeaser ? 'fill' : 'light'" />

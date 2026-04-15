@@ -17,6 +17,11 @@ const emit = defineEmits(['edit', 'delete', 'reorder', 'teaser', 'og'])
 const store = useMediaStore()
 const cropMedia = ref(null)
 
+async function handleVariantToggle(media) {
+  const newVariant = media.variant === 'mobile' ? 'desktop' : 'mobile'
+  await store.updateItem(media.uuid, { variant: newVariant })
+}
+
 async function handleCropSave({ uuid, crop }) {
   try {
     await store.setCrop(uuid, crop)
@@ -54,6 +59,7 @@ const dragItems = computed({
 					@teaser="emit('teaser', $event)"
 					@og="emit('og', $event)"
 					@delete="emit('delete', $event)"
+					@variant="handleVariantToggle"
 					@crop="cropMedia = $event"
 				/>
 			</div>
