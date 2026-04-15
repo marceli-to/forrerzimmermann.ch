@@ -41,23 +41,21 @@ function formatSize(bytes) {
 		<!-- Info -->
 		<div v-if="showInfo" class="px-10 py-8 border-t border-gray-100 dark:border-warm-700">
 			<div class="text-xs text-gray-900 dark:text-warm-100 truncate">{{ media.original_name }}</div>
-			<div class="text-xs text-gray-400 dark:text-warm-500 mt-2">{{ media.width }}&times;{{ media.height }} · {{ formatSize(media.size) }}</div>
-		</div>
-
-		<!-- Badges: top-left -->
-		<div class="absolute top-6 left-6 flex flex-col items-start gap-4 pointer-events-none">
-			<span
-				v-if="badge"
-				class="bg-gray-900 text-white text-[9px] font-medium tracking-wide uppercase px-6 py-3 leading-none rounded-full"
-			>{{ badge }}</span>
-			<span
-				v-if="media.variant"
-				class="bg-gray-900 text-white text-[9px] font-medium tracking-wide uppercase px-6 py-3 leading-none rounded-full"
-			>{{ media.variant === 'mobile' ? 'Mobile' : 'Desktop' }}</span>
-			<span
-				v-if="isOg"
-				class="bg-gray-900 text-white text-[9px] font-medium tracking-wide uppercase px-6 py-3 leading-none rounded-full"
-			>OG</span>
+			<div class="flex items-center gap-4 mt-2">
+				<span class="text-xs text-gray-400 dark:text-warm-500">{{ media.width }}&times;{{ media.height }} · {{ formatSize(media.size) }}</span>
+				<span
+					v-if="badge"
+					class="text-[9px] font-medium uppercase tracking-wide text-gray-500 dark:text-warm-400 border border-gray-200 dark:border-warm-600 rounded px-4 py-1 leading-none"
+				>{{ badge }}</span>
+				<span
+					v-if="media.variant"
+					class="text-[9px] font-medium uppercase tracking-wide text-gray-500 dark:text-warm-400 border border-gray-200 dark:border-warm-600 rounded px-4 py-1 leading-none"
+				>{{ media.variant === 'mobile' ? 'Mobile' : 'Desktop' }}</span>
+				<span
+					v-if="isOg"
+					class="text-[9px] font-medium uppercase tracking-wide text-gray-500 dark:text-warm-400 border border-gray-200 dark:border-warm-600 rounded px-4 py-1 leading-none"
+				>OG</span>
+			</div>
 		</div>
 
 		<!-- Overlay actions: bar slides down from top on hover -->
