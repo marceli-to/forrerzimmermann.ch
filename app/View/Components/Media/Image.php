@@ -57,6 +57,10 @@ class Image extends Component
             $mobileMedia = null;
         }
 
+        if (!$desktopMedia) {
+            throw new \InvalidArgumentException('Image component requires at least one media item.');
+        }
+
         $this->src = 'uploads/' . $desktopMedia->file;
         $this->alt = $alt ?? $desktopMedia->alt ?? '';
         $this->crop = $desktopMedia->crop;
@@ -77,7 +81,10 @@ class Image extends Component
         }
 
         $widths = array_values(array_filter(self::WIDTHS, fn ($w) => $w <= $maxWidth));
-        $this->width = end($widths) ?: $maxWidth;
+        if (empty($widths)) {
+            $widths = [$maxWidth];
+        }
+        $this->width = end($widths);
         $this->height = (int) round($this->width * $this->aspectRatio);
 
         $this->buildSources($widths, $mobileMedia);
