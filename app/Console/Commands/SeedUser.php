@@ -23,6 +23,16 @@ class SeedUser extends Command
             ]
         );
 
+        User::firstOrCreate(
+            ['email' => 'bachmann@bivgrafik.ch'],
+            [
+                'firstname' => 'Siri',
+                'name' => 'Bachmann',
+                'password' => Hash::make('fzac-3492-siri-bach'),
+                'role' => 'admin',
+            ]
+        );
+
         $this->info('Admin user seeded.');
     }
 }
