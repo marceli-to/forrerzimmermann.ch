@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\AtelierController;
 use App\Http\Controllers\Api\KontaktController;
 use App\Http\Controllers\Api\SeoController;
 use App\Http\Controllers\Api\TopicController;
+use App\Http\Controllers\Api\UserController;
 
 Route::prefix('dashboard')
 	->middleware(['web', 'auth'])
@@ -110,6 +111,16 @@ Route::prefix('dashboard')
 			->group(function () {
 				Route::get('/', 'show');
 				Route::put('/', 'update');
+			});
+
+		Route::controller(UserController::class)
+			->prefix('users')
+			->group(function () {
+				Route::get('/', 'index');
+				Route::post('/', 'store');
+				Route::get('/{user}', 'show');
+				Route::put('/{user}', 'update');
+				Route::delete('/{user}', 'destroy');
 			});
 
 	});

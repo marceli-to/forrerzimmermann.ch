@@ -16,6 +16,8 @@ import JobForm from '@/views/jobs/Form.vue'
 import KontaktForm from '@/views/contact/Form.vue'
 import MediaIndex from '@/views/media/Index.vue'
 import SeoForm from '@/views/seo/Index.vue'
+import UserIndex from '@/views/users/Index.vue'
+import UserForm from '@/views/users/Form.vue'
 
 const routes = [
   {
@@ -141,6 +143,24 @@ const routes = [
     name: 'seo.edit',
     component: SeoForm,
     meta: { title: 'SEO' },
+  },
+  {
+    path: '/dashboard/users',
+    name: 'users.index',
+    component: UserIndex,
+    meta: { title: 'Benutzer' },
+  },
+  {
+    path: '/dashboard/users/create',
+    name: 'users.create',
+    component: UserForm,
+    meta: { title: 'Neuer Benutzer' },
+  },
+  {
+    path: '/dashboard/users/:id/edit',
+    name: 'users.edit',
+    component: UserForm,
+    meta: { title: 'Benutzer bearbeiten' },
   },
 ]
 

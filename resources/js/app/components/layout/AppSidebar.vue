@@ -9,6 +9,7 @@ import {
 	PhHouseSimple,
 	PhSignOut,
 	PhTag,
+	PhUserCircle,
 	PhUsers,
 } from '@phosphor-icons/vue'
 
@@ -41,6 +42,7 @@ const navigation = [
 	{
 		items: [
 			{ name: 'SEO', to: '/dashboard/seo', icon: PhGear },
+			{ name: 'Benutzer', to: '/dashboard/users', icon: PhUserCircle },
 		],
 	},
 ]
