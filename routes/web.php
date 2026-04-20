@@ -7,6 +7,11 @@ use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\AtelierController;
 use App\Http\Controllers\ContactController;
 
+/** Prototype routes */
+Route::view('/prototype/landing', 'pages.prototype.landing');
+Route::view('/prototype/team', 'pages.prototype.team');
+
+
 Route::get('/img/{path}', [ImageController::class, 'show'])->where('path', '.*');
 
 Route::get('/', LandingController::class)->name('page.landing');
