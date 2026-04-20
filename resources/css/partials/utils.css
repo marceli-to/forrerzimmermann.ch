@@ -1,0 +1,13 @@
+/* Alpine.js cloak */
+[x-cloak] {
+  display: none;
+}
+
+/* Debug for grids */
+.debug-grid {
+  @apply bg-yellow-50/20;
+}
+
+.debug-grid > * > * {
+  @apply outline outline-1 outline-yellow-500/40 text-orange-500/50 min-h-screen;
+}

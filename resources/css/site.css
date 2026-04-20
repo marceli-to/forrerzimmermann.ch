@@ -1,22 +1,36 @@
 @import 'tailwindcss';
-
-@font-face {
-  font-family: 'Geist';
-  src: url('../fonts/Geist-Variable.woff2') format('woff2');
-  font-weight: 100 900;
-  font-style: normal;
-  font-display: swap;
-}
-
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 @source '../**/*.blade.php';
 @source '../**/*.js';
 
-@theme {
-  --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+@import "./partials/fonts.css";
+@import "./partials/spacing.css";
+@import "./partials/utils.css";
+
+@layer base {
+  :root {
+    --header-height: 4rem;     /* 64px */
+    --header-height-md: 7.5rem; /* 120px */
+    --footer-height: 2rem; /* 32px */
+    --footer-height-md: 3.75rem; /* 60px */
+    --viewport-height: calc(100vh - var(--header-height) - var(--footer-height));
+    --viewport-height-md: calc(100vh - var(--header-height-md) - var(--footer-height-md));
+  }
 }
 
-[x-cloak] {
-  display: none;
+@theme {
+
+  /* Fonts */
+  --font-sans: 'Chroma ST', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  
+  /* Colors */
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-accent: #a400ff;
+
+}
+
+strong, b {
+  @apply font-medium;
 }
