@@ -9,7 +9,7 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="shortcut icon" href="/favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="forrer zimmermann architektur" />
+<meta name="apple-mobile-web-app-title" content="Forrer Zimmermann Architekten" />
 <link rel="manifest" href="/site.webmanifest" />
 @vite(['resources/css/site.css', 'resources/js/site.js'])
 </head>
