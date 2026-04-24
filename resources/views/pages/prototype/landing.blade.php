@@ -13,33 +13,33 @@
 <link rel="manifest" href="/site.webmanifest" />
 @vite(['resources/css/site.css', 'resources/js/site.js'])
 </head>
-<body 
-  class="antialiased font-sans flex flex-col min-h-screen"
+<body
+  class="antialiased font-sans h-screen flex flex-col"
   x-data="{ menu: false }">
   <x-debug />
 
-  <header class="bg-orange-200/40 border-b border-b-black w-full md:h-(--header-height-md) px-32 flex flex-col justify-center items-center">
+  <header class="bg-orange-200/40 border-b border-b-black w-full shrink-0 h-[var(--header-height-md)] px-32 flex flex-col justify-center items-center">
     [HEADER]
   </header>
 
-  <main 
-    role="main" 
-    class="flex-1" 
+  <main
+    role="main"
+    class="flex-1 min-h-0 overflow-hidden"
     data-gallery="landing">
-    <div class="swiper">
+    <div class="swiper h-full">
       <div class="swiper-wrapper">
 
         <div class="swiper-slide px-32">
-          <x-grid.container>
-            <x-grid.span class="col-span-8 col-start-3">
+          <x-grid.container class="h-full">
+            <x-grid.span class="col-span-12 col-span-10 col-start-1 xl:col-span-8 xl:col-start-3 h-full">
               <img src="/img/dummy-content.jpg" alt="Dummy Content" class="w-full h-full object-cover">
             </x-grid.span>
           </x-grid.container>
         </div>
 
         <div class="swiper-slide px-32">
-          <x-grid.container>
-            <x-grid.span class="col-span-8 -ml-32">
+          <x-grid.container class="h-full">
+            <x-grid.span class="col-span-8 -ml-32 h-full">
               <img src="/img/dummy-content.jpg" alt="Dummy Content" class="w-full h-full object-cover">
             </x-grid.span>
             <x-grid.span class="col-span-4 bg-green-200/40">
@@ -53,7 +53,7 @@
     </div>
   </main>
 
-  <footer class="sticky bottom-0 bg-gray-200/30 border-t border-t-black h-(--footer-height-md) px-32 flex justify-between items-center">
+  <footer class="bg-gray-200/30 border-t border-t-black shrink-0 h-[var(--footer-height-md)] px-32 flex justify-between items-center">
     <button type="button" data-gallery-prev="landing" aria-label="Previous slide">←</button>
     [FOOTER]
     <button type="button" data-gallery-next="landing" aria-label="Next slide">→</button>

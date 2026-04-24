@@ -13,30 +13,31 @@
 <link rel="manifest" href="/site.webmanifest" />
 @vite(['resources/css/site.css', 'resources/js/site.js'])
 </head>
-<body 
-  class="antialiased font-sans flex flex-col min-h-screen"
+<body
+  class="antialiased font-sans h-screen flex flex-col"
   x-data="{ menu: false }">
   <x-debug />
 
-  <header class="bg-orange-200/40 border-b border-b-black w-full md:h-(--header-height-md) px-32 flex flex-col justify-center items-center">
+  <header class="bg-orange-200/40 border-b border-b-black w-full shrink-0 h-[var(--header-height-md)] px-32 flex flex-col justify-center items-center">
     [HEADER]
   </header>
 
-  <main 
-    role="main" 
-    class="flex-1 px-32">
-    <x-grid.container>
-      <x-grid.span class="col-span-8 -ml-32">
+  <main role="main" class="flex-1 min-h-0 px-32 overflow-hidden">
+
+    <x-grid.container class="h-full">
+      <x-grid.span class="col-span-8 -ml-32 min-h-0">
         <img src="/img/dummy-content.jpg" alt="Dummy Content" class="w-full h-full object-cover">
       </x-grid.span>
-      <x-grid.span class="col-span-4 bg-green-200/40">
+
+      <x-grid.span class="col-span-4 bg-green-200/40 min-h-0 overflow-auto">
         <h2>Praktikumstelle</h2>
         <p>Für Mitarbeit an Bauprojekten suchen wir ab sofort eine Praktikantin/einen Praktikanten. Von Vorteil sind vier Semester Architekturstudium, gute Deutschkenntnisse und Erfahrung mit VectorWorks</p>
       </x-grid.span>
     </x-grid.container>
+    
   </main>
 
-  <footer class="sticky bottom-0 bg-gray-200/30 border-t border-t-black h-(--footer-height-md) px-32 flex justify-between items-center">
+  <footer class="bg-gray-200/30 border-t border-t-black shrink-0 h-[var(--footer-height-md)] px-32 flex justify-between items-center">
     [FOOTER]
   </footer>
 </body>

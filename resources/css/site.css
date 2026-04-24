@@ -14,8 +14,6 @@
     --header-height-md: 7.5rem; /* 120px */
     --footer-height: 2rem; /* 32px */
     --footer-height-md: 3.75rem; /* 60px */
-    --viewport-height: calc(100vh - var(--header-height) - var(--footer-height));
-    --viewport-height-md: calc(100vh - var(--header-height-md) - var(--footer-height-md));
   }
 }
 
