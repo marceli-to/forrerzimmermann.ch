@@ -14,11 +14,13 @@
 @vite(['resources/css/site.css', 'resources/js/site.js'])
 </head>
 <body
-  class="antialiased font-sans h-screen flex flex-col text-black"
+  class="antialiased font-sans md:h-screen flex flex-col text-black"
   x-data="{ menu: false }">
   <x-debug class="hidden" />
 
-  <header class="bg-red-100/50 border-b border-b-black w-full h-[var(--header-height)] md:h-[var(--header-height-md)] p-16 flex flex-col justify-center shrink-0">
+  <header 
+    class="sticky top-0 md:relative bg-red-100/50 border-b border-b-black w-full h-[var(--header-height)] md:h-[var(--header-height-md)] p-16 flex flex-col justify-center shrink-0 transition-transform duration-600 ease-out will-change-transform [&.is-hidden]:-translate-y-full motion-reduce:transition-none motion-reduce:[&.is-hidden]:translate-y-0" 
+    data-header>
     <div class="relative flex flex-col w-full gap-y-[0.28125rem] leading-none">
       <x-icons.logo.fz class="w-212 h-auto" />
       <x-icons.logo.a class="w-180 h-auto relative ml-1 transition-transform duration-900 delay-600 ease-in-out translate-x-[calc(100vw-32px-100%)] will-change-transform [&.is-ready]:translate-x-0 motion-reduce:transition-none motion-reduce:translate-x-0" data-logo />
@@ -27,9 +29,13 @@
 
   <main
     role="main"
-    class="flex-1 min-h-0 overflow-hidden"
+    class="md:flex-1 md:min-h-0 md:overflow-hidden"
     data-gallery="landing">
-    <div class="swiper h-full">
+    <div class="aspect-square w-full bg-yellow-50 mb-12"></div>
+    <div class="aspect-square w-full bg-orange-50 mb-12"></div>
+    <div class="aspect-square w-full bg-green-50 mb-12"></div>
+
+    <div class="swiper h-full !hidden">
       <div class="swiper-wrapper">
 
         <div class="swiper-slide px-32">

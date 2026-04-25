@@ -10,6 +10,7 @@ use App\Http\Controllers\ContactController;
 /** Prototype routes */
 Route::view('/prototype/landing', 'pages.prototype.landing');
 Route::view('/prototype/team', 'pages.prototype.team');
+Route::view('/prototype/works', 'pages.prototype.works');
 
 
 Route::get('/img/{path}', [ImageController::class, 'show'])->where('path', '.*');
