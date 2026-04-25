@@ -14,12 +14,15 @@
 @vite(['resources/css/site.css', 'resources/js/site.js'])
 </head>
 <body
-  class="antialiased font-sans h-screen flex flex-col"
+  class="antialiased font-sans h-screen flex flex-col text-black"
   x-data="{ menu: false }">
-  <x-debug />
+  <x-debug class="hidden" />
 
-  <header class="bg-orange-200/40 border-b border-b-black w-full shrink-0 h-[var(--header-height-md)] px-32 flex flex-col justify-center items-center">
-    [HEADER]
+  <header class="bg-red-100/50 border-b border-b-black w-full h-[var(--header-height)] md:h-[var(--header-height-md)] p-16 flex flex-col justify-center shrink-0">
+    <div class="relative flex flex-col w-full gap-y-[0.28125rem] leading-none">
+      <x-icons.logo.fz class="w-212 h-auto" />
+      <x-icons.logo.a class="w-180 h-auto relative ml-1 transition-transform duration-900 delay-600 ease-out translate-x-[calc(100vw-32px-100%)] will-change-transform [&.is-ready]:translate-x-0 motion-reduce:transition-none motion-reduce:translate-x-0" data-animated-logo />
+    </div>
   </header>
 
   <main

@@ -10,9 +10,9 @@
 
 @layer base {
   :root {
-    --header-height: 4rem;     /* 64px */
+    --header-height: 6.875rem; /* 110px */
     --header-height-md: 7.5rem; /* 120px */
-    --footer-height: 2rem; /* 32px */
+    --footer-height: 3.75rem; /* 60px */
     --footer-height-md: 3.75rem; /* 60px */
   }
 }

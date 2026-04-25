@@ -18,8 +18,8 @@
   x-data="{ menu: false }">
   <x-debug />
 
-  <header class="bg-orange-200/40 border-b border-b-black w-full shrink-0 h-[var(--header-height-md)] px-32 flex flex-col justify-center items-center">
-    [HEADER]
+  <header class="bg-red-100/50 border-b border-b-black w-full h-[var(--header-height)] md:h-[var(--header-height-md)] p-16 flex flex-col justify-center shrink-0">
+    <x-icons.logo.fza class="w-212 h-auto" />
   </header>
 
   <main role="main" class="flex-1 min-h-0 px-32 overflow-hidden">
