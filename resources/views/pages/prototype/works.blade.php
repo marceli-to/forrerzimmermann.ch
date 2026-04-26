@@ -62,7 +62,7 @@
     </div>
   </main>
 
-  <footer class="sticky bottom-0 left-0 w-full bg-gray-200/30 border-t border-t-black shrink-0 h-[var(--footer-height-md)] px-32 flex justify-between items-center">
+  <footer class="sticky bottom-0 left-0 w-full bg-gray-200/30 border-t border-t-black shrink-0 h-[var(--footer-height)] px-32 flex justify-between items-center">
     <button type="button" data-gallery-prev="landing" aria-label="Previous slide">←</button>
     [FOOTER]
     <button type="button" data-gallery-next="landing" aria-label="Next slide">→</button>

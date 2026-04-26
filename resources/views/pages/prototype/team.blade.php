@@ -37,7 +37,7 @@
     
   </main>
 
-  <footer class="bg-gray-200/30 border-t border-t-black shrink-0 h-[var(--footer-height-md)] px-32 flex justify-between items-center">
+  <footer class="bg-gray-200/30 border-t border-t-black shrink-0 h-[var(--footer-height)] px-32 flex justify-between items-center">
     [FOOTER]
   </footer>
 </body>

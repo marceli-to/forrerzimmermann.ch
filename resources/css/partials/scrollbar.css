@@ -1,0 +1,20 @@
+@layer base {
+  :root {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  :root::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  :root::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  :root::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 999px;
+  }
+}
