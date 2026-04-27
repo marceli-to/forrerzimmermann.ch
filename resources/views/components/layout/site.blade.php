@@ -14,6 +14,8 @@
     <x-layout.partials.main>
       {{ $slot }}
     </x-layout.partials.main>
-    <x-layout.partials.footer />
+    <x-layout.partials.footer>
+      {{ $footer ?? '' }}
+    </x-layout.partials.footer>
   </x-layout.partials.body>
 </x-layout.partials.html>

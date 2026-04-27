@@ -1,12 +1,12 @@
 import Alpine from 'alpinejs';
 import Collapse from '@alpinejs/collapse';
-import { initGallery } from './modules/gallery';
-import { initAnimatedLogo } from './modules/animated-logo';
-import { initDisappear } from './modules/disappear';
+import { initSlides } from './modules/slides';
+import { initLogo } from './modules/logo';
+import { initShy } from './modules/shy';
 
 Alpine.plugin(Collapse);
 Alpine.start();
 
-initGallery();
-initAnimatedLogo();
-initDisappear();
+initSlides();
+initLogo();
+initShy();

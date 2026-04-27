@@ -1,5 +1,6 @@
 <body 
-  class="antialiased flex flex-col min-h-screen"
+  class="antialiased font-sans h-screen flex flex-col text-black"
   x-data="{ menu: false }">
+  <x-debug />
   {{ $slot }}
 </body>

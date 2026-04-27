@@ -1,11 +1,14 @@
-<header class="p-4">
-	<nav class="flex gap-x-4">
-		<a href="{{ route('page.landing') }}">Start</a>
-		<a href="{{ route('page.projects') }}">Projekte</a>
-		<a href="{{ route('page.worklist') }}">Werkliste</a>
-		<a href="{{ route('page.atelier.profile') }}">Profil</a>
-		<a href="{{ route('page.atelier.team') }}">Team</a>
-		<a href="{{ route('page.atelier.jobs') }}">Jobs</a>
-		<a href="{{ route('page.contact') }}">Kontakt</a>
-	</nav>
+<header 
+  class="bg-white sticky top-0 z-40 md:relative border-b border-b-black w-full h-[var(--header-height)] xl:h-[var(--header-height-md)] px-16 xl:px-32 pt-16 xl:pt-21 shrink-0 transition-transform duration-600 ease-out will-change-transform [&.is-hidden]:-translate-y-full motion-reduce:transition-none motion-reduce:[&.is-hidden]:translate-y-0" 
+  data-shy>
+  @if (request()->routeIs('page.prototype.landing') || request()->routeIs('page.landing'))
+    <x-logo.animated />
+  @else
+  <a 
+    href="{{ route('page.prototype.landing') }}"
+    class="block"
+    aria-label="Zurück zur Startseite">
+    <x-logo.default />
+  </a>
+  @endif
 </header>

@@ -35,5 +35,5 @@
 <meta name="twitter:title" content="{{ $metaTitle }}" />
 <meta name="twitter:description" content="{{ $metaDescription }}" />
 <meta name="twitter:image" content="{{ $ogImageUrl }}" />
-@vite(['resources/css/site.css', 'resources/js/site.js'])
+@vite(['resources/css/site.css', 'resources/js/site.js', 'resources/js/debug.js'])
 </head>

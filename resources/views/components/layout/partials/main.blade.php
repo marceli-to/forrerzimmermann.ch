@@ -1,3 +1,3 @@
-<main role="main" class="flex-1 p-4">
+<main role="main" class="flex-1 md:min-h-0 md:overflow-hidden">
   {{ $slot }}
 </main>

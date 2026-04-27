@@ -1,6 +1,6 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-DjWq3cjD.css",
+    "file": "assets/app-DNNta645.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -9,7 +9,7 @@
     ]
   },
   "resources/css/site.css": {
-    "file": "assets/site-D_fMsEYq.css",
+    "file": "assets/site-BL7w1uox.css",
     "src": "resources/css/site.css",
     "isEntry": true,
     "name": "site",
@@ -34,7 +34,7 @@
     "src": "resources/fonts/ChromaST-Regular.woff2"
   },
   "resources/js/app/app.js": {
-    "file": "assets/app-e4ytGsic.js",
+    "file": "assets/app-BXqMFhsP.js",
     "name": "app",
     "src": "resources/js/app/app.js",
     "isEntry": true,
@@ -42,8 +42,14 @@
       "assets/app-Dp7sk0cz.css"
     ]
   },
+  "resources/js/debug.js": {
+    "file": "assets/debug-Cp8JIGGA.js",
+    "name": "debug",
+    "src": "resources/js/debug.js",
+    "isEntry": true
+  },
   "resources/js/site.js": {
-    "file": "assets/site-KGWD_tAI.js",
+    "file": "assets/site-3dvWqJ7z.js",
     "name": "site",
     "src": "resources/js/site.js",
     "isEntry": true,

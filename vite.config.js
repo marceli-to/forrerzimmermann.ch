@@ -10,6 +10,7 @@ export default defineConfig({
             input: [
                 'resources/css/site.css',
                 'resources/js/site.js',
+                'resources/js/debug.js',
                 'resources/css/app.css',
                 'resources/js/app/app.js',
             ],

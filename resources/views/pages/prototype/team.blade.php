@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="overflow-y-scroll">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="overflow-y-auto">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,27 +18,25 @@
   x-data="{ menu: false }">
   <x-debug />
 
-  <header class="bg-red-100/50 border-b border-b-black w-full h-[var(--header-height)] md:h-[var(--header-height-md)] p-16 flex flex-col justify-center shrink-0">
-    <x-icons.logo.fza class="w-212 h-auto" />
-  </header>
+  <x-layout.partials.header />
 
-  <main role="main" class="flex-1 min-h-0 px-32 overflow-hidden">
+  <main role="main" class="flex-1 min-h-0 md:px-32 overflow-hidden">
 
     <x-grid.container class="h-full">
-      <x-grid.span class="col-span-8 -ml-32 min-h-0">
+      <x-grid.span class="md:col-span-8 md:-ml-32 md:min-h-0">
         <img src="/img/dummy-content.jpg" alt="Dummy Content" class="w-full h-full object-cover">
       </x-grid.span>
 
-      <x-grid.span class="col-span-4 bg-green-200/40 min-h-0 overflow-auto">
-        <h2>Praktikumstelle</h2>
-        <p>Für Mitarbeit an Bauprojekten suchen wir ab sofort eine Praktikantin/einen Praktikanten. Von Vorteil sind vier Semester Architekturstudium, gute Deutschkenntnisse und Erfahrung mit VectorWorks</p>
+      <x-grid.span class="col-span-4 px-16 py-16 md:px-0 min-h-0 overflow-auto">
+        <h2 class="text-[23px] leading-[1.18] mb-0">Katrin Zimmermann</h2>
+        <div class="text-[18px] leading-[1.33]">
+          Architektin MSc ETH<br>kzi@forrerzimmermann.ch
+        </div>
       </x-grid.span>
     </x-grid.container>
     
   </main>
 
-  <footer class="bg-gray-200/30 border-t border-t-black shrink-0 h-[var(--footer-height)] px-32 flex justify-between items-center">
-    [FOOTER]
-  </footer>
+  <x-layout.partials.footer />
 </body>
 </html>

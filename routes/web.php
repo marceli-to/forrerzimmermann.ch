@@ -8,9 +8,9 @@ use App\Http\Controllers\AtelierController;
 use App\Http\Controllers\ContactController;
 
 /** Prototype routes */
-Route::view('/prototype/landing', 'pages.prototype.landing');
-Route::view('/prototype/team', 'pages.prototype.team');
-Route::view('/prototype/works', 'pages.prototype.works');
+Route::view('/prototype/landing', 'pages.prototype.landing')->name('page.prototype.landing');
+Route::view('/prototype/team', 'pages.prototype.team')->name('page.prototype.team');
+Route::view('/prototype/works', 'pages.prototype.works')->name('page.prototype.works');
 
 
 Route::get('/img/{path}', [ImageController::class, 'show'])->where('path', '.*');

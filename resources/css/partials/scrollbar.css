@@ -1,19 +1,26 @@
 @layer base {
-  :root {
+  /* Firefox */
+  * {
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;
   }
 
-  :root::-webkit-scrollbar {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  /* WebKit (Chrome, Safari, Edge) */
+  *::-webkit-scrollbar {
     width: 5px;
     height: 5px;
   }
 
-  :root::-webkit-scrollbar-track {
+  *::-webkit-scrollbar-track {
     background: transparent;
   }
 
-  :root::-webkit-scrollbar-thumb {
+  *::-webkit-scrollbar-thumb {
     background: var(--border);
     border-radius: 999px;
   }

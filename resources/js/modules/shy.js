@@ -1,7 +1,7 @@
-export function initDisappear(root = document) {
+export function initShy(root = document) {
   const mq = window.matchMedia('(min-width: 768px)');
 
-  root.querySelectorAll('[data-header]').forEach((el) => {
+  root.querySelectorAll('[data-shy]').forEach((el) => {
     const getY = () => window.scrollY;
 
     let lastY = getY();
