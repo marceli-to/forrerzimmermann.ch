@@ -2,20 +2,20 @@
   class="_bg-white sticky top-0 z-40 md:relative border-b border-b-black w-full h-[var(--header-height)] xl:h-[var(--header-height-md)] px-16 xl:px-32 pt-16 xl:pt-21 shrink-0 transition-transform duration-600 ease-out will-change-transform [&.is-hidden]:-translate-y-full motion-reduce:transition-none motion-reduce:[&.is-hidden]:translate-y-0" 
   data-shy>
   <x-grid.container>
-    <x-grid.span class="xl:col-span-9">
+    <x-grid.span class="md:col-span-6 xl:col-span-8">
       @if (request()->routeIs('page.landing'))
-        <x-logo.animated />
+        <x-icons.logo class="w-212 xl:w-214 h-auto overflow-visible [&_[data-logo-path]]:transition-transform [&_[data-logo-path]]:duration-900 [&_[data-logo-path]]:delay-600 [&_[data-logo-path]]:ease-in-out [&_[data-logo-path]]:translate-x-[calc(100vw-32px-100%)] md:[&_[data-logo-path]]:translate-x-[calc(100vw-64px-100%)] [&_[data-logo-path]]:will-change-transform [&.is-ready_[data-logo-path]]:translate-x-0 motion-reduce:[&_[data-logo-path]]:transition-none motion-reduce:[&_[data-logo-path]]:translate-x-0" />
       @else
         <a 
           href="{{ route('page.landing') }}"
           class="block"
           aria-label="Zurück zur Startseite">
-          <x-logo.static />
+          <x-icons.logo class="w-212 xl:w-214 h-auto" />
         </a>
       @endif
     </x-grid.span>
 
-    <x-grid.span class="xl:col-span-3 bg-blue-50">
+    <x-grid.span class="hidden md:flex md:flex-row justify-end md:col-span-6 xl:col-span-4">
       <x-menu.desktop.container>
         <x-menu.desktop.item href="{{ route('page.projects') }}" label="Projekte" :active="request()->routeIs('page.projects')" />
         <x-menu.desktop.item href="{{ route('page.atelier.profile') }}" label="Atelier" :active="request()->routeIs('page.atelier.*')" />
