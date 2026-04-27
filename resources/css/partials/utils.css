@@ -9,5 +9,5 @@
 }
 
 .debug-grid > * > * {
-  @apply md:outline md:outline-1 md:outline-yellow-500/40 text-orange-500/50 min-h-screen;
+  @apply md:outline md:outline-[0.5px] md:outline-yellow-500/40 text-orange-500/50 min-h-screen;
 }

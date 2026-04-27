@@ -1,0 +1,1 @@
+<x-icons.logo.fza class="w-212 xl:w-214 h-auto" />

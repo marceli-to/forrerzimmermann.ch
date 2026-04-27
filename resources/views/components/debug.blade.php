@@ -1,4 +1,4 @@
-<div class="fixed px-32 min-h-screen left-0 top-0 -z-1 w-full debug-grid {{ $class ?? '' }}">
+<div class="fixed px-16 xl:px-32 min-h-screen left-0 top-0 -z-1 w-full debug-grid {{ $class ?? '' }}">
   <x-grid.container>
     <x-grid.span class="col-span-1 text-center">
       1

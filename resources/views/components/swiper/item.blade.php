@@ -1,3 +1,3 @@
-<div class="swiper-slide md:px-32 {{ $class ?? '' }}">
+<div class="swiper-slide {{ $class ?? '' }}">
   {{ $slot }}
 </div>
