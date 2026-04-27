@@ -21,17 +21,20 @@
 
 
 @theme {
-
-  /* Fonts */
   --font-sans: 'Chroma ST', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  
-  /* Colors */
   --color-black: #000000;
   --color-white: #ffffff;
   --color-accent: #a400ff;
-
 }
 
 strong, b {
   @apply font-medium;
+}
+
+article p:not(:last-child) {
+  @apply mb-18;
+}
+
+article a {
+  @apply underline underline-offset-2 hover:no-underline;
 }

@@ -28,56 +28,56 @@
       <div class="md:col-span-4 xl:col-span-3">
         <a href="#" class="hover:text-accent transition-colors">
           <div class="aspect-[3/2] w-full bg-yellow-50"></div>
-          <h2 class="text-[21px] leading-[1.18] mb-0 mt-12">Nietengasse, Zürich</h2>
+          <h2 class="text-[21px] leading-[1.17] mb-0 mt-12">Nietengasse, Zürich</h2>
           <span class="text-[16px] leading-[1.3]">Instandsetzung 2024</span>
         </a>
       </div>
       <div class="md:col-span-4 xl:col-span-3">
         <a href="#" class="hover:text-accent transition-colors">
           <div class="aspect-[3/2] w-full bg-orange-50"></div>
-          <h2 class="text-[21px] leading-[1.18] mb-0 mt-12">Nietengasse, Zürich</h2>
+          <h2 class="text-[21px] leading-[1.17] mb-0 mt-12">Nietengasse, Zürich</h2>
           <span class="text-[16px] leading-[1.3]">Instandsetzung 2024</span>
         </a>
       </div>
       <div class="md:col-span-4 xl:col-span-3">
         <a href="#" class="hover:text-accent transition-colors">
           <div class="aspect-[3/2] w-full bg-green-50"></div>
-          <h2 class="text-[21px] leading-[1.18] mb-0 mt-12">Nietengasse, Zürich</h2>
+          <h2 class="text-[21px] leading-[1.17] mb-0 mt-12">Nietengasse, Zürich</h2>
           <span class="text-[16px] leading-[1.3]">Instandsetzung 2024</span>
         </a>
       </div>
       <div class="md:col-span-4 xl:col-span-3">
         <a href="#" class="hover:text-accent transition-colors">
           <div class="aspect-[3/2] w-full bg-blue-50"></div>
-          <h2 class="text-[21px] leading-[1.18] mb-0 mt-12">Nietengasse, Zürich</h2>
+          <h2 class="text-[21px] leading-[1.17] mb-0 mt-12">Nietengasse, Zürich</h2>
           <span class="text-[16px] leading-[1.3]">Instandsetzung 2024</span>
         </a>
       </div>
       <div class="md:col-span-4 xl:col-span-3">
         <a href="#" class="hover:text-accent transition-colors">
           <div class="aspect-[3/2] w-full bg-purple-50"></div>
-          <h2 class="text-[21px] leading-[1.18] mb-0 mt-12">Nietengasse, Zürich</h2>
+          <h2 class="text-[21px] leading-[1.17] mb-0 mt-12">Nietengasse, Zürich</h2>
           <span class="text-[16px] leading-[1.3]">Instandsetzung 2024</span>
         </a>
       </div>
       <div class="md:col-span-4 xl:col-span-3">
         <a href="#" class="hover:text-accent transition-colors">
           <div class="aspect-[3/2] w-full bg-fuchsia-50"></div>
-          <h2 class="text-[21px] leading-[1.18] mb-0 mt-12">Nietengasse, Zürich</h2>
+          <h2 class="text-[21px] leading-[1.17] mb-0 mt-12">Nietengasse, Zürich</h2>
           <span class="text-[16px] leading-[1.3]">Instandsetzung 2024</span>
         </a>
       </div>
       <div class="md:col-span-4 xl:col-span-3">
         <a href="#" class="hover:text-accent transition-colors">
           <div class="aspect-[3/2] w-full bg-lime-50"></div>
-          <h2 class="text-[21px] leading-[1.18] mb-0 mt-12">Nietengasse, Zürich</h2>
+          <h2 class="text-[21px] leading-[1.17] mb-0 mt-12">Nietengasse, Zürich</h2>
           <span class="text-[16px] leading-[1.3]">Instandsetzung 2024</span>
         </a>
       </div>
       <div class="md:col-span-4 xl:col-span-3">
         <a href="#" class="hover:text-accent transition-colors">
           <div class="aspect-[3/2] w-full bg-rose-50"></div>
-          <h2 class="text-[21px] leading-[1.18] mb-0 mt-12">Nietengasse, Zürich</h2>
+          <h2 class="text-[21px] leading-[1.17] mb-0 mt-12">Nietengasse, Zürich</h2>
           <span class="text-[16px] leading-[1.3]">Instandsetzung 2024</span>
         </a>
       </div>

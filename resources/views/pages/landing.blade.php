@@ -20,7 +20,7 @@
               @endif
               @if($slide->text)
                 <x-grid.span class="md:col-span-4 px-16 md:px-0">
-                  <article class="hyphens-auto text-[22px] leading-[1.18] py-20">
+                  <article class="hyphens-auto text-[22px] leading-[1.17] py-18">
                     {!! $slide->text !!}
                   </article>
                 </x-grid.span>

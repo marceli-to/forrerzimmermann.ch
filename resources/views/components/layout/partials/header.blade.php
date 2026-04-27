@@ -1,5 +1,5 @@
 <header 
-  class="_bg-white sticky top-0 z-40 md:relative border-b border-b-black w-full h-[var(--header-height)] xl:h-[var(--header-height-md)] px-16 xl:px-32 pt-16 xl:pt-21 shrink-0 transition-transform duration-600 ease-out will-change-transform [&.is-hidden]:-translate-y-full motion-reduce:transition-none motion-reduce:[&.is-hidden]:translate-y-0" 
+  class="bg-white sticky top-0 z-40 md:relative border-b border-b-black w-full h-[var(--header-height)] xl:h-[var(--header-height-md)] px-16 xl:px-32 pt-16 xl:pt-21 shrink-0 transition-transform duration-600 ease-out will-change-transform [&.is-hidden]:-translate-y-full motion-reduce:transition-none motion-reduce:[&.is-hidden]:translate-y-0" 
   data-shy>
   <x-grid.container>
     <x-grid.span class="md:col-span-6 xl:col-span-8">
@@ -16,11 +16,11 @@
     </x-grid.span>
 
     <x-grid.span class="hidden md:flex md:flex-row justify-end md:col-span-6 xl:col-span-4">
-      <x-menu.desktop.container>
-        <x-menu.desktop.item href="{{ route('page.projects') }}" label="Projekte" :active="request()->routeIs('page.projects')" />
-        <x-menu.desktop.item href="{{ route('page.atelier.profile') }}" label="Atelier" :active="request()->routeIs('page.atelier.*')" />
-        <x-menu.desktop.item href="{{ route('page.contact') }}" label="Kontakt" :active="request()->routeIs('page.contact')" />
-      </x-menu.desktop.container>
+      <x-menu.main.desktop.container>
+        <x-menu.main.desktop.item href="{{ route('page.projects') }}" label="Projekte" :active="request()->routeIs('page.projects')" />
+        <x-menu.main.desktop.item href="{{ route('page.atelier.profile') }}" label="Atelier" :active="request()->routeIs('page.atelier.*')" />
+        <x-menu.main.desktop.item href="{{ route('page.contact') }}" label="Kontakt" :active="request()->routeIs('page.contact')" />
+      </x-menu.main.desktop.container>
     </x-grid.span>
 
   </x-grid.container>

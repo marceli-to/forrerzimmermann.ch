@@ -38,7 +38,7 @@
               <x-grid.span class="md:col-span-8 md:-ml-32 md:h-full">
                 <img src="/img/dummy-content.jpg" alt="Dummy Content" class="aspect-[4/3] w-full h-full object-cover">
               </x-grid.span>
-              <x-grid.span class="hyphens-auto px-16 md:px-0 py-20 md:col-span-4 text-[22px] leading-[1.18]">
+              <x-grid.span class="hyphens-auto px-16 md:px-0 py-20 md:col-span-4 text-[22px] leading-[1.17]">
                 <p>Umfassende Erfahrung in Projektierung und Ausführung von ganz kleinen bis sehr grossen Bauvorhaben, Sanierungen, Erweiterungen und Neubauten.</p>
               </x-grid.span>
             </x-grid.container>

@@ -28,7 +28,7 @@
       </x-grid.span>
 
       <x-grid.span class="col-span-4 px-16 py-16 md:px-0 min-h-0 overflow-auto">
-        <h2 class="text-[23px] leading-[1.18] mb-0">Katrin Zimmermann</h2>
+        <h2 class="text-[23px] leading-[1.17] mb-0">Katrin Zimmermann</h2>
         <div class="text-[18px] leading-[1.33]">
           Architektin MSc ETH<br>kzi@forrerzimmermann.ch
         </div>

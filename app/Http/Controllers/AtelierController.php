@@ -17,7 +17,8 @@ class AtelierController extends Controller
 	public function team()
 	{
 		$page = AtelierPage::with('media')->where('slug', 'team')->first();
-		$members = TeamMember::published()->orderBy('sort_order')->get();
+		$members = TeamMember::published()->orderBy('sort_order')->get()
+			->groupBy(fn ($m) => $m->former ? 'former' : 'current');
 		return view('pages.atelier.team', compact('page', 'members'));
 	}
 
