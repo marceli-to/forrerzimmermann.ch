@@ -221,7 +221,7 @@ function onSetOg(media) { mediaStore.setOg(media.uuid) }
 								<FormCheckbox v-model="form.publish">Veröffentlichen</FormCheckbox>
 							</FormGroup>
 							<FormGroup>
-								<FormCheckbox v-model="form.feature">In Projekte anzeigen</FormCheckbox>
+								<FormCheckbox v-model="form.feature">Auswahl</FormCheckbox>
 							</FormGroup>
 						</div>
 						<FormGroup>

@@ -58,8 +58,8 @@ async function handleDelete(project) {
 				<div class="flex items-center justify-end gap-12">
 					<button
 						class="rounded transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 dark:focus-visible:ring-warm-700"
-						:class="row.feature ? 'text-amber-500 hover:text-amber-600' : 'text-gray-300 dark:text-warm-700 hover:text-amber-500'"
-						:title="row.feature ? 'In Auswahl – klicken zum Entfernen' : 'Nicht in Auswahl – klicken zum Hinzufügen'"
+						:class="row.feature ? 'text-amber-300 hover:text-amber-500' : 'text-gray-300 dark:text-warm-700 hover:text-amber-300'"
+						:title="row.feature ? 'Auswahl – klicken zum Entfernen' : 'Nicht in Auswahl – klicken zum Hinzufügen'"
 						@click="store.toggleFeature(row.uuid)"
 					>
 						<PhStar :size="16" :weight="row.feature ? 'fill' : 'light'" />

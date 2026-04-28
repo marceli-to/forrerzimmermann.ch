@@ -1,4 +1,4 @@
-<x-layout.site :description="$seo?->profile_meta_description">
+<x-layout.site :description="$seo?->profile_meta_description" title="Profil">
   <div class="h-full md:px-16 xl:px-32">
     <x-grid.container class="h-full">
       

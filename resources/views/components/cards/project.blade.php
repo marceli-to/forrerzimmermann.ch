@@ -1,8 +1,8 @@
 @props(['project', 'image' => false])
 
 <div>
-  @if($image && $project->teaser->count())
-    <div class="aspect-[16/10] overflow-hidden">
+  @if($project->teaser->count())
+    <div class="aspect-[3/2] mb-8">
       <x-media.image
         :media="$project->teaser"
         :alt="$project->title"
@@ -11,8 +11,17 @@
       />
     </div>
   @endif
-  <div @class(['mt-3' => $image && $project->teaser->count()])>
-    <p class="font-bold">{{ $project->title }}@if($project->location), {{ $project->location }}@endif</p>
-    <p>{{ $project->subtitle }} {{ $project->year }}</p>
+
+  <div class="flex flex-col gap-y-5">
+
+    <h2 class="text-[21px] leading-[1.17]">
+      {{ $project->title }}@if($project->location), {{ $project->location }}@endif
+    </h2>
+
+    <div class="text-[16px] leading-[1.31]">
+      {{ $project->subtitle }} {{ $project->year }}
+    </div>
+    
   </div>
+
 </div>

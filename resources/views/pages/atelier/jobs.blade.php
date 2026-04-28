@@ -1,4 +1,4 @@
-<x-layout.site :description="$seo?->jobs_meta_description">
+<x-layout.site :description="$seo?->jobs_meta_description" title="Jobs">
   <div class="h-full md:px-16 xl:px-32">
     <x-grid.container class="h-full">
 

@@ -1,4 +1,4 @@
-<x-layout.site :description="$seo?->contact_meta_description">
+<x-layout.site :description="$seo?->contact_meta_description" title="Kontakt">
 
   <div class="h-full md:px-16 xl:px-32">
 

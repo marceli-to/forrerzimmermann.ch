@@ -1,4 +1,4 @@
-<x-layout.site :description="$seo?->werkliste_meta_description">
+<x-layout.site :description="$seo?->werkliste_meta_description" title="Werkliste">
   <div class="grid grid-cols-4 gap-x-6 gap-y-10">
     @foreach($projects as $project)
       <x-cards.project :project="$project" />
