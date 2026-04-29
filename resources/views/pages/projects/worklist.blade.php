@@ -1,7 +1,19 @@
-<x-layout.site :description="$seo?->werkliste_meta_description" title="Werkliste">
-  <div class="grid grid-cols-4 gap-x-6 gap-y-10">
-    @foreach($projects as $project)
-      <x-cards.project :project="$project" />
-    @endforeach
+<x-layout.site :description="$seo?->projects_meta_description" title="Werkliste – Projekte">
+
+  <div class="h-full px-16 xl:px-32 py-24 overflow-auto">
+
+    <x-grid.container class="min-h-full flex flex-col gap-y-32 xl:gap-y-52 pb-22">
+      @foreach($projects as $project)
+        <x-grid.span class="md:col-span-4 xl:col-span-3">
+          <x-cards.work :project="$project" />
+        </x-grid.span>
+      @endforeach
+    </x-grid.container>
+    
   </div>
+  
+  <x-slot:footer>
+    <x-menu.pages.projects.container />
+  </x-slot>
+
 </x-layout.site>

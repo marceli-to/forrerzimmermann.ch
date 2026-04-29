@@ -1,8 +1,8 @@
-<x-layout.site :description="$seo?->projects_meta_description" title="Projekte">
+<x-layout.site :description="$seo?->projects_meta_description" title="Auswahl – Projekte">
 
-  <div class="h-full md:px-16 xl:px-32 overflow-auto">
+  <div class="h-full px-16 xl:px-32 overflow-auto">
 
-    <x-grid.container class="min-h-full md:pb-22 md:gap-y-20">
+    <x-grid.container class="min-h-full flex flex-col gap-y-20 pb-22">
       @foreach($projects as $project)
         <x-grid.span class="md:col-span-4 xl:col-span-3">
           <x-cards.project :project="$project" :image="true" />

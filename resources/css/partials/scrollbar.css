@@ -1,6 +1,16 @@
 @layer base {
   /* Firefox */
   * {
+    scrollbar-width: none;
+  }
+
+  /* WebKit (Chrome, Safari, Edge) */
+  *::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Thin custom scrollbar (kept for reference)
+  * {
     scrollbar-width: thin;
     scrollbar-color: var(--border) transparent;
   }
@@ -10,10 +20,9 @@
     scrollbar-color: var(--border) transparent;
   }
 
-  /* WebKit (Chrome, Safari, Edge) */
   *::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
   }
 
   *::-webkit-scrollbar-track {
@@ -24,4 +33,5 @@
     background: var(--border);
     border-radius: 999px;
   }
+  */
 }

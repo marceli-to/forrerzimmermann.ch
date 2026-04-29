@@ -6,7 +6,7 @@ use App\Models\Project;
 
 class ProjectController extends Controller
 {
-	public function index()
+	public function featured()
 	{
 		$projects = Project::published()
 			->where('feature', true)
@@ -20,6 +20,7 @@ class ProjectController extends Controller
 	public function worklist()
 	{
 		$projects = Project::published()
+			->where('feature', false)
 			->orderByDesc('year')
 			->get();
 

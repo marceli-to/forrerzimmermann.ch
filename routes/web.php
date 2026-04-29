@@ -18,7 +18,7 @@ Route::get('/img/{path}', [ImageController::class, 'show'])->where('path', '.*')
 Route::get('/', LandingController::class)->name('page.landing');
 
 Route::prefix('projekte')->group(function () {
-	Route::get('/', [ProjectController::class, 'index'])->name('page.projects');
+	Route::get('/auswahl', [ProjectController::class, 'featured'])->name('page.projects');
 	Route::get('/werkliste', [ProjectController::class, 'worklist'])->name('page.projects.worklist');
 	Route::get('/{slug}', [ProjectController::class, 'show'])->name('page.projects.show');
 });
