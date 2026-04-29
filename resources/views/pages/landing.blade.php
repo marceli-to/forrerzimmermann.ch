@@ -3,13 +3,7 @@
     <x-swiper.container class="h-full">
       @foreach($slides as $slide)
         @if($slide->type === 'image' && $slide->media->count())
-          <x-swiper.item class="xl:px-32">
-            <x-grid.container class="h-full">
-              <x-grid.span class="md:col-span-full xl:col-span-8 xl:col-start-3 h-full">
-                <x-media.image :media="$slide->media" sizes="(min-width: 768px) 67vw, 100vw" class="w-full h-full object-cover" />
-              </x-grid.span>
-            </x-grid.container>
-          </x-swiper.item>
+          <x-swiper.image :media="$slide->media" />
         @elseif($slide->type === 'image_text')
           <x-swiper.item class="md:px-16 xl:px-32">
             <x-grid.container class="h-full">
