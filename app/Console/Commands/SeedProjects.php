@@ -1073,9 +1073,8 @@ TEXT,
 
         foreach ($this->projects as $index => $data) {
             $project = Project::updateOrCreate(
-                ['slug' => Str::slug($data['title'])],
+                ['title' => $data['title'], 'year' => $data['year']],
                 [
-                    'title' => $data['title'],
                     'location' => $data['location'],
                     'subtitle' => $data['subtitle'],
                     'year' => $data['year'],

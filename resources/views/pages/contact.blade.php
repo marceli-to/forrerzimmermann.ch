@@ -14,7 +14,7 @@
         @if($contact)
           <article class="hyphens-auto py-18">
 
-            <h1 class="text-[23px] leading-[1.17] mb-16">
+            <h1 class="text-[23px] leading-[1.174] mb-16">
               {{ $contact->name }}
             </h1>
 

@@ -17,7 +17,7 @@
 
   <div>
 
-    <h2 class="text-[21px] leading-[1.17]">
+    <h2 class="text-[21px] leading-[1.174]">
       {{ $project->title }}@if($project->location), {{ $project->location }}@endif
     </h2>
 

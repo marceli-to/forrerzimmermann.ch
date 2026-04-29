@@ -5,7 +5,7 @@
     <x-grid.container class="min-h-full flex flex-col gap-y-20 pb-22">
       @foreach($projects as $project)
         <x-grid.span class="md:col-span-4 xl:col-span-3">
-          <x-cards.project :project="$project" :image="true" />
+          <x-projects.cards.project :project="$project" :image="true" />
         </x-grid.span>
       @endforeach
     </x-grid.container>

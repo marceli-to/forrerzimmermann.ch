@@ -38,6 +38,7 @@ const newTopicError = ref('')
 const form = ref({
 	title: '',
 	location: '',
+	slug: '',
 	subtitle: '',
 	year: null,
 	description: '',
@@ -47,6 +48,21 @@ const form = ref({
 	feature: false,
 	topic_id: null,
 })
+
+function slugify(value) {
+	return String(value ?? '')
+		.toLowerCase()
+		.replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
+		.replace(/œ/g, 'oe').replace(/æ/g, 'ae')
+		.normalize('NFD').replace(/\p{M}/gu, '')
+		.replace(/[^a-z0-9]+/g, '-')
+		.replace(/^-+|-+$/g, '')
+}
+
+function regenerateSlug() {
+	form.value.slug = slugify([form.value.title, form.value.location, form.value.year].filter(Boolean).join(' '))
+	delete store.errors.slug
+}
 
 const { setOriginal, bypass } = useUnsavedChanges(form)
 
@@ -66,6 +82,7 @@ onMounted(async () => {
 			form.value = {
 				title: p.title || '',
 				location: p.location || '',
+				slug: p.slug || '',
 				subtitle: p.subtitle || '',
 				year: p.year || null,
 				description: p.description || '',
@@ -165,7 +182,7 @@ function onSetOg(media) { mediaStore.setOg(media.uuid) }
 
 					<div class="grid grid-cols-2 gap-24">
 						<FormGroup>
-							<FormLabel for="location" :error="store.errors.location">Ort</FormLabel>
+							<FormLabel for="location" :error="store.errors.location">Ort *</FormLabel>
 							<FormInput id="location" v-model="form.location" :hasError="!!store.errors.location" @focus="delete store.errors.location" />
 						</FormGroup>
 						<FormGroup>
@@ -230,8 +247,13 @@ function onSetOg(media) { mediaStore.setOg(media.uuid) }
 							<button type="button" class="block ml-auto text-xs text-gray-500 dark:text-warm-400 hover:text-gray-900 dark:hover:text-warm-100 transition-colors cursor-pointer mt-6" @click="showTopicDialog = true">+ Hinzufügen</button>
 						</FormGroup>
 						<FormGroup>
+							<FormLabel for="slug" :error="store.errors.slug">Slug</FormLabel>
+							<FormInput id="slug" class="disabled:bg-gray-100 dark:disabled:bg-gray-800" v-model="form.slug" :hasError="!!store.errors.slug" @focus="delete store.errors.slug" disabled />
+							<button type="button" class="block ml-auto text-xs text-gray-500 dark:text-warm-400 hover:text-gray-900 dark:hover:text-warm-100 transition-colors cursor-pointer mt-6" @click="regenerateSlug">Regenerieren</button>
+						</FormGroup>
+						<FormGroup>
 							<FormLabel for="meta_description" :error="store.errors.meta_description">Meta Description</FormLabel>
-							<FormTextarea id="meta_description" v-model="form.meta_description" :hasError="!!store.errors.meta_description" @focus="delete store.errors.meta_description" />
+							<FormTextarea class="field-sizing-content" rows="4" id="meta_description" v-model="form.meta_description" :hasError="!!store.errors.meta_description" @focus="delete store.errors.meta_description" />
               <span class="block text-xs text-gray-500 dark:text-warm-400 mt-6">
                 Nur für Projekte mit Detailseite, max. 160 Zeichen
               </span>

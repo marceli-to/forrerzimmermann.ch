@@ -12,7 +12,7 @@ return new class extends Migration
 			$table->id();
 			$table->uuid('uuid')->unique();
 			$table->string('title');
-			$table->string('location')->nullable();
+			$table->string('location');
 			$table->string('slug')->unique();
 			$table->string('subtitle')->nullable();
 			$table->integer('year');

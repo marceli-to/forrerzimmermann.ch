@@ -17,7 +17,8 @@ class UpdateProjectRequest extends FormRequest
 	{
 		return [
 			'title' => 'required|string|max:255',
-			'location' => 'nullable|string|max:255',
+			'location' => 'required|string|max:255',
+			'slug' => 'nullable|string|max:255',
 			'subtitle' => 'nullable|string|max:255',
 			'year' => 'required|integer',
 			'description' => 'nullable|string',
@@ -37,7 +38,9 @@ class UpdateProjectRequest extends FormRequest
 			'title.max' => 'Titel darf maximal 255 Zeichen lang sein',
 			'year.required' => 'Jahr ist erforderlich',
 			'year.integer' => 'Jahr muss eine Zahl sein',
+			'location.required' => 'Ort ist erforderlich',
 			'location.max' => 'Ort darf maximal 255 Zeichen lang sein',
+			'slug.max' => 'Slug darf maximal 255 Zeichen lang sein',
 			'subtitle.max' => 'Untertitel darf maximal 255 Zeichen lang sein',
 			'meta_description.max' => 'Meta Description darf maximal 255 Zeichen lang sein',
 			'topic_id.exists' => 'Das gewählte Thema ist ungültig',

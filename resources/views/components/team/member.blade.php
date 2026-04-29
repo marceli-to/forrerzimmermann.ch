@@ -1,7 +1,7 @@
 @props(['member', 'showCv' => true])
 <article>
 
-  <h2 class="text-[23px] leading-[1.17] mb-0">
+  <h2 class="text-[23px] leading-[1.174] mb-0">
     {{ $member->firstname }} {{ $member->name }}
   </h2>
 

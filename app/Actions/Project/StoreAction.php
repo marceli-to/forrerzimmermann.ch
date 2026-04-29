@@ -5,7 +5,6 @@ namespace App\Actions\Project;
 use App\Actions\Media\AttachAction as AttachMediaAction;
 use App\Models\Project;
 use App\Models\Topic;
-use Illuminate\Support\Str;
 
 class StoreAction
 {
@@ -14,11 +13,9 @@ class StoreAction
 		$media = $data['media'] ?? [];
 		unset($data['media']);
 
-		$slugParts = [$data['title']];
-		if (!empty($data['location'])) {
-			$slugParts[] = $data['location'];
+		if (empty($data['slug'])) {
+			unset($data['slug']);
 		}
-		$data['slug'] = Str::slug(implode(' ', $slugParts));
 
 		if (!empty($data['topic_id'])) {
 			$topic = Topic::where('uuid', $data['topic_id'])->first();

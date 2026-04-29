@@ -11,8 +11,9 @@
 
 @layer base {
   :root {
-    --header-height: 6.875rem; /* 110px */
-    --header-height-md: 7.5rem; /* 120px */
+    --header-height-sm: 3.75rem; /* 60px */
+    --header-height-md: 6.875rem; /* 110px */
+    --header-height-lg: 7.5rem; /* 120px */
     --footer-height: 3.75rem; /* 60px */
   }
 }
