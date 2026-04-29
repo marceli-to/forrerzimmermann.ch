@@ -72,7 +72,7 @@ class Image extends Component
         $this->sizes = $sizes;
         $this->hasMobileVariant = $mobileMedia !== null;
 
-        if ($this->crop && isset($this->crop['w'], $this->crop['h'])) {
+        if ($this->fit === 'crop' && $this->crop && isset($this->crop['w'], $this->crop['h'])) {
             $this->aspectRatio = $this->crop['h'] / $this->crop['w'];
         } else {
             $baseWidth = $desktopMedia->width ?? 1;
@@ -96,7 +96,7 @@ class Image extends Component
             $mobileSrc = 'uploads/' . $mobileMedia->file;
             $mobileCrop = $mobileMedia->crop;
 
-            if ($mobileCrop && isset($mobileCrop['w'], $mobileCrop['h'])) {
+            if ($this->fit === 'crop' && $mobileCrop && isset($mobileCrop['w'], $mobileCrop['h'])) {
                 $mobileAspectRatio = $mobileCrop['h'] / $mobileCrop['w'];
             } else {
                 $mobileAspectRatio = ($mobileMedia->height ?? 1) / ($mobileMedia->width ?? 1);

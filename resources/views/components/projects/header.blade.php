@@ -3,5 +3,7 @@
   <h1 class="text-[23px] leading-[1.174]">
     {{ $project->full_title }}
   </h1>
-  <x-projects.browser :prev="$prev" :next="$next" />
+  <div class="hidden md:block">
+    <x-projects.browser :prev="$prev" :next="$next" />  
+  </div>
 </header>

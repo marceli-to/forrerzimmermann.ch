@@ -4,6 +4,8 @@ import 'swiper/css';
 
 export function initSlides(root = document) {
   root.querySelectorAll('[data-slides]').forEach((el) => {
+    if (el.offsetParent === null) return;
+
     const id = el.dataset.slides;
     const sel = (role) => id ? `[data-slides-${role}="${id}"]` : `[data-slides-${role}]`;
 

@@ -1,7 +1,7 @@
 @props(['prev' => null, 'next' => null])
 <nav>
   <ul class="flex items-center gap-x-60">
-    <li class="flex items-center gap-x-52">
+    <li class="flex items-center gap-x-52 order-2 md:order-1">
       @if($prev)
         <a href="{{ route('page.projects.show', $prev->slug) }}" aria-label="Vorheriges Projekt" class="block w-15 h-27 text-black">
           <x-icons.chevron-left />
@@ -13,7 +13,7 @@
         </a>
       @endif
     </li>
-    <li>
+    <li class="order-1 md:order-2">
       <a
         href="{{ route('page.projects') }}"
         aria-label="Zurück"
