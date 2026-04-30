@@ -17,7 +17,7 @@
 
     <x-grid.span class="hidden md:flex md:flex-row justify-end md:col-span-6 xl:col-span-4">
       <x-menu.main.desktop.container>
-        <x-menu.main.desktop.item href="{{ route('page.projects') }}" label="Projekte" :active="request()->routeIs('page.projects*')" />
+        <x-menu.main.desktop.item href="{{ route('page.projects') }}" label="Projekte" :active="request()->routeIs('page.project*')" />
         <x-menu.main.desktop.item href="{{ route('page.atelier.profile') }}" label="Atelier" :active="request()->routeIs('page.atelier.*')" />
         <x-menu.main.desktop.item href="{{ route('page.contact') }}" label="Kontakt" :active="request()->routeIs('page.contact')" />
       </x-menu.main.desktop.container>

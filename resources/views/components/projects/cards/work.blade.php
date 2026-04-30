@@ -2,7 +2,7 @@
 
 @if ($project->feature)
   <a 
-    href="{{ route('page.projects.images', $project->slug) }}"
+    href="{{ route('page.project.images', $project->slug) }}"
     class="hover:text-accent transition-colors group w-full block">
 
     <div>
