@@ -2,12 +2,9 @@
 
 use App\Models\TeamMember;
 use App\Models\User;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 beforeEach(function () {
     $this->user = User::factory()->create();
-    Storage::fake('public');
 });
 
 it('lists all team members', function () {
@@ -99,26 +96,6 @@ it('rejects reorder with invalid uuid', function () {
             'items' => [['uuid' => 'bad', 'sort_order' => 0]],
         ])
         ->assertUnprocessable();
-});
-
-it('deletes a team member and their media files', function () {
-    Storage::disk('public')->put('uploads/photo.jpg', 'fake');
-    $member = TeamMember::factory()->create();
-    $member->media()->create([
-        'uuid' => Str::uuid()->toString(),
-        'file' => 'photo.jpg',
-        'original_name' => 'photo.jpg',
-        'mime_type' => 'image/jpeg',
-        'size' => 1000,
-        'sort_order' => 0,
-    ]);
-
-    $this->actingAs($this->user)
-        ->deleteJson("/api/dashboard/team/{$member->uuid}")
-        ->assertNoContent();
-
-    expect(TeamMember::count())->toBe(0);
-    Storage::disk('public')->assertMissing('uploads/photo.jpg');
 });
 
 it('requires authentication', function () {

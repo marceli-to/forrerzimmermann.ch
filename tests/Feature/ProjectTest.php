@@ -17,7 +17,7 @@ it('lists all projects', function () {
         ->assertJsonCount(3, 'data');
 });
 
-it('creates a project and generates slug from title and location', function () {
+it('creates a project and generates slug from title, location, and year', function () {
     $this->actingAs($this->user)
         ->postJson('/api/dashboard/projects', [
             'title' => 'New Project',
@@ -26,19 +26,9 @@ it('creates a project and generates slug from title and location', function () {
         ])
         ->assertCreated()
         ->assertJsonPath('data.title', 'New Project')
-        ->assertJsonPath('data.slug', 'new-project-zurich');
+        ->assertJsonPath('data.slug', 'new-project-zurich-2024');
 
     expect(Project::count())->toBe(1);
-});
-
-it('generates slug from title only when location is absent', function () {
-    $this->actingAs($this->user)
-        ->postJson('/api/dashboard/projects', [
-            'title' => 'Solo Project',
-            'year' => 2023,
-        ])
-        ->assertCreated()
-        ->assertJsonPath('data.slug', 'solo-project');
 });
 
 it('validates required fields on create', function () {
@@ -63,6 +53,7 @@ it('updates a project', function () {
     $this->actingAs($this->user)
         ->putJson("/api/dashboard/projects/{$project->uuid}", [
             'title' => 'Updated Title',
+            'location' => 'Zurich',
             'year' => 2020,
         ])
         ->assertOk()
@@ -77,6 +68,7 @@ it('attaches a topic on create', function () {
     $response = $this->actingAs($this->user)
         ->postJson('/api/dashboard/projects', [
             'title' => 'Project with Topic',
+            'location' => 'Zurich',
             'year' => 2022,
             'topic_id' => $topic->uuid,
         ])

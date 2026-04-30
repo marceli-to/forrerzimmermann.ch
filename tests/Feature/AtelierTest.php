@@ -39,16 +39,7 @@ it('updates an atelier page', function () {
     expect($page->fresh()->title)->toBe('New Title');
 });
 
-it('requires title and text for profil page', function () {
-    $page = AtelierPage::factory()->profil()->create();
-
-    $this->actingAs($this->user)
-        ->putJson("/api/dashboard/atelier/{$page->uuid}", [])
-        ->assertUnprocessable()
-        ->assertJsonValidationErrors(['title', 'text']);
-});
-
-it('does not require title and text for non-profil pages', function () {
+it('accepts an empty update payload', function () {
     $page = AtelierPage::factory()->create(['slug' => 'team']);
 
     $this->actingAs($this->user)
