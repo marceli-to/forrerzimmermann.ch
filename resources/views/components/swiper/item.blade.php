@@ -1,3 +1,3 @@
-<div class="swiper-slide {{ $class ?? '' }}">
+<div class="swiper-slide overflow-y-auto {{ $class ?? '' }}">
   {{ $slot }}
 </div>

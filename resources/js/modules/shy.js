@@ -1,9 +1,9 @@
 export function initShy(root = document) {
   const mq = window.matchMedia('(min-width: 768px)');
+  const scroller = root.querySelector('main') || window;
+  const getY = () => scroller === window ? window.scrollY : scroller.scrollTop;
 
   root.querySelectorAll('[data-shy]').forEach((el) => {
-    const getY = () => window.scrollY;
-
     let lastY = getY();
     let ticking = false;
 
@@ -39,7 +39,7 @@ export function initShy(root = document) {
       }
     };
 
-    window.addEventListener('scroll', onScroll, { passive: true });
+    scroller.addEventListener('scroll', onScroll, { passive: true });
     mq.addEventListener('change', () => {
       if (mq.matches) el.classList.remove('is-hidden');
       lastY = getY();
