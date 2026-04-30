@@ -6,15 +6,13 @@
   :description="$project->meta_description"
   :og-image="$project->og_image">
 
-  <x-projects.images :project="$project" />
-  
-  <!-- text -->
+  <x-projects.text :project="$project" />
 
   <x-slot:footer>
     <div class="md:hidden">
-      <x-projects.browser :prev="$prev" :next="$next" />  
+      <x-projects.browser :prev="$prev" :next="$next" />
     </div>
-    <x-projects.menu />
+    <x-projects.menu :project="$project" />
   </x-slot>
 
 </x-layout.project>

@@ -14,7 +14,7 @@
   />
   <x-layout.partials.body>
     <x-projects.header :project="$project" :prev="$prev" :next="$next" />
-    <x-layout.partials.main>
+    <x-layout.partials.main class="relative">
       {{ $slot }}
     </x-layout.partials.main>
     <x-layout.partials.footer>

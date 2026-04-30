@@ -3,12 +3,12 @@
   <ul class="flex items-center gap-x-60">
     <li class="flex items-center gap-x-52 order-2 md:order-1">
       @if($prev)
-        <a href="{{ route('page.projects.show', $prev->slug) }}" aria-label="Vorheriges Projekt" class="block w-15 h-27 text-black">
+        <a href="{{ route('page.projects.images', $prev->slug) }}" aria-label="Vorheriges Projekt" class="block w-15 h-27 text-black">
           <x-icons.chevron-left />
         </a>
       @endif
       @if($next)
-        <a href="{{ route('page.projects.show', $next->slug) }}" aria-label="Nächstes Projekt" class="block w-15 h-27 text-black">
+        <a href="{{ route('page.projects.images', $next->slug) }}" aria-label="Nächstes Projekt" class="block w-15 h-27 text-black">
           <x-icons.chevron-right />
         </a>
       @endif

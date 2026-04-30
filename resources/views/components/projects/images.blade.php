@@ -4,8 +4,8 @@
 
 @if($images->count())
 
-  <div 
-    data-slides="project-{{ $project->id }}" 
+  <div
+    data-slides="project-{{ $project->id }}"
     class="relative h-full hidden md:block">
     <x-swiper.container class="h-full">
       @foreach($images as $image)

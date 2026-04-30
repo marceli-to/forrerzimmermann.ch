@@ -1,7 +1,7 @@
 @props(['project', 'image' => false])
 
 <a 
-  href="{{ route('page.projects.show', $project->slug) }}"
+  href="{{ route('page.projects.images', $project->slug) }}"
   class="hover:text-accent transition-colors group w-full block">
 
   @if($project->teaser->count())

@@ -39,3 +39,12 @@ article p:not(:last-child) {
 article a {
   @apply underline underline-offset-2 hover:no-underline;
 }
+
+.is-visible {
+  @apply opacity-100;
+}
+
+.is-invisible {
+  @apply opacity-0;
+}
+

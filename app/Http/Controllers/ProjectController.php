@@ -28,13 +28,22 @@ class ProjectController extends Controller
 		return view('pages.projects.worklist', compact('projects'));
 	}
 
-	public function show(Project $project)
+	public function images(Project $project)
 	{
 		$project->load('media', 'topic');
 
 		[$prev, $next] = $this->siblings($project);
 
-		return view('pages.projects.show', compact('project', 'prev', 'next'));
+		return view('pages.projects.images', compact('project', 'prev', 'next'));
+	}
+
+	public function text(Project $project)
+	{
+		$project->load('media', 'topic');
+
+		[$prev, $next] = $this->siblings($project);
+
+		return view('pages.projects.text', compact('project', 'prev', 'next'));
 	}
 
 	protected function siblings(Project $project): array
