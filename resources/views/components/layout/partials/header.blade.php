@@ -4,7 +4,7 @@
   <x-grid.container>
     <x-grid.span class="md:col-span-6 xl:col-span-8">
       @if (request()->routeIs('page.landing'))
-        <x-icons.logo class="w-212 xl:w-214 h-auto overflow-visible [&_[data-logo-path]]:transition-transform [&_[data-logo-path]]:duration-900 [&_[data-logo-path]]:delay-600 [&_[data-logo-path]]:ease-in-out [&_[data-logo-path]]:translate-x-[calc(100vw-32px-100%)] md:[&_[data-logo-path]]:translate-x-[calc(100vw-64px-100%)] [&_[data-logo-path]]:will-change-transform [&.is-ready_[data-logo-path]]:translate-x-0 motion-reduce:[&_[data-logo-path]]:transition-none motion-reduce:[&_[data-logo-path]]:translate-x-0" />
+        <x-icons.logo class="w-212 xl:w-214 h-auto overflow-visible [&_[data-logo-path]]:transition-transform [&_[data-logo-path]]:duration-900 [&_[data-logo-path]]:delay-600 [&_[data-logo-path]]:ease-in-out [&_[data-logo-path]]:translate-x-[calc(100vw-100%)] md:[&_[data-logo-path]]:translate-x-[calc(100vw-100%)] xl:[&_[data-logo-path]]:translate-x-[calc(100vw-48px-100%)] [&_[data-logo-path]]:will-change-transform [&.is-ready_[data-logo-path]]:translate-x-0 motion-reduce:[&_[data-logo-path]]:transition-none motion-reduce:[&_[data-logo-path]]:translate-x-0" />
       @else
         <a 
           href="{{ route('page.landing') }}"
