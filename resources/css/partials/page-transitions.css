@@ -4,7 +4,7 @@
 
 ::view-transition-old(root),
 ::view-transition-new(root) {
-  animation-duration: 1500ms;
+  animation-duration: 250ms;
   animation-timing-function: ease;
 }
 
