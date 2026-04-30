@@ -1,9 +1,14 @@
-	<nav class="flex gap-x-4">
-		<a href="{{ route('page.landing') }}">Start</a>
-		<a href="{{ route('page.projects') }}">Projekte</a>
-		<a href="{{ route('page.worklist') }}">Werkliste</a>
-		<a href="{{ route('page.atelier.profile') }}">Profil</a>
-		<a href="{{ route('page.atelier.team') }}">Team</a>
-		<a href="{{ route('page.atelier.jobs') }}">Jobs</a>
-		<a href="{{ route('page.contact') }}">Kontakt</a>
-	</nav>
+<nav
+  x-show="menu"
+  x-transition:enter="transition-transform duration-300 ease-out"
+  x-transition:enter-start="translate-y-[calc(100%+60px)]"
+  x-transition:enter-end="translate-y-0"
+  x-transition:leave="transition-transform duration-200 ease-in"
+  x-transition:leave-start="translate-y-0"
+  x-transition:leave-end="translate-y-[calc(100%+60px)]"
+  x-cloak
+  class="fixed bottom-60 left-0 z-10 bg-white w-full p-16 h-174 flex flex-col justify-center md:!hidden">
+  <ul class="flex flex-col gap-y-18">
+    {{ $slot }}
+  </ul>
+</nav>
