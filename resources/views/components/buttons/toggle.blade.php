@@ -1,4 +1,3 @@
-
 @props(['label'])
 <button
   {{ $attributes->merge(['class' => 'cursor-pointer flex items-center gap-6 w-full']) }}

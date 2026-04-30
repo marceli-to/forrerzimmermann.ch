@@ -20,7 +20,7 @@
               width="891"
               height="587"
               loading="eager"
-              class="aspect-[891/587] md:aspect-auto w-full h-full object-cover">
+              class="aspect-[4/3] md:aspect-auto w-full h-full object-cover">
           </picture>
         </a>
       </x-grid.span>
@@ -34,7 +34,7 @@
               {{ $contact->name }}
             </h1>
 
-            <div class="py-18 flex flex-col gap-y-48 text-[18px] leading-[1.33]">
+            <div class="flex flex-col gap-y-48 text-[18px] leading-[1.33]">
               <div>
                 {!! nl2br($contact->address) !!}
                 @if($contact->email)
@@ -67,8 +67,6 @@
               @endif
             </div>
           </article>
-
-
         @endif
       </x-grid.span>
       
@@ -78,7 +76,7 @@
   <x-slot:footer>
     <a 
       href="{{ $contact->maps_url }}" 
-      class="hover:text-accent transition-colors !no-underline"
+      class="text-[18px] leading-[1.33] hover:text-accent transition-colors !no-underline"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Google Maps">

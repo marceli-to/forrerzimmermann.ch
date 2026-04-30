@@ -17,7 +17,7 @@
 
           @if($members['former'] ?? false)
             <div x-data="{ open: false }">
-              <x-team.toggle label="Ehemalige Mitarbeitende" />
+              <x-buttons.toggle label="Ehemalige Mitarbeitende" />
               <div
                 x-cloak 
                 x-show="open" 

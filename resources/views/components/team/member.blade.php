@@ -16,7 +16,7 @@
 
     @if ($showCv && $member->cv)
       <div class="mt-18" x-data="{ open: false }">
-        <x-team.toggle label="Lebenslauf" />
+        <x-buttons.toggle label="Lebenslauf" />
         <div
           x-cloak
           x-show="open"
