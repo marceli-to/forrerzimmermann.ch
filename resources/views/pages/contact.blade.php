@@ -5,9 +5,24 @@
     <x-grid.container class="h-full">
       
       <x-grid.span class="md:col-span-7 xl:col-span-8 md:-ml-16 xl:-ml-32 md:min-h-0">
-        {{-- @if($profile?->media->count())
-          <x-media.image :media="$profile->media" sizes="(min-width: 768px) 66vw, 100vw" class="aspect-[4/3] md:aspect-auto w-full h-full object-cover" />
-        @endif --}}
+        <a
+          href="{{ $contact?->maps_url }}"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Anfahrtsplan auf Google Maps öffnen"
+          class="block w-full h-full">
+          <picture>
+            <source srcset="{{ asset('img/forrerzimmermann-anfahrtsplan.avif') }}" type="image/avif">
+            <source srcset="{{ asset('img/forrerzimmermann-anfahrtsplan.webp') }}" type="image/webp">
+            <img
+              src="{{ asset('img/forrerzimmermann-anfahrtsplan.jpg') }}"
+              alt="Anfahrtsplan Forrer Zimmermann"
+              width="891"
+              height="587"
+              loading="eager"
+              class="aspect-[891/587] md:aspect-auto w-full h-full object-cover">
+          </picture>
+        </a>
       </x-grid.span>
 
       <x-grid.span class="md:col-span-5 xl:col-span-4 px-16 md:pl-0 md:pr-16 xl:pr-32 md:-mr-16 xl:-mr-32 min-h-0 overflow-auto">
