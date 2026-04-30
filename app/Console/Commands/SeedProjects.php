@@ -1079,7 +1079,7 @@ TEXT,
                     'subtitle' => $data['subtitle'],
                     'year' => $data['year'],
                     'description' => $data['description'],
-                    'info' => $data['info'],
+                    'info' => $this->formatInfo($data['info']),
                     'publish' => true,
                     'feature' => crc32($data['title']) % 10 < 3,
                     'sort_order' => $index,
@@ -1108,6 +1108,21 @@ TEXT,
         }
 
         $this->info('Projects seeded.');
+    }
+
+    private function formatInfo(string $text): string
+    {
+        $rows = [];
+        foreach (preg_split('/\r?\n/', trim($text)) as $line) {
+            $line = trim($line);
+            if ($line === '') {
+                continue;
+            }
+            [$label, $value] = array_map('trim', explode(':', $line, 2));
+            $rows[] = '<strong>' . e($label) . ':</strong> ' . e($value);
+        }
+
+        return '<p>' . implode(' <br>', $rows) . '</p>';
     }
 
     private function copyImage(string $filename): ?string
