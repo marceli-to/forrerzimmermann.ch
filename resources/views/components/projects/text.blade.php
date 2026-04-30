@@ -1,4 +1,4 @@
-<div class="md:absolute md:left-0 md:top-0 w-full md:h-full px-16 xl:px-32 py-24 md:overflow-auto">
+<div class="w-full md:h-full px-16 xl:px-32 py-24 md:overflow-auto">
   <x-grid.container>
     <x-grid.span class="md:col-span-8 md:col-start-3 xl:col-span-6 xl:col-start-4">
       <h2 class="text-[18px] leading-[1.33] mb-18">
