@@ -26,6 +26,7 @@
       </x-grid.span>
 
       <x-grid.span class="md:col-span-5 xl:col-span-4 px-16 md:pl-0 md:pr-16 xl:pr-32 md:-mr-16 xl:-mr-32 min-h-0 overflow-auto">
+
         @if($contact)
           <article class="hyphens-auto py-18">
 
@@ -33,27 +34,41 @@
               {{ $contact->name }}
             </h1>
 
-            <div class="text-[18px] leading-[1.33]">
-              {!! nl2br($contact->address) !!}
-              @if($contact->email)
-                <br>
-                <a 
-                  href="mailto:{{ $contact->email }}"
-                  class="hover:text-accent transition-colors !no-underline">
-                  {{ $contact->email }}
-                </a>
-              @endif
-              @if($contact->phone)
-                <br>
-                <a 
-                  href="tel:{{ $contact->phone }}"
-                  class="hover:text-accent transition-colors !no-underline">
-                  {{ $contact->phone }}
-                </a>
+            <div class="py-18 flex flex-col gap-y-48 text-[18px] leading-[1.33]">
+              <div>
+                {!! nl2br($contact->address) !!}
+                @if($contact->email)
+                  <br>
+                  <a 
+                    href="mailto:{{ $contact->email }}"
+                    class="hover:text-accent transition-colors !no-underline">
+                    {{ $contact->email }}
+                  </a>
+                @endif
+                @if($contact->phone)
+                  <br>
+                  <a 
+                    href="tel:{{ $contact->phone }}"
+                    class="hover:text-accent transition-colors !no-underline">
+                    {{ $contact->phone }}
+                  </a>
+                @endif
+              </div>
+              @if ($contact->imprint)
+                <div x-data="{ open: false }">
+                  <x-buttons.toggle label="Impressum" />
+                  <div
+                    x-cloak
+                    x-show="open"
+                    class="mt-18">
+                    {!! $contact->imprint !!}
+                  </div>
+                </div>
               @endif
             </div>
-
           </article>
+
+
         @endif
       </x-grid.span>
       
