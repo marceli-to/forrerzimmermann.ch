@@ -8,6 +8,7 @@
 @import "./partials/scrollbar.css";
 @import "./partials/spacing.css";
 @import "./partials/utils.css";
+@import "./partials/page-transitions.css";
 
 @layer base {
   :root {
