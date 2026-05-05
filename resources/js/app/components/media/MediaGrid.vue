@@ -9,6 +9,7 @@ const props = defineProps({
 	items: { type: Array, default: () => [] },
 	hasOg: { type: Boolean, default: false },
 	hasTeaser: { type: Boolean, default: false },
+	hasVariant: { type: Boolean, default: false },
 	sidebar: { type: Boolean, default: false },
 })
 
@@ -55,6 +56,7 @@ const dragItems = computed({
 					:hasOg="hasOg"
 					:isOg="element.is_og"
 					:hasCrop="element.mime_type?.startsWith('image/')"
+					:hasVariant="hasVariant"
 					@edit="emit('edit', $event)"
 					@teaser="emit('teaser', $event)"
 					@og="emit('og', $event)"

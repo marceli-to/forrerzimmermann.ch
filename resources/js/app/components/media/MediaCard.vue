@@ -12,6 +12,7 @@ defineProps({
 	isOg: { type: Boolean, default: false },
 	showOverlay: { type: Boolean, default: true },
 	hasCrop: { type: Boolean, default: false },
+	hasVariant: { type: Boolean, default: false },
 })
 
 const emit = defineEmits(['edit', 'delete', 'teaser', 'og', 'crop', 'click', 'variant'])
@@ -42,9 +43,9 @@ function formatSize(bytes) {
 		<div v-if="showInfo" class="px-10 py-8 border-t border-gray-100 dark:border-warm-700">
 			<div class="text-xs text-gray-900 dark:text-warm-100 truncate">{{ media.original_name }}</div>
 			<div class="text-xs text-gray-400 dark:text-warm-500 mt-2">{{ media.width }}&times;{{ media.height }} · {{ formatSize(media.size) }}</div>
-			<div v-if="badge || media.variant || isOg" class="flex items-center gap-4 mt-6">
+			<div v-if="badge || (hasVariant && media.variant) || isOg" class="flex items-center gap-4 mt-6">
 				<span v-if="badge" class="text-[0.6875rem] font-medium text-amber-700 dark:text-amber-300 bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-full px-8 py-3 leading-none">{{ badge }}</span>
-				<span v-if="media.variant" class="text-[0.6875rem] font-medium rounded-full px-8 py-3 leading-none" :class="media.variant === 'mobile' ? 'text-violet-700 dark:text-violet-300 bg-violet-50 dark:bg-violet-950 border border-violet-200 dark:border-violet-800' : 'text-sky-700 dark:text-sky-300 bg-sky-50 dark:bg-sky-950 border border-sky-200 dark:border-sky-800'">{{ media.variant === 'mobile' ? 'Mobile' : 'Desktop' }}</span>
+				<span v-if="hasVariant && media.variant" class="text-[0.6875rem] font-medium rounded-full px-8 py-3 leading-none" :class="media.variant === 'mobile' ? 'text-violet-700 dark:text-violet-300 bg-violet-50 dark:bg-violet-950 border border-violet-200 dark:border-violet-800' : 'text-sky-700 dark:text-sky-300 bg-sky-50 dark:bg-sky-950 border border-sky-200 dark:border-sky-800'">{{ media.variant === 'mobile' ? 'Mobile' : 'Desktop' }}</span>
 				<span v-if="isOg" class="text-[0.6875rem] font-medium text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800 rounded-full px-8 py-3 leading-none">OG</span>
 			</div>
 		</div>
@@ -64,7 +65,7 @@ function formatSize(bytes) {
 				<button v-if="hasCrop" type="button" class="text-white/70 hover:text-white cursor-pointer" title="Zuschneiden" @click.stop="emit('crop', media)">
 					<PhCrop :size="15" weight="light" />
 				</button>
-				<button type="button" class="text-white/70 hover:text-white cursor-pointer" :title="media.variant === 'mobile' ? 'Auf Desktop setzen' : 'Auf Mobile setzen'" @click.stop="emit('variant', media)">
+				<button v-if="hasVariant" type="button" class="text-white/70 hover:text-white cursor-pointer" :title="media.variant === 'mobile' ? 'Auf Desktop setzen' : 'Auf Mobile setzen'" @click.stop="emit('variant', media)">
 					<PhDeviceMobile v-if="media.variant === 'desktop'" :size="15" weight="light" />
 					<PhDesktop v-else :size="15" weight="light" />
 				</button>

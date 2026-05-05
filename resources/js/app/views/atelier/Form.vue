@@ -124,6 +124,7 @@ function onReorderMedia(items) { mediaStore.reorder(items) }
 							<MediaGrid
 								v-if="mediaStore.items.length"
 								:items="mediaStore.items"
+								:hasVariant="true"
 								sidebar
 								@edit="onEditMedia"
 								@delete="onDeleteMedia"
@@ -155,6 +156,7 @@ function onReorderMedia(items) { mediaStore.reorder(items) }
 						<MediaGrid
 							v-if="mediaStore.items.length"
 							:items="mediaStore.items"
+							:hasVariant="true"
 							@edit="onEditMedia"
 							@delete="onDeleteMedia"
 							@reorder="onReorderMedia"
