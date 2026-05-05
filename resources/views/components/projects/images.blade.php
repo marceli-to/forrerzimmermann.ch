@@ -9,7 +9,7 @@
     class="relative h-full hidden md:block">
     <x-swiper.container class="h-full">
       @foreach($images as $image)
-        <x-swiper.image :media="$image" fit="max" />
+        <x-swiper.image :media="$image" fit="max" preset="image_slide_wide" :show-caption="true" />
       @endforeach
     </x-swiper.container>
     <x-swiper.navigation :id="'project-' . $project->id" layout="sides" />
@@ -17,7 +17,12 @@
 
   <div class="md:hidden flex flex-col gap-y-18">
     @foreach($images as $image)
-      <x-media.image :media="$image" fit="max" sizes="100vw" class="w-full h-auto" />
+      <div>
+        <x-media.image :media="$image" fit="max" sizes="100vw" class="w-full h-auto" />
+        @if($image->caption)
+          <div class="{{ $loop->last ? 'py-18' : 'pt-18' }} px-16 text-[1rem] text-center">{{ $image->caption }}</div>
+        @endif
+      </div>
     @endforeach
   </div>
 
