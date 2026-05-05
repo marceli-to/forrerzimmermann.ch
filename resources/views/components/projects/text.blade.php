@@ -6,7 +6,7 @@
       </h2>
       <div class="flex flex-col gap-y-32">
         @if ($project->description)
-          <article>
+          <article class="text-[18px] leading-[1.33]">
             {!! $project->description !!}
           </article>
         @endif
