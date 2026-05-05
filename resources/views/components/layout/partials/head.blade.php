@@ -2,6 +2,7 @@
   'title' => null,
   'description' => null,
   'ogImage' => null,
+  'canonical' => null,
 ])
 @php
   $appName = config('app.name');
@@ -11,6 +12,7 @@
   $metaDescription = $description ?? $seo?->og_description ?? $defaultDescription;
   $resolvedOgImage = $ogImage ?? $seo?->media->firstWhere('is_og', true)?->file ?? $seo?->media->first()?->file ?? null;
   $ogImageUrl = $resolvedOgImage ? url('uploads/' . $resolvedOgImage) : asset('opengraph.jpg');
+  $canonicalUrl = $canonical ?? url()->current();
 @endphp
 <head>
 <meta charset="utf-8">
@@ -19,6 +21,7 @@
 <meta name="view-transition" content="same-origin">
 <title>{{ $metaTitle }}</title>
 <meta name="description" content="{{ $metaDescription }}">
+<link rel="canonical" href="{{ $canonicalUrl }}" />
 <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="shortcut icon" href="/favicon.ico" />
@@ -27,7 +30,7 @@
 <link rel="manifest" href="/site.webmanifest" />
 <meta property="og:title" content="{{ $metaTitle }}" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="{{ url()->current() }}" />
+<meta property="og:url" content="{{ $canonicalUrl }}" />
 <meta property="og:image" content="{{ $ogImageUrl }}" />
 <meta property="og:description" content="{{ $metaDescription }}" />
 <meta property="og:site_name" content="{{ $appName }}" />

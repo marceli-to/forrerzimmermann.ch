@@ -38,15 +38,17 @@ class Project extends Model
 		'description', 
     'info', 
     'meta_description',
-		'publish', 
-    'feature', 
-    'sort_order', 
+		'publish',
+    'feature',
+    'detail',
+    'sort_order',
     'topic_id',
 	];
 
 	protected $casts = [
 		'publish' => 'boolean',
 		'feature' => 'boolean',
+		'detail' => 'boolean',
 		'year' => 'integer',
 		'sort_order' => 'integer',
 	];
@@ -71,9 +73,9 @@ class Project extends Model
 		return $query->where('feature', true);
 	}
 
-	public function scopeNotFeatured(Builder $query): Builder
+	public function scopeDetailed(Builder $query): Builder
 	{
-		return $query->where('feature', false);
+		return $query->where('detail', true);
 	}
 
 	protected function fullTitle(): Attribute

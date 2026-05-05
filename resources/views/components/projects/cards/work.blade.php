@@ -1,8 +1,8 @@
 @props(['project'])
 
-@if ($project->feature)
-  <a 
-    href="{{ route('page.project.images', $project->slug) }}"
+@if ($project->detail)
+  <a
+    href="{{ route('page.project.worklist.images', $project->slug) }}"
     class="hover:text-accent transition-colors group w-full block">
 
     <div>
@@ -14,12 +14,12 @@
       <div class="text-[16px] leading-[1.31]">
         {{ $project->subtitle }} {{ $project->year }}
       </div>
-      
+
     </div>
 
   </a>
-@else 
-  <div>
+@else
+  <div class="text-silver">
     <h2 class="text-[21px] leading-[1.174]">
       {{ $project->title }}@if($project->location), {{ $project->location }}@endif
     </h2>
@@ -29,4 +29,3 @@
     </div>
   </div>
 @endif
-

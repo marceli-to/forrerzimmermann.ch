@@ -21,6 +21,7 @@ class ProjectResource extends JsonResource
 			'meta_description' => $this->meta_description,
 			'publish' => $this->publish,
 			'feature' => $this->feature,
+			'detail' => $this->detail,
 			'sort_order' => $this->sort_order,
 			'topic' => new TopicResource($this->whenLoaded('topic')),
 			'media' => MediaResource::collection($this->whenLoaded('media')),

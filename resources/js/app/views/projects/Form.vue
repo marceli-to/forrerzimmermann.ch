@@ -46,6 +46,7 @@ const form = ref({
 	meta_description: '',
 	publish: false,
 	feature: false,
+	detail: false,
 	topic_id: null,
 })
 
@@ -90,6 +91,7 @@ onMounted(async () => {
 				meta_description: p.meta_description || '',
 				publish: p.publish,
 				feature: p.feature,
+				detail: p.detail,
 				topic_id: p.topic?.uuid || null,
 			}
 			mediaStore.setItems(p.media || [])
@@ -239,6 +241,9 @@ function onSetOg(media) { mediaStore.setOg(media.uuid) }
 							</FormGroup>
 							<FormGroup>
 								<FormCheckbox v-model="form.feature">Auswahl</FormCheckbox>
+							</FormGroup>
+							<FormGroup>
+								<FormCheckbox v-model="form.detail">Detailseite</FormCheckbox>
 							</FormGroup>
 						</div>
 						<FormGroup>

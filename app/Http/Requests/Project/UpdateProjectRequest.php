@@ -26,6 +26,7 @@ class UpdateProjectRequest extends FormRequest
 			'meta_description' => 'nullable|string|max:255',
 			'publish' => 'boolean',
 			'feature' => 'boolean',
+			'detail' => 'boolean',
 			'topic_id' => 'nullable|string|exists:topics,uuid',
 			...$this->mediaRules(),
 		];

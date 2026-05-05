@@ -14,8 +14,10 @@ Route::get('/', LandingController::class)->name('page.landing');
 Route::prefix('projekte')->group(function () {
 	Route::get('/auswahl', [ProjectController::class, 'featured'])->name('page.projects');
 	Route::get('/werkliste', [ProjectController::class, 'worklist'])->name('page.projects.worklist');
-	Route::get('/{project:slug}/bilder', [ProjectController::class, 'images'])->name('page.project.images');
-	Route::get('/{project:slug}/text', [ProjectController::class, 'text'])->name('page.project.text');
+	Route::get('/auswahl/{project:slug}/bilder', [ProjectController::class, 'images'])->defaults('context', 'featured')->name('page.project.featured.images');
+	Route::get('/auswahl/{project:slug}/text', [ProjectController::class, 'text'])->defaults('context', 'featured')->name('page.project.featured.text');
+	Route::get('/werkliste/{project:slug}/bilder', [ProjectController::class, 'images'])->defaults('context', 'worklist')->name('page.project.worklist.images');
+	Route::get('/werkliste/{project:slug}/text', [ProjectController::class, 'text'])->defaults('context', 'worklist')->name('page.project.worklist.text');
 });
 
 Route::prefix('atelier')->group(function () {

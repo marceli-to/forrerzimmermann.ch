@@ -20,7 +20,6 @@ class ProjectController extends Controller
 	public function worklist()
 	{
 		$projects = Project::published()
-			->notFeatured()
 			->orderByDesc('year')
 			->orderBy('id')
 			->get();
@@ -28,30 +27,34 @@ class ProjectController extends Controller
 		return view('pages.projects.worklist', compact('projects'));
 	}
 
-	public function images(Project $project)
+	public function images(Project $project, string $context)
 	{
+		abort_unless($project->detail, 404);
 		$project->load('media', 'topic');
 
-		[$prev, $next] = $this->siblings($project);
+		[$prev, $next] = $this->siblings($project, $context);
+		$canonical = route('page.project.worklist.images', $project->slug);
 
-		return view('pages.projects.images', compact('project', 'prev', 'next'));
+		return view('pages.projects.images', compact('project', 'prev', 'next', 'context', 'canonical'));
 	}
 
-	public function text(Project $project)
+	public function text(Project $project, string $context)
 	{
+		abort_unless($project->detail, 404);
 		$project->load('media', 'topic');
 
-		[$prev, $next] = $this->siblings($project);
+		[$prev, $next] = $this->siblings($project, $context);
+		$canonical = route('page.project.worklist.text', $project->slug);
 
-		return view('pages.projects.text', compact('project', 'prev', 'next'));
+		return view('pages.projects.text', compact('project', 'prev', 'next', 'context', 'canonical'));
 	}
 
-	protected function siblings(Project $project): array
+	protected function siblings(Project $project, string $context): array
 	{
-		$query = Project::published()->where('feature', $project->feature);
+		$query = Project::published()->detailed();
 
-		if ($project->feature) {
-			$query->orderBy('sort_order');
+		if ($context === 'featured') {
+			$query->featured()->orderBy('sort_order');
 		} else {
 			$query->orderByDesc('year')->orderBy('id');
 		}

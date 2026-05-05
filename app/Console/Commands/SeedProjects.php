@@ -1082,6 +1082,7 @@ TEXT,
                     'info' => $this->formatInfo($data['info']),
                     'publish' => true,
                     'feature' => crc32($data['title']) % 10 < 3,
+                    'detail' => crc32($data['title']) % 10 < 4,
                     'sort_order' => $index,
                     'topic_id' => !empty($topicIds) ? $topicIds[array_rand($topicIds)] : null,
                 ]
