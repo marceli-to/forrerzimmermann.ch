@@ -6,7 +6,7 @@
 
   <div
     data-slides="project-{{ $project->id }}"
-    class="relative h-full hidden md:block">
+    class="relative h-full hidden md:block md:px-56 xl:px-0">
     <x-swiper.container class="h-full">
       @foreach($images as $image)
         <x-swiper.image :media="$image" fit="max" preset="image_slide_wide" :show-caption="true" />

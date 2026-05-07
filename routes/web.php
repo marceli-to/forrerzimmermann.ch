@@ -28,8 +28,6 @@ Route::prefix('atelier')->group(function () {
 
 Route::get('/kontakt', ContactController::class)->name('page.contact');
 
-Route::view('/playground', 'pages.playground')->name('page.playground');
-
 // Dashboard (Vue SPA) — requires authentication
 Route::middleware('auth')->group(function () {
 	Route::get('/dashboard/{any?}', function () {
