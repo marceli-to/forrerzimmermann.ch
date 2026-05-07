@@ -14,12 +14,15 @@ class Seed extends Command
         $this->call('app:seed-user');
         $this->call('app:seed-atelier');
         $this->call('app:seed-contact');
-        $this->call('app:seed-seo');
-        $this->call('app:seed-topics');
-        $this->call('app:seed-projects');
-        $this->call('app:seed-landing-slides');
-        $this->call('app:seed-team');
-        $this->call('app:seed-jobs');
+
+        if (! app()->environment('production')) {
+            $this->call('app:seed-seo');
+            $this->call('app:seed-topics');
+            $this->call('app:seed-projects');
+            $this->call('app:seed-landing-slides');
+            $this->call('app:seed-team');
+            $this->call('app:seed-jobs');
+        }
 
         $this->info('Database seeded.');
     }
