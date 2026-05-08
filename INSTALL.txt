@@ -1,4 +1,0 @@
-# SSH
-
-# GITHUB
-https://github.com/marceli-to/forrerzimmermann.ch.git
