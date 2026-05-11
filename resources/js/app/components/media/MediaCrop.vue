@@ -14,12 +14,22 @@ const isOpen = ref(false)
 const cropperRef = ref(null)
 const aspectRatio = ref(null)
 
-const aspectOptions = [
-  { label: 'Frei', value: null },
-  { label: '3:2', value: 3 / 2 },
-  { label: '4:3', value: 4 / 3 },
-  { label: '1:1', value: 1 },
-]
+const aspectOptions = computed(() => {
+  if (props.media?.variant === 'mobile') {
+    return [
+      { label: 'Frei', value: null },
+      { label: '2:3', value: 2 / 3 },
+      { label: '3:4', value: 3 / 4 },
+      { label: '1:1', value: 1 },
+    ]
+  }
+  return [
+    { label: 'Frei', value: null },
+    { label: '3:2', value: 3 / 2 },
+    { label: '4:3', value: 4 / 3 },
+    { label: '1:1', value: 1 },
+  ]
+})
 
 watch(() => props.media, (val) => {
   isOpen.value = !!val

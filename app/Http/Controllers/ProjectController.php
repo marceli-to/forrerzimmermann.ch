@@ -11,7 +11,8 @@ class ProjectController extends Controller
 		$projects = Project::published()
 			->featured()
 			->with('teaser')
-			->orderBy('sort_order')
+			->orderByDesc('year')
+			->orderByDesc('id')
 			->get();
 
 		return view('pages.projects.index', compact('projects'));
@@ -21,7 +22,7 @@ class ProjectController extends Controller
 	{
 		$projects = Project::published()
 			->orderByDesc('year')
-			->orderBy('id')
+			->orderByDesc('id')
 			->get();
 
 		return view('pages.projects.worklist', compact('projects'));
@@ -54,10 +55,10 @@ class ProjectController extends Controller
 		$query = Project::published()->detailed();
 
 		if ($context === 'featured') {
-			$query->featured()->orderBy('sort_order');
-		} else {
-			$query->orderByDesc('year')->orderBy('id');
+			$query->featured();
 		}
+
+		$query->orderByDesc('year')->orderByDesc('id');
 
 		$siblings = $query->get(['id', 'slug', 'title']);
 		$count = $siblings->count();

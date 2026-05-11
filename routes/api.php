@@ -21,7 +21,6 @@ Route::prefix('dashboard')
 			->group(function () {
 				Route::get('/', 'index');
 				Route::post('/', 'store');
-				Route::patch('/reorder', 'reorder');
 				Route::get('/{project}', 'show');
 				Route::put('/{project}', 'update');
 				Route::patch('/{project}/publish', 'toggle');

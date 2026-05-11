@@ -111,31 +111,17 @@ it('toggles feature state', function () {
         ->assertJsonPath('data.feature', true);
 });
 
-it('reorders projects', function () {
-    $a = Project::factory()->create(['sort_order' => 0]);
-    $b = Project::factory()->create(['sort_order' => 1]);
+it('lists projects ordered by year DESC', function () {
+    $older = Project::factory()->create(['year' => 2018]);
+    $newer = Project::factory()->create(['year' => 2024]);
+    $middle = Project::factory()->create(['year' => 2020]);
 
     $this->actingAs($this->user)
-        ->patchJson('/api/dashboard/projects/reorder', [
-            'items' => [
-                ['uuid' => $a->uuid, 'sort_order' => 1],
-                ['uuid' => $b->uuid, 'sort_order' => 0],
-            ],
-        ])
-        ->assertOk();
-
-    expect($a->fresh()->sort_order)->toBe(1)
-        ->and($b->fresh()->sort_order)->toBe(0);
-});
-
-it('rejects reorder with invalid uuid', function () {
-    $this->actingAs($this->user)
-        ->patchJson('/api/dashboard/projects/reorder', [
-            'items' => [
-                ['uuid' => 'does-not-exist', 'sort_order' => 0],
-            ],
-        ])
-        ->assertUnprocessable();
+        ->getJson('/api/dashboard/projects')
+        ->assertOk()
+        ->assertJsonPath('data.0.uuid', (string) $newer->uuid)
+        ->assertJsonPath('data.1.uuid', (string) $middle->uuid)
+        ->assertJsonPath('data.2.uuid', (string) $older->uuid);
 });
 
 it('deletes a project', function () {

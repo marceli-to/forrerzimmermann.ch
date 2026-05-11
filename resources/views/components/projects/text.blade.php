@@ -2,7 +2,7 @@
   <x-grid.container>
     <x-grid.span class="md:col-span-8 md:col-start-3 xl:col-span-6 xl:col-start-4">
       <h2 class="text-[18px] leading-[1.33] mb-18">
-        {{ $project->subtitle }}
+        {{ collect([$project->subtitle, $project->year])->filter()->implode(' ') }}
       </h2>
       <div class="flex flex-col gap-y-32">
         @if ($project->description)

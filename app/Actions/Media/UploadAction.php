@@ -30,7 +30,7 @@ class UploadAction
 			'is_teaser' => false,
 			'sort_order' => 0,
 			'orientation' => $this->orientation($dimensions[0], $dimensions[1]),
-			'original_url' => '/temp/' . $filename,
+			'original_url' => '/storage/temp/' . $filename,
 			'thumbnail_url' => '/img/temp/' . $filename . '?w=400&h=400&fit=crop',
 			'preview_url' => '/img/temp/' . $filename . '?w=800&fit=max',
 			'_temp' => true,
