@@ -1,25 +1,25 @@
 <x-layout.site :description="$seo?->landing_meta_description">
-  <div data-slides="landing" class="h-full">
+  <div data-slides="landing" class="h-[calc(100dvh_-_var(--header-height-md)_-_var(--footer-height))] xl:h-[calc(100dvh_-_var(--header-height-lg)_-_var(--footer-height))]">
     <x-swiper.container class="h-full">
       @foreach($slides as $slide)
         @if($slide->type === 'image' && $slide->media->count())
           <x-swiper.image :media="$slide->media" />
         @elseif($slide->type === 'image_text')
           <x-swiper.item class="md:px-16 xl:px-32">
-            <x-grid.container class="h-full">
+            <div class="h-full overflow-y-auto flex flex-col md:overflow-visible md:grid md:grid-cols-12 md:gap-x-30">
               @if($slide->media->count())
-                <x-grid.span class="md:col-span-8 md:-ml-16 xl:-ml-32 md:h-full">
-                  <x-media.image :media="$slide->media" sizes="(min-width: 768px) 50vw, 100vw" class="aspect-[4/3] md:aspect-auto w-full h-full object-cover" />
-                </x-grid.span>
+                <div class="shrink-0 md:col-span-8 md:-ml-16 xl:-ml-32 md:h-full">
+                  <x-media.image :media="$slide->media" sizes="(min-width: 768px) 50vw, 100vw" class="w-full h-auto md:aspect-auto md:h-full md:object-cover" />
+                </div>
               @endif
               @if($slide->text)
-                <x-grid.span class="md:col-span-4 px-16 md:px-0">
+                <div class="shrink-0 px-16 md:col-span-4 md:px-0">
                   <article class="hyphens-auto text-[23px] leading-[1.174] py-18">
                     {!! $slide->text !!}
                   </article>
-                </x-grid.span>
+                </div>
               @endif
-            </x-grid.container>
+            </div>
           </x-swiper.item>
         @endif
       @endforeach

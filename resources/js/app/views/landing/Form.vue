@@ -68,6 +68,7 @@ async function handleSubmit() {
 		alt: item.alt || null,
 		caption: item.caption || null,
 		crop: item.crop || null,
+		variant: item.variant || 'desktop',
 	}))
 
 	const success = await store.saveSlide(
@@ -124,6 +125,7 @@ function onReorderMedia(items) { mediaStore.reorder(items) }
 						v-if="mediaStore.items.length"
 						:items="mediaStore.items"
 						:hasVariant="true"
+						:variantCropFormats="true"
 						@edit="onEditMedia"
 						@delete="onDeleteMedia"
 						@reorder="onReorderMedia"

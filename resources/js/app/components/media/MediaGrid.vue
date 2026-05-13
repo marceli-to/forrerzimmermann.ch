@@ -10,6 +10,7 @@ const props = defineProps({
 	hasOg: { type: Boolean, default: false },
 	hasTeaser: { type: Boolean, default: false },
 	hasVariant: { type: Boolean, default: false },
+	variantCropFormats: { type: Boolean, default: false },
 	sidebar: { type: Boolean, default: false },
 })
 
@@ -70,6 +71,7 @@ const dragItems = computed({
 
 	<MediaCrop
 		:media="cropMedia"
+		:variantFormats="variantCropFormats"
 		@close="cropMedia = null"
 		@save="handleCropSave"
 	/>

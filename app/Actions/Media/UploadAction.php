@@ -28,6 +28,7 @@ class UploadAction
 			'alt' => null,
 			'caption' => null,
 			'is_teaser' => false,
+			'variant' => 'desktop',
 			'sort_order' => 0,
 			'orientation' => $this->orientation($dimensions[0], $dimensions[1]),
 			'original_url' => '/storage/temp/' . $filename,

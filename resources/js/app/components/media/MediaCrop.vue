@@ -6,6 +6,7 @@ import 'vue-advanced-cropper/dist/style.css'
 
 const props = defineProps({
   media: { type: Object, default: null },
+  variantFormats: { type: Boolean, default: false },
 })
 
 const emit = defineEmits(['close', 'save'])
@@ -15,7 +16,7 @@ const cropperRef = ref(null)
 const aspectRatio = ref(null)
 
 const aspectOptions = computed(() => {
-  if (props.media?.variant === 'mobile') {
+  if (props.variantFormats && props.media?.variant === 'mobile') {
     return [
       { label: 'Frei', value: null },
       { label: '2:3', value: 2 / 3 },

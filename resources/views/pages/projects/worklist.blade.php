@@ -2,7 +2,7 @@
 
   <div class="h-full px-16 xl:px-32 py-24 overflow-auto">
 
-    <x-grid.container class="min-h-full flex flex-col gap-y-32 xl:gap-y-52 pb-22">
+    <x-grid.container class="min-h-full flex flex-col gap-y-32 xl:gap-y-47 pb-22">
       @foreach($projects as $project)
         <x-grid.span class="md:col-span-4 xl:col-span-3">
           <x-projects.cards.work :project="$project" />

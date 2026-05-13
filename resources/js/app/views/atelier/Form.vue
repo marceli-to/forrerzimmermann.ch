@@ -66,6 +66,7 @@ async function handleSubmit() {
 		alt: item.alt || null,
 		caption: item.caption || null,
 		crop: item.crop || null,
+		variant: item.variant || 'desktop',
 	}))
 
 	const success = await store.savePage(

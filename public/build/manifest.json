@@ -1,6 +1,6 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-C5GQGfaX.css",
+    "file": "assets/app-D1Ju9fE1.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -9,7 +9,7 @@
     ]
   },
   "resources/css/site.css": {
-    "file": "assets/site-CI50Iy3g.css",
+    "file": "assets/site-CWZsH6ul.css",
     "src": "resources/css/site.css",
     "isEntry": true,
     "name": "site",
@@ -34,7 +34,7 @@
     "src": "resources/fonts/ChromaST-Regular.woff2"
   },
   "resources/js/app/app.js": {
-    "file": "assets/app-BPBSgWOJ.js",
+    "file": "assets/app-C8TzOk8l.js",
     "name": "app",
     "src": "resources/js/app/app.js",
     "isEntry": true,
