@@ -87,6 +87,11 @@ class Image extends Component
         $this->width = end($widths);
         $this->height = (int) round($this->width * $this->aspectRatio);
 
+        if ($desktopMedia->mime_type === 'image/gif') {
+            $this->fallbackUrl = '/storage/uploads/' . $desktopMedia->file;
+            return;
+        }
+
         $this->buildSources($widths, $mobileMedia);
     }
 
