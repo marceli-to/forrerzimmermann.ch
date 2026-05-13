@@ -21,7 +21,7 @@
               <div
                 x-cloak 
                 x-show="open" 
-                class="flex flex-col gap-y-48 mt-18">
+                class="flex flex-col _gap-y-48 mt-18">
                 @foreach($members['former'] as $member)
                   <x-team.member :member="$member" :showCv="false" />
                 @endforeach
