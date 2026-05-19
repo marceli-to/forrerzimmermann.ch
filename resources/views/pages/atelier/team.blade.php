@@ -3,7 +3,17 @@
     <x-grid.container class="h-full">
 
       <x-grid.span class="md:col-span-7 xl:col-span-8 md:-ml-16 xl:-ml-32 md:min-h-0">
-        @if($page?->media->count())
+        @if($page?->media->count() > 1)
+          <div data-slides="atelier-team" data-slides-autoplay="4000" class="h-full">
+            <x-swiper.container class="h-full">
+              @foreach($page->media as $image)
+                <x-swiper.item>
+                  <x-media.image :media="$image" sizes="(min-width: 768px) 66vw, 100vw" class="aspect-[4/3] md:aspect-auto w-full h-full object-cover" />
+                </x-swiper.item>
+              @endforeach
+            </x-swiper.container>
+          </div>
+        @elseif($page?->media->count())
           <x-media.image :media="$page->media" sizes="(min-width: 768px) 66vw, 100vw" class="aspect-[4/3] md:aspect-auto w-full h-full object-cover" />
         @endif
       </x-grid.span>

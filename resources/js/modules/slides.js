@@ -1,5 +1,5 @@
 import Swiper from 'swiper';
-import { Navigation } from 'swiper/modules';
+import { Navigation, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 
 export function initSlides(root = document) {
@@ -13,11 +13,17 @@ export function initSlides(root = document) {
     const counterCurrent = counter?.querySelector('[data-slides-counter-current]');
     const counterTotal = counter?.querySelector('[data-slides-counter-total]');
 
+    const autoplayDelay = parseInt(el.dataset.slidesAutoplay || '', 10);
+    const autoplay = autoplayDelay > 0
+      ? { delay: autoplayDelay, disableOnInteraction: false }
+      : false;
+
     const swiper = new Swiper(el.querySelector('.swiper'), {
-      modules: [Navigation],
+      modules: [Navigation, Autoplay],
       slidesPerView: 1,
       loop: true,
       spaceBetween: 0,
+      autoplay,
       navigation: {
         prevEl: root.querySelector(sel('prev')),
         nextEl: root.querySelector(sel('next')),
