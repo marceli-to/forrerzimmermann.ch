@@ -11,7 +11,8 @@ class LandingController extends Controller
 		$slides = LandingSlide::published()
 			->with('media')
 			->orderBy('sort_order')
-			->get();
+			->get()
+			->shuffle();
 
 		return view('pages.landing', compact('slides'));
 	}
