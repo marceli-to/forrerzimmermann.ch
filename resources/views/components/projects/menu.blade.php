@@ -3,7 +3,7 @@
   $imagesRoute = 'page.project.' . $context . '.images';
   $textRoute = 'page.project.' . $context . '.text';
 @endphp
-<nav>
+<nav class="md:flex md:justify-between md:items-center md:w-full">
   <ul class="flex flex-row gap-x-27">
     <li>
       <a
@@ -28,4 +28,12 @@
       </a>
     </li>
   </ul>
+  @if(request()->routeIs('page.project.*.images'))
+    <div
+      data-slides-counter="project-{{ $project->id }}"
+      class="hidden md:block text-[18px] leading-none tabular-nums"
+      aria-live="polite">
+      <span data-slides-counter-current>1</span>/<span data-slides-counter-total>1</span>
+    </div>
+  @endif
 </nav>
