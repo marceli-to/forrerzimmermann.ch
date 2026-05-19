@@ -23,6 +23,20 @@ class ProjectController extends Controller
 		return ProjectResource::collection($projects);
 	}
 
+	public function featured()
+	{
+		return Project::published()
+			->featured()
+			->orderBy('title')
+			->get(['uuid', 'title', 'slug', 'location'])
+			->map(fn ($p) => [
+				'uuid' => $p->uuid,
+				'title' => $p->title,
+				'slug' => $p->slug,
+				'location' => $p->location,
+			]);
+	}
+
 	public function store(StoreProjectRequest $request)
 	{
 		$project = (new StoreAction)->execute($request->validated());

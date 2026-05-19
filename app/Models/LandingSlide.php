@@ -13,10 +13,12 @@ class LandingSlide extends Model
 	use HasFactory, HasPublish, HasUuid;
 
 	protected $fillable = [
-		'uuid', 
-    'type', 
-    'text', 
-    'publish', 
+		'uuid',
+    'type',
+    'text',
+    'link_type',
+    'link_url',
+    'publish',
     'sort_order',
 	];
 

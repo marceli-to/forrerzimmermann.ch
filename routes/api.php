@@ -20,6 +20,7 @@ Route::prefix('dashboard')
 			->prefix('projects')
 			->group(function () {
 				Route::get('/', 'index');
+				Route::get('/featured', 'featured');
 				Route::post('/', 'store');
 				Route::get('/{project}', 'show');
 				Route::put('/{project}', 'update');

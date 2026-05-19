@@ -13,6 +13,8 @@ class LandingSlideResource extends JsonResource
 			'uuid' => $this->uuid,
 			'type' => $this->type,
 			'text' => $this->text,
+			'link_type' => $this->link_type,
+			'link_url' => $this->link_url,
 			'publish' => $this->publish,
 			'sort_order' => $this->sort_order,
 			'media' => MediaResource::collection($this->whenLoaded('media')),

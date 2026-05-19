@@ -41,8 +41,8 @@ const protocolOptions = [
 
 const pageOptions = [
 	{ value: '/', label: 'Home' },
-	{ value: '/projekte', label: 'Projekte' },
-	{ value: '/werkliste', label: 'Werkliste' },
+	{ value: '/projekte/auswahl', label: 'Projekte' },
+	{ value: '/projekte/werkliste', label: 'Werkliste' },
 	{ value: '/atelier/profil', label: 'Profil' },
 	{ value: '/atelier/team', label: 'Team' },
 	{ value: '/atelier/jobs', label: 'Jobs' },
@@ -53,7 +53,7 @@ const projectOptions = computed(() =>
 	[...projects.value]
 		.sort((a, b) => a.title.localeCompare(b.title, 'de'))
 		.map(p => ({
-			value: `/projekte/${p.slug}`,
+			value: `/projekte/auswahl/${p.slug}/bilder`,
 			label: p.location ? `${p.title}, ${p.location}` : p.title,
 		}))
 )
@@ -67,8 +67,8 @@ const placeholder = computed(() => {
 })
 
 onMounted(async () => {
-	const { data } = await projectsApi.index()
-	projects.value = data.data
+	const { data } = await projectsApi.featured()
+	projects.value = data
 })
 
 function openDialog() {
@@ -91,7 +91,7 @@ function openDialog() {
 			if (matchedPage) {
 				linkType.value = 'page'
 				linkPage.value = href
-			} else if (href.startsWith('/projekte/')) {
+			} else if (href.startsWith('/projekte/auswahl/')) {
 				linkType.value = 'project'
 				linkProject.value = href
 			} else {

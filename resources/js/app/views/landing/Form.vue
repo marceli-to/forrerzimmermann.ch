@@ -14,6 +14,7 @@ import FormActions from '@/components/ui/form/FormActions.vue'
 import FormLabel from '@/components/ui/form/FormLabel.vue'
 import FormSelect from '@/components/ui/form/FormSelect.vue'
 import FormGroup from '@/components/ui/form/FormGroup.vue'
+import LinkPicker from '@/components/ui/form/LinkPicker.vue'
 
 const route = useRoute()
 const router = useRouter()
@@ -32,7 +33,17 @@ const typeOptions = [
 const form = ref({
 	type: 'image',
 	text: '',
+	link_type: null,
+	link_url: null,
 	publish: false,
+})
+
+const link = computed({
+	get: () => ({ type: form.value.link_type, url: form.value.link_url }),
+	set: (val) => {
+		form.value.link_type = val.type
+		form.value.link_url = val.url
+	},
 })
 
 const { setOriginal, bypass } = useUnsavedChanges(form)
@@ -47,6 +58,8 @@ onMounted(async () => {
 			form.value = {
 				type: s.type || 'image',
 				text: s.text || '',
+				link_type: s.link_type || null,
+				link_url: s.link_url || null,
 				publish: s.publish,
 			}
 			mediaStore.setItems(s.media || [])
@@ -115,6 +128,11 @@ function onReorderMedia(items) { mediaStore.reorder(items) }
 				<div class="mt-8">
 					<Editor v-model="form.text" :hasError="!!store.errors.text" @focus="delete store.errors.text" />
 				</div>
+			</FormGroup>
+
+			<FormGroup>
+				<FormLabel :error="store.errors.link_url">Link (optional)</FormLabel>
+				<LinkPicker v-model="link" />
 			</FormGroup>
 
 			<FormGroup>
