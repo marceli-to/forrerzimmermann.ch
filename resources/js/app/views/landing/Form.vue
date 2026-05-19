@@ -126,7 +126,7 @@ function onReorderMedia(items) { mediaStore.reorder(items) }
 			<FormGroup v-if="form.type === 'image_text'">
 				<FormLabel :error="store.errors.text">Text</FormLabel>
 				<div class="mt-8">
-					<Editor v-model="form.text" :hasError="!!store.errors.text" @focus="delete store.errors.text" />
+					<Editor v-model="form.text" :link="false" :hasError="!!store.errors.text" @focus="delete store.errors.text" />
 				</div>
 			</FormGroup>
 

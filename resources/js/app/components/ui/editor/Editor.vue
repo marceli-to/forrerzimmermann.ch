@@ -9,6 +9,7 @@ const props = defineProps({
 	modelValue: { type: String, default: '' },
 	hasError: { type: Boolean, default: false },
 	headings: { type: Boolean, default: false },
+	link: { type: Boolean, default: true },
 })
 
 const emit = defineEmits(['update:modelValue', 'focus'])
@@ -49,7 +50,7 @@ watch(() => props.modelValue, (value) => {
 
 <template>
 	<div class="editor" :class="{ 'editor--error': hasError }">
-		<Toolbar v-if="editor" :editor="editor" :headings="headings" />
+		<Toolbar v-if="editor" :editor="editor" :headings="headings" :link="link" />
 		<EditorContent :editor="editor" />
 	</div>
 </template>

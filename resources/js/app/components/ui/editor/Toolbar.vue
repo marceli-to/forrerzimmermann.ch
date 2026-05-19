@@ -13,6 +13,7 @@ import projectsApi from '@/api/projects'
 const props = defineProps({
 	editor: { type: Object, required: true },
 	headings: { type: Boolean, default: false },
+	link: { type: Boolean, default: true },
 })
 
 const showDialog = ref(false)
@@ -223,6 +224,7 @@ function closeDialog() {
 			</button>
 
 			<button
+				v-if="link"
 				type="button"
 				class="p-8 rounded transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-200 dark:focus-visible:ring-warm-700"
 				:class="editor.isActive('link') ? 'text-gray-900 dark:text-warm-100 bg-gray-200 dark:bg-warm-700' : 'text-gray-400 dark:text-warm-500 hover:text-gray-900 dark:hover:text-warm-100'"
