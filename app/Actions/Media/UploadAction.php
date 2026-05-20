@@ -3,6 +3,7 @@
 namespace App\Actions\Media;
 
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class UploadAction
@@ -11,18 +12,23 @@ class UploadAction
 	{
 		$directory = 'temp';
 		$filename = $this->uniqueFilename($file->getClientOriginalName());
+		$mimeType = $file->getMimeType();
+		$originalName = $file->getClientOriginalName();
 
 		$file->storeAs($directory, $filename, 'public');
+		$absolutePath = Storage::disk('public')->path($directory . '/' . $filename);
 
-		$size = @getimagesize($file->getRealPath());
+		(new NormalizeAction)->execute($absolutePath, $mimeType);
+
+		$size = @getimagesize($absolutePath);
 		$dimensions = [$size[0] ?? null, $size[1] ?? null];
 
 		return [
 			'uuid' => Str::uuid()->toString(),
 			'file' => $filename,
-			'original_name' => $file->getClientOriginalName(),
-			'mime_type' => $file->getMimeType(),
-			'size' => $file->getSize(),
+			'original_name' => $originalName,
+			'mime_type' => $mimeType,
+			'size' => @filesize($absolutePath) ?: 0,
 			'width' => $dimensions[0],
 			'height' => $dimensions[1],
 			'alt' => null,
