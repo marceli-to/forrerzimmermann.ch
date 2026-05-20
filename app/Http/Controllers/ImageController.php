@@ -25,11 +25,24 @@ class ImageController extends Controller
 		$cachedPath = $this->server->makeImage($path, $request->all());
 		$cache = $this->server->getCache();
 		$imageContent = $cache->read($cachedPath);
-		$mimeType = $cache->mimeType($cachedPath);
+		$mimeType = $this->resolveMimeType($request, $path);
 
 		return response($imageContent, 200)
 			->header('Content-Type', $mimeType)
 			->header('Cache-Control', 'max-age=31536000, public')
 			->header('Expires', now()->addYear()->toRfc7231String());
+	}
+
+	protected function resolveMimeType(Request $request, string $path): string
+	{
+		$format = strtolower((string) $request->query('fm', pathinfo($path, PATHINFO_EXTENSION)));
+
+		return match ($format) {
+			'avif' => 'image/avif',
+			'webp' => 'image/webp',
+			'png' => 'image/png',
+			'gif' => 'image/gif',
+			default => 'image/jpeg',
+		};
 	}
 }
