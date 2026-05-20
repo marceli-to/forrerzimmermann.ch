@@ -46,8 +46,10 @@ class NormalizeImages extends Command
                 }
 
                 $before = filesize($path);
-                $this->line(sprintf('  %s — %d×%d (%s KB)',
-                    $media->file, $size[0], $size[1], number_format($before / 1024)
+                $hasCrop = is_array($media->crop) && isset($media->crop['x'], $media->crop['y'], $media->crop['w'], $media->crop['h']);
+                $this->line(sprintf('  %s — %d×%d (%s KB)%s',
+                    $media->file, $size[0], $size[1], number_format($before / 1024),
+                    $hasCrop ? ' (cropped)' : ''
                 ));
 
                 if ($dryRun) {
