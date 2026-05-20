@@ -26,7 +26,7 @@
                   @endif
                   @if($slide->text)
                     <div class="shrink-0 px-16 md:col-span-4 md:px-0">
-                      <article class="hyphens-auto text-[23px] leading-[1.174] py-18">
+                      <article class="hyphens-auto text-2xl leading-[1.174] py-18">
                         {!! $slide->text !!}
                       </article>
                     </div>
@@ -42,7 +42,7 @@
                 @endif
                 @if($slide->text)
                   <div class="shrink-0 px-16 md:col-span-4 md:px-0">
-                    <article class="hyphens-auto text-[23px] leading-[1.174] py-18">
+                    <article class="hyphens-auto text-2xl leading-[1.174] py-18">
                       {!! $slide->text !!}
                     </article>
                   </div>

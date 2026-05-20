@@ -8,7 +8,6 @@
 @import "./partials/scrollbar.css";
 @import "./partials/spacing.css";
 @import "./partials/utils.css";
-/* @import "./partials/page-transitions.css"; */
 
 @layer base {
   :root {
@@ -25,6 +24,14 @@
   --color-white: #ffffff;
   --color-accent: #a400ff;
   --color-silver: #828282;
+
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-md: 1rem; /* 16px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-xl: 1.3125rem; /* 21px */
+  --text-2xl: 1.4375rem; /* 23px */
+  --text-3xl: 1.875rem; /* 30px */
 }
 
 strong, b {

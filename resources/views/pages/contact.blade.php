@@ -30,11 +30,11 @@
         @if($contact)
           <article class="hyphens-auto py-18">
 
-            <h1 class="text-[23px] leading-[1.174] mb-16">
+            <h1 class="text-2xl leading-[1.174] mb-16">
               {{ $contact->name }}
             </h1>
 
-            <div class="flex flex-col gap-y-48 text-[18px] leading-[1.33]">
+            <div class="flex flex-col gap-y-48 text-lg leading-[1.33]">
               <div>
                 {!! nl2br($contact->address) !!}
                 @if($contact->email)
@@ -76,7 +76,7 @@
   <x-slot:footer>
     <a 
       href="{{ $contact->maps_url }}" 
-      class="text-[18px] leading-[1.33] hover:text-accent transition-colors !no-underline"
+      class="text-lg leading-[1.33] hover:text-accent transition-colors !no-underline"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Google Maps">

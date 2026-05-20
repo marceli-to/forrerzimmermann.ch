@@ -7,11 +7,11 @@
 
     <div>
 
-      <h2 class="text-[21px] leading-[1.174]">
+      <h2 class="text-xl leading-[1.174]">
         {{ $project->title }}@if($project->location), {{ $project->location }}@endif
       </h2>
 
-      <div class="text-[16px] leading-[1.31]">
+      <div class="text-md leading-[1.31]">
         {{ $project->subtitle }} {{ $project->year }}
       </div>
 
@@ -20,11 +20,11 @@
   </a>
 @else
   <div class="text-silver">
-    <h2 class="text-[21px] leading-[1.174]">
+    <h2 class="text-xl leading-[1.174]">
       {{ $project->title }}@if($project->location), {{ $project->location }}@endif
     </h2>
 
-    <div class="text-[16px] leading-[1.31]">
+    <div class="text-md leading-[1.31]">
       {{ $project->subtitle }} {{ $project->year }}
     </div>
   </div>

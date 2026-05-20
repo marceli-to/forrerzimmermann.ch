@@ -20,7 +20,7 @@
       <div>
         <x-media.image :media="$image" fit="max" sizes="100vw" class="w-full h-auto" />
         @if($image->caption)
-          <div class="{{ $loop->last ? 'py-18' : 'pt-18' }} px-16 text-[1rem] text-center">{{ $image->caption }}</div>
+          <div class="{{ $loop->last ? 'py-18' : 'pt-18' }} px-16 text-md text-center">{{ $image->caption }}</div>
         @endif
       </div>
     @endforeach

@@ -22,10 +22,10 @@
         <div class="py-18 flex flex-col gap-y-48">
           @foreach($jobs as $job)
             <article class="hyphens-auto">
-              <h2 class="text-[23px] leading-[1.174] mb-16">
+              <h2 class="text-2xl leading-[1.174] mb-16">
                 {!! $job->title !!}
               </h2>
-              <div class="text-[18px] leading-[1.33]">
+              <div class="text-lg leading-[1.33]">
                 {!! $job->text !!}
               </div>
             </article>

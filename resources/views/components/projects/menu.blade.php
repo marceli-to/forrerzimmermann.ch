@@ -10,7 +10,7 @@
         href="{{ route($imagesRoute, $project->slug) }}"
         aria-label="Bilder"
         @class([
-          'text-[18px] leading-none hover:text-accent transition-colors [.is-active]:text-accent',
+          'text-lg leading-none hover:text-accent transition-colors [.is-active]:text-accent',
           'is-active' => request()->routeIs('page.project.*.images'),
         ])>
         Bilder
@@ -21,7 +21,7 @@
         href="{{ route($textRoute, $project->slug) }}"
         aria-label="Text"
         @class([
-          'text-[18px] leading-none hover:text-accent transition-colors [.is-active]:text-accent',
+          'text-lg leading-none hover:text-accent transition-colors [.is-active]:text-accent',
           'is-active' => request()->routeIs('page.project.*.text'),
         ])>
         Text
@@ -31,7 +31,7 @@
   @if(request()->routeIs('page.project.*.images'))
     <div
       data-slides-counter="project-{{ $project->id }}"
-      class="hidden md:block text-[18px] leading-none tabular-nums"
+      class="hidden md:block text-lg leading-none tabular-nums"
       aria-live="polite">
       <span data-slides-counter-current>1</span>/<span data-slides-counter-total>1</span>
     </div>

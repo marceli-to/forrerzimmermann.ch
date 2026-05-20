@@ -19,7 +19,7 @@
       </x-grid.span>
 
       <x-grid.span class="md:col-span-5 xl:col-span-4 px-16 md:pl-0 md:pr-16 xl:pr-32 md:-mr-16 xl:-mr-32 min-h-0 overflow-auto">
-        <div class="py-18 flex flex-col gap-y-48 text-[18px] leading-[1.33]">
+        <div class="py-18 flex flex-col gap-y-48 text-lg leading-[1.33]">
           
           @foreach($members['current'] ?? [] as $member)
             <x-team.member :member="$member" />
