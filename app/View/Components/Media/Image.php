@@ -32,7 +32,7 @@ class Image extends Component
     public function __construct(
         Media|Collection $media,
         string $sizes = '100vw',
-        int $maxWidth = 1600,
+        int $maxWidth = 1920,
         ?string $alt = null,
         string $fit = 'crop',
         int $quality = 90,
