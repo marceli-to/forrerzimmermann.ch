@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Support\ImageSupport;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use League\Glide\ServerFactory;
@@ -22,10 +23,15 @@ class ImageController extends Controller
 
 	public function show(Request $request, string $path): Response
 	{
-		$cachedPath = $this->server->makeImage($path, $request->all());
+		$params = $request->all();
+		if (isset($params['fm']) && !ImageSupport::supports((string) $params['fm'])) {
+			unset($params['fm']);
+		}
+
+		$cachedPath = $this->server->makeImage($path, $params);
 		$cache = $this->server->getCache();
 		$imageContent = $cache->read($cachedPath);
-		$mimeType = $this->resolveMimeType($request, $path);
+		$mimeType = $this->resolveMimeType($request, $path, $params);
 
 		return response($imageContent, 200)
 			->header('Content-Type', $mimeType)
@@ -33,9 +39,9 @@ class ImageController extends Controller
 			->header('Expires', now()->addYear()->toRfc7231String());
 	}
 
-	protected function resolveMimeType(Request $request, string $path): string
+	protected function resolveMimeType(Request $request, string $path, array $params): string
 	{
-		$format = strtolower((string) $request->query('fm', pathinfo($path, PATHINFO_EXTENSION)));
+		$format = strtolower((string) ($params['fm'] ?? pathinfo($path, PATHINFO_EXTENSION)));
 
 		return match ($format) {
 			'avif' => 'image/avif',

@@ -3,6 +3,7 @@
 namespace App\View\Components\Media;
 
 use App\Models\Media;
+use App\Support\ImageSupport;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
@@ -66,7 +67,7 @@ class Image extends Component
         $this->crop = $desktopMedia->crop;
         $this->fit = $fit;
         $this->quality = $quality;
-        $this->formats = $formats;
+        $this->formats = array_values(array_filter($formats, fn ($f) => ImageSupport::supports($f)));
         $this->class = $class;
         $this->loading = $loading;
         $this->sizes = $sizes;
